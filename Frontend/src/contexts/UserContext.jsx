@@ -10,6 +10,7 @@ export const UserProvider = ({children}) => {
     };
 
     const logout = () => {
+        //TODO: Remove localstorage user
         setUser(false);
     };
 
