@@ -21,39 +21,39 @@ const PORT = process.env.PORT || 3000;
 
 // Vérifie si un user est donné dans le token et si il doit être un admin
 const authenticate = (superAuth = false) => (req, res, next) => {
-  const authHeader = req.headers["authorization"];
-  const token = authHeader && authHeader.split(" ")[1];
+    const authHeader = req.headers["authorization"];
+    const token = authHeader && authHeader.split(" ")[1];
 
-  if (!token) return res.sendStatus(401);
+    if (!token) return res.sendStatus(401);
 
-  jwt.verify(token, SECRET, (err, user) => {
-    if (err) return res.sendStatus(403);
-    req.user = user;
+    jwt.verify(token, SECRET, (err, user) => {
+        if (err) return res.sendStatus(403);
+        req.user = user;
 
-    if (superAuth && (!user.role || user.role !== "admin")) {
-      return res.sendStatus(403);
-    }
+        if (superAuth && (!user.role || user.role !== "admin")) {
+            return res.sendStatus(403);
+        }
 
-    next();
-  });
+        next();
+    });
 };
 
 // Region Routes user
 userRouter.use(authenticate());
 userRouter.get("/", (req, res) => {
-  res.json({ message: "Hello authenticated user", user: req.user });
+    res.json({message: "Hello authenticated user", user: req.user});
 });
 
 // Region Routes entreprise
 entrepriseRouter.use(authenticate());
 entrepriseRouter.get("/", (req, res) => {
-  res.json({ message: "Hello authenticated user", user: req.user });
+    res.json({message: "Hello authenticated user", user: req.user});
 });
 
 // Region Routes admin
 adminRouter.use(authenticate(true));
 adminRouter.get("/:id", (req, res) => {
-  res.json({ message: `Admin access to ID ${req.params.id}`, user: req.user });
+    res.json({message: `Admin access to ID ${req.params.id}`, user: req.user});
 });
 
 // Ajout des prefix
@@ -63,16 +63,25 @@ app.use("/entreprise", entrepriseRouter);
 
 // Region routes publiques
 app.post('/login', (req, res) => {
-    const user = AuthService.login(req.body)
+    try {
+        const user = AuthService.login(req.body)
+        return res.status(200).json(jwt.sign(user, SECRET));
+    } catch (error) {
+        return res.sendStatus(401);
+    }
 });
 app.post('/register', (req, res) => {
-    const user = AuthService.register(req.body);
-    return res.status(user? 200 : 400).json(user);
+    try {
+        const user = AuthService.register(req.body);
+        return res.status(user ? 200 : 400).json(user);
+    } catch (error) {
+        return res.sendStatus(401);
+    }
 });
 
 // TODO: login, register, CRUDs, password-reset, upload fichiers, connexion pg/mongoDb
 
 // Lancement de l'app avec tous les routers enregistrés
 app.listen(PORT, () => {
-  console.log(`Server running at http://localhost:${PORT}`);
+    console.log(`Server running at http://localhost:${PORT}`);
 });
