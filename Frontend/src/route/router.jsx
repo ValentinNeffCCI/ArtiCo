@@ -2,10 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "../components/security/ProtectedRoutes.jsx";
 import Accueil from "../pages/Accueil";
 import MainLayout from "../components/layouts/MainLayout.jsx";
-import Profile from "../pages/Profile.jsx";
 import NotFound from "../pages/NotFound.jsx";
 import Login from "../pages/Login.jsx";
-import Admin from "../pages/Admin.jsx";
+import UserRoutes from "./routes/UserRoutes.jsx"
+import AdminRoutes from "./routes/AdminRoutes.jsx"
 
 const router = createBrowserRouter([
   {
@@ -17,21 +17,11 @@ const router = createBrowserRouter([
       },
       {
         element: <ProtectedRoute allowedRoles={["user", "admin"]} />,
-        children: [
-          {
-            path: "/profil",
-            element: <Profile />,
-          },
-        ],
+        children: UserRoutes,
       },
       {
         element: <ProtectedRoute allowedRoles={["admin"]} />,
-        children: [
-          {
-            path: "/admin",
-            element: <Admin />,
-          },
-        ],
+        children: AdminRoutes,
       },
     ],
   },
