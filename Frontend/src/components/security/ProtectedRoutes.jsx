@@ -1,17 +1,23 @@
-import {Navigate} from "react-router-dom";
-import {useAuth} from "../../contexts/UserContext.jsx";
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "../../contexts/UserContext.jsx";
+import { Fragment } from "react";
 
-const ProtectedRoute = ({element, allowedRoles}) => {
-    const {user} = useAuth();
-    if (!allowedRoles) return element;
-    if (!user) {
-        return <Navigate to="/login" replace/>
-    }
-    if (allowedRoles && !allowedRoles.include(user.role)) {
-        return <Navigate to="/" replace/>
-    }
+const ProtectedRoute = ({ allowedRoles }) => {
+  const { user } = useAuth();
 
-    return element;
-}
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (allowedRoles && !allowedRoles.includes(user.role)) {
+    return <Navigate to="/" replace />;
+  }
+
+  return (
+    <Fragment>
+      <Outlet />
+    </Fragment>
+  );
+};
 
 export default ProtectedRoute;
