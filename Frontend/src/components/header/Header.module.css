@@ -1,0 +1,19 @@
+.header {
+    background-color: var(--primary);
+    padding: .5rem 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    backdrop-filter: blur(1rem);
+}
+
+.scrolling{
+    box-shadow:
+    0 0 0 transparent,
+    0 0 0 transparent,
+    0 0 2rem var(--primary), 
+    0 0 0 transparent
+    ;
+}

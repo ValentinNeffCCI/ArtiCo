@@ -1,0 +1,9 @@
+.logo-holder{
+    overflow: hidden;
+    width: fit-content;
+}
+
+.logo-holder img{
+    width: 100%;
+    object-fit: cover;
+}

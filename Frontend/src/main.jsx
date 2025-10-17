@@ -1,4 +1,4 @@
-import './index.css'
+import './index.scss'
 import router from './route/router'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router-dom'

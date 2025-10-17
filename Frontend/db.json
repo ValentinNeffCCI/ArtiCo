@@ -1,0 +1,36 @@
+{
+    "categories":[
+        {
+            "id": "1",
+            "name": "Plombier"
+        },
+        {
+            "id": "2",
+            "name": "Electricien"
+        },
+        {
+            "id": "3",
+            "name": "Menuisier"
+        },
+        {
+            "id": "4",
+            "name": "Restaurateur"
+        },
+        {
+            "id": "5",
+            "name": "Agent Immobilier"
+        },
+        {
+            "id": "6",
+            "name": "Service à la personne"
+        },
+        {
+            "id": "7",
+            "name": "Coiffure"
+        },
+        {
+            "id": "8",
+            "name": "Garderie"
+        }
+    ]
+}

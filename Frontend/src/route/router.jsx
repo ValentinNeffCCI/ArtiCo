@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "../components/security/ProtectedRoutes.jsx";
-import Accueil from "../pages/Accueil";
+import Accueil from "../pages/Accueil/Accueil.jsx";
 import MainLayout from "../components/layouts/MainLayout.jsx";
 import NotFound from "../pages/NotFound.jsx";
 import Login from "../pages/Login.jsx";

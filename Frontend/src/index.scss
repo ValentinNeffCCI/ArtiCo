@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Dangrek&family=Itim&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --primary: #280546;
+  --secondary: #8B87FF;
+  --light: #f6f6f6;
+  --dark: #031926;
+}
+
+$weights: (
+  'thin' 200,
+  'bold' 800
+);
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: .3s ease-in;
+  font-family: 'Montserrat', sans-serif;
+}
+
+main {
+  background-color: var(--light);
+  min-height: 100vh;
+  padding: 2rem auto;
+}
+
+.dangrek {
+  font-family: "Dangrek", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.itim {
+  font-family: "Itim", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@each $size, $weight in $weights {
+  .montserrat-#{$size} {
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: $weight;
+    font-style: normal;
+  }
+}
