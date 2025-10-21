@@ -5,6 +5,14 @@
   --secondary: #8B87FF;
   --light: #f6f6f6;
   --dark: #031926;
+  --accent: rgba(139, 135, 255, .7);
+
+  --mobile: 768px;
+}
+
+body {
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 $weights: (
@@ -16,7 +24,6 @@ $weights: (
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  transition: .3s ease-in;
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -51,5 +58,23 @@ main {
     font-optical-sizing: auto;
     font-weight: $weight;
     font-style: normal;
+  }
+}
+
+section {
+  padding: 3rem;
+}
+
+.hidden-mobile {
+  display: none;
+}
+
+button{
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .hidden-mobile {
+    display: block;
   }
 }

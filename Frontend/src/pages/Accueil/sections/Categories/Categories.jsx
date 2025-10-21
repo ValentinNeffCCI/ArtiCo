@@ -1,25 +1,49 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import useAPI from "../../../../hooks/useAPI.jsx";
+import classes from "./Categories.module.css";
+import { LinkButton } from "../../../../components/buttons/Link/LinkButton.jsx";
+import { ArrowRight } from "lucide-react";
 
-export const Categories = ()=>{
+export const Categories = () => {
+  const [categories, setCategories] = useState([]);
+  const { query: callAPI } = useAPI();
 
-    const [categories, setCategories] = useState([]);
-    const {callAPI} = useAPI();
-
-    const fetchCategories = async () => {
-        const value = await callAPI('/categories');
-        setCategories(value);
+  const fetchCategories = async () => {
+    try {
+      const value = await callAPI("/categories?limit=6");
+      value ? setCategories(value.splice(0, 6)) : setCategories([]);
+    } catch (err) {
+      setCategories([]);
     }
+  };
 
-    useEffect(()=>{
-        fetchCategories();
-    }, [])
+  useEffect(() => {
+    fetchCategories();
+  }, []);
 
-    return(
-        <section>
-            {
-                JSON.stringify(categories)
-            }
-        </section>
-    )
-}
+  if (categories.length == 0) return;
+
+  return (
+    <section className={classes["categories"]}>
+      <h3>Des domaines divers et variés</h3>
+      <div>
+        <div>
+          {categories.map((category) => (
+            <LinkButton
+              key={category.id}
+              className={classes["categorie"]}
+              path={`/rechercher?category=${category.id}`}
+              name={"categorie"}
+            >
+              {category.name}
+            </LinkButton>
+          ))}
+        </div>
+        <LinkButton name={"other"} path={"/rechercher"}>
+          <span>Et beaucoup d'autres</span>
+          <ArrowRight />
+        </LinkButton>
+      </div>
+    </section>
+  );
+};

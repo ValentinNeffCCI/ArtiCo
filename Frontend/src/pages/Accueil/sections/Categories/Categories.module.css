@@ -1,0 +1,33 @@
+.categories {
+    padding: 3rem;
+}
+
+.categories h3 {
+    color: var(--dark);
+    font-size: 1.4rem;
+    font-family: 'itim', sans-serif;
+    text-align: center;
+    padding: 0 2.5rem;
+}
+
+@media screen and (min-width:768px) {
+    .categories {
+        padding: 3rem 5%;
+    }
+
+    .categories h3 {
+        font-size: 2rem;
+        text-align: left;
+        padding: 0;
+    }
+
+    .categories > div > div {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .categories > div > div > a{
+        padding: 1rem;
+        font-weight: 600;
+    }
+}

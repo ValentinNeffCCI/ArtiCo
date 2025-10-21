@@ -1,12 +1,30 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink } from "react-router-dom";
+import classes from "./Navbar.module.css";
 
-export function Navbar({links = []}) {
+export function Navbar({ links = [], user = false }) {
+  const filteredLinks = links.map((link) => {
+    if (link.allowedRoles.length === 0) {
+      return link;
+    }
+    if (user) {
+      if (link.allowedRoles.includes(user.role)) {
+        return link;
+      }
+    }
+    return null;
+  });
 
-    const navLinks = links.map((lien, index) => <NavLink key={index} to={lien.path}>{lien.label}</NavLink>)
-  return (
-    <nav>
-        {navLinks}
-    </nav>
-  )
+  const navLinks = filteredLinks.map((lien, index) => {
+    if (lien) {
+      return (
+        <NavLink key={index} to={lien.path} style={{
+          backgroundColor: "transparent"
+        }}>
+          {lien.label}
+        </NavLink>
+      );
+    }
+    return null;
+  });
+  return <nav className={classes.navbar}>{navLinks}</nav>;
 }

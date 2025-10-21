@@ -7,7 +7,8 @@ import classes from './Logo.module.css';
 export const Logo = ({
   theme = "light",
   text = true,
-  size = 100
+  size = 100,
+  style = {}
 }) => {
   const defineLogoToUse = () => {
     if(theme == 'light'){

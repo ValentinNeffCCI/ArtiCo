@@ -1,0 +1,27 @@
+.login_form h1{
+    text-align: center;
+    font-weight: 500;
+    font-family: 'itim', sans-serif;
+}
+
+.login_form input{
+    font-family: "Montserrat", sans-serif;
+    opacity: 0.8;
+}
+
+.login_form input::placeholder{
+    font-family: 'dangrek', sans-serif;
+}
+
+.login_form input:focus{
+    opacity: 1;
+    outline: none
+}
+
+
+@media screen and (min-width: 768px) {
+    .login_form > form{
+        width: 80%;
+    }
+    
+}

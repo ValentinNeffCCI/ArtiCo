@@ -1,0 +1,70 @@
+.menu-trigger {
+    background: transparent;
+    border: none;
+    padding-right: 1.5rem;
+}
+
+.menu-trigger svg {
+    fill: transparent;
+    stroke: white;
+}
+
+.menu-trigger:hover svg {
+    stroke: var(--secondary);
+}
+
+.menu-content {
+    display: block;
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background: var(--secondary);
+    top: 0;
+    left: 0;
+    animation: fadeIn .5s;
+}
+
+.menu-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-content .menu-trigger {
+    align-self: end;
+    margin: 1rem 0;
+
+    svg{
+        aspect-ratio: 1/1;
+        stroke: var(--dark);
+    }
+}
+
+.menu-content .menu-trigger:hover svg{
+    stroke: var(--primary);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .menu-trigger{
+        display: none;
+    }
+
+    .menu-content {
+        display: flex;
+        flex-direction: row;
+        position: static;
+        align-items: center;
+        background-color: transparent;
+        height: fit-content;
+        width: fit-content;
+    }
+}

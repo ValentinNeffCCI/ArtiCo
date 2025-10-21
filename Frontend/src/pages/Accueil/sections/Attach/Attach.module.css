@@ -30,3 +30,32 @@
 .attach .subtitles .links{
     margin: 3rem auto;
 }
+
+@media screen and (min-width: 768px){
+    .attach{
+        flex-direction: row;
+        padding: 0 5%;
+    }
+
+    .attach section {
+        padding-left: 0;
+    }
+
+    .links {
+        display: flex;
+        gap: 2rem;
+        padding: 0 2rem;
+    }
+
+    .attach section h1 {
+        width: 50%;
+    }
+
+    .attach .subtitles{
+        font-weight: 600;
+    }
+
+    .attach .subtitles hr {
+        opacity: 0;
+    }
+}

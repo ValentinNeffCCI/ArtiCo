@@ -1,0 +1,102 @@
+.btn {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    background-color: transparent;
+    color: black;
+    border-color: black;
+    border-width: 2;
+    border-style: solid;
+    border-radius: 10;
+    width: 100%;
+    padding: .5rem 1rem;
+    margin: 1rem 0;
+    font-size: 1.1rem;
+    transition: .3s ease-in;
+}
+
+.btn:hover {
+    opacity: .8;
+}
+
+.home {
+    color: var(--dark);
+}
+
+.search {
+    background-color: var(--light);
+    border-color: var(--light);
+    border-radius: 1rem;
+    padding: .8rem 0;
+    color: var(--dark);
+}
+
+.search:hover {
+    background-color: transparent;
+    color: var(--light);
+}
+
+.artisan {
+    background-color: var(--primary);
+    color: var(--light);
+    border-color: var(--primary);
+    border-radius: 1rem;
+    padding: .8rem 0;
+}
+
+.artisan:hover {
+    background-color: transparent;
+    color: var(--primary);
+}
+
+.categorie {
+    width: 80%;
+    margin: 3rem auto;
+    font-family: Montserrat, sans-serif;
+    border-radius: 1rem;
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.categorie:hover {
+    background-color: var(--primary);
+    color: var(--light);
+}
+
+.other {
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    border-radius: 5px;
+    margin: 1rem auto;
+    background-color: var(--primary);
+}
+
+.other svg {
+    margin-left: 1rem;
+    transition: all .2s ease-in;
+}
+
+@media screen and (min-width: 768px) {
+
+    .artisan,
+    .search {
+        width: 30%;
+    }
+
+    .other {
+        margin: 0;
+        width: 100%;
+        justify-content: end;
+        background-color: transparent;
+        border: none;
+        color: var(--primary);
+        font-weight: 500;
+    }
+
+    .other:hover svg {
+        transform: translateX(1rem);
+    }
+}
