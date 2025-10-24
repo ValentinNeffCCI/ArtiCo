@@ -1,0 +1,8 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" style="background-color: green">
+    <g id="casque">
+
+    </g>
+    <g id="marteau">
+        <rect x="100" y="200" width="40" height="150" rx="10" fill="brown"/>
+    </g>
+</svg>

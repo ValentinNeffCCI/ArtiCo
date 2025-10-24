@@ -1,0 +1,19 @@
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.sidebar ul{
+    display: flex;
+    flex-direction: column;
+    margin: 4rem 0;
+}
+
+.sidebar ul li {
+    padding: .5rem;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-bottom: 2px solid var(--primary);
+}

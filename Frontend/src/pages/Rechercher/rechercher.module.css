@@ -1,0 +1,10 @@
+.rechercher{
+    background-color: var(--secondary);
+}
+
+.rechercher h1 {
+    font-family: 'Dangrek';
+    font-size: 3rem;
+    color: var(--primary);
+    text-align: center;
+}

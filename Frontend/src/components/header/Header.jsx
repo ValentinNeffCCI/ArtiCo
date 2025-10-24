@@ -25,11 +25,6 @@ export const Header = () => {
   const links = [
     {
       path: "/",
-      label: "Profil",
-      allowedRoles: ["user", "artisan", "admin"],
-    },
-    {
-      path: "/",
       label: "Espace administrateur",
       allowedRoles: ["admin"],
     },
@@ -37,6 +32,11 @@ export const Header = () => {
       path: "/rechercher",
       label: "Rechercher une entreprise",
       allowedRoles: [],
+    },
+    {
+      path: "/",
+      label: "Profil",
+      allowedRoles: ["user", "artisan", "admin"],
     },
   ];
 

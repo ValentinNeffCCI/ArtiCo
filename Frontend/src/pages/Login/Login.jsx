@@ -12,7 +12,7 @@ import { CustomButton } from "../../components/buttons/Custom/CustomButton";
 const Login = () => {
   const { user } = useAuth();
 
-  if (user) return <Navigate to={"/"} />;
+  if (user) return <Navigate to={user.role === "admin" ? "/admin" : "/"} />;
 
   const [isConnecting, setIsConnecting] = useState(true);
 

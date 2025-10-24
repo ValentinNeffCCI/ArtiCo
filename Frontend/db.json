@@ -1,36 +1,328 @@
 {
-    "categories":[
-        {
-            "id": "1",
-            "name": "Plombier"
-        },
-        {
-            "id": "2",
-            "name": "Electricien"
-        },
-        {
-            "id": "3",
-            "name": "Menuisier"
-        },
-        {
-            "id": "4",
-            "name": "Restaurateur"
-        },
-        {
-            "id": "5",
-            "name": "Agent Immobilier"
-        },
-        {
-            "id": "6",
-            "name": "Service à la personne"
-        },
-        {
-            "id": "7",
-            "name": "Coiffure"
-        },
-        {
-            "id": "8",
-            "name": "Garderie"
-        }
-    ]
+  "categories": [
+    {
+      "id": "1",
+      "name": "Plombier"
+    },
+    {
+      "id": "2",
+      "name": "Electricien"
+    },
+    {
+      "id": "3",
+      "name": "Menuisier"
+    },
+    {
+      "id": "4",
+      "name": "Restaurateur"
+    },
+    {
+      "id": "5",
+      "name": "Agent Immobilier"
+    },
+    {
+      "id": "6",
+      "name": "Service à la personne"
+    },
+    {
+      "id": "7",
+      "name": "Coiffure"
+    },
+    {
+      "id": "8",
+      "name": "Garderie"
+    }
+  ],
+  "users": [
+    {
+      "id": "1dj4",
+      "name": "admin",
+      "email": "admin@admin.com",
+      "password": "1234"
+    },
+    {
+      "id": "c933",
+      "name": "Regina",
+      "email": "neffvalentinpro@gmail.com",
+      "password": "pizza"
+    },
+    {
+      "id": "dc7f",
+      "name": "Calzone",
+      "email": "calzone@pizza.it",
+      "password": "hola"
+    },
+    {
+      "id": "c65e",
+      "name": "Margherita",
+      "email": "calzone@pizza.it",
+      "password": "sfdfgs"
+    },
+    {
+      "id": "bfc8",
+      "name": "Margherita",
+      "email": "neffvalentin67@gmail.com",
+      "password": "dsxg"
+    },
+    {
+      "id": "632d",
+      "name": "Calzone",
+      "email": "calzone@pizza.it",
+      "password": "gvdfkugvuk"
+    },
+    {
+      "id": "8ecc",
+      "email": "neffvalentin67@gmail.com",
+      "name": "coucou",
+      "password": "xvxcvdv"
+    },
+    {
+      "id": "74dc",
+      "name": "Margherita",
+      "email": "valentin.neff@ccicampus.fr",
+      "password": "dgxgxdg"
+    }
+  ],
+  "entreprises": [
+    {
+      "id": 1,
+      "user_id": 101,
+      "name": "Boulangerie Artisanale Le Pétrin d'Or",
+      "adress1": "12 Rue de la République",
+      "adress2": "",
+      "city": "Strasbourg",
+      "cp": "67000",
+      "phone": "03 88 32 45 67",
+      "image": "petrin-or-logo.jpg",
+      "email": "contact@petrinor.fr",
+      "description": "Boulangerie artisanale traditionnelle proposant pains bio, viennoiseries maison et pâtisseries depuis 1985.",
+      "categorie_id": 1,
+      "created_at": "2024-01-15",
+      "updated_at": "2024-10-20"
+    },
+    {
+      "id": 2,
+      "user_id": 102,
+      "name": "Pâtisserie La Douceur",
+      "adress1": "28 Avenue de la Liberté",
+      "adress2": "",
+      "city": "Colmar",
+      "cp": "68000",
+      "phone": "03 89 23 56 78",
+      "image": "la-douceur.jpg",
+      "email": "contact@ladouceur.fr",
+      "description": "Pâtisserie fine spécialisée en macarons, entremets et créations personnalisées pour événements.",
+      "categorie_id": 1,
+      "created_at": "2023-11-08",
+      "updated_at": "2024-10-19"
+    },
+    {
+      "id": 3,
+      "user_id": 103,
+      "name": "Boulangerie Bio Au Bon Pain",
+      "adress1": "5 Rue du Faubourg",
+      "adress2": "",
+      "city": "Mulhouse",
+      "cp": "68100",
+      "phone": "03 89 67 89 12",
+      "image": "bon-pain.jpg",
+      "email": "info@aubonpain.fr",
+      "description": "Boulangerie 100% bio et locale, pains au levain naturel et viennoiseries sans additifs.",
+      "categorie_id": 1,
+      "created_at": "2024-03-12",
+      "updated_at": "2024-10-22"
+    },
+    {
+      "id": 4,
+      "user_id": 104,
+      "name": "TechVision Solutions",
+      "adress1": "45 Avenue des Vosges",
+      "adress2": "Bâtiment B, 3ème étage",
+      "city": "Colmar",
+      "cp": "68000",
+      "phone": "03 89 41 23 89",
+      "image": "techvision-logo.jpg",
+      "email": "info@techvision.fr",
+      "description": "Entreprise spécialisée en développement web, applications mobiles et solutions cloud pour PME.",
+      "categorie_id": 2,
+      "created_at": "2023-06-10",
+      "updated_at": "2024-10-18"
+    },
+    {
+      "id": 5,
+      "user_id": 105,
+      "name": "Digital Innov",
+      "adress1": "12 Rue de la Tech",
+      "adress2": "Parc d'Innovation",
+      "city": "Strasbourg",
+      "cp": "67000",
+      "phone": "03 88 91 45 67",
+      "image": "digital-innov.jpg",
+      "email": "contact@digitalinnov.fr",
+      "description": "Agence digitale spécialisée en transformation numérique, IA et cybersécurité.",
+      "categorie_id": 2,
+      "created_at": "2023-09-20",
+      "updated_at": "2024-10-21"
+    },
+    {
+      "id": 6,
+      "user_id": 106,
+      "name": "WebForce Alsace",
+      "adress1": "89 Boulevard de Lyon",
+      "adress2": "",
+      "city": "Strasbourg",
+      "cp": "67100",
+      "phone": "03 88 34 78 90",
+      "image": "webforce.jpg",
+      "email": "hello@webforce-alsace.fr",
+      "description": "Création de sites web sur-mesure, e-commerce et référencement SEO pour TPE/PME.",
+      "categorie_id": 2,
+      "created_at": "2024-01-05",
+      "updated_at": "2024-10-23"
+    },
+    {
+      "id": 7,
+      "user_id": 107,
+      "name": "CodeLab Studio",
+      "adress1": "33 Quai Kléber",
+      "adress2": "Espace Startup",
+      "city": "Strasbourg",
+      "cp": "67000",
+      "phone": "03 88 22 33 44",
+      "image": "codelab.jpg",
+      "email": "team@codelab-studio.fr",
+      "description": "Studio de développement spécialisé en applications React, Node.js et solutions SaaS innovantes.",
+      "categorie_id": 2,
+      "created_at": "2023-07-15",
+      "updated_at": "2024-10-17"
+    },
+    {
+      "id": 8,
+      "user_id": 108,
+      "name": "Restaurant Le Gourmet Alsacien",
+      "adress1": "23 Rue des Tonneliers",
+      "adress2": "",
+      "city": "Strasbourg",
+      "cp": "67000",
+      "phone": "03 88 36 89 45",
+      "image": "gourmet-alsacien.jpg",
+      "email": "reservation@gourmet-alsacien.fr",
+      "description": "Restaurant gastronomique proposant une cuisine alsacienne revisitée avec des produits locaux.",
+      "categorie_id": 3,
+      "created_at": "2023-11-05",
+      "updated_at": "2024-10-22"
+    },
+    {
+      "id": 9,
+      "user_id": 109,
+      "name": "Bistrot du Marché",
+      "adress1": "8 Place du Marché",
+      "adress2": "",
+      "city": "Colmar",
+      "cp": "68000",
+      "phone": "03 89 45 67 89",
+      "image": "bistrot-marche.jpg",
+      "email": "contact@bistrotdumarche.fr",
+      "description": "Bistrot convivial avec terrasse, cuisine traditionnelle française et formules du jour.",
+      "categorie_id": 3,
+      "created_at": "2024-02-20",
+      "updated_at": "2024-10-20"
+    },
+    {
+      "id": 10,
+      "user_id": 110,
+      "name": "Pizzeria Bella Vita",
+      "adress1": "45 Rue de Zurich",
+      "adress2": "",
+      "city": "Strasbourg",
+      "cp": "67000",
+      "phone": "03 88 56 78 90",
+      "image": "bella-vita.jpg",
+      "email": "pizza@bellavita.fr",
+      "description": "Pizzeria authentique avec four à bois, pâtes fraîches maison et produits italiens importés.",
+      "categorie_id": 3,
+      "created_at": "2023-05-14",
+      "updated_at": "2024-10-24"
+    },
+    {
+      "id": 11,
+      "user_id": 111,
+      "name": "Garage Auto Prestige",
+      "adress1": "56 Route de Bischwiller",
+      "adress2": "Zone Industrielle Nord",
+      "city": "Haguenau",
+      "cp": "67500",
+      "phone": "03 88 93 67 23",
+      "image": "auto-prestige.jpg",
+      "email": "contact@autoprestige.fr",
+      "description": "Garage multimarques offrant entretien, réparation et diagnostic électronique.",
+      "categorie_id": 4,
+      "created_at": "2024-02-14",
+      "updated_at": "2024-10-15"
+    },
+    {
+      "id": 12,
+      "user_id": 112,
+      "name": "Mécanique Express",
+      "adress1": "12 Rue de l'Industrie",
+      "adress2": "",
+      "city": "Strasbourg",
+      "cp": "67100",
+      "phone": "03 88 44 55 66",
+      "image": "mecanique-express.jpg",
+      "email": "info@mecanique-express.fr",
+      "description": "Centre auto rapide : vidange express, pneus, freinage et révision sans rendez-vous.",
+      "categorie_id": 4,
+      "created_at": "2023-10-05",
+      "updated_at": "2024-10-18"
+    },
+    {
+      "id": 13,
+      "user_id": 113,
+      "name": "Salle de Sport FitZone Premium",
+      "adress1": "88 Route du Rhin",
+      "adress2": "Centre Commercial Rivétoile",
+      "city": "Strasbourg",
+      "cp": "67100",
+      "phone": "03 88 45 23 56",
+      "image": "fitzone-premium.jpg",
+      "email": "info@fitzone-premium.fr",
+      "description": "Salle de sport avec musculation, cardio, cours collectifs et spa.",
+      "categorie_id": 5,
+      "created_at": "2023-08-15",
+      "updated_at": "2024-10-24"
+    },
+    {
+      "id": 14,
+      "user_id": 114,
+      "name": "CrossFit Alsace",
+      "adress1": "34 Rue du Sport",
+      "adress2": "",
+      "city": "Colmar",
+      "cp": "68000",
+      "phone": "03 89 78 90 12",
+      "image": "crossfit-alsace.jpg",
+      "email": "contact@crossfit-alsace.fr",
+      "description": "Box CrossFit avec coaching personnalisé, WODs quotidiens et préparation physique.",
+      "categorie_id": 5,
+      "created_at": "2024-04-10",
+      "updated_at": "2024-10-19"
+    },
+    {
+      "id": 15,
+      "user_id": 115,
+      "name": "Yoga & Zen Studio",
+      "adress1": "17 Rue de la Paix",
+      "adress2": "2ème étage",
+      "city": "Strasbourg",
+      "cp": "67000",
+      "phone": "03 88 33 44 55",
+      "image": "yoga-zen.jpg",
+      "email": "namaste@yogazen.fr",
+      "description": "Studio de yoga, pilates et méditation dans une ambiance zen et ressourçante.",
+      "categorie_id": 5,
+      "created_at": "2023-12-01",
+      "updated_at": "2024-10-21"
+    }
+  ]
 }

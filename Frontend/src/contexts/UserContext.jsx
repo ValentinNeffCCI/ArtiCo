@@ -4,25 +4,21 @@ import useLocalStorage from "../hooks/useLocalStorage.jsx";
 const UserContext = createContext(null);
 
 export const UserProvider = ({children}) => {
-    const [user, setUser] = useState(false);
-    const {storedValue} = useLocalStorage();
-    const [token, setToken] = useState(storedValue);
+    const storage = useLocalStorage();
+    const [user, setUser] = useState(storage.user ?? false);
 
-    useEffect(() => {
-    }, []);
-
-    const login = (email, password) => {
-        //TODO: fetch
-        console.log(email, password);
+    const login = (data) => {
+        setUser(data);
+        storage.setValue(data)
     };
 
     const logout = () => {
-        //TODO: Remove localstorage user
+        localStorage.removeItem('artico_user');
         setUser(false);
     };
 
     return (
-        <UserContext.Provider value={{user, login, logout, token}}>
+        <UserContext.Provider value={{user, login, logout}}>
             {children}
         </UserContext.Provider>
     );

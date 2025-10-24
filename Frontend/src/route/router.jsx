@@ -6,6 +6,10 @@ import NotFound from "../pages/NotFound.jsx";
 import Login from "../pages/Login/Login.jsx";
 import UserRoutes from "./routes/UserRoutes.jsx";
 import AdminRoutes from "./routes/AdminRoutes.jsx";
+import { AdminLayout } from "../components/layouts/AdminLayout.jsx";
+import ForgotPassword from "../pages/ForgotPassword/ForgotPassword.jsx";
+import PasswordRecovery from "../pages/PasswordRecovery/PasswordRecovery.jsx";
+import RechercherEntreprise from "../pages/Rechercher/RechercherEntreprise.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,9 +20,26 @@ const router = createBrowserRouter([
         element: <Accueil />,
       },
       {
+        path: "/mot-de-passe-oublie",
+        element: <ForgotPassword />,
+      },
+      {
+        path: "/reinitialiser-mot-de-passe",
+        element: <PasswordRecovery/>
+      },
+      {
+        path: "/rechercher",
+        element: <RechercherEntreprise/>
+      },
+      {
         element: <ProtectedRoute allowedRoles={["user", "admin", "artisan"]} />,
         children: UserRoutes,
       },
+    ],
+  },
+  {
+    element: <AdminLayout />,
+    children: [
       {
         element: <ProtectedRoute allowedRoles={["admin"]} />,
         children: AdminRoutes,
