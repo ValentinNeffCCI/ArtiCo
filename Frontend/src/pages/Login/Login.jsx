@@ -23,6 +23,7 @@ const Login = () => {
       style={{
         height: "100vh",
         display: "flex",
+        overflow: "hidden"
       }}
     >
       <div

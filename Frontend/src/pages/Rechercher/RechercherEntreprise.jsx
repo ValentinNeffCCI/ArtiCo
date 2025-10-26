@@ -3,17 +3,55 @@ import style from "./rechercher.module.css";
 import usePosition from "../../hooks/usePosition";
 import { Suspense, useEffect, useState } from "react";
 import CardSkeleton from "../../components/skeleton/CardSkeleton";
+import { useSearchParams } from "react-router-dom";
+import EntrepriseList from "../../components/listes/EntrepriseList";
+import useAPI from "../../hooks/useAPI";
 
 const RechercherEntreprise = () => {
-  const { user } = useAuth();
-  const position = usePosition();
+
+  const { query: callAPI } = useAPI();
+
+  const [entreprises, setEntreprises] = useState([]);
+  const [categories, setCategories] = useState([]);
+
+  const [query] = useSearchParams();
+  const categorie = query.get("categorie");
+
+  const getEnterprises = async () => {
+    let response = await callAPI("/entreprises");
+    if (response) {
+      setEntreprises(response);
+    }
+  };
+
+  window.scrollTo({
+    top: 0
+  })
+
+  const getCategories = async () => {
+    const response = await callAPI("/categories");
+    if (response) {
+      setCategories(response);
+    }
+    getEnterprises();
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
 
   return (
     <main className={style.rechercher}>
       <h1>Rechercher une entreprise</h1>
-      {JSON.stringify(position)}
-      <Suspense fallback={<CardSkeleton/>}>
-      </Suspense>
+      {entreprises.length != 0 && (
+        <Suspense fallback={<CardSkeleton />}>
+          <EntrepriseList
+            categorie={categorie}
+            allEntreprises={entreprises}
+            allCategories={categories}
+          />
+        </Suspense>
+      )}
     </main>
   );
 };

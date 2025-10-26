@@ -1,6 +1,6 @@
 import { LinkButton } from "../../../../components/buttons/Link/LinkButton";
 import classes from "./Attach.module.css";
-import perceuse from "../../../../assets/photos/Thijs_van_der_Weide/perceuse.jpg";
+import worker from "../../../../assets/mascotte/greeting_worker.png"
 
 export const Attach = ({ user }) => {
   return (
@@ -28,25 +28,16 @@ export const Attach = ({ user }) => {
       <figure
         className={"hidden-mobile"}
         style={{
-          width: "50%",
+          width: "30%",
         }}
       >
         <img
-          src={perceuse}
-          alt="Perceuse"
+          src={worker}
+          alt="Ouvrier amicale"
           style={{
             width: "100%",
           }}
         />
-        <figcaption
-          style={{
-            color: "var(--primary)",
-            fontSize: 18,
-            fontWeight: 600,
-          }}
-        >
-          Crédits : Thijs_van_der_Weide
-        </figcaption>
       </figure>
     </div>
   );

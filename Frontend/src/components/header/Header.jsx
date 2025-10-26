@@ -29,14 +29,19 @@ export const Header = () => {
       allowedRoles: ["admin"],
     },
     {
-      path: "/rechercher",
-      label: "Rechercher une entreprise",
-      allowedRoles: [],
+      path: "/",
+      label: "Mon Profil",
+      allowedRoles: ["user", "artisan", "admin"],
     },
     {
       path: "/",
-      label: "Profil",
-      allowedRoles: ["user", "artisan", "admin"],
+      label: "Mon entreprise",
+      allowedRoles: ["artisan"]
+    },
+    {
+      path: "/rechercher",
+      label: "Rechercher une entreprise",
+      allowedRoles: [],
     },
   ];
 

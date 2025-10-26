@@ -35,10 +35,12 @@
     .attach{
         flex-direction: row;
         padding: 0 5%;
+        height: fit-content;
     }
 
     .attach section {
         padding-left: 0;
+        padding-bottom: 0;
     }
 
     .links {
@@ -58,4 +60,8 @@
     .attach .subtitles hr {
         opacity: 0;
     }
+}
+
+.attach figure{
+    align-self: end;
 }

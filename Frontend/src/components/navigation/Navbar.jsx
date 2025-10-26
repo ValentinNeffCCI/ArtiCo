@@ -19,7 +19,7 @@ export function Navbar({ links = [], user = false }) {
       return (
         <NavLink key={index} to={lien.path} style={{
           backgroundColor: "transparent"
-        }}>
+        }} className={classes['link']}>
           {lien.label}
         </NavLink>
       );

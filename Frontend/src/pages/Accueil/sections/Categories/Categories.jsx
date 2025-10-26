@@ -32,7 +32,7 @@ export const Categories = () => {
             <LinkButton
               key={category.id}
               className={classes["categorie"]}
-              path={`/rechercher?category=${category.id}`}
+              path={`/rechercher?categorie=${category.id}`}
               name={"categorie"}
             >
               {category.name}

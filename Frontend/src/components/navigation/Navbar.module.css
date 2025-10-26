@@ -15,10 +15,12 @@
     width: 80%;
     margin-left: 10%;
     border-bottom: 2px solid var(--primary);
+    transition: color .2s ease-in;
 }
 
 .navbar a:hover {
     background-color: var(--light);
+    color: var(--secondary);
 }
 
 @media screen and (min-width: 768px){
@@ -28,6 +30,7 @@
         margin-right: 10%;
         flex-direction: row;
         align-items: center;
+        width: 80%;
     }
 
     .navbar a{
@@ -36,5 +39,7 @@
         font-weight: 500;
         width: fit-content;
         margin-left: 0;
+        width: 30%;
+        padding: 1rem 0;
     }
 }

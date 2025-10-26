@@ -3,8 +3,9 @@
 }
 
 .rechercher h1 {
-    font-family: 'Dangrek';
+    font-family: 'Montserrat', sans-serif;
     font-size: 3rem;
-    color: var(--primary);
+    color: white;
     text-align: center;
+    padding: 2rem;
 }
