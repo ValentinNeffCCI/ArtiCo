@@ -2,7 +2,7 @@ import style from "./Card.module.css";
 import { NavLink } from "react-router-dom";
 import defaultImage from "../../../assets/photos/Sora_Shimazaki/handshake.jpg";
 
-const EntrepriseCard = ({ entreprise }) => {
+const EntrepriseCard = ({ entreprise, style={} }) => {
   return (
     <NavLink
       to={`/artisan/${entreprise.id}`}

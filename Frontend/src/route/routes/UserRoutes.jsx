@@ -1,4 +1,4 @@
-import Profile from "../../pages/Profile.jsx";
+import Profile from "../../pages/Profile/Profile.jsx";
 
 const userRoutes = [
   {

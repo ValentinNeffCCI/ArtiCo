@@ -17,6 +17,7 @@ const useAPI = () => {
             const response = await fetch(baseURL + suffix, payload);
             return await response.json();
         } catch (error) {
+            if(import.meta.env.VITE_ENV_MODE !== "prod") console.error(error)
             return false;
         }
     }

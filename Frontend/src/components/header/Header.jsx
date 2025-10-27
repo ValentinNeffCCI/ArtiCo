@@ -29,7 +29,7 @@ export const Header = () => {
       allowedRoles: ["admin"],
     },
     {
-      path: "/",
+      path: "/profil",
       label: "Mon Profil",
       allowedRoles: ["user", "artisan", "admin"],
     },

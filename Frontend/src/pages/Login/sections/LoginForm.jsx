@@ -5,22 +5,20 @@ import useForm from "../../../hooks/useForm";
 import classes from "./Loginsection.module.css";
 import { LinkButton } from "../../../components/buttons/Link/LinkButton";
 import useAPI from "../../../hooks/useAPI";
+import { toast } from "react-toastify";
 
 export const LoginForm = ({ children }) => {
   const mode = import.meta.env.VITE_ENV_MODE;
-  const { changeListener, prepare, content, simulateUserConnection } = useForm("/login", "POST");
-  const [error, setError] = useState(false);
-
+  const { changeListener, prepare, content, simulateUserConnection } = useForm(
+    "/login",
+    "POST"
+  );
   const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(false);
     if (!content.email.includes("@")) {
-      setError({
-        name: "email",
-        message: "Veuillez renseigner une adresse mail valide !",
-      });
+      toast.error("Veuillez renseigner une adresse mail valide");
       return;
     }
 
@@ -32,10 +30,7 @@ export const LoginForm = ({ children }) => {
 
     const loginAccess = await prepare(e);
     if (!loginAccess) {
-      setError({
-        name: "password",
-        message: "Le mot de passe est incorrect",
-      });
+      toast.error("Mot de passe incorrect");
     }
   };
 
@@ -44,15 +39,12 @@ export const LoginForm = ({ children }) => {
     const { email } = content;
     let response = await query(`/users?email=${email}`);
     if (response.length > 0) {
-      if(mode === "demo"){
-        response[0] = simulateUserConnection(response[0])
+      if (mode === "demo") {
+        response[0] = simulateUserConnection(response[0]);
       }
       login(response[0]);
     } else {
-      setError({
-        name: "email",
-        message: "Aucun compte associé",
-      });
+      toast.error("Aucun compte n'a été trouvé avec cet e-mail");
     }
     return;
   };
@@ -67,17 +59,7 @@ export const LoginForm = ({ children }) => {
           required
           type="email"
           placeholder="E-mail"
-          style={
-            error && error.name == "email"
-              ? {
-                  border: "1px solid red",
-                }
-              : undefined
-          }
         />
-        {error && error.name == "email" && (
-          <p style={{ color: "var(--light)", backgroundColor: "red", fontSize: 12, padding:3, textAlign: "center", borderRadius: 20 }}>{error.message}</p>
-        )}
         <input
           name="password"
           onChange={changeListener}
@@ -85,9 +67,6 @@ export const LoginForm = ({ children }) => {
           type="password"
           placeholder="Mot de passe"
         />
-        {error && error.name == "password" && (
-          <p style={{ color: "var(--light)", backgroundColor: "red", fontSize: 12, padding:3, textAlign: "center", borderRadius: 20 }}>{error.message}</p>
-        )}
         <LinkButton
           path="/mot-de-passe-oublie"
           style={{

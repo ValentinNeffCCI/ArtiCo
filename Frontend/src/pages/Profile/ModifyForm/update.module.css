@@ -1,0 +1,23 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin: 2rem 0;
+    gap: 1rem;
+}
+
+.form input{
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    border: none;
+}
+
+.form > div{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.form label{
+    font-weight: 500;
+}

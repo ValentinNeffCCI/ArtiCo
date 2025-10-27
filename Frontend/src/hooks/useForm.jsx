@@ -2,8 +2,8 @@ import { useState } from "react";
 import useAPI from "./useAPI";
 import { data } from "react-router-dom";
 
-const useForm = (url_suffix = "/", method = "GET") => {
-  const [datas, setDatas] = useState(false);
+const useForm = (url_suffix = "/", method = "GET", defaultValue = false) => {
+  const [datas, setDatas] = useState(defaultValue);
 
   const { query } = useAPI();
 
@@ -29,7 +29,6 @@ const useForm = (url_suffix = "/", method = "GET") => {
       role: object.email.includes('admin') ? "admin" : "user",
       active: true,
       reset_token: "123456",
-      image: "/profil/user.png"
     }
   }
 

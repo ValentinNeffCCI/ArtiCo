@@ -1,0 +1,22 @@
+.profil {
+    background-color: var(--secondary);
+    padding: 3rem 10%;
+    display: flex;
+}
+
+.title {
+    font-size: 3em;
+}
+
+.modify {
+    width: 70%;
+    border-right: 2px solid var(--primary)
+}
+
+.entrepriseList{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}

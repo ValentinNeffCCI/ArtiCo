@@ -69,12 +69,6 @@
       "password": "hola"
     },
     {
-      "id": "c65e",
-      "name": "Margherita",
-      "email": "calzone@pizza.it",
-      "password": "sfdfgs"
-    },
-    {
       "id": "bfc8",
       "name": "Margherita",
       "email": "neffvalentin67@gmail.com",
@@ -87,12 +81,6 @@
       "password": "gvdfkugvuk"
     },
     {
-      "id": "8ecc",
-      "email": "neffvalentin67@gmail.com",
-      "name": "coucou",
-      "password": "xvxcvdv"
-    },
-    {
       "id": "74dc",
       "name": "Margherita",
       "email": "valentin.neff@ccicampus.fr",
@@ -102,7 +90,7 @@
   "entreprises": [
     {
       "id": 1,
-      "user_id": 101,
+      "user_id": "74dc",
       "name": "Boulangerie Artisanale Le Pétrin d'Or",
       "adress1": "12 Rue de la République",
       "adress2": "",
