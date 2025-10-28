@@ -3,18 +3,31 @@ import useForm from "../../../hooks/useForm";
 import { useAuth } from "../../../contexts/UserContext";
 import { CustomButton } from "../../../components/buttons/Custom/CustomButton";
 import style from "./update.module.css";
+import { toast, ToastContainer } from "react-toastify";
 
 const UpdateUserForm = () => {
-  const { user } = useAuth();
-  const { content, changeListener } = useForm("/user/" + user.id, "PUT", {
+  const isDemo = import.meta.env.VITE_ENV_MODE == "demo";
+  const { user, login } = useAuth();
+  const { changeListener, prepare } = useForm("/users/" + user.id, "PUT", {
     id: user.id,
     email: user.email,
     name: user.name,
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(content);
+    const response = await prepare(e);
+    if (response) {
+      isDemo
+        ? login((prev) => ({
+            ...response,
+            role: prev.role,
+          }))
+        : login(response);
+      toast.success("Modifications effectuées");
+    } else {
+      toast.error("Une erreur est survenue");
+    }
   };
 
   return (
@@ -29,7 +42,7 @@ const UpdateUserForm = () => {
           placeholder="Pseudo"
           id="name"
           defaultValue={user.name}
-        />
+          />
       </div>
       <div>
         <label htmlFor="email">E-mail :</label>
@@ -41,7 +54,7 @@ const UpdateUserForm = () => {
           type="email"
           placeholder="E-mail"
           defaultValue={user.email}
-        />
+          />
       </div>
       <div>
         <label htmlFor="password">Mot de passe</label>
@@ -51,16 +64,17 @@ const UpdateUserForm = () => {
           onChange={changeListener}
           type="password"
           placeholder="Mot de passe (Laissez vide pour ne pas le modifier)"
-        />
+          />
       </div>
       <CustomButton
         style={{
           "--bg-color": "var(--primary)",
           "--color": "var(--light)",
         }}
-      >
+        >
         Modification
       </CustomButton>
+        <ToastContainer/>
     </form>
   );
 };

@@ -1,9 +1,10 @@
 import React from "react";
+import style from './customInput.module.css'
 
 const CustomInput = ({ input, children }) => {
   return (
-    <div>
-      <label htmlFor={input.name.replaceAll(" ", "_")}>{input.name}</label>
+    <div className={style["input"]}>
+      <label htmlFor={input.name.replaceAll(" ", "-")}>{input.label}</label>
       {children}
     </div>
   );

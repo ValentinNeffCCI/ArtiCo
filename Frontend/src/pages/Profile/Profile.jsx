@@ -6,7 +6,7 @@ import useAPI from "../../hooks/useAPI";
 import { CustomButton } from "../../components/buttons/Custom/CustomButton";
 import EntrepriseCard from "../../components/cards/EntrepriseCard/EntrepriseCard";
 import defaultImage from "../../assets/photos/Sora_Shimazaki/handshake.jpg";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useAuth();
@@ -50,6 +50,7 @@ const Profile = () => {
                   width: "90%",
                 }}
                 to={"/entreprise/" + entreprise.id}
+                key={entreprise.id}
               >
                 <img
                   src={entreprise.image ?? defaultImage}
@@ -76,15 +77,17 @@ const Profile = () => {
         ) : (
           <div>Vos entreprises seront répertoriées ici</div>
         )}
-        <CustomButton
-          style={{
-            "--bg-color": "var(--primary)",
-            "--color": "var(--light)",
-            margin: "1rem auto",
-          }}
-        >
-          Ajouter une entreprise
-        </CustomButton>
+        <NavLink to="/entreprise/nouveau">
+          <CustomButton
+            style={{
+              "--bg-color": "var(--primary)",
+              "--color": "var(--light)",
+              margin: "1rem auto",
+            }}
+          >
+            Ajouter une entreprise
+          </CustomButton>
+        </NavLink>
       </div>
     </main>
   );

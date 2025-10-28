@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import CustomInput from "./CustomInput";
+import classes from './customInput.module.css'
 
-const CustomForm = ({ form = [] }) => {
+const CustomForm = ({ form = [], children, onChange, onSubmit, style }) => {
 
   return (
-    <form>
+    <form onSubmit={onSubmit} style={style} className={classes["form"]}>
       {form.map((input) => {
         switch (input.type) {
           case "textarea":
@@ -13,7 +14,10 @@ const CustomForm = ({ form = [] }) => {
                 <textarea
                   name={input.name}
                   id={input.name.replaceAll(" ", "_")}
+                  onChange={onChange}
                   required={input.required}
+                  resize={"vertical"}
+                  rows={5}
                 ></textarea>
               </CustomInput>
             );
@@ -24,6 +28,7 @@ const CustomForm = ({ form = [] }) => {
                   name={input.name}
                   id={input.name.replaceAll(" ", "_")}
                   required={input.required}
+                  onChange={onChange}
                 >
                   <option value="">Choisissez une réponse</option>
                   {input.options &&
@@ -39,18 +44,19 @@ const CustomForm = ({ form = [] }) => {
               <CustomInput key={input.id} input={input}>
                 <input
                   type={input.type}
-                  min={input.min}
-                  max={input.max}
+                  min={input.min ?? 0}
+                  max={input.max ?? 100}
                   placeholder={input.label}
                   name={input.name}
                   required={input.required}
+                  onChange={onChange}
                   id={input.name.replaceAll(" ", "_")}
                 />
               </CustomInput>
             );
         }
       })}
-      {/* Ajouter mail user si user pas co en required sinon user.id*/}
+      {children}
       <button>Envoyer</button>
     </form>
   );

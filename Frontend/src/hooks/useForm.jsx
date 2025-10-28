@@ -1,16 +1,17 @@
 import { useState } from "react";
 import useAPI from "./useAPI";
-import { data } from "react-router-dom";
 
-const useForm = (url_suffix = "/", method = "GET", defaultValue = false) => {
+const useForm = (url_suffix = "/", method = "GET", defaultValue = {}) => {
   const [datas, setDatas] = useState(defaultValue);
 
   const { query } = useAPI();
 
   const handleChange = (e) => {
+    const { name, type, value, files, checked } = e.target;
     setDatas((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]:
+        type === "file" ? files[0] : type === "checkbox" ? checked : value,
     }));
   };
 
@@ -26,17 +27,17 @@ const useForm = (url_suffix = "/", method = "GET", defaultValue = false) => {
   const simulateRegister = (object) => {
     return {
       ...object,
-      role: object.email.includes('admin') ? "admin" : "user",
+      role: object.email.includes("admin") ? "admin" : "user",
       active: true,
       reset_token: "123456",
-    }
-  }
+    };
+  };
 
   return {
     prepare: submit,
     changeListener: handleChange,
     content: datas,
-    simulateUserConnection: simulateRegister
+    simulateUserConnection: simulateRegister,
   };
 };
 

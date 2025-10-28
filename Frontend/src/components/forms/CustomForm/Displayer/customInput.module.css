@@ -1,0 +1,14 @@
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.form textarea {
+    resize: vertical;
+}
+
+.form input, .form textarea, .form select {
+    padding: .5rem 1rem;
+
+}
