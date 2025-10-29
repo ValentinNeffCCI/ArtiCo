@@ -3,12 +3,14 @@ import useForm from "../../../hooks/useForm";
 import { useAuth } from "../../../contexts/UserContext";
 import useAPI from "../../../hooks/useAPI";
 import { Navigate } from "react-router-dom";
-import CustomInput from "../CustomForm/Displayer/CustomInput";
 import CustomForm from "../CustomForm/Displayer/CustomForm";
+import style from "./style.module.css";
+import { Upload } from "lucide-react";
+import placeholder from "../../../assets/photos/placeholder.jpeg";
 
 const CreateEntreprise = () => {
   const { user } = useAuth();
-  const { content, changeListener, prepare } = useForm("/entreprise", "POST", {
+  const { content, changeListener, prepare } = useForm("/entreprises", "POST", {
     user_id: user.id,
     email: user.email,
   });
@@ -34,13 +36,22 @@ const CreateEntreprise = () => {
     if (content.image) {
       setImage(URL.createObjectURL(content.image));
     } else {
-        setImage(false);
+      setImage(false);
     }
   }, [content]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(content);
+    if(import.meta.env.VITE_ENV_MODE == "demo"){
+      changeListener({
+        target:{
+          name: "image",
+          value: null
+        }
+      })
+    }
+    const response = await prepare(e);
+    console.log(response);
   };
 
   const inputs = [
@@ -62,7 +73,7 @@ const CreateEntreprise = () => {
       name: "adress2",
       type: "text",
       id: 3,
-      required: true,
+      required: false,
       label: "Complément d'adresse",
     },
     {
@@ -81,7 +92,7 @@ const CreateEntreprise = () => {
     },
     {
       name: "phone",
-      type: "text",
+      type: "phone",
       id: 4,
       required: true,
       label: "Téléphone de l'entreprise",
@@ -92,12 +103,13 @@ const CreateEntreprise = () => {
       id: 5,
       required: true,
       label: "Email de l'entreprise",
+      value: user.email,
     },
     {
       name: "description",
       type: "textarea",
       id: 5,
-      required: true,
+      required: false,
       label: "Bio de l'entreprise",
     },
   ];
@@ -107,11 +119,22 @@ const CreateEntreprise = () => {
       form={inputs}
       onChange={changeListener}
       onSubmit={handleSubmit}
-      style={{ width: "80%" }}
+      style={{
+        width: "50%",
+        margin: "0 auto",
+        padding: "0 2rem",
+        display: "flex",
+        flexDirection: "column",
+      }}
     >
-      <div>
-        <label htmlFor="image">Catégorie de votre entreprise</label>
-        <select type="file" name="image" id="image" onChange={changeListener}>
+      <div className={[style["input"], style["select"]].join(" ")}>
+        <label htmlFor="categorie_id">Catégorie de votre entreprise :</label>
+        <select
+          type="file"
+          name="categorie_id"
+          id="categorie_id"
+          onChange={changeListener}
+        >
           <option value="">Toutes les options</option>
           {categories.map((cat) => (
             <option key={cat.id} value={cat.id}>
@@ -120,15 +143,32 @@ const CreateEntreprise = () => {
           ))}
         </select>
       </div>
-      <div>
-        <label htmlFor="image">Photo de votre entreprise</label>
-        <input type="file" name="image" id="image" onChange={changeListener} />
+      <div className={[style["input"], style["file"]].join(" ")}>
+        <h4>Photo de votre entreprise :</h4>
+        <label htmlFor="image">
+          <Upload />
+        </label>
+        <input
+          type="file"
+          name="image"
+          id="image"
+          onChange={changeListener}
+          style={{
+            opacity: 0,
+            height: 0.1,
+            width: 0.1,
+          }}
+        />
       </div>
-      {image && (
-        <figure style={{ width: "50%", aspectRatio: "4/3" }}>
-          <img src={image ?? ""} alt="" style={{ width: "100%" }} />
-        </figure>
-      )}
+      <figure style={{ width: "50%", aspectRatio: "4/3", margin: "0 auto" }}>
+        <label htmlFor="image" className="pointer">
+          <img
+            src={image ? image : placeholder}
+            alt="photo de l'entreprise"
+            style={{ width: "100%", objectFit: "cover" }}
+          />
+        </label>
+      </figure>
     </CustomForm>
   );
 };

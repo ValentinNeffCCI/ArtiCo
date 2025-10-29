@@ -4,9 +4,8 @@ import style from "./profil.module.css";
 import UpdateUserForm from "./ModifyForm/UpdateUserForm";
 import useAPI from "../../hooks/useAPI";
 import { CustomButton } from "../../components/buttons/Custom/CustomButton";
-import EntrepriseCard from "../../components/cards/EntrepriseCard/EntrepriseCard";
 import defaultImage from "../../assets/photos/Sora_Shimazaki/handshake.jpg";
-import { Navigate, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useAuth();

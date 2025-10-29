@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
 import CustomInput from "./CustomInput";
-import classes from './customInput.module.css'
+import classes from "./customInput.module.css";
+import { CustomButton } from "../../../buttons/Custom/CustomButton";
 
 const CustomForm = ({ form = [], children, onChange, onSubmit, style }) => {
-
   return (
     <form onSubmit={onSubmit} style={style} className={classes["form"]}>
       {form.map((input) => {
@@ -12,12 +11,16 @@ const CustomForm = ({ form = [], children, onChange, onSubmit, style }) => {
             return (
               <CustomInput key={input.id} input={input}>
                 <textarea
-                  name={input.name}
+                  name={input.name.replaceAll(' ', '-')}
                   id={input.name.replaceAll(" ", "_")}
                   onChange={onChange}
                   required={input.required}
                   resize={"vertical"}
                   rows={5}
+                  defaultValue={
+                    input.value ?? ""
+                  }
+                  placeholder={input.label}
                 ></textarea>
               </CustomInput>
             );
@@ -29,6 +32,10 @@ const CustomForm = ({ form = [], children, onChange, onSubmit, style }) => {
                   id={input.name.replaceAll(" ", "_")}
                   required={input.required}
                   onChange={onChange}
+                  className={classes["select"]}
+                  defaultValue={
+                    input.value ?? ""
+                  }
                 >
                   <option value="">Choisissez une réponse</option>
                   {input.options &&
@@ -38,7 +45,7 @@ const CustomForm = ({ form = [], children, onChange, onSubmit, style }) => {
                 </select>
               </CustomInput>
             );
-            // case input type radio : fragment + chaque option
+          // case input type radio : fragment + chaque option
           default:
             return (
               <CustomInput key={input.id} input={input}>
@@ -50,6 +57,7 @@ const CustomForm = ({ form = [], children, onChange, onSubmit, style }) => {
                   name={input.name}
                   required={input.required}
                   onChange={onChange}
+                  defaultValue={input.value ?? ""}
                   id={input.name.replaceAll(" ", "_")}
                 />
               </CustomInput>
@@ -57,7 +65,12 @@ const CustomForm = ({ form = [], children, onChange, onSubmit, style }) => {
         }
       })}
       {children}
-      <button>Envoyer</button>
+      <CustomButton style={{
+        margin: "1.5rem auto",
+        alignSelf: "center",
+        "--bg-color": "var(--primary)",
+        "--color": "var(--light)"
+      }}>Envoyer</CustomButton>
     </form>
   );
 };

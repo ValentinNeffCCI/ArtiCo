@@ -326,6 +326,19 @@
       "categorie_id": 12,
       "created_at": "2023-12-01",
       "updated_at": "2024-10-21"
+    },
+    {
+      "id": "875b",
+      "user_id": "74dc",
+      "email": "valentin.neff@ccicampus.fr",
+      "name": "Valentin Neff",
+      "adress1": "4, rue principale",
+      "city": "Mussig",
+      "cp": "67600",
+      "phone": "0624950494",
+      "description": "test",
+      "categorie_id": "9",
+      "image": null
     }
   ]
 }

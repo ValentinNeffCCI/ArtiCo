@@ -78,3 +78,35 @@ button{
     display: block;
   }
 }
+
+@for $i from 0 to 10 {
+  .p-#{$i}{
+    padding: #{$i}rem
+  }
+}
+
+@for $i from 0 to 100 {
+  .w-#{$i}{
+    width: #{$i}+'%';
+  }
+}
+
+.text-center{
+  text-align: center;
+}
+
+.text-left{
+  text-align: left;
+}
+
+.flex{
+  display: flex;
+}
+
+.mx-auto{
+  margin: 0 auto;
+}
+
+.pointer{
+  cursor: pointer;
+}

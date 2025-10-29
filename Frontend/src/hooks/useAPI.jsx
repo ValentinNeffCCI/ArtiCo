@@ -16,7 +16,8 @@ const useAPI = () => {
         method: method,
       };
       if (["PUT", "POST"].includes(method) && body) {
-        if (hasFileData(body)) {
+        // Désactive l'upload de fichier en mode démo à cause de json-server
+        if (hasFileData(body) && import.meta.env.VITE_ENV_MODE !== "demo") {
           const formData = new FormData();
           Object.entries(body).forEach(([key, value]) =>
             formData.append(key, value)
