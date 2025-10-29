@@ -1,4 +1,5 @@
 import AddEntreprise from "../../pages/CreerEntreprise/AddEntreprise.jsx";
+import ModifierEntreprise from "../../pages/ModifierEntreprise/ModifierEntreprise.jsx";
 import Profile from "../../pages/Profile/Profile.jsx";
 
 const userRoutes = [
@@ -10,6 +11,10 @@ const userRoutes = [
     path: "/entreprise/nouveau",
     element: <AddEntreprise />,
   },
+  {
+    path: "/entreprise/:id",
+    element: <ModifierEntreprise/>
+  }
 ];
 
 export default userRoutes;

@@ -10,6 +10,7 @@ import { AdminLayout } from "../components/layouts/AdminLayout.jsx";
 import ForgotPassword from "../pages/ForgotPassword/ForgotPassword.jsx";
 import PasswordRecovery from "../pages/PasswordRecovery/PasswordRecovery.jsx";
 import RechercherEntreprise from "../pages/Rechercher/RechercherEntreprise.jsx";
+import DetailEntreprise from "../pages/DetailEntreprise/DetailEntreprise.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/rechercher",
         element: <RechercherEntreprise/>
+      },
+      {
+        path: "/artisan/:id",
+        element: <DetailEntreprise/>
       },
       {
         element: <ProtectedRoute allowedRoles={["user", "admin", "artisan"]} />,

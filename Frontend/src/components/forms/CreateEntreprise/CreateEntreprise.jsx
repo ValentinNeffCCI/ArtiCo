@@ -8,7 +8,7 @@ import style from "./style.module.css";
 import { Upload } from "lucide-react";
 import placeholder from "../../../assets/photos/placeholder.jpeg";
 
-const CreateEntreprise = () => {
+const CreateEntreprise = (defaultValues = false) => {
   const { user } = useAuth();
   const { content, changeListener, prepare } = useForm("/entreprises", "POST", {
     user_id: user.id,
@@ -29,29 +29,31 @@ const CreateEntreprise = () => {
   const [image, setImage] = useState(false);
 
   useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
     retrieveCategories();
   }, []);
 
-  useEffect(() => {
-    if (content.image) {
-      setImage(URL.createObjectURL(content.image));
-    } else {
-      setImage(false);
-    }
-  }, [content]);
+  const handleImageChange = (e)=>{
+    setImage(URL.createObjectURL(e.target.files[0]));
+    changeListener(e)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(import.meta.env.VITE_ENV_MODE == "demo"){
+    if (import.meta.env.VITE_ENV_MODE == "demo") {
       changeListener({
-        target:{
+        target: {
           name: "image",
-          value: null
-        }
-      })
+          value: null,
+        },
+      });
     }
     const response = await prepare(e);
-    console.log(response);
+    if(response){
+      return <Navigate to={"/profil"}/>
+    }
   };
 
   const inputs = [
@@ -61,6 +63,7 @@ const CreateEntreprise = () => {
       id: 1,
       required: true,
       label: "Nom de l'entreprise",
+      value: defaultValues.name ?? ""
     },
     {
       name: "adress1",
@@ -68,6 +71,7 @@ const CreateEntreprise = () => {
       id: 2,
       required: true,
       label: "Adresse de l'entreprise",
+      value: defaultValues.adress1 ?? ""
     },
     {
       name: "adress2",
@@ -75,6 +79,7 @@ const CreateEntreprise = () => {
       id: 3,
       required: false,
       label: "Complément d'adresse",
+      value: defaultValues.adress2 ?? ""
     },
     {
       name: "city",
@@ -82,6 +87,7 @@ const CreateEntreprise = () => {
       id: 8,
       required: true,
       label: "Ville",
+      value: defaultValues.city ?? ""
     },
     {
       name: "cp",
@@ -89,6 +95,7 @@ const CreateEntreprise = () => {
       id: 9,
       required: true,
       label: "Code postal",
+      value: defaultValues.cp ?? ""
     },
     {
       name: "phone",
@@ -96,6 +103,7 @@ const CreateEntreprise = () => {
       id: 4,
       required: true,
       label: "Téléphone de l'entreprise",
+      value: defaultValues.phone ?? ""
     },
     {
       name: "email",
@@ -104,6 +112,7 @@ const CreateEntreprise = () => {
       required: true,
       label: "Email de l'entreprise",
       value: user.email,
+      value: defaultValues.email ?? ""
     },
     {
       name: "description",
@@ -111,6 +120,7 @@ const CreateEntreprise = () => {
       id: 5,
       required: false,
       label: "Bio de l'entreprise",
+      value: defaultValues.description ?? ""
     },
   ];
 
@@ -134,6 +144,7 @@ const CreateEntreprise = () => {
           name="categorie_id"
           id="categorie_id"
           onChange={changeListener}
+          defaultValue={defaultValues.categorie_id}
         >
           <option value="">Toutes les options</option>
           {categories.map((cat) => (
@@ -152,7 +163,7 @@ const CreateEntreprise = () => {
           type="file"
           name="image"
           id="image"
-          onChange={changeListener}
+          onChange={handleImageChange}
           style={{
             opacity: 0,
             height: 0.1,
@@ -160,7 +171,7 @@ const CreateEntreprise = () => {
           }}
         />
       </div>
-      <figure style={{ width: "50%", aspectRatio: "4/3", margin: "0 auto" }}>
+      <figure style={{ width: "50%", margin: "0 auto", border: "1px solid var(--dark)" }}>
         <label htmlFor="image" className="pointer">
           <img
             src={image ? image : placeholder}
