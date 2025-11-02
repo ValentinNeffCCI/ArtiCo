@@ -1,6 +1,7 @@
 import { Fragment, useState } from "react";
 import InputBuilder from "./InputBuilder";
-import CustomForm from "./CustomForm";
+import CustomForm from "../Displayer/CustomForm";
+import classes from './form.module.css';
 
 const defaultInput = (index) => ({
   type: "text",
@@ -22,6 +23,7 @@ const FormBuilder = ({
       options: false,
     },
   ],
+  style = {}
 }) => {
   const [datas, setDatas] = useState(form);
 
@@ -35,8 +37,8 @@ const FormBuilder = ({
   };
 
   return (
-    <Fragment>
-      <form>
+    <div className={classes["builder"]}>
+      <form style={style}>
         {datas.length > 0 ? (
           datas.map((input, index) => (
             <InputBuilder input={input} index={index} onChange={handleChange} />
@@ -46,8 +48,8 @@ const FormBuilder = ({
         )}
         <button onClick={addField}>Ajouter un champ</button>
       </form>
-      <CustomForm form={datas} />
-    </Fragment>
+      <CustomForm form={datas} style={style}/>
+    </div>
   );
 };
 

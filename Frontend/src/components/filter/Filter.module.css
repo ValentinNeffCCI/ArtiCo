@@ -6,7 +6,7 @@
     align-items: center;
     background-color: white;
     border-radius: 2rem;
-    padding: 3rem 1.5rem;
+    padding: 1rem 1.5rem;
 }
 
 .filter input[name="name"]{
@@ -32,7 +32,7 @@
 .filter label{
     font-size: .8em;
     font-weight: 500;
-    margin-bottom: .8rem;
+    margin-bottom: .5rem;
 }
 
 .filter select{

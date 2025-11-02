@@ -2,20 +2,32 @@ import React, { useEffect, useState } from "react";
 import useForm from "../../../hooks/useForm";
 import { useAuth } from "../../../contexts/UserContext";
 import useAPI from "../../../hooks/useAPI";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import CustomForm from "../CustomForm/Displayer/CustomForm";
 import style from "./style.module.css";
 import { Upload } from "lucide-react";
 import placeholder from "../../../assets/photos/placeholder.jpeg";
 
-const CreateEntreprise = (defaultValues = false) => {
+const CreateEntreprise = ({
+  defaultValues = false,
+  method = "POST",
+  url = "/entreprises",
+}) => {
   const { user } = useAuth();
-  const { content, changeListener, prepare } = useForm("/entreprises", "POST", {
-    user_id: user.id,
-    email: user.email,
-  });
+  const { content, changeListener, prepare } = useForm(
+    url,
+    method,
+    defaultValues
+      ? defaultValues
+      : {
+          user_id: user.id,
+          email: user.email,
+        }
+  );
   const API = useAPI();
   const [categories, setCategories] = useState([]);
+
+  const navigation = useNavigate();
 
   const retrieveCategories = async () => {
     const response = await API.query("/categories");
@@ -35,10 +47,10 @@ const CreateEntreprise = (defaultValues = false) => {
     retrieveCategories();
   }, []);
 
-  const handleImageChange = (e)=>{
+  const handleImageChange = (e) => {
     setImage(URL.createObjectURL(e.target.files[0]));
-    changeListener(e)
-  }
+    changeListener(e);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,12 +59,13 @@ const CreateEntreprise = (defaultValues = false) => {
         target: {
           name: "image",
           value: null,
+          type: "text"
         },
       });
     }
     const response = await prepare(e);
-    if(response){
-      return <Navigate to={"/profil"}/>
+    if (response) {
+      return navigation('/profil');
     }
   };
 
@@ -63,7 +76,7 @@ const CreateEntreprise = (defaultValues = false) => {
       id: 1,
       required: true,
       label: "Nom de l'entreprise",
-      value: defaultValues.name ?? ""
+      value: content.name ?? "",
     },
     {
       name: "adress1",
@@ -71,7 +84,7 @@ const CreateEntreprise = (defaultValues = false) => {
       id: 2,
       required: true,
       label: "Adresse de l'entreprise",
-      value: defaultValues.adress1 ?? ""
+      value: content.adress1 ?? "",
     },
     {
       name: "adress2",
@@ -79,7 +92,7 @@ const CreateEntreprise = (defaultValues = false) => {
       id: 3,
       required: false,
       label: "Complément d'adresse",
-      value: defaultValues.adress2 ?? ""
+      value: content.adress2 ?? "",
     },
     {
       name: "city",
@@ -87,7 +100,7 @@ const CreateEntreprise = (defaultValues = false) => {
       id: 8,
       required: true,
       label: "Ville",
-      value: defaultValues.city ?? ""
+      value: content.city ?? "",
     },
     {
       name: "cp",
@@ -95,7 +108,7 @@ const CreateEntreprise = (defaultValues = false) => {
       id: 9,
       required: true,
       label: "Code postal",
-      value: defaultValues.cp ?? ""
+      value: content.cp ?? "",
     },
     {
       name: "phone",
@@ -103,7 +116,7 @@ const CreateEntreprise = (defaultValues = false) => {
       id: 4,
       required: true,
       label: "Téléphone de l'entreprise",
-      value: defaultValues.phone ?? ""
+      value: content.phone ?? "",
     },
     {
       name: "email",
@@ -111,8 +124,7 @@ const CreateEntreprise = (defaultValues = false) => {
       id: 5,
       required: true,
       label: "Email de l'entreprise",
-      value: user.email,
-      value: defaultValues.email ?? ""
+      value: content.email ? content.email : user ? user.email : "",
     },
     {
       name: "description",
@@ -120,7 +132,7 @@ const CreateEntreprise = (defaultValues = false) => {
       id: 5,
       required: false,
       label: "Bio de l'entreprise",
-      value: defaultValues.description ?? ""
+      value: content.description ?? "",
     },
   ];
 
@@ -132,7 +144,7 @@ const CreateEntreprise = (defaultValues = false) => {
       style={{
         width: "50%",
         margin: "0 auto",
-        padding: "0 2rem",
+        padding: "0 0 2rem 0",
         display: "flex",
         flexDirection: "column",
       }}
@@ -145,6 +157,7 @@ const CreateEntreprise = (defaultValues = false) => {
           id="categorie_id"
           onChange={changeListener}
           defaultValue={defaultValues.categorie_id}
+          required
         >
           <option value="">Toutes les options</option>
           {categories.map((cat) => (
@@ -171,7 +184,13 @@ const CreateEntreprise = (defaultValues = false) => {
           }}
         />
       </div>
-      <figure style={{ width: "50%", margin: "0 auto", border: "1px solid var(--dark)" }}>
+      <figure
+        style={{
+          width: "50%",
+          margin: "0 auto",
+          border: "1px solid var(--dark)",
+        }}
+      >
         <label htmlFor="image" className="pointer">
           <img
             src={image ? image : placeholder}

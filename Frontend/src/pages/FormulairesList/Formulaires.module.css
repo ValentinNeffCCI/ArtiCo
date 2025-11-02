@@ -1,0 +1,20 @@
+.formList{
+
+}
+
+.title {
+    font-size: 2em;
+    width: 80%;
+    padding: 1rem;
+    margin: 0 auto;
+}
+
+.no-content, .formList{
+    width: 75%;
+    text-align: center;
+    margin: 1rem auto;
+}
+
+.no-content{
+    font-weight: 500;
+}

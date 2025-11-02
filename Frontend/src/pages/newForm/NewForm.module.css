@@ -1,0 +1,14 @@
+.builder input{
+    border: none;
+    border-bottom: 1px solid var(--primary);
+}
+
+.builder div{
+    margin-bottom: 1rem;
+}
+
+.subtitles {
+    display: flex;
+    justify-content: center;
+    gap: 30%;
+}

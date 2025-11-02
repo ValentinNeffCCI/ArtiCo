@@ -53,7 +53,7 @@ const CustomForm = ({ form = [], children, onChange, onSubmit, style }) => {
                   type={input.type}
                   min={input.min ?? 0}
                   max={input.max ?? 100}
-                  placeholder={input.label}
+                  placeholder={input.label ?? input.name}
                   name={input.name}
                   required={input.required}
                   onChange={onChange}

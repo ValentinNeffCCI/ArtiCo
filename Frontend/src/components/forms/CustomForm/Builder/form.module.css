@@ -1,0 +1,19 @@
+.builder{
+    display: flex;
+    width: 80%;
+    margin: 1rem auto;
+    justify-content: space-between;
+}
+
+.builder > form {
+    width: 45%;
+}
+
+.builder input{
+    margin-bottom: 1.5rem;
+}
+
+.builder label {
+    margin-top: 1.5rem;
+    margin-bottom: .5rem;
+}

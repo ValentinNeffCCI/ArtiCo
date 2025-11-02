@@ -6,6 +6,8 @@ import useAPI from "../../hooks/useAPI";
 import { CustomButton } from "../../components/buttons/Custom/CustomButton";
 import defaultImage from "../../assets/photos/Sora_Shimazaki/handshake.jpg";
 import { NavLink } from "react-router-dom";
+import { LinkButton } from "../../components/buttons/Link/LinkButton";
+import { FolderCode, FormInput, Pencil } from "lucide-react";
 
 const Profile = () => {
   const { user } = useAuth();
@@ -35,21 +37,22 @@ const Profile = () => {
         <UpdateUserForm />
       </div>
       <div className={style["entrepriseList"]}>
-        <h2 className="itim">Mes entreprises</h2>
+        <h2 className="itim" style={{
+          fontSize: "2rem",
+          marginBottom: "1.5rem"
+        }}>Mes entreprises</h2>
         {entreprises.length !== 0 ? (
           <Fragment>
             {entreprises.map((entreprise) => (
-              <NavLink
+              <div
                 style={{
                   background: "var(--light)",
-                  padding: "0 0 1rem 0",
+                  padding: "0",
                   borderRadius: "1rem",
                   margin: "1rem 0",
                   overflow: "hidden",
                   width: "90%",
                 }}
-                to={"/entreprise/" + entreprise.id}
-                key={entreprise.id}
               >
                 <img
                   src={entreprise.image ?? defaultImage}
@@ -59,6 +62,7 @@ const Profile = () => {
                 <div
                   style={{
                     padding: "1rem",
+                    paddingBottom: "0",
                     display: "flex",
                     flexDirection: "column",
                     gap: ".3rem",
@@ -69,8 +73,57 @@ const Profile = () => {
                   <h6 className="montserrat">
                     {entreprise.cp} {entreprise.city}
                   </h6>
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-evenly",
+                      marginTop: "1rem"
+                    }}
+                  >
+                    <NavLink
+                      to={"/entreprise/" + entreprise.id}
+                      style={{
+                        margin: "0",
+                        width: "fit-content",
+                        border: "none",
+                        padding: ".5rem",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: ".3rem"
+                      }}
+                      title={"Mettre à jour les informations"}
+                    >
+                      <Pencil size={20}/>
+                      <p style={{
+                        fontSize: ".8rem"
+                      }}>Modifier</p>
+                    </NavLink>
+                    <NavLink
+                      to={"/entreprise/" + entreprise.id + "/formulaires"}
+                      style={{
+                        margin: "0",
+                        width: "fit-content",
+                        border: "none",
+                        padding: ".5rem",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        gap: ".3rem"
+                      }}
+                      title={
+                        "Gérer les questionnaires"
+                      }
+                    >
+                      <FolderCode size={20}/>
+                      <p style={{
+                        fontSize: ".8rem"
+                      }}>Questionnaires</p>
+                    </NavLink>
+                  </div>
                 </div>
-              </NavLink>
+              </div>
             ))}
           </Fragment>
         ) : (
@@ -88,6 +141,7 @@ const Profile = () => {
           </CustomButton>
         </NavLink>
       </div>
+      {/* TODO : Supprimer son compte */}
     </main>
   );
 };

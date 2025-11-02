@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAPI from "./useAPI";
 
 const useForm = (url_suffix = "/", method = "GET", defaultValue = {}) => {
