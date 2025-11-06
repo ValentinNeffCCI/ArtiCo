@@ -8,11 +8,17 @@ const useForm = (url_suffix = "/", method = "GET", defaultValue = {}) => {
 
   const handleChange = (e) => {
     const { name, type, value, files, checked } = e.target;
+
+    if(import.meta.env.VITE_ENV_MODE == "demo" && type == "password"){
+      return;
+    }
+
     setDatas((prev) => ({
       ...prev,
       [name]:
         type === "file" ? files[0] : type === "checkbox" ? checked : value,
     }));
+    
   };
 
   const submit = async (e) => {

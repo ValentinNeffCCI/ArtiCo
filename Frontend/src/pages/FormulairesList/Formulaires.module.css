@@ -18,3 +18,56 @@
 .no-content{
     font-weight: 500;
 }
+
+.formList{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.form {
+    padding: 1rem;
+    border: 2px solid var(--primary);
+    border-radius: .5rem;
+}
+
+.formList h2{
+    font-size: 1rem;
+}
+
+.form-buttons{
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.form-buttons a, .form-buttons button{
+    display: flex;
+    align-items: center;
+    width: 50%;
+    gap: 5px;
+    border: none;
+    font-weight: 400;
+    margin: 0;
+    padding: .5rem;
+    justify-content: center;
+    transition: background .2s ease;
+    border-radius: 0;
+}
+
+.form-buttons a:hover, .form-buttons button:hover{
+    font-weight: 600;
+}
+
+.form-buttons a:hover{
+    background-color: var(--secondary);
+}
+
+.form-buttons button:hover{
+    background-color: red;
+    color: white;
+}
+
+.form-buttons a{
+    border-right: 1px solid #ccc;
+}

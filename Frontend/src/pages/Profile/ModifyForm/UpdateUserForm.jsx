@@ -72,7 +72,7 @@ const UpdateUserForm = () => {
           "--color": "var(--light)",
         }}
         >
-        Modification
+        Modifier
       </CustomButton>
         <ToastContainer/>
     </form>

@@ -1,24 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CustomForm from "../../components/forms/CustomForm/Displayer/CustomForm";
 import FormBuilder from "../../components/forms/CustomForm/Builder/FormBuilder";
 import classes from "./NewForm.module.css";
+import useAPI from "../../hooks/useAPI";
+import { useParams } from "react-router-dom";
 
 const NewForm = () => {
-  const defaultFields = {
-    name: "name",
-    type: "text",
-    id: 1,
-    required: true,
-    label: "Nom du formulaire",
-    value: "",
+  const [name, setName] = useState("Nom du questionnaire");
+  const [id, setId] = useState(false);
+  const { query } = useAPI();
+  const { id: entrepriseID } = useParams();
+
+  useEffect(() => {
+    initForm();
+  }, []);
+
+  const initForm = async () => {
+    const response = await query("/formulaires", "POST", {
+      entreprise_id: entrepriseID,
+    });
+    if (response) {
+      setId(response.id);
+    }
   };
-  const handleSubmit = (e, inputList) => {
-    e.preventDefault();
-    console.log(inputList);
+
+  const handleChange = (e) => {
+    setName(e.target.value);
   };
   return (
     <main className={classes["builder"]}>
-      <h1>Nouveau questionnaire</h1>
+      <h1>Créez votre questionnaire</h1>
       <form
         style={{
           display: "flex",
@@ -28,14 +39,6 @@ const NewForm = () => {
           padding: "1rem",
         }}
       >
-        <label
-          htmlFor="name"
-          style={{
-            marginBottom: ".5rem",
-          }}
-        >
-          Nom du Questionnaire
-        </label>
         <input
           type="text"
           placeholder="Nom du Questionnaire"
@@ -43,22 +46,25 @@ const NewForm = () => {
           id="name"
           style={{
             padding: ".4rem",
+            background: "transparent",
           }}
+          defaultValue={name}
+          onChange={handleChange}
+          required
         />
       </form>
-      <div className={classes["subtitles"]}>
-        <h2>Paramètres</h2>
-        <h2>Aperçu</h2>
-      </div>
-        <FormBuilder
-          style={{
-            width: "50%",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between"
-          }}
-          onSave={handleSubmit}
-        />
+      <div className={classes["subtitles"]}></div>
+      <FormBuilder
+        style={{
+          width: "100%",
+          display: "flex",
+        }}
+        formId={id}
+        formDatas={{
+          entreprise_id: entrepriseID,
+          name,
+        }}
+      />
     </main>
   );
 };

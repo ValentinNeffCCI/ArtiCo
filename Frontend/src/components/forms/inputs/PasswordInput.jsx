@@ -13,10 +13,6 @@ const PasswordInput = ({
 
   const toggleShow = () => setShow((prev) => !prev);
 
-  useEffect(() => {
-    console.log(show);
-  }, [show]);
-
   return (
     <div
       style={{

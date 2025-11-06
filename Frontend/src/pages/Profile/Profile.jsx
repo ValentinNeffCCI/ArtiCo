@@ -6,7 +6,6 @@ import useAPI from "../../hooks/useAPI";
 import { CustomButton } from "../../components/buttons/Custom/CustomButton";
 import defaultImage from "../../assets/photos/Sora_Shimazaki/handshake.jpg";
 import { NavLink } from "react-router-dom";
-import { LinkButton } from "../../components/buttons/Link/LinkButton";
 import { FolderCode, FormInput, Pencil } from "lucide-react";
 
 const Profile = () => {
@@ -33,35 +32,35 @@ const Profile = () => {
         <h1 className={["dangrek", style["title"]].join(" ")}>
           Modifier mon profil
         </h1>
-        <h2 className="itim">Bienvenue {user.name}</h2>
         <UpdateUserForm />
       </div>
       <div className={style["entrepriseList"]}>
         <h2 className="itim" style={{
           fontSize: "2rem",
-          marginBottom: "1.5rem"
+          margin: "1rem"
         }}>Mes entreprises</h2>
-        {entreprises.length !== 0 ? (
-          <Fragment>
+        {entreprises.length !== 0 ? 
+        (
+          <div>
             {entreprises.map((entreprise) => (
               <div
                 style={{
                   background: "var(--light)",
                   padding: "0",
                   borderRadius: "1rem",
-                  margin: "1rem 0",
+                  margin: "1rem auto",
                   overflow: "hidden",
                   width: "90%",
                 }}
               >
                 <img
-                  src={entreprise.image ?? defaultImage}
+                  src={(entreprise.image instanceof String) ? entreprise.image : defaultImage}
                   alt={entreprise.name}
                   style={{ width: "100%", aspectRatio: "3/1" }}
                 />
                 <div
                   style={{
-                    padding: "1rem",
+                    padding: ".5rem",
                     paddingBottom: "0",
                     display: "flex",
                     flexDirection: "column",
@@ -69,30 +68,11 @@ const Profile = () => {
                   }}
                 >
                   <h3 className="itim">{entreprise.name}</h3>
-                  <h5 className="montserrat">{entreprise.adress1}</h5>
-                  <h6 className="montserrat">
-                    {entreprise.cp} {entreprise.city}
-                  </h6>
                   <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-evenly",
-                      marginTop: "1rem"
-                    }}
+                    className={style["card-buttons"]}
                   >
                     <NavLink
                       to={"/entreprise/" + entreprise.id}
-                      style={{
-                        margin: "0",
-                        width: "fit-content",
-                        border: "none",
-                        padding: ".5rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        gap: ".3rem"
-                      }}
                       title={"Mettre à jour les informations"}
                     >
                       <Pencil size={20}/>
@@ -102,16 +82,6 @@ const Profile = () => {
                     </NavLink>
                     <NavLink
                       to={"/entreprise/" + entreprise.id + "/formulaires"}
-                      style={{
-                        margin: "0",
-                        width: "fit-content",
-                        border: "none",
-                        padding: ".5rem",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        gap: ".3rem"
-                      }}
                       title={
                         "Gérer les questionnaires"
                       }
@@ -125,14 +95,14 @@ const Profile = () => {
                 </div>
               </div>
             ))}
-          </Fragment>
+          </div>
         ) : (
-          <div>Vos entreprises seront répertoriées ici</div>
+          <div style={{color: "var(--light)", textAlign: "center", height: "80vh", display: "flex", alignItems: "center"}}>Vos entreprises seront répertoriées ici</div>
         )}
         <NavLink to="/entreprise/nouveau">
           <CustomButton
             style={{
-              "--bg-color": "var(--primary)",
+              "--bg-color": "var(--secondary)",
               "--color": "var(--light)",
               margin: "1rem auto",
             }}
@@ -141,7 +111,6 @@ const Profile = () => {
           </CustomButton>
         </NavLink>
       </div>
-      {/* TODO : Supprimer son compte */}
     </main>
   );
 };

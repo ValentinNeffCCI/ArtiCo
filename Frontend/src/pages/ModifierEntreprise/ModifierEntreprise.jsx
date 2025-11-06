@@ -8,6 +8,7 @@ import CreateEntreprise from "../../components/forms/CreateEntreprise/CreateEntr
 import { LinkButton } from "../../components/buttons/Link/LinkButton";
 import style from './Modifier.module.css'
 import ManageGalerie from "../../components/images/galerie/ManageGalerie";
+import { CustomButton } from "../../components/buttons/Custom/CustomButton";
 
 const ModifierEntreprise = () => {
   const { id } = useParams();
@@ -24,6 +25,17 @@ const ModifierEntreprise = () => {
       navigation('/profil')
     }
   };
+
+  const handleDelete = async () => {
+    if(confirm('Voulez-vous vraiment supprimer cette entreprise ?')){
+      const response = await callAPI('/entreprises/'+id, "DELETE");
+      if(response){
+        navigation('/profil')
+      } else {
+        toast.error('Une erreur est survenue');
+      }
+    }
+  }
 
   useEffect(() => {
     getEntrepriseById(id);
@@ -65,6 +77,12 @@ const ModifierEntreprise = () => {
       ) : (
         <Loader />
       )}
+      <CustomButton style={{
+        '--color': "red",
+        marginLeft: "10%"
+      }} clickAction={handleDelete}>
+        Supprimer l'entreprise
+      </CustomButton>
       <ToastContainer />
     </main>
   );

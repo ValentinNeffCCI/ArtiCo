@@ -53,32 +53,27 @@
     {
       "id": "1dj4",
       "name": "admin",
-      "email": "admin@admin.com",
-      "password": "1234"
+      "email": "admin@admin.com"
     },
     {
       "id": "c933",
       "name": "Regina",
-      "email": "neffvalentinpro@gmail.com",
-      "password": "pizza"
+      "email": "neffvalentinpro@gmail.com"
     },
     {
       "id": "dc7f",
       "name": "Calzone",
-      "email": "calzone@pizza.it",
-      "password": "hola"
+      "email": "calzone@pizza.it"
     },
     {
       "id": "bfc8",
       "name": "Margherita",
-      "email": "neffvalentin67@gmail.com",
-      "password": "dsxg"
+      "email": "neffvalentin67@gmail.com"
     },
     {
       "id": "632d",
       "name": "Calzone",
-      "email": "calzone@pizza.it",
-      "password": "gvdfkugvuk"
+      "email": "calzone@pizza.it"
     },
     {
       "id": "74dc",
@@ -87,19 +82,6 @@
     }
   ],
   "entreprises": [
-    {
-      "user_id": "74dc",
-      "email": "valentin.neff@ccicampus.fr",
-      "categorie_id": "10",
-      "image": null,
-      "adress1": "12 Rue de la République",
-      "id": "1",
-      "name": "Boulangerie du coin",
-      "city": "Strasbourg",
-      "cp": "67000",
-      "phone": "0624950494",
-      "description": "Nos meilleurs offres de développement Web"
-    },
     {
       "id": "2",
       "user_id": 102,
@@ -325,7 +307,7 @@
       "updated_at": "2024-10-21"
     },
     {
-      "id": "875b",
+      "id": "19ed",
       "user_id": "74dc",
       "email": "valentin.neff@ccicampus.fr",
       "name": "Valentin Neff",
@@ -333,9 +315,8 @@
       "city": "Mussig",
       "cp": "67600",
       "phone": "0624950494",
-      "description": "test",
-      "categorie_id": "9",
-      "image": null
+      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ullamcorper, ex vitae scelerisque euismod, tortor risus pretium elit, a posuere ex nibh at purus. Fusce ut gravida nunc. Vivamus dignissim arcu et nulla blandit commodo. Cras finibus, nibh sed pretium euismod, ipsum felis placerat massa, id cursus felis eros a velit. Fusce bibendum elit sem, in malesuada elit molestie non. Nam fermentum sapien sit amet porttitor lobortis. Sed vestibulum enim tortor. Mauris accumsan elit euismod sem sagittis hendrerit. Sed fringilla, nibh vitae malesuada egestas, dolor leo rutrum augue, ac suscipit ipsum dolor et velit. Donec maximus, mauris vel consequat interdum, purus ante aliquet turpis, ac porttitor nisl tellus rhoncus ante. Phasellus molestie auctor ex vitae iaculis. Nullam sit amet tincidunt arcu.",
+      "categorie_id": "10"
     }
   ],
   "galeries": [
@@ -380,26 +361,6 @@
       "path": "photo_fitzone1.jpg"
     },
     {
-      "id": "58de",
-      "entreprise_id": "1",
-      "path": "/perceuse.jpg"
-    },
-    {
-      "id": "e84a",
-      "entreprise_id": "1",
-      "path": "/perceuse.jpg"
-    },
-    {
-      "id": "fa5e",
-      "entreprise_id": "1",
-      "path": "/perceuse.jpg"
-    },
-    {
-      "id": "8dcf",
-      "entreprise_id": "1",
-      "path": "/perceuse.jpg"
-    },
-    {
       "id": "99ed",
       "entreprise_id": "1",
       "path": "/perceuse.jpg"
@@ -410,7 +371,610 @@
       "path": "/perceuse.jpg"
     }
   ],
-  "formulaires":[
-    
+  "formulaires": [
+    {
+      "id": "6036"
+    },
+    {
+      "id": "c051"
+    },
+    {
+      "id": "20af"
+    },
+    {
+      "id": "7d62"
+    },
+    {
+      "id": "409f"
+    },
+    {
+      "id": "7a2b"
+    },
+    {
+      "id": "46d6"
+    },
+    {
+      "id": "610c"
+    },
+    {
+      "id": "c503"
+    },
+    {
+      "id": "466a"
+    },
+    {
+      "id": "cdcc",
+      "entreprise_id": "1"
+    },
+    {
+      "id": "8be2",
+      "entreprise_id": "1"
+    },
+    {
+      "id": "7c85",
+      "entreprise_id": "1"
+    },
+    {
+      "id": "2df5",
+      "entreprise_id": "1"
+    },
+    {
+      "id": "1206",
+      "entreprise_id": "1"
+    },
+    {
+      "id": "ecf6",
+      "entreprise_id": "1"
+    },
+    {
+      "id": "5f45",
+      "entreprise_id": "1"
+    },
+    {
+      "name": "Demande de RDV",
+      "entreprise_id": "1",
+      "inputs": [
+        {
+          "id": "e218",
+          "type": "text",
+          "name": "Nom",
+          "required": "true",
+          "options": false,
+          "formulaire_id": "667d"
+        },
+        {
+          "id": "7722",
+          "type": "datetime-local",
+          "name": "Date et heure souhaitée",
+          "required": "true",
+          "options": false,
+          "formulaire_id": "667d"
+        },
+        {
+          "id": "c606",
+          "type": "radio",
+          "name": "Sujet du rdv",
+          "required": "true",
+          "options": [
+            {
+              "id": "8c1a",
+              "input_id": "c606",
+              "value": "achat"
+            },
+            {
+              "id": "13d7",
+              "input_id": "c606",
+              "value": "vente"
+            },
+            {
+              "id": "7a30",
+              "input_id": "c606",
+              "value": "location"
+            }
+          ],
+          "formulaire_id": "667d"
+        }
+      ],
+      "id": "667d"
+    },
+    {
+      "name": "Demande de devis",
+      "entreprise_id": "19ed",
+      "inputs": [
+        {
+          "id": "1c47",
+          "type": "text",
+          "name": "nom du projet",
+          "required": "true",
+          "options": false,
+          "formulaire_id": "d929"
+        },
+        {
+          "id": "952c",
+          "type": "select",
+          "name": "Type de réalisation",
+          "required": "true",
+          "options": [
+            {
+              "id": "30c7",
+              "input_id": "952c",
+              "value": "Application web"
+            },
+            {
+              "id": "1be7",
+              "input_id": "952c",
+              "value": "Site vitrine"
+            },
+            {
+              "id": "4fba",
+              "input_id": "952c",
+              "value": "Site E-commerce"
+            }
+          ],
+          "formulaire_id": "d929"
+        },
+        {
+          "id": "9c23",
+          "type": "datetime-local",
+          "name": "Créneau de rencontre souhaité",
+          "required": "true",
+          "options": false,
+          "formulaire_id": "d929"
+        }
+      ],
+      "id": "d929"
+    },
+    {
+      "id": "76b3",
+      "entreprise_id": "19ed"
+    },
+    {
+      "id": "b055",
+      "entreprise_id": "19ed"
+    },
+    {
+      "id": "0bc4",
+      "entreprise_id": "19ed"
+    },
+    {
+      "id": "9eab",
+      "entreprise_id": "19ed"
+    },
+    {
+      "id": "12c1",
+      "entreprise_id": "19ed"
+    },
+    {
+      "id": "7d3c",
+      "entreprise_id": "19ed"
+    },
+    {
+      "id": "e43a",
+      "entreprise_id": "19ed"
+    },
+    {
+      "id": "3202",
+      "entreprise_id": "19ed"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "185c",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "6036"
+    },
+    {
+      "id": "8808",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "c051"
+    },
+    {
+      "id": "cbbc",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "20af"
+    },
+    {
+      "id": "6a2d",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "20af"
+    },
+    {
+      "id": "1c28",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "20af"
+    },
+    {
+      "id": "29cf",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "20af"
+    },
+    {
+      "id": "0388",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "7d62"
+    },
+    {
+      "id": "1281",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "409f"
+    },
+    {
+      "id": "ceb6",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "7a2b"
+    },
+    {
+      "id": "c92b",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "46d6"
+    },
+    {
+      "id": "e075",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "610c"
+    },
+    {
+      "id": "0de2",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "2df5"
+    },
+    {
+      "id": "c6a4",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "2df5"
+    },
+    {
+      "id": "048f",
+      "type": "text",
+      "name": "",
+      "value": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "2df5"
+    },
+    {
+      "id": "e218",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "667d"
+    },
+    {
+      "id": "7722",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "667d"
+    },
+    {
+      "id": "c606",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "667d"
+    },
+    {
+      "id": "1c47",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "d929"
+    },
+    {
+      "id": "952c",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "d929"
+    },
+    {
+      "id": "9c23",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "d929"
+    },
+    {
+      "id": "3349",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "d766"
+    },
+    {
+      "id": "e13e",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "76b3"
+    },
+    {
+      "id": "148e",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "b055"
+    },
+    {
+      "id": "b890",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "0bc4"
+    },
+    {
+      "id": "eb6c",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "9eab"
+    },
+    {
+      "id": "bc23",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "12c1"
+    },
+    {
+      "id": "ebff",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "7d3c"
+    },
+    {
+      "id": "0641",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "e43a"
+    },
+    {
+      "id": "4a5e",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "3202"
+    }
+  ],
+  "options": [
+    {
+      "id": "5d9a",
+      "input_id": "8808",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "af2e",
+      "input_id": "8808",
+      "value": "Sortir le chien"
+    },
+    {
+      "id": "2237",
+      "input_id": "8808",
+      "value": "faire les courses"
+    },
+    {
+      "id": "b804",
+      "input_id": "cbbc",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "8e3a",
+      "input_id": "cbbc",
+      "value": "faire les courses"
+    },
+    {
+      "id": "92c1",
+      "input_id": "29cf",
+      "value": "faire les courses"
+    },
+    {
+      "id": "5625",
+      "input_id": "29cf",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "31e3",
+      "input_id": "29cf",
+      "value": "faire les courses"
+    },
+    {
+      "id": "aef2",
+      "input_id": "0388",
+      "value": "faire les courses"
+    },
+    {
+      "id": "8eda",
+      "input_id": "0388",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "affa",
+      "input_id": "1281",
+      "value": "faire les courses"
+    },
+    {
+      "id": "8b6c",
+      "input_id": "1281",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "b973",
+      "input_id": "ceb6",
+      "value": "faire les courses"
+    },
+    {
+      "id": "aa33",
+      "input_id": "ceb6",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "ed79",
+      "input_id": "ceb6",
+      "value": "faire les courses"
+    },
+    {
+      "id": "159e",
+      "input_id": "ceb6",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "cf68",
+      "input_id": "ceb6",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "cde2",
+      "input_id": "c92b",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "d858",
+      "input_id": "c92b",
+      "value": "faire les courses"
+    },
+    {
+      "id": "246f",
+      "input_id": "c92b",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "dc08",
+      "input_id": "c92b",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "eec1",
+      "input_id": "c92b",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "9f14",
+      "input_id": "c92b",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "8174",
+      "input_id": "e075",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "238a",
+      "input_id": "e075",
+      "value": "faire les courses"
+    },
+    {
+      "id": "e80b",
+      "input_id": "048f",
+      "value": "achat"
+    },
+    {
+      "id": "fdd6",
+      "input_id": "048f",
+      "value": "vente"
+    },
+    {
+      "id": "64fa",
+      "input_id": "048f",
+      "value": "location"
+    },
+    {
+      "id": "8c1a",
+      "input_id": "c606",
+      "value": "achat"
+    },
+    {
+      "id": "13d7",
+      "input_id": "c606",
+      "value": "vente"
+    },
+    {
+      "id": "7a30",
+      "input_id": "c606",
+      "value": "location"
+    },
+    {
+      "id": "30c7",
+      "input_id": "952c",
+      "value": "Application web"
+    },
+    {
+      "id": "1be7",
+      "input_id": "952c",
+      "value": "Site vitrine"
+    },
+    {
+      "id": "4fba",
+      "input_id": "952c",
+      "value": "Site E-commerce"
+    }
   ]
 }

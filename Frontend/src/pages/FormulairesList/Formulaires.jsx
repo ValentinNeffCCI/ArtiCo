@@ -5,6 +5,7 @@ import Loader from "../../components/UX/loaders/Loader";
 import style from "./Formulaires.module.css";
 import { CustomButton } from "../../components/buttons/Custom/CustomButton";
 import { Plus } from "lucide-react";
+import FormCard from "./FormCard/FormCard";
 
 const Formulaires = () => {
   const { id: entrepriseID } = useParams();
@@ -19,7 +20,11 @@ const Formulaires = () => {
         "/formulaires?entreprise_id=" + entrepriseID
       );
       if (response) {
-        setForms(response);
+        setForms(
+          response.filter(
+            (form) => form.entreprise_id && form.entreprise_id == entrepriseID
+          )
+        );
       }
     } catch (error) {
       if (import.meta.env.VITE_ENV_MODE != "prod") {
@@ -27,6 +32,13 @@ const Formulaires = () => {
       }
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const response = await query("/formulaires/" + id, "DELETE");
+    if (response) {
+      setForms((prev) => prev.filter((item) => item.id != id));
     }
   };
 
@@ -40,10 +52,11 @@ const Formulaires = () => {
       <h1 className={["dangrek", style["title"]].join(" ")}>
         Les questionnaires de mon entreprise
       </h1>
+      <div className={style["formList"]}>
+        {forms && forms.map((form) => <FormCard form={form} onDelete={handleDelete}/>)}
+      </div>
       {forms.length !== 0 && <div></div>}
-      <NavLink
-      to={`/entreprise/${entrepriseID}/formulaire/nouveau`}
-      >
+      <NavLink to={`/entreprise/${entrepriseID}/formulaire/nouveau`}>
         <CustomButton
           style={{
             fontSize: 15,

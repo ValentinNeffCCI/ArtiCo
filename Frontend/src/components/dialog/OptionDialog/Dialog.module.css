@@ -1,0 +1,45 @@
+.dialog{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.dialog-body{
+    width: 60%;
+    height: 60%;
+    background-color: white;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dialog-body form{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+}
+
+.dialog-body h3 {
+    text-align: center;
+    font-family: 'dangrek';
+    font-size: 1.8rem;
+}
+
+.dialog-body input {
+    background-color: var(--light);
+    margin-bottom: 1rem;
+}
+
+.dialog-body form button{
+    font-size: 1rem;
+    --bg-color: var(--secondary)
+}
