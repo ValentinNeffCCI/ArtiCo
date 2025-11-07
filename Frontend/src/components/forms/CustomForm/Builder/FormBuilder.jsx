@@ -15,8 +15,6 @@ const defaultInput = (formId) => ({
   formulaire_id: formId,
 });
 
-//! Soumission du formulaire et enregistrement des champs + options
-
 const FormBuilder = ({
   form = [],
   style = {},
@@ -75,7 +73,7 @@ const FormBuilder = ({
     };
     const response = await callAPI("/formulaires/" + formId, "PUT", payLoad);
     if (response) {
-      navigation("/profil");
+      navigation(`/entreprise/${formDatas.entreprise_id}/formulaires`);
     }
   };
 

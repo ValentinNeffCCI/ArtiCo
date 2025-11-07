@@ -59,13 +59,13 @@ const CreateEntreprise = ({
         target: {
           name: "image",
           value: null,
-          type: "text"
+          type: "text",
         },
       });
     }
     const response = await prepare(e);
     if (response) {
-      return navigation('/profil');
+      return navigation("/profil");
     }
   };
 
@@ -148,25 +148,32 @@ const CreateEntreprise = ({
         display: "flex",
         flexDirection: "column",
       }}
+      submitButton={
+        defaultValues
+          ? "Enregistrer les modifications"
+          : "Je créé mon entreprise"
+      }
     >
-      <div className={[style["input"], style["select"]].join(" ")}>
-        <label htmlFor="categorie_id">Catégorie de votre entreprise :</label>
-        <select
-          type="file"
-          name="categorie_id"
-          id="categorie_id"
-          onChange={changeListener}
-          defaultValue={defaultValues.categorie_id}
-          required
-        >
-          <option value="">Toutes les options</option>
-          {categories.map((cat) => (
-            <option key={cat.id} value={cat.id}>
-              {cat.name}
-            </option>
-          ))}
-        </select>
-      </div>
+      {categories.length !== 0 && (
+        <div className={[style["input"], style["select"]].join(" ")}>
+          <label htmlFor="categorie_id">Catégorie de votre entreprise :</label>
+          <select
+            type="file"
+            name="categorie_id"
+            id="categorie_id"
+            onChange={changeListener}
+            defaultValue={defaultValues && defaultValues.categorie_id}
+            required
+          >
+            <option value="">Toutes les options</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
       <div className={[style["input"], style["file"]].join(" ")}>
         <h4>Photo de votre entreprise :</h4>
         <label htmlFor="image">

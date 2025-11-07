@@ -19,7 +19,7 @@ const FormCard = ({ onDelete, form }) => {
           <span>Modifier</span>
         </LinkButton>
         <CustomButton style={{fontSize: 16}} clickAction={handleDelete}>
-          <Trash2 size={15} />
+          <Trash2 size={20} />
           <span>Supprimer</span>
         </CustomButton>
       </div>

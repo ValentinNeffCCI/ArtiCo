@@ -1,18 +1,18 @@
 import { useAuth } from "../../contexts/UserContext";
 import style from "./rechercher.module.css";
-import usePosition from "../../hooks/usePosition";
 import { Suspense, useEffect, useState } from "react";
 import CardSkeleton from "../../components/skeleton/CardSkeleton";
 import { useSearchParams } from "react-router-dom";
 import EntrepriseList from "../../components/listes/EntrepriseList";
 import useAPI from "../../hooks/useAPI";
+import Loader from "../../components/UX/loaders/Loader";
 
 const RechercherEntreprise = () => {
-
   const { query: callAPI } = useAPI();
 
   const [entreprises, setEntreprises] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [query] = useSearchParams();
   const categorie = query.get("categorie");
@@ -21,12 +21,13 @@ const RechercherEntreprise = () => {
     let response = await callAPI("/entreprises");
     if (response) {
       setEntreprises(response);
+      setTimeout(() => setIsLoading(false), 1500);
     }
   };
 
   window.scrollTo({
-    top: 0
-  })
+    top: 0,
+  });
 
   const getCategories = async () => {
     const response = await callAPI("/categories");
@@ -40,9 +41,11 @@ const RechercherEntreprise = () => {
     getCategories();
   }, []);
 
+  if (isLoading) return <Loader />;
+
   return (
     <main className={style.rechercher}>
-      <h1>Rechercher une entreprise</h1>
+      <h1 className="dangrek">Rechercher une entreprise</h1>
       {entreprises.length != 0 && (
         <Suspense fallback={<CardSkeleton />}>
           <EntrepriseList

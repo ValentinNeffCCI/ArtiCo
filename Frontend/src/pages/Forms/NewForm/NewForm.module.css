@@ -12,3 +12,12 @@
     justify-content: center;
     gap: 30%;
 }
+
+.builder input[name="name"]{
+    font-size: 1.3em;
+    margin-top: 0;
+}
+
+.builder h1{
+    padding: 0;
+}

@@ -1,8 +1,9 @@
 import AddEntreprise from "../../pages/CreerEntreprise/AddEntreprise.jsx";
 import Formulaires from "../../pages/FormulairesList/Formulaires.jsx";
 import ModifierEntreprise from "../../pages/ModifierEntreprise/ModifierEntreprise.jsx";
-import NewForm from "../../pages/newForm/NewForm.jsx";
+import NewForm from "../../pages/Forms/NewForm/NewForm.jsx";
 import Profile from "../../pages/Profile/Profile.jsx";
+import UpdateForm from "../../pages/Forms/UpdateForm/UpdateForm.jsx";
 
 const userRoutes = [
   {
@@ -24,6 +25,10 @@ const userRoutes = [
   {
     path: "/entreprise/:id/formulaire/nouveau",
     element: <NewForm />,
+  },
+  {
+    path: "/formulaire/modifier/:id",
+    element: <UpdateForm />,
   },
 ];
 

@@ -9,6 +9,7 @@ const CustomForm = ({
   onSubmit,
   style,
   active = true,
+  submitButton = "Envoyer"
 }) => {
   return (
     <form onSubmit={onSubmit} style={style} className={classes["form"]}>
@@ -118,7 +119,7 @@ const CustomForm = ({
           display: active ? "block" : "none",
         }}
       >
-        Envoyer
+        {submitButton}
       </CustomButton>
     </form>
   );

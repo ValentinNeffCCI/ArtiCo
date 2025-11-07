@@ -152,7 +152,7 @@ const InputBuilder = ({
           }}
           clickAction={onRemove}
         >
-          Supprimer
+          Retirer
         </CustomButton>
       </div>
       {onglet == 0 && (

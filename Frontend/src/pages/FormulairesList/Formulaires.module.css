@@ -1,7 +1,3 @@
-.formList{
-
-}
-
 .title {
     font-size: 2em;
     width: 80%;
@@ -9,7 +5,7 @@
     margin: 0 auto;
 }
 
-.no-content, .formList{
+.no-content{
     width: 75%;
     text-align: center;
     margin: 1rem auto;
@@ -20,15 +16,25 @@
 }
 
 .formList{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
+    padding: 1rem;
+}
+
+.form-display > div {
+    width: 70%;
 }
 
 .form {
     padding: 1rem;
     border: 2px solid var(--primary);
     border-radius: .5rem;
+    height: fit-content;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
 }
 
 .formList h2{
@@ -44,7 +50,6 @@
 .form-buttons a, .form-buttons button{
     display: flex;
     align-items: center;
-    width: 50%;
     gap: 5px;
     border: none;
     font-weight: 400;
@@ -70,4 +75,18 @@
 
 .form-buttons a{
     border-right: 1px solid #ccc;
+}
+
+.form-display{
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.form-display figure{
+    width: 20%;
+}
+
+.form-display img{
+    width: 100%;
 }
