@@ -11,36 +11,12 @@ import ForgotPassword from "../pages/ForgotPassword/ForgotPassword.jsx";
 import PasswordRecovery from "../pages/PasswordRecovery/PasswordRecovery.jsx";
 import RechercherEntreprise from "../pages/Rechercher/RechercherEntreprise.jsx";
 import DetailEntreprise from "../pages/DetailEntreprise/DetailEntreprise.jsx";
+import { VisitorRoutes } from "./routes/VisitorRoutes.jsx";
 
 const router = createBrowserRouter([
   {
     element: <MainLayout />,
-    children: [
-      {
-        path: "/",
-        element: <Accueil />,
-      },
-      {
-        path: "/mot-de-passe-oublie",
-        element: <ForgotPassword />,
-      },
-      {
-        path: "/reinitialiser-mot-de-passe",
-        element: <PasswordRecovery/>
-      },
-      {
-        path: "/rechercher",
-        element: <RechercherEntreprise/>
-      },
-      {
-        path: "/artisan/:id",
-        element: <DetailEntreprise/>
-      },
-      {
-        element: <ProtectedRoute allowedRoles={["user", "admin", "artisan"]} />,
-        children: UserRoutes,
-      },
-    ],
+    children: VisitorRoutes
   },
   {
     element: <AdminLayout />,

@@ -1,14 +1,13 @@
-import React from "react";
 import useForm from "../../../hooks/useForm";
 import { useAuth } from "../../../contexts/UserContext";
 import { CustomButton } from "../../../components/buttons/Custom/CustomButton";
 import style from "./update.module.css";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const UpdateUserForm = () => {
   const isDemo = import.meta.env.VITE_ENV_MODE == "demo";
   const { user, login } = useAuth();
-  const { changeListener, prepare } = useForm("/users/" + user.id, "PUT", {
+  const { changeListener, prepare } = useForm("/users/" + user.id, "PATCH", {
     id: user.id,
     email: user.email,
     name: user.name,
@@ -74,7 +73,7 @@ const UpdateUserForm = () => {
         >
         Modifier
       </CustomButton>
-        <ToastContainer/>
+        
     </form>
   );
 };

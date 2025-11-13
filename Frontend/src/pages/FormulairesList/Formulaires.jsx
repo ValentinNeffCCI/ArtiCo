@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
 import Loader from "../../components/UX/loaders/Loader";
 import style from "./Formulaires.module.css";
 import { CustomButton } from "../../components/buttons/Custom/CustomButton";
-import { Plus } from "lucide-react";
+import { ArrowLeft, Plus } from "lucide-react";
 import FormCard from "./FormCard/FormCard";
 import worker from "../../assets/mascotte/happy_worker.png";
 
@@ -13,6 +13,8 @@ const Formulaires = () => {
   const { query } = useAPI();
   const [isLoading, setIsLoading] = useState();
   const [forms, setForms] = useState([]);
+  const navigation = useNavigate();
+  const returnBack = () => navigation(-1);
 
   const getEntrepriseForms = async () => {
     setIsLoading(true);
@@ -48,8 +50,12 @@ const Formulaires = () => {
   }, []);
 
   return (
-    <main>
-      {isLoading && <Loader />}
+    <main className={style["formulaires"]}>
+      {isLoading && <Loader />}      
+      <CustomButton clickAction={returnBack} className={style['goBack']}>
+        <ArrowLeft />
+        Revenir en arrière
+      </CustomButton>
       <h1 className={["dangrek", style["title"]].join(" ")}>
         Les questionnaires de mon entreprise
       </h1>

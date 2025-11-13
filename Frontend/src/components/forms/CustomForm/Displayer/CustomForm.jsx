@@ -1,6 +1,7 @@
 import CustomInput from "./CustomInput";
 import classes from "./customInput.module.css";
 import { CustomButton } from "../../../buttons/Custom/CustomButton";
+import ColorInput from "../Builder/Color/ColorInput";
 
 const CustomForm = ({
   form = [],
@@ -9,7 +10,7 @@ const CustomForm = ({
   onSubmit,
   style,
   active = true,
-  submitButton = "Envoyer"
+  submitButton = "Envoyer",
 }) => {
   return (
     <form onSubmit={onSubmit} style={style} className={classes["form"]}>
@@ -18,34 +19,51 @@ const CustomForm = ({
           case "radio":
           case "checkbox":
             return (
-              <div className={classes["checkArea"]}>
-                {input.options &&
-                  input.options.map((option) => (
-                    <div key={option.id}>
-                      <input
-                        type={input.type}
-                        id={option.value.replaceAll(" ", "_") + option.id}
-                        required={input.required == "true"}
-                        name={input.name.length !== 0 ? input.name : "default"}
-                        value={option.value}
-                      />
-                      <label
-                        htmlFor={option.value.replaceAll(" ", "_") + option.id}
-                      >
-                        {option.value}
-                      </label>
-                    </div>
-                  ))}
+              <div key={input.id} className={classes["checkArea"]}>
+                <CustomInput key={input.id} input={input}>
+                  {input.options &&
+                    input.options.map((option) => (
+                      <div key={option.id}>
+                        <input
+                          type={input.type}
+                          id={option.value.replaceAll(" ", "_") + option.id}
+                          required={(input.type === "radio") && (input.required == "true")}
+                          onChange={onChange}
+                          name={
+                            input.name.length !== 0
+                              ? input.name.replaceAll(" ", "-") + "_" + input.id
+                              : "default_" + input.id
+                          }
+                          value={option.value}
+                        />
+                        <label
+                          htmlFor={
+                            option.value.replaceAll(" ", "_") + option.id
+                          }
+                        >
+                          {option.value}
+                        </label>
+                      </div>
+                    ))}
+                </CustomInput>
               </div>
             );
+          case "color":
+            return <ColorInput key={input.id} input={input} onChange={onChange} />;
           case "number":
             return (
               <CustomInput key={input.id} input={input}>
                 <input
                   type="number"
-                  id={input.name.replaceAll(" ", "_")}
+                  id={input.name.replaceAll(" ", "_") + "_" + input.id}
+                  name={
+                    input.name.length !== 0
+                      ? input.name.replaceAll(" ", "-") + "_" + input.id
+                      : "default_" + input.id
+                  }
                   required={input.required == "true"}
                   defaultValue={input.value ?? ""}
+                  onChange={onChange}
                   placeholder={`${input.name} (nombre)`}
                   step={0.01}
                   min={0}
@@ -56,8 +74,12 @@ const CustomForm = ({
             return (
               <CustomInput key={input.id} input={input}>
                 <textarea
-                  name={input.name.replaceAll(" ", "-")}
-                  id={input.name.replaceAll(" ", "_")}
+                  name={
+                    input.name.length !== 0
+                      ? input.name.replaceAll(" ", "-") + "_" + input.id
+                      : "default_" + input.id
+                  }
+                  id={input.name.replaceAll(" ", "_") + "_" + input.id}
                   onChange={onChange}
                   required={input.required}
                   resize={"vertical"}
@@ -71,9 +93,13 @@ const CustomForm = ({
             return (
               <CustomInput key={input.id} input={input}>
                 <select
-                  name={input.name}
-                  id={input.name.replaceAll(" ", "_")}
-                  required={input.required}
+                  name={
+                    input.name.length !== 0
+                      ? input.name.replaceAll(" ", "-") + "_" + input.id
+                      : "default_" + input.id
+                  }
+                  id={input.name.replaceAll(" ", "_") + "_" + input.id}
+                  required={input.require == 'true'}
                   onChange={onChange}
                   className={classes["select"]}
                   defaultValue={input.value ?? ""}
@@ -84,12 +110,11 @@ const CustomForm = ({
                   <option value="">Choisissez une réponse</option>
                   {input.options &&
                     input.options.map((option) => (
-                      <option value={option.value}>{option.value}</option>
+                      <option key={option.id} value={option.value}>{option.value}</option>
                     ))}
                 </select>
               </CustomInput>
             );
-          // case input type radio : fragment + chaque option
           default:
             return (
               <CustomInput key={input.id} input={input}>
@@ -98,11 +123,15 @@ const CustomForm = ({
                   min={input.min ?? 0}
                   max={input.max ?? 100}
                   placeholder={input.label ?? input.name}
-                  name={input.name}
+                  name={
+                    input.name.length !== 0
+                      ? input.name.replaceAll(" ", "-") + "_" + input.id
+                      : "default_" + input.id
+                  }
                   required={input.required == "true"}
                   onChange={onChange}
                   defaultValue={input.value ?? ""}
-                  id={input.name.replaceAll(" ", "_")}
+                  id={input.name.replaceAll(" ", "_") + "_" + input.id}
                 />
               </CustomInput>
             );

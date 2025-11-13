@@ -37,16 +37,15 @@
 @media screen and (min-width: 768px) {
     .actions {
         display: flex;
-        width: 40%;
+        width: 90%;
         flex-direction: row;
+        justify-content: space-between;
         overflow: hidden;
         margin: 0 auto;
     }
 
     .action {
-        width: 100%;
-        flex-shrink: 0;
-        animation: fadeAppear 10s infinite;
+        width: 30%;
     }
 
     .howto > div {

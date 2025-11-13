@@ -16,7 +16,8 @@
     margin-left: 10%;
     border-bottom: 2px solid var(--primary);
     transition: color .2s ease-in;
-    font-size: .8rem;
+    font-size: 1rem;
+    font-family: "Montserrat-bold", sans-serif
 }
 
 .navbar a:hover {

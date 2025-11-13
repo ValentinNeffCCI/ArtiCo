@@ -17,6 +17,11 @@ export const UserProvider = ({children}) => {
         setUser(false);
     };
 
+    // useEffect(()=>{
+    //   localStorage.removeItem("GPS");
+    //   localStorage.removeItem("artico_user");
+    // }, [])
+
     return (
         <UserContext.Provider value={{user, login, logout}}>
             {children}

@@ -30,7 +30,7 @@ const OptionDialog = ({addOption, inputId, onClose}) => {
         <form onSubmit={handleSubmit}>
           <label htmlFor="value">Intitulé du choix</label>
           <input type="text" name="value" required id="value" onChange={handleChange}/>
-        <ToastContainer/>
+        
           <CustomButton>
             <span>Enregistrer</span>
           </CustomButton>

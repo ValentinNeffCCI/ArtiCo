@@ -4,6 +4,12 @@ const usePosition = () => {
   const [position, setPosition] = useState(false);
   const hasRequested = useRef(false);
 
+  useEffect(() => {
+    return () => {
+      localStorage.removeItem("GPS");
+    };
+  }, []);
+
   const baseUrl =
     "https://geo.api.gouv.fr/communes?lat={latitude}&lon={longitude}&fields=code,nom,codesPostaux";
 
@@ -41,9 +47,9 @@ const usePosition = () => {
     if (GPS) {
       const datas = JSON.parse(GPS);
       const today = new Date().toLocaleDateString();
-      if(datas.fetched_at === today){
-          setPosition(datas);
-          return;
+      if (datas.fetched_at === today) {
+        setPosition(datas);
+        return;
       }
     }
     if (navigator.geolocation) {

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { types } from "../types.js";
-import { Minus, Plus, X } from "lucide-react";
+import { Plus } from "lucide-react";
 import { CustomButton } from "../../../buttons/Custom/CustomButton.jsx";
 import classes from "./input.module.css";
 import CustomInput from "../Displayer/CustomInput.jsx";
@@ -131,7 +131,6 @@ const InputBuilder = ({
 
   return (
     <div className={classes["input"]}>
-      {/* menu onglets  */}
       <div className={classes["onglets"]}>
         {onglets.map((item, index) => (
           <button
@@ -246,16 +245,17 @@ const InputBuilder = ({
             </div>
             <CustomButton
               style={{
-                fontSize: 12,
+                fontSize: 14,
                 margin: "1rem auto",
                 display: "flex",
                 alignItems: "center",
                 "--bg-color": "var(--secondary)",
+                gap: "1rem"
               }}
               clickAction={showModal}
             >
-              <Plus size={10} />
               <span>Ajouter un choix</span>
+              <Plus size={15} />
             </CustomButton>
           </div>
         ) : (

@@ -77,7 +77,7 @@ const Login = () => {
           <ArrowLeft />
           <span>Revenir à l'accueil</span>
         </LinkButton>
-        <ToastContainer/>
+        
         {isConnecting ? (
           <LoginForm>
             <CustomButton

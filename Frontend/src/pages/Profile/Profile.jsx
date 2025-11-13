@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/UserContext";
 import style from "./profil.module.css";
 import UpdateUserForm from "./ModifyForm/UpdateUserForm";
@@ -54,7 +54,7 @@ const Profile = () => {
                 }}
               >
                 <img
-                  src={(entreprise.image instanceof String) ? entreprise.image : defaultImage}
+                  src={(typeof entreprise.image == "string") ? entreprise.image : defaultImage}
                   alt={entreprise.name}
                   style={{ width: "100%", aspectRatio: "3/1" }}
                 />
@@ -103,7 +103,7 @@ const Profile = () => {
           <CustomButton
             style={{
               "--bg-color": "var(--secondary)",
-              "--color": "var(--light)",
+              "--color": "var(--dark)",
               margin: "1rem auto",
             }}
           >

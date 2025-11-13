@@ -31,14 +31,6 @@ export const HowTo = () => {
             </div>
           ))}
         </div>
-        <figure className={"hidden-mobile"}>
-            <img src={HandShake} alt="poignée de main" style={{
-                width: "100%"
-            }}/>
-            <figcaption>
-                Credits: Sora Shimazaki
-            </figcaption>
-        </figure>
       </div>
     </section>
   );

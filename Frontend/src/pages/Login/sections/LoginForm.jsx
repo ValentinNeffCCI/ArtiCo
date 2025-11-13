@@ -5,7 +5,7 @@ import useForm from "../../../hooks/useForm";
 import classes from "./Loginsection.module.css";
 import { LinkButton } from "../../../components/buttons/Link/LinkButton";
 import useAPI from "../../../hooks/useAPI";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 export const LoginForm = ({ children }) => {
   const mode = import.meta.env.VITE_ENV_MODE;
@@ -51,6 +51,7 @@ export const LoginForm = ({ children }) => {
 
   return (
     <div className={classes["login_form"]}>
+      <ToastContainer/>
       <h1>Accéder à mon profil</h1>
       <form onSubmit={handleSubmit}>
         <input

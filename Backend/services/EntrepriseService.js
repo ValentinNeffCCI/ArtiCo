@@ -16,8 +16,5 @@ export default {
   },
   findByName: (name) => {
     // recherche par email renvoie le premier résultat
-  },
-  findByTags: (tags) => {
-    // recherche par mots-clés de l'entreprise findFirstOrCreate pour chacun
   }
 };

@@ -33,7 +33,6 @@ const NewForm = () => {
 
   const cancelCreation = async () => {
     const response = await query("/formulaires/" + id, "DELETE");
-    console.log(response);
     if (response) {
       navigation(`/entreprise/${entrepriseID}/formulaires`);
     }

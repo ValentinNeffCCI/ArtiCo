@@ -26,13 +26,11 @@ const EntrepriseList = ({
     setEntreprises(filteredEnterprises(filters));
   };
 
-  // Nécessaire pour la démonstration sera gérée via Node plus tard
   const filteredEnterprises = (filters) => {
     if (!filters || Object.keys(filters).length === 0) {
       return allEntreprises;
     }
     let returnValue = allEntreprises;
-    console.log(returnValue)
     returnValue = filters.name
       ? returnValue.filter(
           (element) =>
@@ -40,7 +38,6 @@ const EntrepriseList = ({
             element.city.toLowerCase().includes(filters.name.toLowerCase())
         )
       : returnValue;
-      console.log(returnValue, filters.categorie_id)
     returnValue = filters.categorie_id
       ? returnValue.filter(
           (element) => parseInt(element.categorie_id) === parseInt(filters.categorie_id)

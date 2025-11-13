@@ -1,0 +1,12 @@
+.colorInput{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.colorInput input{
+    width: 3%;
+    border: none;
+    background-color: var(--selected-color);
+    border-radius: 50%;
+}

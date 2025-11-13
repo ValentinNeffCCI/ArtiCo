@@ -67,7 +67,7 @@ export const Header = () => {
       }`}
     >
       <NavLink to={"/"}>
-        <Logo size={120} />
+        <Logo size={100} />
       </NavLink>
       <Menu isMobile={isMobile}>
         <NavLink

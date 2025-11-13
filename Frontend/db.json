@@ -317,6 +317,19 @@
       "phone": "0624950494",
       "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ullamcorper, ex vitae scelerisque euismod, tortor risus pretium elit, a posuere ex nibh at purus. Fusce ut gravida nunc. Vivamus dignissim arcu et nulla blandit commodo. Cras finibus, nibh sed pretium euismod, ipsum felis placerat massa, id cursus felis eros a velit. Fusce bibendum elit sem, in malesuada elit molestie non. Nam fermentum sapien sit amet porttitor lobortis. Sed vestibulum enim tortor. Mauris accumsan elit euismod sem sagittis hendrerit. Sed fringilla, nibh vitae malesuada egestas, dolor leo rutrum augue, ac suscipit ipsum dolor et velit. Donec maximus, mauris vel consequat interdum, purus ante aliquet turpis, ac porttitor nisl tellus rhoncus ante. Phasellus molestie auctor ex vitae iaculis. Nullam sit amet tincidunt arcu.",
       "categorie_id": "10"
+    },
+    {
+      "id": "3d4b",
+      "user_id": "74dc",
+      "email": "projet_eclate@mail.fr",
+      "name": "coucou",
+      "adress1": "4, rue principale",
+      "city": "Mussig",
+      "cp": "67600",
+      "phone": "0201030605",
+      "description": "    <p>Innovation, qualité et confiance depuis 20XX</p>\n    <div class=\"presentation\">\n      <h2>Qui sommes-nous ?</h2>\n      <p>\n        Fondée en 20XX, <strong>Nom de l’Entreprise</strong> est une société spécialisée dans \n        <em>votre domaine d’activité</em>. Nous accompagnons nos clients avec des solutions \n        sur mesure et une expertise reconnue dans le secteur.\n      </p>\n    </div>\n\n    <div class=\"mission\">\n      <h2>Notre mission</h2>\n      <p>\n        Offrir des produits et services innovants qui répondent aux besoins réels de nos \n        clients, tout en favorisant la durabilité, la performance et la satisfaction.\n      </p>\n    </div>\n\n    <div class=\"valeurs\">\n      <h2>Nos valeurs</h2>\n      <ul>\n        <li>Intégrité et transparence dans toutes nos actions</li>\n        <li>Innovation au service de la performance</li>\n        <li>Respect de nos collaborateurs et de nos clients</li>\n        <li>Engagement envers le développement durable</li>\n      </ul>\n    </div>",
+      "categorie_id": "10",
+      "image": {}
     }
   ],
   "galeries": [
@@ -371,85 +384,52 @@
       "path": "/perceuse.jpg"
     },
     {
-      "id": "7609",
+      "id": "9e9f",
       "entreprise_id": "19ed",
       "path": "/perceuse.jpg"
     },
     {
-      "id": "ca7c",
-      "entreprise_id": "19ed",
+      "id": "6c76",
+      "entreprise_id": "3d4b",
       "path": "/perceuse.jpg"
     },
     {
-      "id": "b2c2",
-      "entreprise_id": "19ed",
+      "id": "f763",
+      "entreprise_id": "3d4b",
       "path": "/perceuse.jpg"
     },
     {
-      "id": "ae43",
-      "entreprise_id": "19ed",
+      "id": "2a4b",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "6aa9",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "828f",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "9472",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "16c7",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "3e11",
+      "entreprise_id": "3d4b",
       "path": "/perceuse.jpg"
     }
   ],
   "formulaires": [
-    {
-      "id": "6036"
-    },
-    {
-      "id": "c051"
-    },
-    {
-      "id": "20af"
-    },
-    {
-      "id": "7d62"
-    },
-    {
-      "id": "409f"
-    },
-    {
-      "id": "7a2b"
-    },
-    {
-      "id": "46d6"
-    },
-    {
-      "id": "610c"
-    },
-    {
-      "id": "c503"
-    },
-    {
-      "id": "466a"
-    },
-    {
-      "id": "cdcc",
-      "entreprise_id": "1"
-    },
-    {
-      "id": "8be2",
-      "entreprise_id": "1"
-    },
-    {
-      "id": "7c85",
-      "entreprise_id": "1"
-    },
-    {
-      "id": "2df5",
-      "entreprise_id": "1"
-    },
-    {
-      "id": "1206",
-      "entreprise_id": "1"
-    },
-    {
-      "id": "ecf6",
-      "entreprise_id": "1"
-    },
-    {
-      "id": "5f45",
-      "entreprise_id": "1"
-    },
     {
       "name": "Demande de RDV",
       "entreprise_id": "1",
@@ -529,6 +509,11 @@
               "id": "4fba",
               "input_id": "952c",
               "value": "Site E-commerce"
+            },
+            {
+              "id": "8ecb",
+              "input_id": "952c",
+              "value": "logiciel de bureau"
             }
           ],
           "formulaire_id": "d929"
@@ -537,6 +522,67 @@
           "id": "9c23",
           "type": "datetime-local",
           "name": "Créneau de rencontre souhaité",
+          "required": "true",
+          "options": false,
+          "formulaire_id": "d929"
+        },
+        {
+          "id": "18c2",
+          "type": "radio",
+          "name": "test",
+          "required": "true",
+          "options": [
+            {
+              "id": "2c2a",
+              "input_id": "18c2",
+              "value": "faire les courses"
+            },
+            {
+              "id": "c71b",
+              "input_id": "18c2",
+              "value": "ranger la chambre"
+            },
+            {
+              "id": "a0cb",
+              "input_id": "18c2",
+              "value": "vente"
+            },
+            {
+              "id": "3da6",
+              "input_id": "18c2",
+              "value": "location"
+            }
+          ],
+          "formulaire_id": "d929"
+        },
+        {
+          "id": "41af",
+          "type": "checkbox",
+          "name": "jdvbgjksbvkjdb<k",
+          "required": "true",
+          "options": [
+            {
+              "id": "62b4",
+              "input_id": "41af",
+              "value": "achat"
+            },
+            {
+              "id": "3d56",
+              "input_id": "41af",
+              "value": "AApplication web"
+            },
+            {
+              "id": "6e3a",
+              "input_id": "41af",
+              "value": "faire les courses"
+            }
+          ],
+          "formulaire_id": "d929"
+        },
+        {
+          "id": "9751",
+          "type": "color",
+          "name": "couleur",
           "required": "true",
           "options": false,
           "formulaire_id": "d929"
@@ -869,6 +915,38 @@
       "required": "true",
       "options": false,
       "formulaire_id": "a5dc"
+    },
+    {
+      "id": "1657",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "1dc5"
+    },
+    {
+      "id": "18c2",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "d929"
+    },
+    {
+      "id": "41af",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "d929"
+    },
+    {
+      "id": "9751",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "d929"
     }
   ],
   "options": [
@@ -1056,6 +1134,47 @@
       "id": "82dc",
       "input_id": "9eb2",
       "value": "location"
+    },
+    {
+      "id": "8ecb",
+      "input_id": "952c",
+      "value": "logiciel de bureau"
+    },
+    {
+      "id": "2c2a",
+      "input_id": "18c2",
+      "value": "faire les courses"
+    },
+    {
+      "id": "c71b",
+      "input_id": "18c2",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "a0cb",
+      "input_id": "18c2",
+      "value": "vente"
+    },
+    {
+      "id": "3da6",
+      "input_id": "18c2",
+      "value": "location"
+    },
+    {
+      "id": "62b4",
+      "input_id": "41af",
+      "value": "achat"
+    },
+    {
+      "id": "3d56",
+      "input_id": "41af",
+      "value": "AApplication web"
+    },
+    {
+      "id": "6e3a",
+      "input_id": "41af",
+      "value": "faire les courses"
     }
-  ]
+  ],
+  "submissions": []
 }

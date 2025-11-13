@@ -1,0 +1,27 @@
+.page{
+    padding: 2rem 10%;
+    min-height: 100vh;
+}
+
+.goBack {
+    display: flex;
+    margin: 0;
+    gap: 1rem;
+    align-items: center;
+}
+
+.goBack:hover{
+    color: var(--secondary);
+}
+
+.goBack svg{
+    transition: transform .3s ease;
+}
+
+.goBack:hover svg{
+    transform: translateX(-1rem);
+}
+
+.page h1{
+    text-align: center;
+}
