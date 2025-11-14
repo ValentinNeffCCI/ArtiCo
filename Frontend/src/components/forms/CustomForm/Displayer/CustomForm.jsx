@@ -125,7 +125,10 @@ const CustomForm = ({
                   placeholder={input.label ?? input.name}
                   name={
                     input.name.length !== 0
-                      ? input.name.replaceAll(" ", "-") + "_" + input.id
+                      ? 
+                      input.id ?
+                        input.name.replaceAll(" ", "-") + "_" + input.id
+                        : input.name.replaceAll(" ", "-")
                       : "default_" + input.id
                   }
                   required={input.required == "true"}

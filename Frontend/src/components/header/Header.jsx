@@ -34,11 +34,6 @@ export const Header = () => {
       allowedRoles: ["user", "artisan", "admin"],
     },
     {
-      path: "/",
-      label: "Mon entreprise",
-      allowedRoles: ["artisan"]
-    },
-    {
       path: "/rechercher",
       label: "Rechercher une entreprise",
       allowedRoles: [],
