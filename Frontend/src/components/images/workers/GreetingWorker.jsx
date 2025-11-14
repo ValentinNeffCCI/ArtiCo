@@ -1,10 +1,14 @@
 import React from 'react'
 import worker from '../../../assets/mascotte/greeting_worker.png'
 
-const Worker = () => {
+export const GreetingWorker = () => {
   return (
-    <img src={worker} alt='ouvrier heureux'/>
-  )
+    <figure>
+      <img
+        src={worker}
+        alt="ouvrier qui veut vous serrer la main"
+        style={{ width: "100%" }}
+      />
+    </figure>
+  );
 }
-
-export default Worker

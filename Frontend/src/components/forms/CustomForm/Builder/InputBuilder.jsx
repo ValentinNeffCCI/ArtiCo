@@ -5,6 +5,7 @@ import { CustomButton } from "../../../buttons/Custom/CustomButton.jsx";
 import classes from "./input.module.css";
 import CustomInput from "../Displayer/CustomInput.jsx";
 import OptionBuilder from "./InputOption/OptionBuilder.jsx";
+import ColorInput from "./Color/ColorInput.jsx";
 
 const InputBuilder = ({
   input,
@@ -66,6 +67,8 @@ const InputBuilder = ({
               ))}
           </div>
         );
+      case "color":
+        return <ColorInput key={input.id} input={input} onChange={onChange} />;
       case "number":
         return (
           <CustomInput key={input.id} input={input}>
@@ -250,7 +253,7 @@ const InputBuilder = ({
                 display: "flex",
                 alignItems: "center",
                 "--bg-color": "var(--secondary)",
-                gap: "1rem"
+                gap: "1rem",
               }}
               clickAction={showModal}
             >

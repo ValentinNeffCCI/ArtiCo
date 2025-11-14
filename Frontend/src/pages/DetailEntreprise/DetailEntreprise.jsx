@@ -85,7 +85,7 @@ const DetailEntreprise = () => {
         </div>
           <div className={classes["contact"]}>
             <div className={classes["adress"]}>
-              <NavLink to={mapsAdress(entreprise.adress1)} target="_blank">
+              <NavLink to={mapsAdress(entreprise.adress1)} target="_blank" title="Voir sur Google Maps">
                 <MapPin />
               </NavLink>
               <div>
@@ -97,7 +97,7 @@ const DetailEntreprise = () => {
               </div>
             </div>
             <div className={classes["phone"]}>
-              <NavLink to={`tel:${entreprise.phone}`} target="_blank">
+              <NavLink to={`tel:${entreprise.phone}`} target="_blank" title="Contacter par téléphone">
                 <Phone />
               </NavLink>
               <div>
@@ -105,7 +105,7 @@ const DetailEntreprise = () => {
               </div>
             </div>
             <div className={classes["mail"]}>
-              <NavLink to={`mailto:${entreprise.email}`} target="_blank">
+              <NavLink to={`mailto:${entreprise.email}`} target="_blank" title="Contacter par mail">
                 <Mail />
               </NavLink>
               <div>

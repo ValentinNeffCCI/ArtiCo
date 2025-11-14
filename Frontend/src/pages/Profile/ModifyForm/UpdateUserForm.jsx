@@ -7,11 +7,7 @@ import { toast } from "react-toastify";
 const UpdateUserForm = () => {
   const isDemo = import.meta.env.VITE_ENV_MODE == "demo";
   const { user, login } = useAuth();
-  const { changeListener, prepare } = useForm("/users/" + user.id, "PATCH", {
-    id: user.id,
-    email: user.email,
-    name: user.name,
-  });
+  const { changeListener, prepare } = useForm("/users/" + user.id, "PATCH");
 
   const handleSubmit = async (e) => {
     e.preventDefault();

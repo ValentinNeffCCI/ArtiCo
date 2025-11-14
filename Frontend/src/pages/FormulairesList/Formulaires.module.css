@@ -17,6 +17,7 @@
 
 .formulaires{
     padding: 2rem 10%;
+    min-height: auto;
 }
 
 .formList{
@@ -88,7 +89,7 @@
 }
 
 .form-display figure{
-    width: 20%;
+    width: 30%;
 }
 
 .form-display img{

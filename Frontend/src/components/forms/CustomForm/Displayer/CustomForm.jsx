@@ -65,7 +65,7 @@ const CustomForm = ({
                   defaultValue={input.value ?? ""}
                   onChange={onChange}
                   placeholder={`${input.name} (nombre)`}
-                  step={0.01}
+                  step={1}
                   min={0}
                 />
               </CustomInput>
