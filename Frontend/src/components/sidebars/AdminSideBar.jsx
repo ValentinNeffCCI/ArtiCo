@@ -10,15 +10,18 @@ export const AdminSidebar = () => {
 
   const links = [
     {
+      id: 1,
       path: "/admin",
       label: "Dashboard",
     },
     {
-      path: "/users",
+      id: 2,
+      path: "/admin/users",
       label: "Utilisateurs",
     },
     {
-      path: "/entreprises",
+      id: 3,
+      path: "/admin/entreprises",
       label: "Entreprises",
     },
   ];

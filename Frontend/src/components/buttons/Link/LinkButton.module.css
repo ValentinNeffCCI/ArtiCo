@@ -1,11 +1,11 @@
 .btn {
-    display: block;
+    display: flex;
     text-decoration: none;
     text-align: center;
     background-color: transparent;
     color: black;
     border-color: black;
-    border-width: 2;
+    border-width: 1;
     border-style: solid;
     border-radius: 10;
     width: 100%;
@@ -13,6 +13,8 @@
     margin: 1rem 0;
     font-size: 1rem;
     transition: .3s ease-in;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn:hover {

@@ -1,0 +1,15 @@
+.dashboard{
+    width: 100%;
+}
+
+.dashboard h1{
+    margin-left: 0;
+}
+
+.tableaux{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 2rem auto;
+    gap: 2rem;
+}

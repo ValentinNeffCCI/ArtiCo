@@ -1,0 +1,45 @@
+.form-group {
+    width: 75%;
+    display: flex;
+    margin: 1rem auto;
+    align-items: center;
+    background-color: white;
+    border: 1px solid var(--dark);
+    border-radius: 2rem;
+}
+
+.form-group input{
+    width: 95%;
+    outline: 0;
+    border: none;
+    padding: .5rem 1rem;
+}
+
+.form-group svg {
+    margin: .5rem;
+}
+
+.list > article{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.button-section{
+    display: flex;
+    gap: 1rem;
+    background-color: var(--dark);
+    width: 30%;
+    padding: .5rem;
+    border-radius: 2rem;
+    justify-content: space-evenly;
+}
+
+.button-section button{
+    margin: 0;
+    padding: 0;
+}
+
+.button-section span {
+    font-size: 1rem;
+}

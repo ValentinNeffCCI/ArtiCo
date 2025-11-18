@@ -53,25 +53,35 @@
     {
       "id": "1dj4",
       "name": "admin",
-      "email": "admin@admin.com"
+      "active": true,
+      "email": "admin@admin.com",
+      "role": "user"
     },
     {
       "id": "c933",
       "name": "Regina",
+      "active": true,
+      "role": "user",
       "email": "neffvalentinpro@gmail.com"
     },
     {
       "id": "dc7f",
       "name": "Calzone",
+      "active": true,
+      "role": "user",
       "email": "calzone@pizza.it"
     },
     {
       "id": "632d",
       "name": "Calzone",
+      "active": true,
+      "role": "user",
       "email": "calzone@pizza.it"
     },
     {
       "id": "74dc",
+      "active": true,
+      "role": "user",
       "email": "valentin.neff@ccicampus.fr",
       "name": "Test"
     }
@@ -357,16 +367,6 @@
       "id": "8",
       "entreprise_id": "9",
       "path": "/perceuse.jpg"
-    },
-    {
-      "id": "9",
-      "entreprise_id": "11",
-      "path": "photo_garage1.jpg"
-    },
-    {
-      "id": "10",
-      "entreprise_id": "13",
-      "path": "photo_fitzone1.jpg"
     },
     {
       "id": "99ed",
@@ -1179,23 +1179,6 @@
     }
   ],
   "soumissions": [
-    {
-      "id": "a101",
-      "formulaire_id": "d929",
-      "submitted_at": "14/11/2025",
-      "inputs": {
-        "nom-du-projet_1c47": "vcbxbj",
-        "Type-de-réalisation_952c": "Application web",
-        "Créneau-de-rencontre-souhaité_9c23": "2025-02-23T14:00",
-        "test_18c2": "faire les courses",
-        "jdvbgjksbvkjdb<k_41af": [
-          "achat",
-          "AApplication web"
-        ],
-        "couleur_9751": "#e10e0e",
-        "Votre-adresse-mail-afin-de-pouvoir-être-recontacté-par-le-professionnel_undefined": "neffvalentin@gmail.com"
-      }
-    },
     {
       "id": "ac13",
       "formulaire_id": "d929",
