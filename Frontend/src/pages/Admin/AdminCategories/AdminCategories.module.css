@@ -1,0 +1,32 @@
+.page{
+    background-color: var(--light);
+}
+
+.input {
+    
+}
+
+.page form {
+    display: flex;
+    justify-content: center;
+    width: 75%;
+    margin: 1rem auto;
+}
+
+.page input {
+    width: 80%;
+    padding: 1rem;
+    border-radius: 1.5rem;
+    outline: 0;
+    border: 1px solid var(--primary);
+}
+
+.form-btn {
+    --bg-color: var(--primary);
+    --color: var(--light);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: .9rem;
+    margin: 0 1rem;
+}

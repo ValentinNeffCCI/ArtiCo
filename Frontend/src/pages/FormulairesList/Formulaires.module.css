@@ -26,6 +26,7 @@
     flex-wrap: wrap;
     gap: 1rem;
     padding: 1rem;
+    margin: 2rem 0;
 }
 
 .form-display > div {

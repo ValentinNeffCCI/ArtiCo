@@ -3,7 +3,7 @@ import style from "./rechercher.module.css";
 import { Suspense, useEffect, useState } from "react";
 import CardSkeleton from "../../components/skeleton/CardSkeleton";
 import { useSearchParams } from "react-router-dom";
-import EntrepriseList from "../../components/listes/EntrepriseList";
+import EntrepriseList from "../../components/listes/entreprises/EntrepriseList.jsx";
 import useAPI from "../../hooks/useAPI";
 import Loader from "../../components/UX/loaders/Loader";
 

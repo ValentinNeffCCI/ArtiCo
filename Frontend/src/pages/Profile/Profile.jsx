@@ -7,7 +7,7 @@ import { CustomButton } from "../../components/buttons/Custom/CustomButton";
 import defaultImage from "../../assets/photos/Sora_Shimazaki/handshake.jpg";
 import { NavLink } from "react-router-dom";
 import { FolderCode, FormInput, Pencil } from "lucide-react";
-import Modale from "../../components/modales/DeleteAccountModale";
+import Modale from "../../components/modales/DeleteAccount/DeleteAccountModale.jsx";
 import { LostWorker } from "../../components/images/workers/LostWorker";
 import { toast } from "react-toastify";
 

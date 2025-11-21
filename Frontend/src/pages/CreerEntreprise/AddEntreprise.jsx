@@ -14,6 +14,8 @@ const AddEntreprise = () => {
           border: "none",
           gap: ".5rem",
           margin: 0,
+          alignSelf: 'start',
+          justifyContent: "start"
         }}
         path="/profil"
       >

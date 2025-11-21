@@ -4,4 +4,43 @@
     margin: 1rem auto;
     border-radius: 2rem;
     padding-left: 1rem;
+    animation: fade-in-up .7s;
+}
+
+.button-section{
+    display: flex;
+    gap: 1rem;
+    background-color: var(--dark);
+    width: 30%;
+    border-radius: 2rem;
+    justify-content: space-evenly;
+}
+
+.button-section button{
+    margin: 0;
+    padding: 0;
+}
+
+.button-section span {
+    font-size: 1rem;
+}
+
+.card > div:first-of-type {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    font-weight: 600;
+}
+
+.card span:first-of-type{
+    display: block;
+    width: 25%;
+}
+
+@keyframes fade-in-up {
+    from{
+        transform: translateY(10px);
+        opacity: 0;
+    }
 }

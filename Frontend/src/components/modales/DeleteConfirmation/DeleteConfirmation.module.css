@@ -1,0 +1,34 @@
+.modale{
+    position: fixed;
+    z-index: 10;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0,0,0,.6);
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modale-content{
+    background: var(--light);
+    width: fit-content;
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.modale-content h2 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+}
+
+.modale-buttons {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}

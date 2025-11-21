@@ -1,117 +1,101 @@
-import { Ban, CheckCheck, Search, Trash } from "lucide-react";
+import {Search} from "lucide-react";
 import classes from "./AdminUsers.module.css";
-import { useState, useEffect, useRef } from "react";
+import {useState, useEffect } from "react";
 import useAPI from "../../../hooks/useAPI";
-import AdminCard from "../Cards/AdminCard";
-import ToggleButton from "../Buttons/ToggleButton";
+import DeleteConfirmation from "../../../components/modales/DeleteConfirmation/DeleteConfirmation.jsx";
+import UserList from "../../../components/listes/users/EntiteList.jsx";
 
 const AdminUsers = () => {
-  const [users, setUsers] = useState(false);
-  const [filteredUsers, setFilteredUsers] = useState([]);
+    const [users, setUsers] = useState(false);
+    const [search, setSearch] = useState("");
+    const [selectedUser, setSelectedUser] = useState(false);
 
-  const searchInputRef = useRef();
+    const {query: callAPI} = useAPI();
 
-  const { query: callAPI } = useAPI();
+    const handleSearch = (e) => {
+        setSearch(e.target.value);
+    };
 
-  const getAllUsers = async () => {
-    const response = await callAPI("/users");
-    if (response) {
-      setUsers(response);
-      setFilteredUsers(response);
+    const filterUsers = () => {
+        if (search.length === 0) return users;
+        return users.filter((u) => u.email.includes(search) || u.name.toLowerCase().includes(search));
+    };
+
+    const toggleBan = async (user) => {
+        const response = await callAPI("/users/" + user.id, "PATCH", {
+            active: !user.active,
+        });
+        if (response) {
+            const copy = [...users].map((u) => {
+                return u.id === response.id
+                    ? {
+                        ...u,
+                        active: !u.active,
+                    }
+                    : u;
+            });
+            setUsers(copy);
+        }
+    };
+
+    const deleteUser = async (user) => {
+        const response = await callAPI('/users/' + user.id, "DELETE");
+        if (response) {
+            const copy = [...users].filter((u) => u.id !== user.id)
+            setUsers(copy);
+        }
+        setSelectedUser(false);
+    };
+
+    const confirmDeletion = async (user) => {
+        setSelectedUser(user);
     }
-  };
 
-  useEffect(() => {
-    getAllUsers();
-  }, []);
+    const getAllUsers = async () => {
+        const response = await callAPI("/users");
+        if (response) {
+            setUsers(response);
+        }
+    };
 
-  const handleSearch = (e) => {
-    filterUsers(e.target.value);
-  };
+    const closeModale = () => {
+        setSelectedUser(false);
+    }
 
-  const filterUsers = (string) => {
-    if (string.length == 0) return users;
-    return setFilteredUsers(
-      users.filter((u) => u.email.includes(string) || u.name.includes(string))
+    useEffect(() => {
+        getAllUsers();
+    }, []);
+
+    return (
+        <main className={classes["dashboard"]}>
+            <h1>Gestion des utilisateurs</h1>
+            {
+                selectedUser &&
+                <DeleteConfirmation onDelete={deleteUser} onClose={closeModale} entite={selectedUser}>
+                    Voulez-vous vraiment supprimer {selectedUser.name} ?
+                </DeleteConfirmation>
+            }
+            <form onSubmit={(e) => {
+                e.preventDefault()
+            }}>
+                <div className={classes["form-group"]}>
+                    <Search/>
+                    <input
+                        type="search"
+                        name="filter"
+                        id="filter"
+                        placeholder="Rechercher"
+                        onChange={handleSearch}
+                    />
+                </div>
+            </form>
+            {
+                users &&
+                <UserList entites={filterUsers()} onBan={toggleBan}
+                          onDelete={confirmDeletion}/>
+            }
+        </main>
     );
-  };
-
-  const toggleBan = async (user) => {
-    const response = await callAPI("/users/" + user.id, "PATCH", {
-      active: !user.active,
-    });
-    if (response) {
-      setUsers((prev) =>
-        prev.map((u) => {
-          u.id === response.id
-            ? {
-                ...u,
-                active: !u.active,
-              }
-            : u;
-        })
-      );
-    }
-  };
-
-  const deleteUser = async (id) => {
-    const response = await callAPI('/users/' + id)
-  };
-
-  return (
-    <main className={classes["dashboard"]}>
-      <h1>Gestion des utilisateurs</h1>
-      <form>
-        <div className={classes["form-group"]}>
-          <Search />
-          <input
-            type="search"
-            name="filter"
-            id="filter"
-            placeholder="Rechercher"
-            onChange={handleSearch}
-            ref={searchInputRef}
-          />
-        </div>
-      </form>
-      <section className={classes["list"]}>
-        {filteredUsers.map((u) => (
-          <AdminCard key={u.id}>
-            {JSON.stringify(u)}
-            <div className={classes["button-section"]}>
-              <ToggleButton status={u.active} entite={u} onClick={toggleBan} style={{
-                "--color": "white"
-              }}>
-                {
-                  u.active ?
-                  <Ban color="red"/>
-                  :
-                  <CheckCheck/>
-                }
-                <span>
-                {
-                  u.active ?
-                  "Bannir"
-                  :
-                  "Rétablir"
-                }
-                </span>
-              </ToggleButton>
-              <ToggleButton status={u.active} entite={u} onClick={toggleBan} style={{
-                "--color": "white",
-                "--bg-color": "red"
-              }}>
-                <Trash/>
-                <span>
-                  Supprimer
-                </span>
-              </ToggleButton>
-            </div>
-          </AdminCard>
-        ))}
-      </section>
-    </main>
-  );
 };
 
 export default AdminUsers;

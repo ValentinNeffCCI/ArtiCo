@@ -1,15 +1,16 @@
 .toggle{
     display: flex;
     align-items: center;
-    gap: .3rem;
     border: none;
     padding: .5rem 1rem !important;
+    gap: .3rem;
+    width: 50%;
 }
 
 .toggle:hover{
-    color: antiquewhite;
+    color: white;
 }
 
 .toggle:hover svg{
-    stroke: red;
+    stroke: --bg-color;
 }

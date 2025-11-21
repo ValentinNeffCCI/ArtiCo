@@ -24,13 +24,18 @@ export const AdminSidebar = () => {
       path: "/admin/entreprises",
       label: "Entreprises",
     },
+    {
+      id: 4,
+      path: "/admin/categories",
+      label: "Categories",
+    },
   ];
 
   return (
     <aside className={styles["sidebar"]}>
       <div>
         <NavLink
-          to={"/admin"}
+          to={"/"}
           style={{
             display: "flex",
             justifyContent: "center",

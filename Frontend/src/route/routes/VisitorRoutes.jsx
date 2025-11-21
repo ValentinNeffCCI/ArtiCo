@@ -33,7 +33,7 @@ export const VisitorRoutes = [
     element: <AnswerForm />,
   },
   {
-    element: <ProtectedRoute allowedRoles={["user", "admin", "artisan"]} />,
+    element: <ProtectedRoute allowedRoles={["user", "admin"]} />,
     children: userRoutes,
   },
 ];

@@ -77,6 +77,7 @@ const CreateEntreprise = ({
       required: true,
       label: "Nom de l'entreprise",
       value: content.name ?? "",
+      is_fix: false
     },
     {
       name: "adress1",
@@ -85,6 +86,7 @@ const CreateEntreprise = ({
       required: true,
       label: "Adresse de l'entreprise",
       value: content.adress1 ?? "",
+      is_fix: false
     },
     {
       name: "adress2",
@@ -93,6 +95,7 @@ const CreateEntreprise = ({
       required: false,
       label: "Complément d'adresse",
       value: content.adress2 ?? "",
+      is_fix: false
     },
     {
       name: "city",
@@ -101,6 +104,7 @@ const CreateEntreprise = ({
       required: true,
       label: "Ville",
       value: content.city ?? "",
+      is_fix: false
     },
     {
       name: "cp",
@@ -109,6 +113,7 @@ const CreateEntreprise = ({
       required: true,
       label: "Code postal",
       value: content.cp ?? "",
+      is_fix: false
     },
     {
       name: "phone",
@@ -117,6 +122,7 @@ const CreateEntreprise = ({
       required: true,
       label: "Téléphone de l'entreprise",
       value: content.phone ?? "",
+      is_fix: false
     },
     {
       name: "email",
@@ -125,6 +131,7 @@ const CreateEntreprise = ({
       required: true,
       label: "Email de l'entreprise",
       value: content.email ? content.email : user ? user.email : "",
+      is_fix: false
     },
     {
       name: "description",
@@ -133,6 +140,7 @@ const CreateEntreprise = ({
       required: false,
       label: "Bio de l'entreprise",
       value: content.description ?? "",
+      is_fix: false
     },
   ];
 

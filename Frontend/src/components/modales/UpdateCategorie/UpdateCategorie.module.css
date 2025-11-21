@@ -1,0 +1,41 @@
+.modale {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,.6);
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modale-content{
+    width: 40%;
+    height: 40%;
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modale h2{
+    font-family: 'Dangrek', sans-serif;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.modale-content form{
+    display: flex;
+    flex-direction: column;
+}
+
+.modale-content input{
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 1rem auto;
+}
