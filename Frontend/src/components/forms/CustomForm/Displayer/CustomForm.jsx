@@ -27,12 +27,18 @@ const CustomForm = ({
                         <input
                           type={input.type}
                           id={option.value.replaceAll(" ", "_") + option.id}
-                          required={(input.type === "radio") && (input.required == "true")}
+                          required={
+                            input.type === "radio" && input.required == "true"
+                          }
                           onChange={onChange}
                           name={
-                            input.name.length !== 0
-                              ? input.name.replaceAll(" ", "-") + "_" + input.id
-                              : "default_" + input.id
+                            input.is_fix
+                              ? input.name.length !== 0
+                                ? input.name.replaceAll(" ", "-") +
+                                  "_" +
+                                  input.id
+                                : "default_" + input.id
+                              : input.name
                           }
                           value={option.value}
                         />
@@ -49,7 +55,9 @@ const CustomForm = ({
               </div>
             );
           case "color":
-            return <ColorInput key={input.id} input={input} onChange={onChange} />;
+            return (
+              <ColorInput key={input.id} input={input} onChange={onChange} />
+            );
           case "number":
             return (
               <CustomInput key={input.id} input={input}>
@@ -57,15 +65,17 @@ const CustomForm = ({
                   type="number"
                   id={input.name.replaceAll(" ", "_") + "_" + input.id}
                   name={
-                    input.name.length !== 0
-                      ? input.name.replaceAll(" ", "-") + "_" + input.id
-                      : "default_" + input.id
+                    input.is_fix
+                      ? input.name.length !== 0
+                        ? input.name.replaceAll(" ", "-") + "_" + input.id
+                        : "default_" + input.id
+                      : input.name
                   }
                   required={input.required == "true"}
                   defaultValue={input.value ?? ""}
                   onChange={onChange}
                   placeholder={`${input.name} (nombre)`}
-                  step={0.01}
+                  step={1}
                   min={0}
                 />
               </CustomInput>
@@ -75,9 +85,11 @@ const CustomForm = ({
               <CustomInput key={input.id} input={input}>
                 <textarea
                   name={
-                    input.name.length !== 0
-                      ? input.name.replaceAll(" ", "-") + "_" + input.id
-                      : "default_" + input.id
+                    input.is_fix
+                      ? input.name.length !== 0
+                        ? input.name.replaceAll(" ", "-") + "_" + input.id
+                        : "default_" + input.id
+                      : input.name
                   }
                   id={input.name.replaceAll(" ", "_") + "_" + input.id}
                   onChange={onChange}
@@ -94,12 +106,14 @@ const CustomForm = ({
               <CustomInput key={input.id} input={input}>
                 <select
                   name={
-                    input.name.length !== 0
-                      ? input.name.replaceAll(" ", "-") + "_" + input.id
-                      : "default_" + input.id
+                    input.is_fix
+                      ? input.name.length !== 0
+                        ? input.name.replaceAll(" ", "-") + "_" + input.id
+                        : "default_" + input.id
+                      : input.name
                   }
                   id={input.name.replaceAll(" ", "_") + "_" + input.id}
-                  required={input.require == 'true'}
+                  required={input.require == "true"}
                   onChange={onChange}
                   className={classes["select"]}
                   defaultValue={input.value ?? ""}
@@ -110,7 +124,9 @@ const CustomForm = ({
                   <option value="">Choisissez une réponse</option>
                   {input.options &&
                     input.options.map((option) => (
-                      <option key={option.id} value={option.value}>{option.value}</option>
+                      <option key={option.id} value={option.value}>
+                        {option.value}
+                      </option>
                     ))}
                 </select>
               </CustomInput>
@@ -124,9 +140,13 @@ const CustomForm = ({
                   max={input.max ?? 100}
                   placeholder={input.label ?? input.name}
                   name={
+                    input.is_fix ?
                     input.name.length !== 0
-                      ? input.name.replaceAll(" ", "-") + "_" + input.id
+                      ? input.id
+                        ? input.name.replaceAll(" ", "-") + "_" + input.id
+                        : input.name.replaceAll(" ", "-")
                       : "default_" + input.id
+                    : input.name
                   }
                   required={input.required == "true"}
                   onChange={onChange}

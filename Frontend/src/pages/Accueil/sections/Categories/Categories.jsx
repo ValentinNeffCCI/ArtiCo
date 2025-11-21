@@ -3,10 +3,11 @@ import useAPI from "../../../../hooks/useAPI.jsx";
 import classes from "./Categories.module.css";
 import { LinkButton } from "../../../../components/buttons/Link/LinkButton.jsx";
 import { ArrowRight } from "lucide-react";
+import categories from '../../../../datas/categories.json'
 
 export const Categories = () => {
-  const [categories, setCategories] = useState([]);
   const { query: callAPI } = useAPI();
+  const [categories, setCategories] = useState([]);
 
   const fetchCategories = async () => {
     try {
@@ -28,7 +29,7 @@ export const Categories = () => {
       <h3>Des domaines divers et variés</h3>
       <div>
         <div>
-          {categories.map((category) => (
+          {categories.splice(0, 9).map((category) => (
             <LinkButton
               key={category.id}
               className={classes["categorie"]}

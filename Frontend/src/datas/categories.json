@@ -1,0 +1,1303 @@
+[
+  {
+    "group": "Eleveurs",
+    "name": "Eleveurs de lapins et volailles"
+  },
+  {
+    "group": "Eleveurs",
+    "name": "Eleveurs d'ovins ou de caprins"
+  },
+  { "group": "Eleveurs", "name": "Eleveurs de porcins" },
+  {
+    "group": "Bûcherons, sylviculteurs et agents forestiers",
+    "name": "Sylviculteurs, agents forestiers et agents de protection des espaces naturels"
+  },
+  {
+    "group": "Maraîchers et horticulteurs",
+    "name": "Maraîchers et horticulteurs"
+  },
+  {
+    "group": "Techniciens et agents d'encadrement d'exploitations agricoles",
+    "name": "Techniciens et agents de maîtrise en agriculture, élevage et environnement naturel"
+  },
+  {
+    "group": "Ouvriers peu qualifiés de l'extraction et des travaux publics",
+    "name": "Ouvriers peu qualifiés de l'extraction et des travaux publics"
+  },
+  {
+    "group": "Ouvriers de la construction en béton",
+    "name": "Ouvriers qualifiés en construction en béton"
+  },
+  {
+    "group": "Maçons qualifiés",
+    "name": "Maçons qualifiés"
+  },
+  {
+    "group": "Ouvriers en pose et décoration de revêtements",
+    "name": "Ouvriers qualifiés en pose et décoration de revêtements"
+  },
+  {
+    "group": "Plombiers chauffagistes",
+    "name": "Plombiers, chauffagistes qualifiés"
+  },
+  {
+    "group": "Ouvriers en peinture en bâtiment",
+    "name": "Ouvriers peu qualifiés en peinture en bâtiment"
+  },
+  {
+    "group": "Ouvriers en peinture en bâtiment",
+    "name": "Ouvriers qualifiés en peinture en bâtiment"
+  },
+  {
+    "group": "Ouvriers peu qualifiés en menuiserie et en agencement du BTP",
+    "name": "Ouvriers peu qualifiés en menuiserie et en agencement du BTP"
+  },
+  { "group": "Géomètres", "name": "Géomètres" },
+  {
+    "group": "Techniciens experts et chargés d’études du BTP",
+    "name": "Techniciens et agents de maîtrise des études BTP, des études géologiques et du contrôle et diagnostic technique du BTP"
+  },
+  {
+    "group": "Techniciens experts et chargés d’études du BTP",
+    "name": "Techniciens et agents de maîtrise du métré de la construction"
+  },
+  {
+    "group": "Dessinateurs en bâtiment et en travaux publics",
+    "name": "Dessinateurs en bâtiment et en travaux publics"
+  },
+  {
+    "group": "Conducteurs de travaux et chefs de chantier non cadres",
+    "name": "Conducteurs de travaux et chefs de chantier non cadres"
+  },
+  {
+    "group": "Cadres des études BTP, des études géologiques, du métré de la construction et du contrôle et diagnostic technique du BTP",
+    "name": "Cadres des études BTP, des études géologiques, du métré de la construction et du contrôle et diagnostic technique du BTP"
+  },
+  {
+    "group": "Ouvriers de l'électricité et de l'électronique",
+    "name": "Ouvriers peu qualifiés de l'électricité et de l'électronique"
+  },
+  {
+    "group": "Ouvriers qualifiés en conduite d'équipement d'usinage",
+    "name": "Ouvriers qualifiés en conduite d'équipement d'usinage"
+  },
+  { "group": "Régleurs", "name": "Régleurs" },
+  {
+    "group": "Ouvriers de la peinture et du traitement de surface",
+    "name": "Ouvriers de la peinture et du traitement de surface"
+  },
+  {
+    "group": "Ouvriers peu qualifiés de conduite d'installation de production de métaux",
+    "name": "Ouvriers peu qualifiés de conduite d'installation de production de métaux"
+  },
+  {
+    "group": "Ouvriers qualifiés de conduite d'installation de production de métaux",
+    "name": "Ouvriers qualifiés de conduite d'installation de production de métaux"
+  },
+  {
+    "group": "Ouvriers qualifiés des industries chimiques et plastiques",
+    "name": "Ouvriers qualifiés des industries chimiques et plastiques"
+  },
+  {
+    "group": "Ouviers peu qualifiés des industries agro-alimentaires",
+    "name": "Ouviers peu qualifiés des industries agro-alimentaires"
+  },
+  {
+    "group": "Agents de maitrise et assimilés des industries de process",
+    "name": "Agents de maitrise et assimilés des industries de process"
+  },
+  {
+    "group": "Ouvriers, techniciens et agents de maîtrise en traitement du cuir",
+    "name": "Ouvriers, techniciens et agents de maîtrise en traitement du cuir"
+  },
+  {
+    "group": "Ouvriers, techniciens et agents de maîtrise de l'habillement",
+    "name": "Ouvriers, techniciens et agents de maîtrise de l'habillement"
+  },
+  {
+    "group": "Ouvriers de la réalisation d'ouvrages décoratifs et meubles en bois",
+    "name": "Ouvriers de la réalisation d'ouvrages décoratifs et meubles en bois"
+  },
+  {
+    "group": "Ouvriers et techniciens de la scierie, de l'assemblage et de la fabrication d'ouvrages en bois",
+    "name": "Ouvriers peu qualifiés de la scierie, de l'assemblage et de la fabrication d'ouvrages en bois"
+  },
+  {
+    "group": "Ouvriers, techniciens et agents de maîtrise de l'imprimerie",
+    "name": "Ouvriers de l'imprimerie"
+  },
+  {
+    "group": "Ouvriers, techniciens et agents de maîtrise de l'imprimerie",
+    "name": "Techniciens et agents de maîtrise de l'imprimerie"
+  },
+  {
+    "group": "Ouvriers de la maintenance générale et mécanique",
+    "name": "Ouvriers en maintenance générale et mécanique industrielle"
+  },
+  {
+    "group": "Carrossiers automobiles",
+    "name": "Ouvriers qualifiés en réparation de carrosserie"
+  },
+  {
+    "group": "Ouvriers mécaniciens de véhicules",
+    "name": "Ouvriers qualifiés en Maintenance d'engins de chantier, de levage, manutention et agricoles"
+  },
+  {
+    "group": "Ouvriers mécaniciens de véhicules",
+    "name": "Ouvriers qualifiés en Mécanique automobile"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise en maintenance générale et mécanique industrielle",
+    "name": "Techniciens et agents de maîtrise en maintenance en nautisme, mécanique de marine et aéronefs"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise en installation et maintenance en froid et conditionnement d'air",
+    "name": "Techniciens et agents de maîtrise en installation et maintenance en froid et conditionnement d'air"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise en maintenance électrique, électronique et automatismes",
+    "name": "Techniciens et agents de maîtrise en études, conception et maintenance d'automatismes"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise en distribution et assainissement d'eau et gestion des déchets",
+    "name": "Techniciens et agents de maîtrise en distribution et assainissement d'eau et gestion des déchets"
+  },
+  {
+    "group": "Ouvriers qualifiés du contrôle qualité et de laboratoire",
+    "name": "Ouvriers qualifiés du contrôle qualité"
+  },
+  {
+    "group": "Techniciens du dessin industriel",
+    "name": "Techniciens du dessin industriel"
+  },
+  {
+    "group": "Ingénieurs et cadres de fabrication et de la production",
+    "name": "Ingénieurs et cadres de fabrication et de la production"
+  },
+  {
+    "group": "Ingénieurs en maintenance et support technique client",
+    "name": "Ingénieurs en maintenance et support technique client"
+  },
+  {
+    "group": "Ingénieurs des méthodes de production, du contrôle qualité",
+    "name": "Ingénieurs et cadres technique en gestion industrielle et logistique"
+  },
+  {
+    "group": "Ingénieurs des méthodes de production, du contrôle qualité",
+    "name": "Ingénieurs et cadres techniques en management et ingénierie qualité industrielle et BTP"
+  },
+  {
+    "group": "Manutentionnaires et déménageurs qualifiés",
+    "name": "Manutentionnaires et déménageurs qualifiés"
+  },
+  {
+    "group": "Magasiniers et préparateurs de commandes peu qualifiés",
+    "name": "Magasiniers et préparateurs de commandes peu qualifiés"
+  },
+  {
+    "group": "Responsable du magasinage et de la logistique (non cadres)",
+    "name": "Responsable du magasinage et de la logistique (non cadres)"
+  },
+  {
+    "group": "Conducteurs de véhicules légers",
+    "name": "Conducteurs de taxi, VTC"
+  },
+  {
+    "group": "Employés du tourisme et agent de billetterie des transports",
+    "name": "Employés du tourisme et agent de billetterie des transports"
+  },
+  {
+    "group": "Agents d'exploitation du transport",
+    "name": "Agents d'exploitation des transports (hors ferroviaire)"
+  },
+  {
+    "group": "Agents d'exploitation du transport",
+    "name": "Agents d'exploitation des transports ferroviaires"
+  },
+  {
+    "group": "Techniciens d'exploitation et d'administration des transports",
+    "name": "Techniciens d'exploitation et d'administration des transports"
+  },
+  {
+    "group": "Cadres des transports et du tourisme",
+    "name": "Cadres des transports"
+  },
+  {
+    "group": "Personnels techniques navigants de l’aviation",
+    "name": "Personnels techniques navigants de l’aviation"
+  },
+  {
+    "group": "Artisans et ouvriers de blanchisserie",
+    "name": "Artisans et ouvriers de blanchisserie"
+  },
+  {
+    "group": "Employés de la comptabilité",
+    "name": "Employés de la comptabilité"
+  },
+  {
+    "group": "Techniciens des services administratifs",
+    "name": "Techniciens assistanat technique, administratif et gestion d'enquêtes"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise des services financiers ou comptables",
+    "name": "Techniciens et agents de maîtrise des services financiers ou comptables"
+  },
+  {
+    "group": "Techniciens d'étude et de développement en informatique",
+    "name": "Techniciens d'étude et de développement en informatique"
+  },
+  {
+    "group": "Techniciens de production, d'exploitation, d'installation, et de maintenance, support et services aux utilisateurs en informatique",
+    "name": "Techniciens d’exploitation, installation et maintenance des infrastructures réseau télecoms"
+  },
+  {
+    "group": "Techniciens de production, d'exploitation, d'installation, et de maintenance, support et services aux utilisateurs en informatique",
+    "name": "Techniciens de maintenance, support et service aux utilisateurs en informatique"
+  },
+  {
+    "group": "Experts et consultants en systèmes d'information",
+    "name": "Experts et consultants en systèmes d'information"
+  },
+  {
+    "group": "Ingénieurs et cadres d'étude, recherche et développement (industrie)",
+    "name": "Ingénieurs et cadres d'étude, recherche et développement (industrie)"
+  },
+  {
+    "group": "Chercheurs (sauf industrie et enseignement supérieur)",
+    "name": "Chercheurs (sauf industrie et enseignement supérieur)"
+  },
+  {
+    "group": "Contrôleurs des impôts et des douanes",
+    "name": "Contrôleurs des impôts et des douanes"
+  },
+  {
+    "group": "Autres cadres B des administrations publiques",
+    "name": "Autres cadres B des administrations publiques"
+  },
+  { "group": "Magistrats", "name": "Magistrats" },
+  {
+    "group": "Cadres de la police et de l'armée",
+    "name": "Cadres de la sécurité civile et des secours"
+  },
+  {
+    "group": "Cadres de la police et de l'armée",
+    "name": "Cadres de la défense"
+  },
+  {
+    "group": "Experts de l'assurance",
+    "name": "Experts de l'assurance"
+  },
+  {
+    "group": "Employés et techniciens commerciaux de la banque",
+    "name": "Employés et techniciens commerciaux de la banque"
+  },
+  {
+    "group": "Employés et techniciens commerciaux des assurances",
+    "name": "Employés et techniciens commerciaux des assurances"
+  },
+  {
+    "group": "Managers en banque assurance",
+    "name": "Managers en banque assurance"
+  },
+  {
+    "group": "Vendeurs en ameublement, équipement du foyer, bricolage",
+    "name": "Vendeurs en ameublement, équipement du foyer, bricolage"
+  },
+  {
+    "group": "Vendeurs en habillement et accessoires, articles de luxe, de sport, de loisirs et culturels",
+    "name": "Vendeurs en Achat vente d'objets d'art, anciens ou d'occasion"
+  },
+  {
+    "group": "Vendeurs en habillement et accessoires, articles de luxe, de sport, de loisirs et culturels",
+    "name": "Vendeurs en habillement et accessoires de la personne"
+  },
+  {
+    "group": "Télévendeurs et téléconseillers",
+    "name": "Télévendeurs et téléconseillers"
+  },
+  {
+    "group": "Professions intermédiaires commerciales des achats",
+    "name": "Professions intermédiaires commerciales des achats"
+  },
+  {
+    "group": "Professions intermédiaires du marketing et des services commerciaux (hors achats)",
+    "name": "Professions intermédiaires du marketing et des services commerciaux (hors achats)"
+  },
+  {
+    "group": "Cadres commerciaux, acheteurs et cadres de la mercatique",
+    "name": "Cadres commerciaux et de la mercatique"
+  },
+  {
+    "group": "Cadres agents immobiliers et syndics",
+    "name": "Cadres agents immobiliers"
+  },
+  {
+    "group": "Charcutiers, traiteurs",
+    "name": "Charcutiers, traiteurs"
+  },
+  {
+    "group": "Boulangers, pâtissiers",
+    "name": "Boulangers, pâtissiers"
+  },
+  { "group": "Cuisiniers", "name": "Cuisiniers" },
+  {
+    "group": "Chefs cuisiniers",
+    "name": "Chefs cuisiniers"
+  },
+  {
+    "group": "Employés de l'hôtellerie",
+    "name": "Employés de l'hôtellerie"
+  },
+  {
+    "group": "Coiffeurs, esthéticiens",
+    "name": "Coiffeurs"
+  },
+  {
+    "group": "Personnels de ménage chez des particuliers",
+    "name": "Personnels de ménage chez des particuliers"
+  },
+  {
+    "group": "Agents de service hospitaliers",
+    "name": "Agents de service hospitaliers"
+  },
+  {
+    "group": "Employés des services divers",
+    "name": "Personnels d'attraction, de structures de loisirs et personnels techniques des jeux"
+  },
+  {
+    "group": "Employés des services divers",
+    "name": "Chargés en développement personnel et en bien-être de la personne"
+  },
+  {
+    "group": "Employés des services divers",
+    "name": "Artisans et ouvriers animaliers (toiletteurs, maréchaux-ferrants et taxidermistes)"
+  },
+  {
+    "group": "Cadres de la communication",
+    "name": "Cadres de la communication"
+  },
+  {
+    "group": "Professionnels des spectacles",
+    "name": "Techniciens du décor et de la régie"
+  },
+  {
+    "group": "Graphistes, dessinateurs, stylistes, décorateurs et créateurs de supports de communication visuelle",
+    "name": "Concepteur-designer de produits"
+  },
+  {
+    "group": "Artistes plasticiens",
+    "name": "Artistes plasticiens"
+  },
+  {
+    "group": "Aides-soignants",
+    "name": "Aide aux soins des animaux"
+  },
+  {
+    "group": "Infirmiers et sages-femmes",
+    "name": "Infirmiers et sages-femmes"
+  },
+  {
+    "group": "Infirmiers et sages-femmes",
+    "name": "Infirmiers généralistes et de prévention"
+  },
+  {
+    "group": "Infirmiers et sages-femmes",
+    "name": "Infirmiers spécialisés, en anesthésie, en bloc opératoire"
+  },
+  {
+    "group": "Infirmiers et sages-femmes",
+    "name": "Infirmiers spécialisés en puériculture"
+  },
+  { "group": "Vétérinaires", "name": "Vétérinaires" },
+  {
+    "group": "Pharmaciens",
+    "name": "Biologistes médicaux"
+  },
+  {
+    "group": "Spécialistes de l'appareillage médical",
+    "name": "Prothèses dentaires"
+  },
+  {
+    "group": "Autres professionnels para-médicaux",
+    "name": "Ostéopathie et chiropraxie"
+  },
+  {
+    "group": "Psychologues, psychothérapeutes",
+    "name": "Psychologues, psychothérapeutes"
+  },
+  {
+    "group": "Professionnels de l’orientation et de l’insertion professionnelle",
+    "name": "Professionnels de l’orientation et de l’insertion professionnelle"
+  },
+  {
+    "group": "Aides médico-psychologiques",
+    "name": "Aides médico-psychologiques"
+  },
+  {
+    "group": "Professionnels de l'action sociale",
+    "name": "action et médiation sociale"
+  },
+  {
+    "group": "Professionnels de l'action sociale",
+    "name": "Accueillants et médiateurs sociaux"
+  },
+  {
+    "group": "Formateurs",
+    "name": "Formateurs professionnels"
+  },
+  { "group": "Agriculteurs", "name": "Agriculteurs" },
+  {
+    "group": "Eleveurs",
+    "name": "Eleveurs de bovins ou d'équins"
+  },
+  { "group": "Eleveurs", "name": "Aides d'éleveurs" },
+  {
+    "group": "Conducteurs d'engins agricoles ou forestiers",
+    "name": "Conducteurs d'engins agricoles ou forestiers"
+  },
+  {
+    "group": "Jardiniers des espaces verts et naturels",
+    "name": "Jardiniers des espaces verts et naturels"
+  },
+  {
+    "group": "Techniciens et agents d'encadrement d'exploitations agricoles",
+    "name": "Techniciens et agents de contrôle et diagnostic technique en agriculture"
+  },
+  {
+    "group": "Ingénieurs, cadres techniques de l'agriculture",
+    "name": "Ingénieurs, cadres techniques de l'agriculture"
+  },
+  {
+    "group": "Pêcheurs et aquaculteurs",
+    "name": "Aquaculteurs et saliculteurs"
+  },
+  {
+    "group": "Pêcheurs et aquaculteurs",
+    "name": "Marins d'équipage de pêche"
+  },
+  { "group": "Marins", "name": "Marins" },
+  {
+    "group": "Cadres et maîtres d'équipage de la marine",
+    "name": "Cadres et maîtres d'équipage de la marine"
+  },
+  {
+    "group": "Ouvriers qualifiés de l'extraction et des travaux publics",
+    "name": "Ouvriers qualifiés de l'extraction et des travaux publics"
+  },
+  {
+    "group": "Maçons peu qualifiés",
+    "name": "Maçons peu qualifiés"
+  },
+  {
+    "group": "Charpentiers (métal et bois)",
+    "name": "Charpentiers qualifiés"
+  },
+  {
+    "group": "Ouvriers en pose et décoration de revêtements",
+    "name": "Ouvriers peu qualifiés en pose et décoration de revêtements"
+  },
+  {
+    "group": "Ouvriers en travaux de façade, d'étanchéité et d'isolation",
+    "name": "Ouvriers peu qualifiés en travaux de façade, d'étanchéité et d'isolation"
+  },
+  {
+    "group": "Ouvriers en travaux de façade, d'étanchéité et d'isolation",
+    "name": "Ouvriers qualifiés en travaux de façade, d'étanchéité et d'isolation"
+  },
+  {
+    "group": "Ouvriers en électricité du bâtiment",
+    "name": "Ouvriers qualifiés en électricité du bâtiment"
+  },
+  {
+    "group": "Ouvriers en montage réseaux électriques et télécoms",
+    "name": "Ouvriers en montage réseaux électriques et télécoms"
+  },
+  {
+    "group": "Ouvriers qualifiés en menuiserie et en agencement du BTP",
+    "name": "Ouvriers qualifiés en menuiserie et en agencement du BTP"
+  },
+  {
+    "group": "Conducteurs d'engins du bâtiment et des travaux publics",
+    "name": "Conducteurs d'engins de terrassement et de carrière"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise de chantiers du BTP",
+    "name": "Techniciens et agents de maîtrise de chantiers du BTP"
+  },
+  {
+    "group": "Ingénieurs du bâtiment et des travaux publics, chefs de chantier et conducteurs de travaux (cadres)",
+    "name": "Cadres de la conduite de travaux du BTP et de la direction en entretien des infrastructures et du bâti"
+  },
+  {
+    "group": "Ingénieurs du bâtiment et des travaux publics, chefs de chantier et conducteurs de travaux (cadres)",
+    "name": "Cadres en Direction de chantier du BTP"
+  },
+  {
+    "group": "Ingénieurs du bâtiment et des travaux publics, chefs de chantier et conducteurs de travaux (cadres)",
+    "name": "Cadres en Direction et ingénierie d'exploitation de gisements et de carrières"
+  },
+  {
+    "group": "Techniciens, agents de maîtrise et assimilés en électricité et en électronique",
+    "name": "Techniciens, agents de maîtrise et assimilés en électricité et en électronique"
+  },
+  {
+    "group": "Soudeurs",
+    "name": "Ouvriers qualifiés en soudage"
+  },
+  {
+    "group": "Ouvriers peu qualifiés en ajustement, montage et assemblage mécanique",
+    "name": "Ouvriers peu qualifiés en ajustement, montage et assemblage mécanique"
+  },
+  {
+    "group": "Techniciens en mécanique et travail des métaux",
+    "name": "Techniciens en mécanique et travail des métaux"
+  },
+  {
+    "group": "Ouviers qualifiés des industries agro-alimentaires",
+    "name": "Ouviers qualifiés des industries agro-alimentaires"
+  },
+  {
+    "group": "Ouvriers en conduite d’équipement de fabrication de pâte à papier, de papier et de carton et de panneaux de bois",
+    "name": "Ouvriers en conduite d’équipement de fabrication de pâte à papier, de papier et de carton et de panneaux de bois"
+  },
+  {
+    "group": "Ouvriers du conditionnement, du tri et de l'emballage",
+    "name": "Ouvriers qualifiés du conditionnement, du tri et de l'emballage"
+  },
+  {
+    "group": "Techniciens des industries de process",
+    "name": "Techniciens des industries de process"
+  },
+  {
+    "group": "Techniciens des industries de process",
+    "name": "Techniciens intervention technique en laboratoire d'analyse industrielle et en formulation et analyse sensorielle"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise en maintenance de véhicules",
+    "name": "Techniciens et agents de maîtrise en mécanique automobile, réparation de cycles, motocycles et motoculteurs de loisirs"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise en maintenance de véhicules",
+    "name": "Techniciens et agents de maîtrise en Maintenance d'engins de chantier, de levage, manutention et agricoles"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise en maintenance générale et mécanique industrielle",
+    "name": "Techniciens et agents de maîtrise en maintenance mécanique et entretien d'équipements industriels"
+  },
+  {
+    "group": "Mainteniciens en biens électrodomestiques",
+    "name": "Mainteniciens en biens électrodomestiques"
+  },
+  {
+    "group": "Ouvriers qualifiés du contrôle qualité et de laboratoire",
+    "name": "Agents qualifiés de laboratoire"
+  },
+  {
+    "group": "Techniciens du contrôle qualité",
+    "name": "Techniciens du contrôle qualité"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise de la logistique, du planning, de l'ordonnancement et méthodes en industrialisation",
+    "name": "Techniciens et agents de maîtrise de la logistique, du planning, de l'ordonnancement et méthodes en industrialisation"
+  },
+  {
+    "group": "Ingénieurs des méthodes de production, du contrôle qualité",
+    "name": "Ingénieurs et cadres techniques en Management et ingénierie méthodes et industrialisation"
+  },
+  {
+    "group": "Conducteurs d’engins légers de déplacement de charges, cariste",
+    "name": "Conducteurs d’engins légers de déplacement de charges, cariste"
+  },
+  {
+    "group": "Conducteurs de transport en commun sur route",
+    "name": "Conducteurs de transport en commun sur route"
+  },
+  {
+    "group": "Employés administratifs et commerciaux des transports",
+    "name": "Employés administratifs et commerciaux des transports"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise du tourisme",
+    "name": "Techniciens et agents de maîtrise du tourisme"
+  },
+  {
+    "group": "Artisans et ouvriers artisanaux",
+    "name": "Artisans et ouvriers artisanaux"
+  },
+  {
+    "group": "Secrétaires bureautiques et assimilés",
+    "name": "Secrétaires"
+  },
+  {
+    "group": "Secrétaires bureautiques et assimilés",
+    "name": "Secrétaires médicaux et assistants médicaux ou médico-sociaux"
+  },
+  {
+    "group": "Techniciens des services administratifs",
+    "name": "Techniciens assistanat en ressources humaines"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise chargés d'études socio-économiques",
+    "name": "Techniciens et agents de maîtrise chargés d'études socio-économiques"
+  },
+  {
+    "group": "Cadres administratifs, comptables et financiers (hors juristes)",
+    "name": "Cadres administratifs, comptables et financiers (hors juristes)"
+  },
+  {
+    "group": "Dirigeants de petites et moyennes entreprises de moins de 50 salariés",
+    "name": "Dirigeants de petites et moyennes entreprises de moins de 50 salariés"
+  },
+  {
+    "group": "Techniciens de production, d'exploitation, d'installation, et de maintenance, support et services aux utilisateurs en informatique",
+    "name": "Techniciens de production, exploitation et administration des systèmes d'information"
+  },
+  {
+    "group": "Responsables et cadres de la production, de l'exploitation et de la maintenance informatique et télécom",
+    "name": "Responsables de production, d'exploitation et d'administration des systèmes d'information et télécom"
+  },
+  {
+    "group": "Responsables et cadres de la production, de l'exploitation et de la maintenance informatique et télécom",
+    "name": "Responsables et cadres de maintenance, support et service aux utilisateurs en informatique et télécom"
+  },
+  {
+    "group": "Cadres A des administrations publiques (hors spécialités juridiques) et assimilés",
+    "name": "Cadres A des administrations publiques chargées du patrimoine et de la culture"
+  },
+  {
+    "group": "Cadres A des administrations publiques (hors spécialités juridiques) et assimilés",
+    "name": "Cadres A de l'administration publique territoriale"
+  },
+  {
+    "group": "Professionnels du droit",
+    "name": "Professionnels du droit en Aide et médiation judiciaire"
+  },
+  {
+    "group": "Agents de sécurité et de l'ordre public",
+    "name": "Sécurité publique"
+  },
+  {
+    "group": "Experts de la banque",
+    "name": "Experts de la banque"
+  },
+  {
+    "group": "Gestionnaires de la banque et de l'assurance",
+    "name": "Gestionnaires de la banque et de l'assurance"
+  },
+  {
+    "group": "Employés de libre service",
+    "name": "Employés de magasins animateurs de vente"
+  },
+  {
+    "group": "Employés de libre service",
+    "name": "Employés de mise en rayon libre-service"
+  },
+  {
+    "group": "Vendeurs en produits alimentaires",
+    "name": "Vendeurs en alimentation"
+  },
+  {
+    "group": "Vendeurs en habillement et accessoires, articles de luxe, de sport, de loisirs et culturels",
+    "name": "Vendeurs en articles de sport, de loisirs et de véhicules"
+  },
+  {
+    "group": "Attachés commerciaux",
+    "name": "Conseillers en information médicale"
+  },
+  {
+    "group": "Représentants auprès des particuliers",
+    "name": "Représentants auprès des particuliers"
+  },
+  {
+    "group": "Maîtrise des magasins",
+    "name": "Maîtrise des magasins"
+  },
+  {
+    "group": "Employés et professions intermédiaires de l'immobilier",
+    "name": "Employés et professions intermédiaires de l'immobilier"
+  },
+  {
+    "group": "Cadres commerciaux, acheteurs et cadres de la mercatique",
+    "name": "acheteurs"
+  },
+  {
+    "group": "Aides de cuisine et employés polyvalents de la restauration",
+    "name": "Aides de cuisine et employés polyvalents de la restauration"
+  },
+  {
+    "group": "Agents de maîtrise de l'hôtellerie et de la gestion des structures de loisirs",
+    "name": "Agents de maîtrise de l'hôtellerie et de la gestion des structures de loisirs"
+  },
+  {
+    "group": "Patrons et cadres de l’hôtellerie et de la restauration",
+    "name": "Patrons et cadres de l’hôtellerie et de la restauration"
+  },
+  {
+    "group": "Aides à domicile et auxiliaires de vie",
+    "name": "Aides à domicile et auxiliaires de vie"
+  },
+  {
+    "group": "Assistants maternels, auxiliaires de puériculture, assistants familiaux et gardes à domicile",
+    "name": "Assistants maternels, assistants familiaux et gardes à domicile"
+  },
+  {
+    "group": "Assistants maternels, auxiliaires de puériculture, assistants familiaux et gardes à domicile",
+    "name": "Autres intervenants  auprès d'enfants (hors social)"
+  },
+  {
+    "group": "Ouvriers de l'assainissement et du traitement des déchets",
+    "name": "Agents d'entretien des espaces urbains"
+  },
+  {
+    "group": "Ouvriers de l'assainissement et du traitement des déchets",
+    "name": "Agents d'entretien industriel"
+  },
+  {
+    "group": "Employés des services divers",
+    "name": "Personnels des services funéraires"
+  },
+  {
+    "group": "Assistants de la communication",
+    "name": "Assistants de la communication"
+  },
+  { "group": "Interprètes", "name": "Interprètes" },
+  {
+    "group": "Journalistes et cadres de l'édition",
+    "name": "Professionnels de l'édition"
+  },
+  {
+    "group": "Journalistes et cadres de l'édition",
+    "name": "Journalistes et responsable de l'information média"
+  },
+  {
+    "group": "Professionnels des spectacles",
+    "name": "Producteurs de spectacles et promoteurs d'artistes"
+  },
+  {
+    "group": "Professionnels des spectacles",
+    "name": "Techniciens de la préparation de spectacles"
+  },
+  {
+    "group": "Graphistes, dessinateurs, stylistes, décorateurs et créateurs de supports de communication visuelle",
+    "name": "Concepteur et réalisateur multimédia"
+  },
+  {
+    "group": "Graphistes, dessinateurs, stylistes, décorateurs et créateurs de supports de communication visuelle",
+    "name": "Concepteurs et réalisateurs de films d'animation"
+  },
+  {
+    "group": "Artistes (musique, danse, spectacles)",
+    "name": "Artistes interprètes et metteurs en scène"
+  },
+  { "group": "Écrivains", "name": "Écrivains" },
+  {
+    "group": "Aides-soignants",
+    "name": "Assistants médico-techniques"
+  },
+  { "group": "Médecins", "name": "Médecins" },
+  { "group": "Dentistes", "name": "Dentistes" },
+  {
+    "group": "Techniciens médicaux et préparateurs",
+    "name": "Techniciens de laboratoire médical"
+  },
+  {
+    "group": "Autres professionnels para-médicaux",
+    "name": "Diététique"
+  },
+  {
+    "group": "Autres professionnels para-médicaux",
+    "name": "Ergothérapeute"
+  },
+  {
+    "group": "Autres professionnels para-médicaux",
+    "name": "Pédicurie et podologie"
+  },
+  {
+    "group": "Professionnels de l'animation socioculturelle",
+    "name": "Professionnels de l'animation socioculturelle"
+  },
+  {
+    "group": "Sportifs et animateurs sportifs",
+    "name": "Sportifs et animateurs sportifs"
+  },
+  {
+    "group": "Surveillants d'établissements scolaires et accompagnateurs des élèves en situation de handicap",
+    "name": "Surveillants d'établissements scolaires"
+  },
+  {
+    "group": "Professeurs des écoles",
+    "name": "Professeurs des écoles"
+  },
+  {
+    "group": "Professeurs du secondaire",
+    "name": "Professeurs du secondaire"
+  },
+  {
+    "group": "Professionnels de la politique",
+    "name": "Professionnels de la politique"
+  },
+  { "group": "Clergé", "name": "Clergé" },
+  {
+    "group": "Eleveurs",
+    "name": "Eleveurs d'insectes, d'animaux sauvages ou de compagnie"
+  },
+  {
+    "group": "Bûcherons, sylviculteurs et agents forestiers",
+    "name": "Bûcherons et élagueurs"
+  },
+  {
+    "group": "Viticulteurs, arboriculteurs",
+    "name": "Viticulteurs, arboriculteurs"
+  },
+  {
+    "group": "Techniciens et agents d'encadrement d'exploitations agricoles",
+    "name": "Techniciens et agents de conseil et assistance technique en agriculture"
+  },
+  {
+    "group": "Ouvriers de la construction en béton",
+    "name": "Ouvriers peu qualifiés en construction en béton"
+  },
+  {
+    "group": "Charpentiers (métal et bois)",
+    "name": "Charpentiers peu qualifiés"
+  },
+  {
+    "group": "Couvreurs",
+    "name": "Couvreurs peu qualifiés"
+  },
+  {
+    "group": "Couvreurs",
+    "name": "Couvreurs qualifiés"
+  },
+  {
+    "group": "Professionnels du travail de la pierre et des matériaux associés",
+    "name": "Professionnels du travail de la pierre et des matériaux associés"
+  },
+  {
+    "group": "Ouvriers en électricité du bâtiment",
+    "name": "Ouvriers peu qualifiés en électricité du bâtiment"
+  },
+  {
+    "group": "Plombiers chauffagistes",
+    "name": "Plombiers, chauffagistes peu qualifiés"
+  },
+  {
+    "group": "Conducteurs d'engins du bâtiment et des travaux publics",
+    "name": "Conducteurs de grue"
+  },
+  { "group": "Architectes", "name": "Architectes" },
+  {
+    "group": "Ouvriers de l'électricité et de l'électronique",
+    "name": "Ouvriers qualifiés de l'électricité et de l'électronique"
+  },
+  {
+    "group": "Ouvriers peu qualifiés en conduite d'équipement d'usinage",
+    "name": "Ouvriers peu qualifiés en conduite d'équipement d'usinage"
+  },
+  {
+    "group": "Ouvriers en chaudronnerie et tôlerie",
+    "name": "Ouvriers peu qualifiés en chaudronnerie et tôlerie"
+  },
+  {
+    "group": "Ouvriers en chaudronnerie et tôlerie",
+    "name": "Ouvriers qualifiés en chaudronnerie et tôlerie"
+  },
+  { "group": "Tuyauteurs", "name": "Tuyauteurs" },
+  {
+    "group": "Soudeurs",
+    "name": "Ouvriers peu qualifiés en soudage"
+  },
+  {
+    "group": "Ouvriers qualifiés en ajustement, montage et assemblage mécanique",
+    "name": "Ouvriers qualifiés en ajustement, montage et assemblage mécanique"
+  },
+  {
+    "group": "Agents de maîtrise et assimilés en fabrication mécanique",
+    "name": "Agents de maîtrise et assimilés en fabrication mécanique"
+  },
+  {
+    "group": "Pilotes d'installation lourdes des industries de transformation et d'énergie",
+    "name": "Pilotes d'installation lourdes des industries de transformation et d'énergie"
+  },
+  {
+    "group": "Ouvriers de l'industrie verrière, céramique et matériaux de construction",
+    "name": "Ouvriers peu qualifiés de l'industrie verrière, céramique et matériaux de construction"
+  },
+  {
+    "group": "Ouvriers de l'industrie verrière, céramique et matériaux de construction",
+    "name": "Ouvriers qualifiés de l'industrie verrière, céramique et matériaux de construction"
+  },
+  {
+    "group": "Ouvriers peu qualifiés des industries chimiques et plastiques",
+    "name": "Ouvriers peu qualifiés des industries chimiques et plastiques"
+  },
+  {
+    "group": "Ouvriers du conditionnement, du tri et de l'emballage",
+    "name": "Ouvriers peu qualifiés du conditionnement, du tri et de l'emballage"
+  },
+  {
+    "group": "Ouvriers, techniciens et agents de maîtrise du textile",
+    "name": "Ouvriers, techniciens et agents de maîtrise du textile"
+  },
+  {
+    "group": "Ouvriers et techniciens de la scierie, de l'assemblage et de la fabrication d'ouvrages en bois",
+    "name": "Ouvriers qualifiés et techniciens de la scierie, de l'assemblage et de la fabrication d'ouvrages en bois"
+  },
+  {
+    "group": "Ouvriers de la maintenance générale et mécanique",
+    "name": "Ouvriers en réparation - montage en systèmes horlogers"
+  },
+  {
+    "group": "Ouvriers de la maintenance générale et mécanique",
+    "name": "Ouvriers en installation maintenance en nautisme, mécanique de marine et aéronefs"
+  },
+  {
+    "group": "Ouvriers de la maintenance en électricité et en électronique",
+    "name": "Ouvriers de la maintenance en électricité et en électronique"
+  },
+  {
+    "group": "Ouvriers polyvalents d'entretien du bâtiment",
+    "name": "Ouvriers polyvalents d'entretien du bâtiment"
+  },
+  {
+    "group": "Carrossiers automobiles",
+    "name": "Ouvriers peu qualifiés en réparation de carrosserie"
+  },
+  {
+    "group": "Ouvriers mécaniciens de véhicules",
+    "name": "Ouvriers peu qualifiés en maintenance d'engins de chantier, de levage, manutention et agricoles"
+  },
+  {
+    "group": "Ouvriers mécaniciens de véhicules",
+    "name": "Ouvriers peu qualifiés en mécanique automobile"
+  },
+  {
+    "group": "Ouvriers mécaniciens de véhicules",
+    "name": "Ouvriers qualifiés en Réparation de cycles, motocycles et motoculteurs de loisirs"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise en intervention technique en Hygiène Sécurité Environnement -HSE industriel et protection du patrimoine naturel",
+    "name": "Techniciens et agents de maîtrise en intervention technique en Hygiène Sécurité Environnement -HSE industriel et protection du patrimoine naturel"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise en assistance et support technique client et en installation et maintenance télécoms et courants faibles",
+    "name": "Techniciens et agents de maîtrise en assistance et support technique client et en installation et maintenance télécoms et courants faibles"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise en maintenance électrique, électronique et automatismes",
+    "name": "Techniciens et agents de maîtrise en maintenance électrique"
+  },
+  {
+    "group": "Techniciens et agents de maîtrise en maintenance électrique, électronique et automatismes",
+    "name": "Techniciens et agents de maîtrise en Installation et maintenance électronique"
+  },
+  {
+    "group": "Ingénieurs et cadres techniques en Hygiène Sécurité Environnement -HSE- industriels et exploitation éco-industriel",
+    "name": "Ingénieurs et cadres techniques en Hygiène Sécurité Environnement -HSE- industriels et exploitation éco-industriel"
+  },
+  {
+    "group": "Manutentionnaires et déménageurs peu qualifiés",
+    "name": "Manutentionnaires et déménageurs peu qualifiés"
+  },
+  {
+    "group": "Magasiniers et préparateurs de commande qualifiés",
+    "name": "Magasiniers et préparateurs de commande qualifiés"
+  },
+  {
+    "group": "Facteurs et distributeurs de documents (non cadres)",
+    "name": "Facteurs et distributeurs de documents (non cadres)"
+  },
+  {
+    "group": "Conducteurs de véhicules légers",
+    "name": "Ambulanciers"
+  },
+  {
+    "group": "Conducteurs et livreurs sur courte distance (hors distribution de documents)",
+    "name": "Conducteurs et livreurs sur courte distance (hors distribution de documents)"
+  },
+  {
+    "group": "Conducteurs routiers",
+    "name": "Conducteurs routiers"
+  },
+  {
+    "group": "Conducteurs sur rails et d'engins de traction",
+    "name": "Conducteurs sur rails et d'engins de traction"
+  },
+  {
+    "group": "Agents et hôtesses d'accompagnement",
+    "name": "Agents et hôtesses d'accompagnement"
+  },
+  {
+    "group": "Agents d'exploitation du transport",
+    "name": "Responsable de circulation ferroviaire, chef de gare (non cadres)"
+  },
+  {
+    "group": "Contrôleurs des transports",
+    "name": "Contrôleurs des transports"
+  },
+  {
+    "group": "Cadres des transports et du tourisme",
+    "name": "Cadres du tourisme"
+  },
+  {
+    "group": "Cadres de la logistique",
+    "name": "Cadres de la logistique"
+  },
+  {
+    "group": "Secrétaires bureautiques et assimilés",
+    "name": "Secrétaires assistants commerciaux"
+  },
+  {
+    "group": "Secrétaires bureautiques et assimilés",
+    "name": "Secrétaires comptables"
+  },
+  {
+    "group": "Agents d'accueil et d'information",
+    "name": "Agents d'accueil et d'information"
+  },
+  {
+    "group": "Agents administratifs",
+    "name": "Agents administratifs"
+  },
+  {
+    "group": "Secrétaires de direction",
+    "name": "Assistants commerciaux techniciens"
+  },
+  {
+    "group": "Secrétaires de direction",
+    "name": "Secrétaires et assistanat de direction"
+  },
+  {
+    "group": "Secrétaires de direction",
+    "name": "Secrétaires de direction comptable"
+  },
+  {
+    "group": "Secrétaires de direction",
+    "name": "Secrétaires de direction médical ou médico-social"
+  },
+  {
+    "group": "Juristes et avocats",
+    "name": "Juristes et avocats"
+  },
+  {
+    "group": "Cadres des ressources humaines et du recrutement",
+    "name": "Cadres des ressources humaines et du recrutement"
+  },
+  {
+    "group": "Chargés d'études socio-économiques",
+    "name": "Chargés d'études socio-économiques"
+  },
+  {
+    "group": "Cadres dirigeants des grandes entreprises de plus de 50 salariés",
+    "name": "Cadres dirigeants des grandes entreprises de plus de 50 salariés"
+  },
+  {
+    "group": "Ingénieurs et cadres d'étude, recherche et développement en informatique et télécom",
+    "name": "Ingénieurs et cadres d'étude, recherche et développement en informatique et télécom"
+  },
+  {
+    "group": "Chefs de projet et directeurs de service informatique",
+    "name": "Chefs de projet et directeurs de service informatique"
+  },
+  {
+    "group": "Techniciens d'étude, recherche et développement",
+    "name": "Techniciens d'étude, recherche et développement"
+  },
+  {
+    "group": "Agents des impôts et des douanes",
+    "name": "Agents des impôts et des douanes"
+  },
+  {
+    "group": "Autres cadres C des administrations publiques",
+    "name": "Autres cadres C des administrations publiques"
+  },
+  {
+    "group": "Cadres A des administrations publiques (hors spécialités juridiques) et assimilés",
+    "name": "Cadres A des administrations publiques en conception, pilotage et mise en oeuvre des pouvoirs publics et en représentation de l'Etat"
+  },
+  {
+    "group": "Cadres A des administrations publiques (hors spécialités juridiques) et assimilés",
+    "name": "Cadres A des administrations publiques en management de structure de santé, sociale ou pénitentiaire"
+  },
+  {
+    "group": "Cadres A des administrations publiques (hors spécialités juridiques) et assimilés",
+    "name": "Cadres A des administrations publiques en inspection du travail, de la sécurité sociale et des Urssaf"
+  },
+  {
+    "group": "Cadres A des administrations publiques (hors spécialités juridiques) et assimilés",
+    "name": "Cadres A des impôts, du Trésor Public et des douanes"
+  },
+  {
+    "group": "Professionnels du droit",
+    "name": "Professionnels du droit en Collaboration juridique"
+  },
+  {
+    "group": "Agents de sécurité et de l'ordre public",
+    "name": "Personnel de la Défense"
+  },
+  {
+    "group": "Agents de sécurité et de l'ordre public",
+    "name": "Sécurité civile et secours"
+  },
+  {
+    "group": "Agents de polices municipales",
+    "name": "Agents de polices municipales"
+  },
+  {
+    "group": "Cadres de la police et de l'armée",
+    "name": "Management de la sécurité publique"
+  },
+  {
+    "group": "Experts de la finance",
+    "name": "Experts de la finance"
+  },
+  {
+    "group": "Cadres et indépendants commerciaux de la banque",
+    "name": "Cadres et indépendants commerciaux de la banque"
+  },
+  {
+    "group": "Cadres et indépendants commerciaux des assurances",
+    "name": "Cadres et indépendants commerciaux des assurances"
+  },
+  { "group": "Caissiers", "name": "Caissiers" },
+  {
+    "group": "Vendeurs en produits alimentaires",
+    "name": "Vendeurs en poissonnerie"
+  },
+  {
+    "group": "Vendeurs en produits alimentaires",
+    "name": "Vendeurs en gros de produits frais"
+  },
+  {
+    "group": "Vendeurs en habillement et accessoires, articles de luxe, de sport, de loisirs et culturels",
+    "name": "Vendeurs de végétaux et vendeurs en animalerie"
+  },
+  {
+    "group": "Employés des services commerciaux",
+    "name": "Employés des services commerciaux"
+  },
+  {
+    "group": "Attachés commerciaux",
+    "name": "Attachés commerciaux (hors médical)"
+  },
+  {
+    "group": "Technico-commerciaux",
+    "name": "Technico-commerciaux"
+  },
+  {
+    "group": "Cadres du management des magasins",
+    "name": "Cadres du management des magasins"
+  },
+  {
+    "group": "Cadres agents immobiliers et syndics",
+    "name": "Cadres chargés de gérance, de location et de projets immobiliers"
+  },
+  { "group": "Bouchers", "name": "Bouchers" },
+  {
+    "group": "Serveurs de cafés restaurants",
+    "name": "Serveurs de cafés restaurants"
+  },
+  {
+    "group": "Agents de maîtrise de la restauration",
+    "name": "Agents de maîtrise de la restauration"
+  },
+  {
+    "group": "Coiffeurs, esthéticiens",
+    "name": "Esthéticiens, manucure, hydrothérapie"
+  },
+  {
+    "group": "Assistants maternels, auxiliaires de puériculture, assistants familiaux et gardes à domicile",
+    "name": "Aide en puériculture"
+  },
+  { "group": "Concierges", "name": "Concierges" },
+  {
+    "group": "Agents de sécurité et de surveillance",
+    "name": "Agents de sécurité et de surveillance"
+  },
+  {
+    "group": "Agents d'entretien de locaux",
+    "name": "Agents d'entretien de locaux"
+  },
+  {
+    "group": "Cadres et techniciens de la documentation",
+    "name": "Cadres et techniciens de la documentation"
+  },
+  {
+    "group": "Professionnels des spectacles",
+    "name": "Techniciens de la réalisation cinématographique et audiovisuelle"
+  },
+  { "group": "Photographes", "name": "Photographes" },
+  {
+    "group": "Graphistes, dessinateurs, stylistes, décorateurs et créateurs de supports de communication visuelle",
+    "name": "Concepteur-décorateur d’espaces"
+  },
+  {
+    "group": "Artistes (musique, danse, spectacles)",
+    "name": "Enseignants artistiques"
+  },
+  {
+    "group": "Aides-soignants",
+    "name": "Aides-soignants"
+  },
+  {
+    "group": "Infirmiers et sages-femmes",
+    "name": "Sages-femmes"
+  },
+  { "group": "Pharmaciens", "name": "Pharmaciens" },
+  {
+    "group": "Techniciens médicaux et préparateurs",
+    "name": "Techniciens en imagerie médicale"
+  },
+  {
+    "group": "Techniciens médicaux et préparateurs",
+    "name": "Préparation en pharmacie"
+  },
+  {
+    "group": "Spécialistes de l'appareillage médical",
+    "name": "Prothèses, orthèses et audioprothèses"
+  },
+  {
+    "group": "Spécialistes de l'appareillage médical",
+    "name": "Optique – lunetterie"
+  },
+  {
+    "group": "Autres professionnels para-médicaux",
+    "name": "masseurs-kinésithérapeuthes"
+  },
+  {
+    "group": "Autres professionnels para-médicaux",
+    "name": "Orthophonistes et spécialistes de l'orthoptique"
+  },
+  {
+    "group": "Autres professionnels para-médicaux",
+    "name": "Psychomotricien"
+  },
+  {
+    "group": "Educateurs spécialisés et autres intervenants socio-éducatifs",
+    "name": "Éducateurs de jeunes enfants"
+  },
+  {
+    "group": "Educateurs spécialisés et autres intervenants socio-éducatifs",
+    "name": "Éducateurs techniques spécialisés, moniteurs d’ateliers"
+  },
+  {
+    "group": "Professionnels de l'action sociale",
+    "name": "Agents de médiation conjugale et familiale et aide aux bénéficiaires d'une mesure de protection juridique"
+  },
+  {
+    "group": "Surveillants d'établissements scolaires et accompagnateurs des élèves en situation de handicap",
+    "name": "Accompagnateurs des élèves en situation de handicap"
+  },
+  {
+    "group": "Directeurs d’établissements du secondaire ou du supérieur et inspecteurs",
+    "name": "Directeurs d’établissements du secondaire ou du supérieur et inspecteurs"
+  },
+  {
+    "group": "Professeurs du supérieur",
+    "name": "Professeurs du supérieur"
+  },
+  {
+    "group": "Formateurs",
+    "name": "Formateurs en conduite"
+  }
+]

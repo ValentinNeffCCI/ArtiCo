@@ -64,6 +64,8 @@
 .required label, .required input[type='radio'], .required > div {
     margin: 0;
     padding: .3rem .5rem;
+    cursor: pointer;
+    padding: .8rem;
 }
 
 .required input[type='radio']:checked + label {

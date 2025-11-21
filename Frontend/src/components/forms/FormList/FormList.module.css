@@ -38,13 +38,18 @@
     width: 30%;
 }
 
-.list span{
+.list div{
     display: flex;
     align-items: center;
     font-weight: 500;
     gap: 10px;
+    justify-content: center;
 }
 
-.list a:hover span svg{
+.list div span{
+    width: 50%;
+}
+
+.list a:hover div svg{
     transform: translateX(1rem);
 }

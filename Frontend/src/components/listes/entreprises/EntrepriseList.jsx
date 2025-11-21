@@ -1,9 +1,9 @@
 import { Fragment, useEffect, useState } from "react";
 import style from "./Entreprise.module.css";
-import EntrepriseCard from "../cards/EntrepriseCard/EntrepriseCard";
-import EntrepriseFilter from "../filter/EntrepriseFilter";
-import useForm from "../../hooks/useForm";
-import usePosition from "../../hooks/usePosition";
+import EntrepriseCard from "../../cards/EntrepriseCard/EntrepriseCard.jsx";
+import EntrepriseFilter from "../../filter/EntrepriseFilter.jsx";
+import useForm from "../../../hooks/useForm.jsx";
+import usePosition from "../../../hooks/usePosition.jsx";
 
 const EntrepriseList = ({
   categorie = false,

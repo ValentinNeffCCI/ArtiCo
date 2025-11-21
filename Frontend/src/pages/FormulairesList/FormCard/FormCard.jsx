@@ -5,11 +5,9 @@ import { LinkButton } from "../../../components/buttons/Link/LinkButton";
 import { CustomButton } from "../../../components/buttons/Custom/CustomButton";
 
 const FormCard = ({ onDelete, form }) => {
-    const handleDelete = ()=>{
-        if(confirm('Etes-vous sûr de vouloir supprimer ce questionnaire ?')){
-            onDelete(form.id);
-        }
-    }
+  const handleDelete = () => {
+    onDelete(form);
+  };
   return (
     <div className={style["form"]}>
       <h2>{form.name}</h2>
@@ -18,7 +16,7 @@ const FormCard = ({ onDelete, form }) => {
           <Pencil size={15} />
           <span>Modifier</span>
         </LinkButton>
-        <CustomButton style={{fontSize: 16}} clickAction={handleDelete}>
+        <CustomButton style={{ fontSize: 16 }} clickAction={handleDelete}>
           <Trash2 size={20} />
           <span>Supprimer</span>
         </CustomButton>

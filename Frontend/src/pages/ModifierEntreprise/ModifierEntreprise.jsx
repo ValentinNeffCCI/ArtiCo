@@ -6,9 +6,10 @@ import { toast, ToastContainer } from "react-toastify";
 import defaultImage from "../../assets/photos/Sora_Shimazaki/handshake.jpg";
 import CreateEntreprise from "../../components/forms/CreateEntreprise/CreateEntreprise";
 import { LinkButton } from "../../components/buttons/Link/LinkButton";
-import style from './Modifier.module.css'
+import style from "./Modifier.module.css";
 import ManageGalerie from "../../components/images/galerie/ManageGalerie";
 import { CustomButton } from "../../components/buttons/Custom/CustomButton";
+import DeleteConfirmation from "../../components/modales/DeleteConfirmation/DeleteConfirmation";
 
 const ModifierEntreprise = () => {
   const { id } = useParams();
@@ -16,41 +17,49 @@ const ModifierEntreprise = () => {
   const navigation = useNavigate();
 
   const [entreprise, setEntreprise] = useState(false);
+  const [showModale, setShowModale] = useState(false);
+
+  const closeModale = ()=>{
+    setShowModale(false)
+  }
 
   const getEntrepriseById = async (id) => {
     const response = await callAPI(`/entreprises/${id}`);
     if (response) {
       setEntreprise(response);
     } else {
-      navigation('/profil')
+      navigation("/profil");
     }
   };
 
-  const handleDelete = async () => {
-    if(confirm('Voulez-vous vraiment supprimer cette entreprise ?')){
-      const response = await callAPI('/entreprises/'+id, "DELETE");
-      if(response){
-        navigation('/profil')
+  const deleteUser = async () => {
+      const response = await callAPI("/entreprises/" + id, "DELETE");
+      if (response) {
+        navigation("/profil");
       } else {
-        toast.error('Une erreur est survenue');
+        toast.error("Une erreur est survenue");
       }
-    }
   }
+
+  const displayModale = ()=>{
+    setShowModale(entreprise)
+  };
 
   useEffect(() => {
     getEntrepriseById(id);
   }, [id]);
   return (
-    <main>
+    <main className={style["page"]}>
+      {showModale && <DeleteConfirmation onClose={closeModale} onDelete={deleteUser}>Voulez-vous vraiment supprimer l'entreprise ?</DeleteConfirmation>}
       <LinkButton
         style={{
           display: "flex",
           alignItems: "center",
           border: "none",
           gap: ".5rem",
-          margin: '0 3rem',
-          width: 'fit-content',
-          padding: '2rem 0' 
+          margin: "0 3rem",
+          width: "fit-content",
+          padding: "2rem 0"
         }}
         path="/profil"
       >
@@ -77,10 +86,13 @@ const ModifierEntreprise = () => {
       ) : (
         <Loader />
       )}
-      <CustomButton style={{
-        '--color': "red",
-        marginLeft: "10%"
-      }} clickAction={handleDelete}>
+      <CustomButton
+        style={{
+          "--color": "red",
+          marginLeft: "10%",
+        }}
+        clickAction={displayModale}
+      >
         Supprimer l'entreprise
       </CustomButton>
       <ToastContainer />

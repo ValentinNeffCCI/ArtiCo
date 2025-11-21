@@ -62,19 +62,3 @@
             font-weight: 600;
     }
 }
-
-@keyframes fadeAppear {
-    0% {
-        transform: translateX(10%);
-    }
-    33%{
-        transform: translateX(-100%);
-    }
-    66%{
-        opacity: 1;
-        transform: translateX(-200%);
-    }
-    100%{
-        transform: translateX(0);
-    }
-}

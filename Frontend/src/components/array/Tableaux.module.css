@@ -1,0 +1,12 @@
+.tableau h2{
+    margin: 1.5rem 10px;
+    font-family: 'Itim', sans-serif;
+} 
+
+.tableau tfoot td{
+    font-weight: 600;
+}
+
+.tableau{
+    width: 100%;
+}

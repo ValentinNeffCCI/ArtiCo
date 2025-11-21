@@ -72,6 +72,8 @@ const Login = () => {
             position: window.innerWidth < 768 ? "absolute" : "static",
             top: "1rem",
             color: window.innerWidth < 768 ? "white" : " ",
+            width: "fit-content",
+            alignSelf: "start"
           }}
         >
           <ArrowLeft />

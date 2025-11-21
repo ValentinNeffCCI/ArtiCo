@@ -31,7 +31,7 @@ const useForm = (url_suffix = "/", method = "GET", defaultValue = {}) => {
         }
         break;
       default:
-        valueToStore = valueToStore.replaceAll("<script", "__script");
+        valueToStore = valueToStore;
     }
 
     setDatas((prev) => ({

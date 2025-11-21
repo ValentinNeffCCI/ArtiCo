@@ -9,18 +9,22 @@ export const RegisterForm = ({ children }) => {
   const AppMode = import.meta.env.VITE_ENV_MODE;
 
   const { login } = useAuth();
-  const { changeListener, prepare, simulateUserConnection: simulateRegister } = useForm(
-    AppMode === "demo" ? "/users" : "/register",
-    "POST"
-  );
+  const {
+    changeListener,
+    prepare,
+    simulateUserConnection: simulateRegister,
+  } = useForm(AppMode === "demo" ? "/users" : "/register", "POST", {
+    active: true,
+    role: "user"
+  });
   const handleSubmit = async (e) => {
     e.preventDefault();
     let response = await prepare(e);
-    if(!response){
-      toast.error('Cet e-mail est déjà utilisé')
+    if (!response) {
+      toast.error("Cet e-mail est déjà utilisé");
       return;
     }
-    if(AppMode === "demo"){
+    if (AppMode === "demo") {
       response = simulateRegister(response);
     }
     login(response);

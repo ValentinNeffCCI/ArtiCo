@@ -24,19 +24,14 @@ export const Header = () => {
 
   const links = [
     {
-      path: "/",
+      path: "/admin",
       label: "Espace administrateur",
       allowedRoles: ["admin"],
     },
     {
       path: "/profil",
       label: "Mon Profil",
-      allowedRoles: ["user", "artisan", "admin"],
-    },
-    {
-      path: "/",
-      label: "Mon entreprise",
-      allowedRoles: ["artisan"]
+      allowedRoles: ["user", "admin"],
     },
     {
       path: "/rechercher",
@@ -87,6 +82,7 @@ export const Header = () => {
             borderRadius: "2rem",
             backgroundColor: "var(--light)",
             border: "none",
+            fontSize: "1.1rem"
           }}
           onClickAction={user && logout}
         >

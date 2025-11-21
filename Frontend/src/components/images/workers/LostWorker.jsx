@@ -1,10 +1,10 @@
-import React from 'react'
-import worker from '../../../assets/mascotte/lost_worker.png'
+import React from "react";
+import worker from "../../../assets/mascotte/lost_worker.png";
 
-const Worker = () => {
+export const LostWorker = () => {
   return (
-    <img src={worker} alt='ouvrier heureux'/>
-  )
-}
-
-export default Worker
+    <figure>
+      <img src={worker} alt="ouvrier triste" style={{ width: "100%" }} />
+    </figure>
+  );
+};

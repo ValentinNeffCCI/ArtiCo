@@ -2,23 +2,24 @@
   "categories": [
     {
       "id": "1",
-      "name": "Plombier"
+      "name": "Plomberie",
+      "": "Plomberie"
     },
     {
       "id": "2",
-      "name": "Electricien"
+      "name": "Electricite"
     },
     {
       "id": "3",
-      "name": "Menuisier"
+      "name": "Menuiserie"
     },
     {
       "id": "4",
-      "name": "Restaurateur"
+      "name": "Restauration"
     },
     {
       "id": "5",
-      "name": "Agent Immobilier"
+      "name": "Immobilier"
     },
     {
       "id": "6",
@@ -47,38 +48,37 @@
     {
       "id": "12",
       "name": "Sport / Fitness"
+    },
+    {
+      "id": "872c",
+      "name": "Maçonnerie"
+    },
+    {
+      "id": "28ed",
+      "name": "Carrelage"
     }
   ],
   "users": [
     {
       "id": "1dj4",
       "name": "admin",
-      "email": "admin@admin.com"
-    },
-    {
-      "id": "c933",
-      "name": "Regina",
-      "email": "neffvalentinpro@gmail.com"
-    },
-    {
-      "id": "dc7f",
-      "name": "Calzone",
-      "email": "calzone@pizza.it"
-    },
-    {
-      "id": "bfc8",
-      "name": "Margherita",
-      "email": "neffvalentin67@gmail.com"
-    },
-    {
-      "id": "632d",
-      "name": "Calzone",
-      "email": "calzone@pizza.it"
+      "active": true,
+      "email": "admin@admin.com",
+      "role": "user"
     },
     {
       "id": "74dc",
+      "active": true,
+      "role": "user",
       "email": "valentin.neff@ccicampus.fr",
-      "name": "Tiago"
+      "name": "Test"
+    },
+    {
+      "id": "5898",
+      "active": true,
+      "role": "user",
+      "name": "piniouf",
+      "email": "projet_eclate@mail.fr"
     }
   ],
   "entreprises": [
@@ -307,29 +307,28 @@
       "updated_at": "2024-10-21"
     },
     {
-      "id": "19ed",
+      "id": "7211",
       "user_id": "74dc",
       "email": "valentin.neff@ccicampus.fr",
-      "name": "TechNeff",
+      "name": "Valentin Neff",
       "adress1": "4, rue principale",
       "city": "Mussig",
       "cp": "67600",
       "phone": "0624950494",
-      "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam ullamcorper, ex vitae scelerisque euismod, tortor risus pretium elit, a posuere ex nibh at purus. Fusce ut gravida nunc. Vivamus dignissim arcu et nulla blandit commodo. Cras finibus, nibh sed pretium euismod, ipsum felis placerat massa, id cursus felis eros a velit. Fusce bibendum elit sem, in malesuada elit molestie non. Nam fermentum sapien sit amet porttitor lobortis. Sed vestibulum enim tortor. Mauris accumsan elit euismod sem sagittis hendrerit. Sed fringilla, nibh vitae malesuada egestas, dolor leo rutrum augue, ac suscipit ipsum dolor et velit. Donec maximus, mauris vel consequat interdum, purus ante aliquet turpis, ac porttitor nisl tellus rhoncus ante. Phasellus molestie auctor ex vitae iaculis. Nullam sit amet tincidunt arcu.",
+      "description": "pour les piniouf",
       "categorie_id": "10"
     },
     {
-      "id": "3d4b",
-      "user_id": "74dc",
+      "id": "1eed",
+      "user_id": "5898",
       "email": "projet_eclate@mail.fr",
-      "name": "coucou",
+      "name": "Valentin Neff",
       "adress1": "4, rue principale",
       "city": "Mussig",
       "cp": "67600",
-      "phone": "0201030605",
-      "description": "    <p>Innovation, qualité et confiance depuis 20XX</p>\n    <div class=\"presentation\">\n      <h2>Qui sommes-nous ?</h2>\n      <p>\n        Fondée en 20XX, <strong>Nom de l’Entreprise</strong> est une société spécialisée dans \n        <em>votre domaine d’activité</em>. Nous accompagnons nos clients avec des solutions \n        sur mesure et une expertise reconnue dans le secteur.\n      </p>\n    </div>\n\n    <div class=\"mission\">\n      <h2>Notre mission</h2>\n      <p>\n        Offrir des produits et services innovants qui répondent aux besoins réels de nos \n        clients, tout en favorisant la durabilité, la performance et la satisfaction.\n      </p>\n    </div>\n\n    <div class=\"valeurs\">\n      <h2>Nos valeurs</h2>\n      <ul>\n        <li>Intégrité et transparence dans toutes nos actions</li>\n        <li>Innovation au service de la performance</li>\n        <li>Respect de nos collaborateurs et de nos clients</li>\n        <li>Engagement envers le développement durable</li>\n      </ul>\n    </div>",
-      "categorie_id": "10",
-      "image": {}
+      "phone": "0624950494",
+      "description": "n;nvjxjkvxudjhj",
+      "categorie_id": "4"
     }
   ],
   "galeries": [
@@ -364,16 +363,6 @@
       "path": "/perceuse.jpg"
     },
     {
-      "id": "9",
-      "entreprise_id": "11",
-      "path": "photo_garage1.jpg"
-    },
-    {
-      "id": "10",
-      "entreprise_id": "13",
-      "path": "photo_fitzone1.jpg"
-    },
-    {
       "id": "99ed",
       "entreprise_id": "1",
       "path": "/perceuse.jpg"
@@ -389,31 +378,6 @@
       "path": "/perceuse.jpg"
     },
     {
-      "id": "6c76",
-      "entreprise_id": "3d4b",
-      "path": "/perceuse.jpg"
-    },
-    {
-      "id": "f763",
-      "entreprise_id": "3d4b",
-      "path": "/perceuse.jpg"
-    },
-    {
-      "id": "2a4b",
-      "entreprise_id": "3d4b",
-      "path": "/perceuse.jpg"
-    },
-    {
-      "id": "6aa9",
-      "entreprise_id": "3d4b",
-      "path": "/perceuse.jpg"
-    },
-    {
-      "id": "828f",
-      "entreprise_id": "3d4b",
-      "path": "/perceuse.jpg"
-    },
-    {
       "id": "9472",
       "entreprise_id": "3d4b",
       "path": "/perceuse.jpg"
@@ -426,6 +390,46 @@
     {
       "id": "3e11",
       "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "17dd",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "dc21",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "1fda",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "3e5c",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "45ca",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "111e",
+      "entreprise_id": "0656",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "7b5f",
+      "entreprise_id": "13c7",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "9376",
+      "entreprise_id": "7211",
       "path": "/perceuse.jpg"
     }
   ],
@@ -591,45 +595,6 @@
       "id": "d929"
     },
     {
-      "name": "Rendez-vous immobilier",
-      "entreprise_id": "19ed",
-      "inputs": [
-        {
-          "id": "9eb2",
-          "type": "radio",
-          "name": "Essai",
-          "required": "true",
-          "options": [
-            {
-              "id": "5760",
-              "input_id": "9eb2",
-              "value": "achat"
-            },
-            {
-              "id": "7f66",
-              "input_id": "9eb2",
-              "value": "vente"
-            },
-            {
-              "id": "82dc",
-              "input_id": "9eb2",
-              "value": "location"
-            }
-          ],
-          "formulaire_id": "a5dc"
-        },
-        {
-          "id": "00c7",
-          "type": "date",
-          "name": "Jour souhaité du rendez-vous",
-          "required": "true",
-          "options": false,
-          "formulaire_id": "a5dc"
-        }
-      ],
-      "id": "a5dc"
-    },
-    {
       "name": "Peinture murale",
       "entreprise_id": "19ed",
       "inputs": [
@@ -643,6 +608,67 @@
         }
       ],
       "id": "763e"
+    },
+    {
+      "name": "Informations complémentaires",
+      "entreprise_id": "19ed",
+      "inputs": [
+        {
+          "id": "d9fd",
+          "type": "number",
+          "name": "enocnoé",
+          "required": "true",
+          "options": false,
+          "formulaire_id": "8b9d"
+        }
+      ],
+      "id": "8b9d"
+    },
+    {
+      "name": "Nouveau questionnaire",
+      "entreprise_id": "0656",
+      "inputs": [
+        {
+          "id": "cd8b",
+          "type": "text",
+          "name": "gfdhf",
+          "required": "true",
+          "options": false,
+          "formulaire_id": "eb6f"
+        },
+        {
+          "id": "00c9",
+          "type": "text",
+          "name": "ffhfdxh",
+          "required": "true",
+          "options": false,
+          "formulaire_id": "eb6f"
+        }
+      ],
+      "id": "eb6f"
+    },
+    {
+      "name": "Nouveau questionnaire",
+      "entreprise_id": "7211",
+      "inputs": [
+        {
+          "id": "3c16",
+          "type": "text",
+          "name": "plouf",
+          "required": "true",
+          "options": false,
+          "formulaire_id": "43cb"
+        },
+        {
+          "id": "4991",
+          "type": "tel",
+          "name": "banane",
+          "required": "true",
+          "options": false,
+          "formulaire_id": "43cb"
+        }
+      ],
+      "id": "43cb"
     }
   ],
   "inputs": [
@@ -947,6 +973,62 @@
       "required": "true",
       "options": false,
       "formulaire_id": "d929"
+    },
+    {
+      "id": "d9fd",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "8b9d"
+    },
+    {
+      "id": "522e",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "b838"
+    },
+    {
+      "id": "cd8b",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "eb6f"
+    },
+    {
+      "id": "00c9",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "eb6f"
+    },
+    {
+      "id": "3c16",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "43cb"
+    },
+    {
+      "id": "4991",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "43cb"
+    },
+    {
+      "id": "ce7d",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "de36"
     }
   ],
   "options": [
@@ -1174,7 +1256,67 @@
       "id": "6e3a",
       "input_id": "41af",
       "value": "faire les courses"
+    },
+    {
+      "id": "fcd4",
+      "input_id": "dd24",
+      "value": "location"
+    },
+    {
+      "id": "ccce",
+      "input_id": "dd24",
+      "value": "vente"
+    },
+    {
+      "id": "842c",
+      "input_id": "dd24",
+      "value": "achat"
     }
   ],
-  "submissions": []
+  "soumissions": [
+    {
+      "id": "ac13",
+      "formulaire_id": "d929",
+      "submitted_at": "2025-11-14T10:41:06.220Z",
+      "inputs": {
+        "Votre-adresse-mail-afin-de-pouvoir-être-recontacté-par-le-professionnel": "",
+        "nom-du-projet_1c47": "vcbxbj",
+        "Type-de-réalisation_952c": "Site vitrine",
+        "Créneau-de-rencontre-souhaité_9c23": "2025-11-06T15:40",
+        "test_18c2": "faire les courses",
+        "jdvbgjksbvkjdb<k_41af": [
+          "faire les courses"
+        ],
+        "couleur_9751": "#f90101",
+        "default_undefined": "neffvalentin@gmail.com"
+      }
+    },
+    {
+      "id": "dd38",
+      "formulaire_id": "763e",
+      "submitted_at": "2025-11-14T10:42:21.464Z",
+      "inputs": {
+        "Votre-adresse-mail-afin-de-pouvoir-être-recontacté-par-le-professionnel": "neffvalentin67@gmail.com",
+        "Teinte-de-peinture_1cc3": "#fd2b2b"
+      }
+    },
+    {
+      "id": "f6db",
+      "formulaire_id": "8b9d",
+      "submitted_at": "2025-11-14T10:44:52.898Z",
+      "inputs": {
+        "Votre-adresse-mail-afin-de-pouvoir-être-recontacté-par-le-professionnel": "neffvalentin67@gmail.com",
+        "enocnoé_d9fd": "14"
+      }
+    },
+    {
+      "id": "40a4",
+      "formulaire_id": "8b9d",
+      "submitted_at": "2025-11-14T10:45:16.811Z",
+      "inputs": {
+        "Votre-adresse-mail-afin-de-pouvoir-être-recontacté-par-le-professionnel": "valentin.neff@ccicampus.fr",
+        "enocnoé_d9fd": "8"
+      }
+    }
+  ]
 }

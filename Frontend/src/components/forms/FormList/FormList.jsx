@@ -16,10 +16,10 @@ const FormList = ({ forms = [] }) => {
             {forms.map((form) => (
               <NavLink to={"/questionnaire/" + form.id}>
                 <img src={answerForm} />
-                <span>
-                  {form.name}
+                <div>
+                  <span>{form.name}</span>
                   <ArrowRight />
-                </span>
+                </div>
               </NavLink>
             ))}
           </div>

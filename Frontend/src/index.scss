@@ -31,6 +31,7 @@ main {
   background-color: var(--light);
   min-height: 100vh;
   padding: 2rem auto;
+  width: 100%;
 }
 
 h1{
@@ -127,6 +128,16 @@ button{
   display: flex;
 }
 
+.items-center{
+  align-items: center;
+}
+
+@for $i from 0 to 10 {
+  .gap-#{$i}{
+    gap: #{$i}rem;
+  }
+}
+
 .mx-auto{
   margin: 0 auto;
 }
@@ -136,8 +147,36 @@ button{
 }
 
 .Toastify{
-  background-color: green;
   height: 0;
   width: 0;
   padding: 0;
+}
+
+table {
+  width: 100%;
+}
+
+thead{
+  background: var(--secondary);
+}
+
+thead th, td{
+  padding: 1rem;
+}
+
+td {
+  text-align: center;
+}
+
+tbody tr:nth-of-type(2n+1){
+  background-color: white;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
