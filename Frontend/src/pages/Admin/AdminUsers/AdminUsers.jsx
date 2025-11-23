@@ -1,6 +1,6 @@
-import {Search} from "lucide-react";
+import { Search } from "lucide-react";
 import classes from "./AdminUsers.module.css";
-import {useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import useAPI from "../../../hooks/useAPI";
 import DeleteConfirmation from "../../../components/modales/DeleteConfirmation/DeleteConfirmation.jsx";
 import UserList from "../../../components/listes/users/EntiteList.jsx";
@@ -10,7 +10,7 @@ const AdminUsers = () => {
     const [search, setSearch] = useState("");
     const [selectedUser, setSelectedUser] = useState(false);
 
-    const {query: callAPI} = useAPI();
+    const { query: callAPI } = useAPI();
 
     const handleSearch = (e) => {
         setSearch(e.target.value);
@@ -31,6 +31,24 @@ const AdminUsers = () => {
                     ? {
                         ...u,
                         active: !u.active,
+                    }
+                    : u;
+            });
+            setUsers(copy);
+        }
+    };
+
+    const toggleRole = async (user) => {
+        const newRole = user.role === "admin" ? "user" : "admin";
+        const response = await callAPI("/users/" + user.id, "PATCH", {
+            role: newRole,
+        });
+        if (response) {
+            const copy = [...users].map((u) => {
+                return u.id === response.id
+                    ? {
+                        ...u,
+                        role: newRole,
                     }
                     : u;
             });
@@ -79,7 +97,7 @@ const AdminUsers = () => {
                 e.preventDefault()
             }}>
                 <div className={classes["form-group"]}>
-                    <Search/>
+                    <Search />
                     <input
                         type="search"
                         name="filter"
@@ -92,7 +110,7 @@ const AdminUsers = () => {
             {
                 users &&
                 <UserList entites={filterUsers()} onBan={toggleBan}
-                          onDelete={confirmDeletion}/>
+                    onDelete={confirmDeletion} onRoleChange={toggleRole} />
             }
         </main>
     );

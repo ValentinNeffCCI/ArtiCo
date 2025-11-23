@@ -1,4 +1,4 @@
-import getHeaders from "../utils/getHeaders.jsx";
+import getHeaders from "../utils/getHeaders.js";
 
 const useAPI = () => {
   const baseURL = import.meta.env.VITE_API_URL;
