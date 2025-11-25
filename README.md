@@ -48,3 +48,5 @@ npm run dev
 - **Toastify** : Librairie qui va nous permettre de générer des alertes sous forme de toasts
 - **react-router-dom** : Librairie qui va nous permettre de gérer le routing de l'application
 - **Lucide** : Librairie qui va nous permettre d'avoir des icônes
+- **json-server** : Librairie qui va nous permettre de simuler un backend
+- **sass** : Librairie qui va nous permettre de faciliter la génération du style de l'application
