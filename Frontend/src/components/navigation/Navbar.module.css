@@ -13,9 +13,9 @@
     text-decoration: none;
     padding: 1rem 5%;
     width: 80%;
-    margin-left: 10%;
-    border-bottom: 2px solid var(--primary);
     transition: color .2s ease-in;
+    font-size: 1rem;
+    font-family: "Montserrat-bold", sans-serif
 }
 
 .navbar a:hover {
@@ -39,7 +39,7 @@
         font-weight: 500;
         width: fit-content;
         margin-left: 0;
-        width: 30%;
+        width: 25%;
         padding: 1rem 0;
     }
 }

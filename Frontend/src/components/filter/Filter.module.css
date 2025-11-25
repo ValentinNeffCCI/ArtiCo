@@ -1,4 +1,4 @@
-.filter{
+.filter {
     margin: 0 auto;
     width: 85%;
     display: flex;
@@ -6,15 +6,16 @@
     align-items: center;
     background-color: white;
     border-radius: 2rem;
-    padding: 3rem 1.5rem;
+    padding: 2rem 1.5rem;
 }
 
-.filter input[name="name"]{
-    width: 70%;
+.filter input[name="name"] {
+    width: 75%;
     margin: 0 auto;
 }
 
-.filter input, .filter select {
+.filter input,
+.filter select {
     border: none;
     background-color: white;
     border-bottom: 1px solid var(--primary);
@@ -24,35 +25,46 @@
     transition: all .2s ease-in;
 }
 
-.filter input:focus{
-    border-bottom-width: 3px;
+.filter input:focus {
     border-color: var(--secondary);
 }
 
-.filter label{
+.filter label {
     font-size: .8em;
     font-weight: 500;
-    margin-bottom: .8rem;
+    margin-bottom: .5rem;
 }
 
-.filter select{
-    border-radius: .5rem;
-    border: 1px solid #9d9d9d;
+.filter select {
+    border-radius: 0;
+    border: none;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-left: 0;
+    cursor: pointer;
+    border-bottom: 1px solid var(--dark);
 }
 
-.filter input::placeholder{
-    color: var(--primary);
-}
-
-.filter > div {
+.filter>div {
     display: flex;
     margin: 2rem;
-    justify-content: space-evenly;
-    width: 100%;
+    justify-content: space-between;
+    width: 75%;
+    min-width: 600px;
     align-items: end;
 }
 
-.input_container{
+.input_container {
     display: flex;
     flex-direction: column;
+}
+
+.filter>div>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 40%;
+    min-width: 400px;
 }

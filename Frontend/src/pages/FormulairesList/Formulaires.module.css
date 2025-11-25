@@ -1,0 +1,116 @@
+.title {
+    font-size: 2em;
+    width: 80%;
+    padding: 1rem;
+    margin: 0 auto;
+}
+
+.no-content{
+    width: 75%;
+    text-align: center;
+    margin: 1rem auto;
+}
+
+.no-content{
+    font-weight: 500;
+}
+
+.formulaires{
+    padding: 2rem 10%;
+    min-height: auto;
+}
+
+.formList{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 2rem 0;
+}
+
+.form-display > div {
+    width: 70%;
+}
+
+.form {
+    padding: 1rem;
+    border: 2px solid var(--primary);
+    border-radius: .5rem;
+    height: fit-content;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.formList h2{
+    font-size: 1rem;
+}
+
+.form-buttons{
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.form-buttons a, .form-buttons button{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    font-weight: 400;
+    margin: 0;
+    padding: .5rem;
+    justify-content: center;
+    transition: background .2s ease;
+    border-radius: 0;
+}
+
+.form-buttons a:hover, .form-buttons button:hover{
+    font-weight: 600;
+}
+
+.form-buttons a:hover{
+    background-color: var(--secondary);
+}
+
+.form-buttons button:hover{
+    background-color: red;
+    color: white;
+}
+
+.form-buttons a{
+    border-right: 1px solid #ccc;
+}
+
+.form-display{
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.form-display figure{
+    width: 30%;
+}
+
+.form-display img{
+    width: 100%;
+}
+.goBack {
+    display: flex;
+    margin: 0;
+    gap: 1rem;
+    align-items: center;
+}
+
+.goBack:hover{
+    color: var(--secondary);
+}
+
+.goBack svg{
+    transition: transform .3s ease;
+}
+
+.goBack:hover svg{
+    transform: translateX(-1rem);
+}

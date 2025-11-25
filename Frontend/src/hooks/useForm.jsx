@@ -1,16 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAPI from "./useAPI";
-import { data } from "react-router-dom";
 
-const useForm = (url_suffix = "/", method = "GET") => {
-  const [datas, setDatas] = useState(false);
+const useForm = (url_suffix = "/", method = "GET", defaultValue = {}) => {
+  const [datas, setDatas] = useState(defaultValue);
 
   const { query } = useAPI();
 
   const handleChange = (e) => {
+    const { name, type, value, files, checked } = e.target;
+
+    let valueToStore = value;
+
+    if (import.meta.env.VITE_ENV_MODE == "demo" && type == "password") {
+      return;
+    }
+
+    switch (type) {
+      case "file":
+        valueToStore = files[0];
+        break;
+      case "checkbox":
+        if (checked) {
+          valueToStore = Array.isArray(datas[name])
+            ? [...datas[name], valueToStore]
+            : [valueToStore];
+        } else {
+          valueToStore = Array.isArray(datas[name])
+            ? datas[name].filter((datas) => datas != value)
+            : [];
+        }
+        break;
+      default:
+        valueToStore = valueToStore;
+    }
+
     setDatas((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: valueToStore,
     }));
   };
 
@@ -26,18 +52,17 @@ const useForm = (url_suffix = "/", method = "GET") => {
   const simulateRegister = (object) => {
     return {
       ...object,
-      role: object.email.includes('admin') ? "admin" : "user",
+      role: object.email.includes("admin") ? "admin" : "user",
       active: true,
       reset_token: "123456",
-      image: "/profil/user.png"
-    }
-  }
+    };
+  };
 
   return {
     prepare: submit,
     changeListener: handleChange,
     content: datas,
-    simulateUserConnection: simulateRegister
+    simulateUserConnection: simulateRegister,
   };
 };
 

@@ -8,6 +8,7 @@ import classes from "./Login.module.css";
 import { LinkButton } from "../../components/buttons/Link/LinkButton";
 import { ArrowLeft } from "lucide-react";
 import { CustomButton } from "../../components/buttons/Custom/CustomButton";
+import { ToastContainer } from "react-toastify";
 
 const Login = () => {
   const { user } = useAuth();
@@ -45,7 +46,7 @@ const Login = () => {
             src={Soudure}
             alt="Photo En Niveaux De Gris De L'homme Tenant Des Outils"
             style={{
-              height: "100%",
+              height: "95%",
             }}
           />
           <figcaption
@@ -70,12 +71,15 @@ const Login = () => {
             fontWeight: 600,
             position: window.innerWidth < 768 ? "absolute" : "static",
             top: "1rem",
-            color: window.innerWidth < 768 ? "white" : " "
+            color: window.innerWidth < 768 ? "white" : " ",
+            width: "fit-content",
+            alignSelf: "start"
           }}
         >
           <ArrowLeft />
           <span>Revenir à l'accueil</span>
         </LinkButton>
+        
         {isConnecting ? (
           <LoginForm>
             <CustomButton

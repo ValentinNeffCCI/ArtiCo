@@ -31,6 +31,31 @@ main {
   background-color: var(--light);
   min-height: 100vh;
   padding: 2rem auto;
+  width: 100%;
+}
+
+h1{
+  font-size: 2rem;
+  font-family: 'Itim', 'Dangrek', sans-serif;
+  width: 80%;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+ul li{
+  list-style-type: none;
+}
+
+p{
+  margin: 0;
+}
+
+textarea{
+  resize: vertical;
+}
+
+select {
+  background-color: white;
 }
 
 .dangrek {
@@ -77,4 +102,82 @@ button{
   .hidden-mobile {
     display: block;
   }
+}
+
+@for $i from 0 to 10 {
+  .p-#{$i}{
+    padding: #{$i}rem
+  }
+}
+
+@for $i from 0 to 100 {
+  .w-#{$i}{
+    width: #{$i}+'%';
+  }
+}
+
+.text-center{
+  text-align: center;
+}
+
+.text-left{
+  text-align: left;
+}
+
+.flex{
+  display: flex;
+}
+
+.items-center{
+  align-items: center;
+}
+
+@for $i from 0 to 10 {
+  .gap-#{$i}{
+    gap: #{$i}rem;
+  }
+}
+
+.mx-auto{
+  margin: 0 auto;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.Toastify{
+  height: 0;
+  width: 0;
+  padding: 0;
+  z-index: 1000000000;
+}
+
+table {
+  width: 100%;
+}
+
+thead{
+  background: var(--secondary);
+}
+
+thead th, td{
+  padding: 1rem;
+}
+
+td {
+  text-align: center;
+}
+
+tbody tr:nth-of-type(2n+1){
+  background-color: white;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

@@ -48,7 +48,6 @@
 
     .form>div {
         width: 70%;
-        aspect-ratio: 4/5;
         background-color: var(--accent);
         border-radius: 2rem;
     }

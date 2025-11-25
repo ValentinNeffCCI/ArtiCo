@@ -1,0 +1,62 @@
+---
+config:
+  theme: redux
+---
+flowchart LR
+    A(["Start"]) --> Accueil["Accueil"]
+    Accueil --> Rechercher["Rechercher"] & Connexion["Connexion"]
+    Rechercher --> EntrepriseProfil@{ label: "Page de l'entreprise" }
+    EntrepriseProfil --> AnswerFormulaire["Répondre à un questionnaire"]
+    AnswerFormulaire --> EntrepriseProfil
+    Connexion --> B{"Role: admin ?"}
+    B -- Oui --> Admin["Dashboard Admin"]
+    B -- Non --> Profil["Profil"]
+    Admin --> AdminCategories["Catégories"] & AdminUsers["Utilisateurs"] & AdminEntreprises["Entreprises"]
+    AdminCategories --> CrudCategories["Ajouter/Modifier/Supprimer"]
+    AdminUsers --> BanUsers["Bannir/Supprimer utilisateur"]
+    AdminEntreprises --> DeleteEntreprises["Supprimer entreprise"]
+    Profil--->SectionProfil
+
+    EntrepriseProfil@{ shape: rect}
+    DeleteEntreprise@{ shape: diamond}
+
+    subgraph SectionProfil
+    direction LR
+    Start2(["Start"]) --> ProfilSub["Profil"]
+    ListFormulaires --> CreateForms["Créer un formulaire"] & UpdateForms["Mettre à jour un formulaire"] & DeleteForms["Supprimer un formulaire"]
+    CreateForms --> ListFormulaires
+    UpdateForms --> ListFormulaires
+    DeleteForms --> ListFormulaires
+    ProfilSub ---> CreateEntreprise["Ajouter Entreprise"] & UpdateEntreprise["Modifier Entreprise"] & ListFormulaires["Lister les questionnaires"]
+    CreateEntreprise ---> ProfilSub
+    UpdateEntreprise --> ProfilSub & DeleteEntreprise@{ label: "Supprimer l'entreprise ?" }
+    DeleteEntreprise -- Oui --> ProfilSub
+    end
+     ProfilSub:::Page
+     CreateEntreprise:::Page
+     UpdateEntreprise:::Page
+     ListFormulaires:::Page
+     CreateForms:::Page
+     UpdateForms:::Page
+     DeleteForms:::Page
+    classDef Page fill:#2962FF, color:#FFFFFF
+    classDef Start fill:#D50000,color:#FFFFFF
+    classDef Choice fill:#FFD600
+    A:::Start
+    Accueil:::Page
+    Rechercher:::Page
+    Connexion:::Page
+    EntrepriseProfil:::Page
+    AnswerFormulaire:::Page
+    B:::Choice
+    Admin:::Page
+    Profil:::Page
+    AdminCategories:::Page
+    AdminUsers:::Page
+    AdminEntreprises:::Page
+    CrudCategories:::Page
+    BanUsers:::Page
+    DeleteEntreprises:::Page
+    Start2:::Start
+    ProfilSub:::Page
+    DeleteEntreprise:::Choice

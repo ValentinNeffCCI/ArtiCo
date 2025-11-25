@@ -1,4 +1,4 @@
-.attach{
+.attach {
     background-color: var(--secondary);
     color: var(--dark);
     display: flex;
@@ -6,33 +6,34 @@
     align-items: center;
 }
 
-.attach section{
+.attach section {
     padding: 3rem 10%;
 }
 
 .attach section h1 {
-    font-family: 'Itim';
+    font-family: 'Itim', sans-serif;
     font-size: 3.2rem;
 }
 
-.attach .subtitles{
+.attach .subtitles {
     margin: 3rem 0;
 }
+
 .attach .subtitles hr {
     border-color: var(--dark);
 }
 
-.attach .subtitles p{
+.attach .subtitles p {
     margin: 1rem 0;
     font-size: 1.1rem;
 }
 
-.attach .subtitles .links{
+.attach .subtitles .links {
     margin: 3rem auto;
 }
 
-@media screen and (min-width: 768px){
-    .attach{
+@media screen and (min-width: 768px) {
+    .attach {
         flex-direction: row;
         padding: 0 5%;
         height: fit-content;
@@ -51,9 +52,16 @@
 
     .attach section h1 {
         width: 50%;
+        margin: 0;
+        padding: 0;
+        font-size: 2.5rem;
     }
 
-    .attach .subtitles{
+    .attach .subtitles p {
+        margin: .3rem;
+    }
+
+    .attach .subtitles {
         font-weight: 600;
     }
 
@@ -62,6 +70,6 @@
     }
 }
 
-.attach figure{
+.attach figure {
     align-self: end;
 }

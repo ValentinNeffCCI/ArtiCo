@@ -2,23 +2,24 @@
   "categories": [
     {
       "id": "1",
-      "name": "Plombier"
+      "name": "Plomberie",
+      "": "Plomberie"
     },
     {
       "id": "2",
-      "name": "Electricien"
+      "name": "Electricite"
     },
     {
       "id": "3",
-      "name": "Menuisier"
+      "name": "Menuiserie"
     },
     {
       "id": "4",
-      "name": "Restaurateur"
+      "name": "Restauration"
     },
     {
       "id": "5",
-      "name": "Agent Immobilier"
+      "name": "Immobilier"
     },
     {
       "id": "6",
@@ -47,77 +48,42 @@
     {
       "id": "12",
       "name": "Sport / Fitness"
+    },
+    {
+      "id": "872c",
+      "name": "Maçonnerie"
+    },
+    {
+      "id": "28ed",
+      "name": "Carrelage"
     }
   ],
   "users": [
     {
       "id": "1dj4",
       "name": "admin",
+      "active": true,
       "email": "admin@admin.com",
-      "password": "1234"
-    },
-    {
-      "id": "c933",
-      "name": "Regina",
-      "email": "neffvalentinpro@gmail.com",
-      "password": "pizza"
-    },
-    {
-      "id": "dc7f",
-      "name": "Calzone",
-      "email": "calzone@pizza.it",
-      "password": "hola"
-    },
-    {
-      "id": "c65e",
-      "name": "Margherita",
-      "email": "calzone@pizza.it",
-      "password": "sfdfgs"
-    },
-    {
-      "id": "bfc8",
-      "name": "Margherita",
-      "email": "neffvalentin67@gmail.com",
-      "password": "dsxg"
-    },
-    {
-      "id": "632d",
-      "name": "Calzone",
-      "email": "calzone@pizza.it",
-      "password": "gvdfkugvuk"
-    },
-    {
-      "id": "8ecc",
-      "email": "neffvalentin67@gmail.com",
-      "name": "coucou",
-      "password": "xvxcvdv"
+      "role": "admin"
     },
     {
       "id": "74dc",
-      "name": "Margherita",
+      "active": true,
+      "role": "user",
       "email": "valentin.neff@ccicampus.fr",
-      "password": "dgxgxdg"
+      "name": "Test"
+    },
+    {
+      "id": "5898",
+      "active": true,
+      "role": "user",
+      "name": "piniouf",
+      "email": "projet_eclate@mail.fr"
     }
   ],
   "entreprises": [
     {
-      "id": 1,
-      "user_id": 101,
-      "name": "Boulangerie Artisanale Le Pétrin d'Or",
-      "adress1": "12 Rue de la République",
-      "adress2": "",
-      "city": "Strasbourg",
-      "cp": "67000",
-      "phone": "03 88 32 45 67",
-      "image": null,
-      "email": "contact@petrinor.fr",
-      "description": "Boulangerie artisanale traditionnelle proposant pains bio, viennoiseries maison et pâtisseries depuis 1985.",
-      "categorie_id": 9,
-      "created_at": "2024-01-15",
-      "updated_at": "2024-10-20"
-    },
-    {
-      "id": 2,
+      "id": "2",
       "user_id": 102,
       "name": "Pâtisserie La Douceur",
       "adress1": "28 Avenue de la Liberté",
@@ -133,7 +99,7 @@
       "updated_at": "2024-10-19"
     },
     {
-      "id": 3,
+      "id": "3",
       "user_id": 103,
       "name": "Boulangerie Bio Au Bon Pain",
       "adress1": "5 Rue du Faubourg",
@@ -149,7 +115,7 @@
       "updated_at": "2024-10-22"
     },
     {
-      "id": 4,
+      "id": "4",
       "user_id": 104,
       "name": "TechVision Solutions",
       "adress1": "45 Avenue des Vosges",
@@ -165,7 +131,7 @@
       "updated_at": "2024-10-18"
     },
     {
-      "id": 5,
+      "id": "5",
       "user_id": 105,
       "name": "Digital Innov",
       "adress1": "12 Rue de la Tech",
@@ -181,7 +147,7 @@
       "updated_at": "2024-10-21"
     },
     {
-      "id": 6,
+      "id": "6",
       "user_id": 106,
       "name": "WebForce Alsace",
       "adress1": "89 Boulevard de Lyon",
@@ -197,7 +163,7 @@
       "updated_at": "2024-10-23"
     },
     {
-      "id": 7,
+      "id": "7",
       "user_id": 107,
       "name": "CodeLab Studio",
       "adress1": "33 Quai Kléber",
@@ -213,7 +179,7 @@
       "updated_at": "2024-10-17"
     },
     {
-      "id": 8,
+      "id": "8",
       "user_id": 108,
       "name": "Restaurant Le Gourmet Alsacien",
       "adress1": "23 Rue des Tonneliers",
@@ -229,7 +195,7 @@
       "updated_at": "2024-10-22"
     },
     {
-      "id": 9,
+      "id": "9",
       "user_id": 109,
       "name": "Bistrot du Marché",
       "adress1": "8 Place du Marché",
@@ -245,7 +211,7 @@
       "updated_at": "2024-10-20"
     },
     {
-      "id": 10,
+      "id": "10",
       "user_id": 110,
       "name": "Pizzeria Bella Vita",
       "adress1": "45 Rue de Zurich",
@@ -261,7 +227,7 @@
       "updated_at": "2024-10-24"
     },
     {
-      "id": 11,
+      "id": "11",
       "user_id": 111,
       "name": "Garage Auto Prestige",
       "adress1": "56 Route de Bischwiller",
@@ -277,7 +243,7 @@
       "updated_at": "2024-10-15"
     },
     {
-      "id": 12,
+      "id": "12",
       "user_id": 112,
       "name": "Mécanique Express",
       "adress1": "12 Rue de l'Industrie",
@@ -293,7 +259,7 @@
       "updated_at": "2024-10-18"
     },
     {
-      "id": 13,
+      "id": "13",
       "user_id": 113,
       "name": "Salle de Sport FitZone Premium",
       "adress1": "88 Route du Rhin",
@@ -309,7 +275,7 @@
       "updated_at": "2024-10-24"
     },
     {
-      "id": 14,
+      "id": "14",
       "user_id": 114,
       "name": "CrossFit Alsace",
       "adress1": "34 Rue du Sport",
@@ -325,7 +291,7 @@
       "updated_at": "2024-10-19"
     },
     {
-      "id": 15,
+      "id": "15",
       "user_id": 115,
       "name": "Yoga & Zen Studio",
       "adress1": "17 Rue de la Paix",
@@ -339,6 +305,305 @@
       "categorie_id": 12,
       "created_at": "2023-12-01",
       "updated_at": "2024-10-21"
+    },
+    {
+      "id": "7211",
+      "user_id": "74dc",
+      "email": "valentin.neff@ccicampus.fr",
+      "name": "Valentin Neff",
+      "adress1": "4, rue principale",
+      "city": "Mussig",
+      "cp": "67600",
+      "phone": "0624950494",
+      "description": "pour les piniouf",
+      "categorie_id": "10"
+    },
+    {
+      "id": "1eed",
+      "user_id": "5898",
+      "email": "projet_eclate@mail.fr",
+      "name": "Valentin Neff",
+      "adress1": "4, rue principale",
+      "city": "Mussig",
+      "cp": "67600",
+      "phone": "0624950494",
+      "description": "n;nvjxjkvxudjhj",
+      "categorie_id": "4"
+    },
+    {
+      "id": "d5e3",
+      "user_id": "1dj4",
+      "email": "admin@admin.com",
+      "name": "Valentin Techno",
+      "adress1": "4, rue principale",
+      "city": "Mussig",
+      "cp": "67600",
+      "phone": "0624950494",
+      "description": "Entreprise très technologique promis",
+      "categorie_id": "10",
+      "image": {}
+    }
+  ],
+  "galeries": [
+    {
+      "id": "3",
+      "entreprise_id": "2",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "4",
+      "entreprise_id": "3",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "5",
+      "entreprise_id": "4",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "6",
+      "entreprise_id": "5",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "7",
+      "entreprise_id": "8",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "8",
+      "entreprise_id": "9",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "99ed",
+      "entreprise_id": "1",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "61fb",
+      "entreprise_id": "1",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "9472",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "16c7",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "3e11",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "17dd",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "dc21",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "1fda",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "3e5c",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "45ca",
+      "entreprise_id": "3d4b",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "111e",
+      "entreprise_id": "0656",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "7b5f",
+      "entreprise_id": "13c7",
+      "path": "/perceuse.jpg"
+    },
+    {
+      "id": "9376",
+      "entreprise_id": "7211",
+      "path": "/perceuse.jpg"
+    }
+  ],
+  "formulaires": [
+    {
+      "name": "Nouveau questionnaire",
+      "entreprise_id": "7211",
+      "inputs": [
+        {
+          "id": "4ef7",
+          "type": "color",
+          "name": "test",
+          "required": "true",
+          "options": false,
+          "formulaire_id": "8888"
+        },
+        {
+          "id": "6111",
+          "type": "email",
+          "name": "autre test",
+          "required": "true",
+          "options": false,
+          "formulaire_id": "8888"
+        }
+      ],
+      "id": "8888"
+    },
+    {
+      "name": "Mon petit questionnaire",
+      "entreprise_id": "d5e3",
+      "inputs": [
+        {
+          "id": "75b1",
+          "type": "select",
+          "name": "Test",
+          "required": "true",
+          "options": [
+            {
+              "id": "b42a",
+              "input_id": "75b1",
+              "value": "ranger la chambre"
+            },
+            {
+              "id": "b395",
+              "input_id": "75b1",
+              "value": "faire les courses"
+            }
+          ],
+          "formulaire_id": "7d6a"
+        }
+      ],
+      "id": "7d6a"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "4ef7",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "8888"
+    },
+    {
+      "id": "6111",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "8888"
+    },
+    {
+      "id": "75b1",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "7d6a"
+    }
+  ],
+  "options": [
+    {
+      "id": "b42a",
+      "input_id": "75b1",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "b395",
+      "input_id": "75b1",
+      "value": "faire les courses"
+    }
+  ],
+  "soumissions": [
+    {
+      "id": "ac13",
+      "formulaire_id": "d929",
+      "submitted_at": "2025-11-14T10:41:06.220Z",
+      "inputs": {
+        "Votre-adresse-mail-afin-de-pouvoir-être-recontacté-par-le-professionnel": "",
+        "nom-du-projet_1c47": "vcbxbj",
+        "Type-de-réalisation_952c": "Site vitrine",
+        "Créneau-de-rencontre-souhaité_9c23": "2025-11-06T15:40",
+        "test_18c2": "faire les courses",
+        "jdvbgjksbvkjdb<k_41af": [
+          "faire les courses"
+        ],
+        "couleur_9751": "#f90101",
+        "default_undefined": "neffvalentin@gmail.com"
+      }
+    },
+    {
+      "id": "dd38",
+      "formulaire_id": "763e",
+      "submitted_at": "2025-11-14T10:42:21.464Z",
+      "inputs": {
+        "Votre-adresse-mail-afin-de-pouvoir-être-recontacté-par-le-professionnel": "neffvalentin67@gmail.com",
+        "Teinte-de-peinture_1cc3": "#fd2b2b"
+      }
+    },
+    {
+      "id": "f6db",
+      "formulaire_id": "8b9d",
+      "submitted_at": "2025-11-14T10:44:52.898Z",
+      "inputs": {
+        "Votre-adresse-mail-afin-de-pouvoir-être-recontacté-par-le-professionnel": "neffvalentin67@gmail.com",
+        "enocnoé_d9fd": "14"
+      }
+    },
+    {
+      "id": "40a4",
+      "formulaire_id": "8b9d",
+      "submitted_at": "2025-11-14T10:45:16.811Z",
+      "inputs": {
+        "Votre-adresse-mail-afin-de-pouvoir-être-recontacté-par-le-professionnel": "valentin.neff@ccicampus.fr",
+        "enocnoé_d9fd": "8"
+      }
+    },
+    {
+      "id": "d296",
+      "formulaire_id": "8888",
+      "submitted_at": "2025-11-21T12:37:44.482Z",
+      "inputs": {
+        "Votre-adresse-mail-afin-de-pouvoir-être-recontacté-par-le-professionnel": "valentin.neff@ccicampus.fr",
+        "test_4ef7": "#a62b2b",
+        "autre test": "val@val.val"
+      }
+    },
+    {
+      "id": "1e3d",
+      "formulaire_id": "8888",
+      "submitted_at": "2025-11-21T12:38:41.839Z",
+      "inputs": {
+        "Votre-adresse-mail-afin-de-pouvoir-être-recontacté-par-le-professionnel": "valentin.neff@ccicampus.fr",
+        "test_4ef7": "#49d473",
+        "autre test": "gjghjghghj@ghgjh.fhfg"
+      }
+    },
+    {
+      "id": "3532",
+      "formulaire_id": "8888",
+      "submitted_at": "2025-11-21T12:40:13.387Z",
+      "inputs": {
+        "Votre-adresse-mail-afin-de-pouvoir-être-recontacté-par-le-professionnel": "valentin.neff@ccicampus.fr",
+        "test_4ef7": "#d47408",
+        "autre test": "val@val.val"
+      }
     }
   ]
 }

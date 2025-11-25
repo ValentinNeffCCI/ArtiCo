@@ -1,0 +1,15 @@
+.input{
+    margin: 1.5rem 0;
+}
+
+.select{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.file{
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}

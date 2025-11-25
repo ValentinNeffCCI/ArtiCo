@@ -10,16 +10,24 @@ export const AdminSidebar = () => {
 
   const links = [
     {
+      id: 1,
       path: "/admin",
       label: "Dashboard",
     },
     {
-      path: "/users",
+      id: 2,
+      path: "/admin/users",
       label: "Utilisateurs",
     },
     {
-      path: "/entreprises",
+      id: 3,
+      path: "/admin/entreprises",
       label: "Entreprises",
+    },
+    {
+      id: 4,
+      path: "/admin/categories",
+      label: "Categories",
     },
   ];
 
@@ -27,7 +35,7 @@ export const AdminSidebar = () => {
     <aside className={styles["sidebar"]}>
       <div>
         <NavLink
-          to={"/admin"}
+          to={"/"}
           style={{
             display: "flex",
             justifyContent: "center",

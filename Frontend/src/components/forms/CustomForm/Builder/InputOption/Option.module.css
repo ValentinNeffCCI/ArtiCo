@@ -1,0 +1,25 @@
+.option{
+    padding: .5rem;
+    border-radius: 5px;
+    width: 90%;
+    font-size: .8rem;
+    background-color: white;
+    border: 2px solid var(--primary);
+    display: flex;
+    align-items: center;
+}
+
+.option span{
+    width: 90%;
+    overflow: hidden;
+}
+
+.option button{
+    padding: 2px;
+    height: fit-content;
+    margin: 0;
+    aspect-ratio: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

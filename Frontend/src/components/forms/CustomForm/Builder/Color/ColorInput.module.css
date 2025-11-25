@@ -1,0 +1,30 @@
+.colorInput{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0;
+    width: 10%;
+    background-color: white;
+    border: 1px solid var(--dark);
+    margin: auto;
+}
+
+.colorInput input{
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+    width: 100%;
+    aspect-ratio: 1/1;
+    height: auto;
+    padding: 0!important;
+    box-shadow: none;
+    background-color: transparent;
+    caret-color: transparent;
+    margin: 0;
+}
+
+.colorInput label{
+    padding: 1rem;
+    margin: 0!important;
+    width: 100%;
+}
