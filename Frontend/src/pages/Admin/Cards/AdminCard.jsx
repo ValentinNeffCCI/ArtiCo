@@ -1,13 +1,14 @@
 import React from 'react'
 import classes from './AdminCard.module.css'
 import ToggleButton from "../Buttons/ToggleButton.jsx";
-import { Ban, CheckCheck, Pencil, Trash } from "lucide-react";
+import { Ban, CheckCheck, Pencil, Trash, Shield, User } from "lucide-react";
 
 const AdminCard = ({
     entite,
     ban: toggleBan,
     onDelete,
-    onChoose
+    onChoose,
+    onRoleChange
 }) => {
     const handleDelete = () => {
         onDelete(entite)
@@ -26,15 +27,35 @@ const AdminCard = ({
                         </span>
                     </>
                 }
+                {entite.role &&
+                    <>
+                        |
+                        <span>
+                            {entite.role == "user" ? "Utilisateur" : "Admin"}
+                        </span>
+                    </>
+                }
             </div>
             <div className={classes["button-section"]}>
+                {
+                    onRoleChange &&
+                    <ToggleButton entite={entite} onClick={onRoleChange} style={{
+                        "--color": "white",
+                        "--bg-color": entite.role === "admin" ? "darkgreen" : "darkred"
+                    }}>
+                        {entite.role === "admin" ? <User /> : <Shield />}
+                        <span>
+                            {entite.role === "admin" ? "Promouvoir" : "Rétrograder"}
+                        </span>
+                    </ToggleButton>
+                }
                 {
                     onChoose &&
                     <ToggleButton entite={entite} onClick={onChoose} style={{
                         "--color": "white",
                         "--bg-color": "var(--secondary)"
                     }}>
-                        <Pencil/>
+                        <Pencil />
                         <span>
                             Modifier
                         </span>
@@ -43,8 +64,8 @@ const AdminCard = ({
                 {
                     toggleBan &&
                     <ToggleButton status={entite.active} entite={entite} onClick={toggleBan} style={{
-                        "--bg-color": "var(--primary)",
-                        "--color": "var(--light)"
+                        "--bg-color": entite.active ? "var(--secondary)" : "var(--primary)",
+                        "--color": entite.active ? "var(--dark)" : "var(--light)"
                     }}>
                         {
                             entite.active ?

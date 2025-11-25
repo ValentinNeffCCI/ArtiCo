@@ -1,5 +1,5 @@
 .card{
-    width: 75%;
+    width: 100%;
     border: 2px solid var(--primary);
     margin: 1rem auto;
     border-radius: 2rem;
@@ -11,7 +11,7 @@
     display: flex;
     gap: 1rem;
     background-color: var(--dark);
-    width: 30%;
+    width: 50%;
     border-radius: 2rem;
     justify-content: space-evenly;
 }
@@ -35,7 +35,12 @@
 
 .card span:first-of-type{
     display: block;
-    width: 25%;
+    width: 15%;
+}
+
+.card span:nth-of-type(2){
+    display: block;
+    width: 30%;
 }
 
 @keyframes fade-in-up {

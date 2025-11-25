@@ -39,10 +39,6 @@ const InputBuilder = ({
     onOpenDialog(input.id);
   };
 
-  useEffect(() => {
-    console.warn(input);
-  }, [input]);
-
   const preview = () => {
     switch (input.type) {
       case "radio":
