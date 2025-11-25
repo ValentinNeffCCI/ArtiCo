@@ -329,6 +329,19 @@
       "phone": "0624950494",
       "description": "n;nvjxjkvxudjhj",
       "categorie_id": "4"
+    },
+    {
+      "id": "d5e3",
+      "user_id": "1dj4",
+      "email": "admin@admin.com",
+      "name": "Valentin Techno",
+      "adress1": "4, rue principale",
+      "city": "Mussig",
+      "cp": "67600",
+      "phone": "0624950494",
+      "description": "Entreprise très technologique promis",
+      "categorie_id": "10",
+      "image": {}
     }
   ],
   "galeries": [
@@ -451,6 +464,32 @@
         }
       ],
       "id": "8888"
+    },
+    {
+      "name": "Mon petit questionnaire",
+      "entreprise_id": "d5e3",
+      "inputs": [
+        {
+          "id": "75b1",
+          "type": "select",
+          "name": "Test",
+          "required": "true",
+          "options": [
+            {
+              "id": "b42a",
+              "input_id": "75b1",
+              "value": "ranger la chambre"
+            },
+            {
+              "id": "b395",
+              "input_id": "75b1",
+              "value": "faire les courses"
+            }
+          ],
+          "formulaire_id": "7d6a"
+        }
+      ],
+      "id": "7d6a"
     }
   ],
   "inputs": [
@@ -469,9 +508,28 @@
       "required": "true",
       "options": false,
       "formulaire_id": "8888"
+    },
+    {
+      "id": "75b1",
+      "type": "text",
+      "name": "",
+      "required": "true",
+      "options": false,
+      "formulaire_id": "7d6a"
     }
   ],
-  "options": [],
+  "options": [
+    {
+      "id": "b42a",
+      "input_id": "75b1",
+      "value": "ranger la chambre"
+    },
+    {
+      "id": "b395",
+      "input_id": "75b1",
+      "value": "faire les courses"
+    }
+  ],
   "soumissions": [
     {
       "id": "ac13",
