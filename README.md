@@ -11,7 +11,7 @@
 
 ## Présentation
 
-ArtiCo est une application web single page permettant à une entreprise de s'enregistrer de mettre ses réalisations en avant et de proposer des questionnaires à ses clients. Cette application est développée en React pour le frontend et le backend en NodeJS arrivera sous peu.
+ArtiCo est une application web single page permettant à une entreprise de s'enregistrer, de mettre ses réalisations en avant et de proposer des questionnaires à ses clients. Cette application est développée en React pour le frontend et le backend en NodeJS arrivera sous peu.
 
 ## Frontend
 ### Avant de lancer le projet en local
