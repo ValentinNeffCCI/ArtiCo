@@ -9,7 +9,9 @@ const EntrepriseCard = ({ entreprise, style={} }) => {
       className={classes["card"]}
       title={`Accéder à la page de ${entreprise.name}`}
     >
-      <img src={typeof entreprise.image == 'string' ? entreprise.image : defaultImage} alt={entreprise.name} />
+      <figure>
+        <img src={typeof entreprise.image == 'string' ? entreprise.image : defaultImage} alt={entreprise.name} />
+      </figure>
       <div className={classes["description"]}>
         <h3 className="itim">{entreprise.name}</h3>
         <h4 className="montserrat">{entreprise.categorie?.name}</h4>

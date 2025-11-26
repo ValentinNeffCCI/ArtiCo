@@ -66,7 +66,7 @@ const Formulaires = () => {
         <ArrowLeft />
         Revenir en arrière
       </CustomButton>
-      {showModale && <DeleteConfirmation onDelete={handleDelete} onClose={closePopup}/>}
+      {showModale && <DeleteConfirmation onDelete={handleDelete} onClose={closePopup} />}
       <h1 className={["dangrek", style["title"]].join(" ")}>
         Les questionnaires de mon entreprise
       </h1>
@@ -77,31 +77,13 @@ const Formulaires = () => {
               forms.map((form) => (
                 <FormCard form={form} onDelete={showPopup} />
               ))}
-            {forms.length !== 0 && <div></div>}
-          </div>
-          <NavLink
-            to={`/entreprise/${entrepriseID}/formulaire/nouveau`}
-            style={{
-              width: "fit-content",
-              display: "flex",
-              margin: "0 auto",
-            }}
-          >
-            <CustomButton
-              style={{
-                fontSize: 15,
-                display: "flex",
-                alignItems: "center",
-                gap: ".3rem",
-                "--bg-color": "var(--secondary)",
-                "--color": "var(--primary)",
-                margin: "0 auto",
-              }}
+            <NavLink
+              to={`/entreprise/${entrepriseID}/formulaire/nouveau`}
+              className={style["newForm"]}
             >
-              <span>Nouveau Questionnaire</span>
-              <Plus size={15} />
-            </CustomButton>
-          </NavLink>
+              <Plus />
+            </NavLink>
+          </div>
         </div>
         <figure>
           <img src={worker} alt="Artisan heureux" />

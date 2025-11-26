@@ -30,5 +30,7 @@
     .categories > div > div > a{
         padding: 1rem;
         font-weight: 600;
+        aspect-ratio: 16/9;
+        border-width: 1px;
     }
 }

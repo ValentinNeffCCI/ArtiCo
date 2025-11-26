@@ -3,7 +3,6 @@ import useAPI from "../../../../hooks/useAPI.jsx";
 import classes from "./Categories.module.css";
 import { LinkButton } from "../../../../components/buttons/Link/LinkButton.jsx";
 import { ArrowRight } from "lucide-react";
-import categories from '../../../../datas/categories.json'
 
 export const Categories = () => {
   const { query: callAPI } = useAPI();

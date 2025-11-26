@@ -3,16 +3,19 @@ import classes from './ContactModale.module.css';
 import { CustomButton } from '../../buttons/Custom/CustomButton';
 import useAPI from '../../../hooks/useAPI';
 import { toast } from 'react-toastify';
+import useForm from '../../../hooks/useForm';
+import { useAuth } from '../../../contexts/UserContext';
 
 const ContactModale = ({ toggleModale }) => {
-    const [message, setMessage] = useState('');
+    const { user } = useAuth();
     const { query } = useAPI();
+    const { content, changeListener } = useForm('/contact', 'POST', { email: user?.email });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!message.trim()) return;
+        if (!content.message.trim()) return;
 
-        const response = await query('/contact', 'POST', { message });
+        const response = await query('/contact', 'POST', content);
 
         if (response) {
             toast.success('Message envoyé avec succès !');
@@ -27,13 +30,27 @@ const ContactModale = ({ toggleModale }) => {
             <div className={classes['modale-content']} onClick={(e) => e.stopPropagation()}>
                 <h2>Nous contacter</h2>
                 <form onSubmit={handleSubmit}>
+                    {
+                        !user &&
+                        <div className={classes['form-group']}>
+                            <label htmlFor="email">Email</label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                onChange={changeListener} 
+                                required 
+                                placeholder='Votre email' 
+                                name='email' 
+                            />
+                        </div>
+                    }
                     <div className={classes['form-group']}>
                         <label htmlFor="message">Votre message</label>
                         <textarea
                             id="message"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
+                            onChange={changeListener}
                             placeholder="Écrivez votre message ici..."
+                            name='message'
                             required
                         />
                     </div>
