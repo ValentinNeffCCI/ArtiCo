@@ -1,3 +1,4 @@
+
 .title {
     font-size: 2em;
     width: 80%;
@@ -22,8 +23,8 @@
 
 .formList{
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     padding: 1rem;
     margin: 2rem 0;
@@ -38,19 +39,31 @@
     border: 2px solid var(--primary);
     border-radius: .5rem;
     height: fit-content;
-    width: 40%;
+    width: 100%;
     display: flex;
+    aspect-ratio: 4/3;
     flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
 }
 
 .formList h2{
     font-size: 1rem;
+    text-align: center;
 }
 
 .form-buttons{
     display: flex;
+    flex-direction: column;
     align-items: center;
     margin-top: 1rem;
+    width: 90%;
+    gap: .5rem;
+}
+
+.form-buttons a{
+    --bg-color: var(--secondary);
+    --color: var(--dark);
 }
 
 .form-buttons a, .form-buttons button{
@@ -62,12 +75,19 @@
     margin: 0;
     padding: .5rem;
     justify-content: center;
-    transition: background .2s ease;
-    border-radius: 0;
+    transition: background-color .2s ease;
+    border-radius: .3rem;
 }
 
 .form-buttons a:hover, .form-buttons button:hover{
     font-weight: 600;
+}
+
+.form-buttons a, .form-buttons button{
+    border-width: 1px;
+    border-style: solid;
+    border-color: var(--bg-color);
+    width: 100%;
 }
 
 .form-buttons a:hover{
@@ -77,10 +97,6 @@
 .form-buttons button:hover{
     background-color: red;
     color: white;
-}
-
-.form-buttons a{
-    border-right: 1px solid #ccc;
 }
 
 .form-display{
@@ -113,4 +129,38 @@
 
 .goBack:hover svg{
     transform: translateX(-1rem);
+}
+
+.newForm{
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .3rem;
+    --bg-color: var(--secondary);
+    --color: var(--primary);
+    margin: 0 auto;
+    height: 100%;
+    aspect-ratio: 1/1;
+    margin: 0 auto;
+    border-radius: .5rem;
+    border: .5rem solid var(--primary);
+    transition: border-color .3s ease, border-width .3s ease, background-color .3s ease;
+}
+
+.newForm:hover{
+    background-color: var(--secondary);
+    border-color: var(--primary);
+    border-width: .3rem;
+}
+
+.newForm:hover svg{
+    transform: scale(1.2);
+}
+
+.newForm svg{
+    width: 20%;
+    aspect-ratio: 1;
+    height: auto;
+    transition: transform .3s ease;
 }

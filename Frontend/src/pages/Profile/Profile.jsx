@@ -66,34 +66,22 @@ const Profile = () => {
           <div>
             {entreprises.map((entreprise) => (
               <div
-                style={{
-                  background: "var(--light)",
-                  padding: "0",
-                  borderRadius: "1rem",
-                  margin: "1rem auto",
-                  overflow: "hidden",
-                  width: "90%",
-                }}
+              className={style["card"]}
               >
-                <img
+                <figure>
+                  <img
                   src={
                     typeof entreprise.image == "string"
                       ? entreprise.image
                       : defaultImage
                   }
                   alt={entreprise.name}
-                  style={{ width: "100%", aspectRatio: "3/1" }}
                 />
+                </figure>
                 <div
-                  style={{
-                    padding: ".5rem",
-                    paddingBottom: "0",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: ".3rem",
-                  }}
+                className={style["card-content"]}
                 >
-                  <h3 className="itim">{entreprise.name}</h3>
+                  <h3 className="montserrat">{entreprise.name}</h3>
                   <div className={style["card-buttons"]}>
                     <NavLink
                       to={"/entreprise/" + entreprise.id}

@@ -10,3 +10,26 @@
     gap: .5rem;
 }
 
+.contact-button {
+    height: 2.5rem;
+}
+
+.contact-button span {
+    overflow: hidden;
+    opacity: 0;
+    width: 0;
+    font-size: 0;
+    transition: all .3s ease-in-out;
+}
+
+.contact-button:hover span {
+    opacity: 1;
+    width: 200px;
+    font-size: 1rem;
+}
+
+.contact-button:hover {
+    background-color: var(--light)!important;
+    color: var(--dark)!important;
+}
+
