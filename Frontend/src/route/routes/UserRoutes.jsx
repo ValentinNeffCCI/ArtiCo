@@ -4,6 +4,7 @@ import ModifierEntreprise from "../../pages/ModifierEntreprise/ModifierEntrepris
 import NewForm from "../../pages/Forms/NewForm/NewForm.jsx";
 import Profile from "../../pages/Profile/Profile.jsx";
 import UpdateForm from "../../pages/Forms/UpdateForm/UpdateForm.jsx";
+import Responses from "../../pages/Reponses/Responses.jsx";
 
 const userRoutes = [
   {
@@ -29,6 +30,10 @@ const userRoutes = [
   {
     path: "/formulaire/modifier/:id",
     element: <UpdateForm />,
+  },
+  {
+    path: "/formulaire/:id/reponses",
+    element: <Responses />,
   },
 ];
 

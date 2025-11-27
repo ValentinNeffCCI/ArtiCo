@@ -22,7 +22,7 @@ const AnswerForm = () => {
     "/soumissions",
     "POST",
     {
-      "Votre-adresse-mail-afin-de-pouvoir-être-recontacté-par-le-professionnel": user.email ?? "",
+      "Votre adresse mail afin de pouvoir être recontacté par le professionnel": user.email ?? "",
     }
   );
 
