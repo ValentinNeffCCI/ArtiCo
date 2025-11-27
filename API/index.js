@@ -6,11 +6,12 @@ import jwt from "jsonwebtoken";
 // routers
 import entrepriseRouter from "./routers/entreprise-router.js";
 import userRouter from "./routers/user-router.js";
+import authRouter from "./routers/auth-router.js";
 
 // middlewares
 import authenticated from "./middlewares/authenticated.js";
 
-import AuthService from "./services/AuthService.js";
+import AuthService from "./services/auth-service.js";
 import errorMiddleware from "./middlewares/error-middleware.js";
 import { HttpError } from "./customclasses/HttpError.js";
 
@@ -30,6 +31,7 @@ app.get('/', (req,res, next)=>{
 // Ajout des prefix
 app.use("/users", userRouter);
 app.use("/entreprises", entrepriseRouter);
+app.use("/auth", authRouter);
 
 // Region routes publiques
 app.post('/login', (req, res) => {
