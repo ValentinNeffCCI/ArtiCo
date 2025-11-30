@@ -1,10 +1,12 @@
-import express from "express";
-import {login, register, resetPassword} from "../controllers/auth-controller";
+const express = require("express");
+const AuthController = require("../controllers/auth-controller.js");
+const authenticate = require("../middlewares/authenticated.js");
+const fieldVerification = require("../middlewares/field-verification.js");
 
 const router = express.Router();
 
-router.post('/login', login);
-router.post('/register', register);
-router.post('/password', resetPassword);
+router.post('/login', fieldVerification(['email', 'password']), AuthController.login);
+router.post('/register', fieldVerification(['email', 'password', 'name']), AuthController.register);
+router.post('/reset-password', authenticate(), fieldVerification(['password']), AuthController.reset);
 
-export default router;
+module.exports = router;

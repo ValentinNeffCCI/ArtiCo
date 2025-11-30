@@ -1,26 +1,33 @@
-export default {
-    login: (req, res, next) => {
+const AuthService = require("../services/auth-service.js");
+const HttpError = require("../customclasses/HttpError.js");
+
+module.exports = {
+    login: async (req, res, next) => {
         try {
-            const user = AuthService.login(req.body)
-            return res.status(200).json(jwt.sign(user, SECRET, {expiresIn: '2h'}));
+            const { email, password } = req.body;
+            const user = await AuthService.login(email, password)
+            return res.status(200).json(user);
         } catch (error) {
-            return next(error);
+            return next(new HttpError(error.message || "Erreur lors de la connexion", error.status || 500));
         }
     },
-    register: (req, res, next) => {
+    register: async (req, res, next) => {
         try {
-            const user = AuthService.register(req.body);
-            return res.status(user ? 200 : 409).json(jwt.sign(user, SECRET, {expiresIn: "2h"}));
+            const { email, password, name } = req.body;
+            const user = await AuthService.register(email, password, name);
+            return res.status(user.user ? 200 : 409).json(user);
         } catch (error) {
-            return next(error);
+            return next(new HttpError(error.message || "Erreur lors de la création du compte", error.status || 500));
         }
     },
-    resetPassword: (req, res, next) => {
+    reset: async (req, res, next) => {
         try {
-            const user = AuthService.resetPassword(req.body);
-            return res.status(user ? 200 : 409).json(jwt.sign(user, SECRET, {expiresIn: "2h"}));
+            const { password } = req.body;
+            const user = req.user;
+            const reset_user = await AuthService.reset(password, user.id);
+            return res.status(reset_user ? 200 : 409).json(reset_user);
         } catch (error) {
-            return next(error);
+            return next(new HttpError(error.message || "Erreur lors de la mise à jour du mot de passe", error.status || 500));
         }
     }
 }

@@ -2,3 +2,7 @@ node_modules/
 package-lock.json
 ../../backup/.env
 datas/
+postgres_datas/
+/generated/prisma
+
+/generated/prisma

@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   findOne: (id) => {
     // code prisma ou brut pour findOne
   },
