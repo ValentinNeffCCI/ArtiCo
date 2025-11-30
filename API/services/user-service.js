@@ -1,7 +1,7 @@
-import userRepository from "../repositories/user-repository.js";
+const userRepository = require("../repositories/user-repository.js");
 
-export default {
-    getAllUsers: ()=> {
+module.exports = {
+    getAllUsers: () => {
         return userRepository.findAll();
     }
 }

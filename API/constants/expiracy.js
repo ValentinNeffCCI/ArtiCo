@@ -1,1 +1,2 @@
-export const expiracy = '2h';
+const expiracy = '2h';
+module.exports = expiracy;

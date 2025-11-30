@@ -5,8 +5,7 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client"
-  output   = "../generated/prisma"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -14,19 +13,19 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  name String @unique
-  email String @unique
-  password String
-  role EnumRole @default(USER)
-  active Boolean @default(true)
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  email     String   @unique
+  password  String
+  role      EnumRole @default(USER)
+  active    Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   entreprises Entreprise[]
 
-  @@map("users")
   @@index([email, name])
+  @@map("users")
 }
 
 enum EnumRole {
@@ -35,22 +34,22 @@ enum EnumRole {
 }
 
 model Entreprise {
-  id Int @id @default(autoincrement())
-  name String 
-  email String 
-  city String 
-  cp String 
-  address1 String 
-  address2 String?
-  phone String?
+  id          Int     @id @default(autoincrement())
+  name        String
+  email       String
+  city        String
+  cp          String
+  address1    String
+  address2    String?
+  phone       String?
   description String?
-  image String?
-  ownerId Int
+  image       String?
+  ownerId     Int
   categorieId Int
 
-  owner User @relation(fields: [ownerId], references: [id])
+  owner      User      @relation(fields: [ownerId], references: [id])
   categories Categorie @relation(fields: [categorieId], references: [id])
-  photos Galerie[]
+  photos     Galerie[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -59,8 +58,8 @@ model Entreprise {
 }
 
 model Categorie {
-  id Int @id @default(autoincrement())
-  name String @unique
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -70,20 +69,20 @@ model Categorie {
 }
 
 model Formulaire {
-  id Int @id @default(autoincrement())
-  name String @unique
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  inputs Input[]
+  inputs      Input[]
   soumissions Soumission[]
 
   @@map("formulaires")
 }
 
 model Galerie {
-  id Int @id @default(autoincrement())
-  path String 
+  id        Int      @id @default(autoincrement())
+  path      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -95,21 +94,21 @@ model Galerie {
 }
 
 model Input {
-  id Int @id @default(autoincrement())
-  name String @unique
-  type String
-  required Boolean
+  id           Int     @id @default(autoincrement())
+  name         String  @unique
+  type         String
+  required     Boolean
   formulaireId Int
 
   formulaire Formulaire @relation(fields: [formulaireId], references: [id])
-  options Option[]
+  options    Option[]
 
   @@map("inputs")
 }
 
 model Option {
-  id Int @id @default(autoincrement())
-  value String @unique
+  id      Int    @id @default(autoincrement())
+  value   String @unique
   inputId Int
 
   input Input @relation(fields: [inputId], references: [id])
@@ -118,14 +117,14 @@ model Option {
 }
 
 model Soumission {
-  id Int @id @default(autoincrement())
-  content Json
-  email String
+  id        Int      @id @default(autoincrement())
+  content   Json
+  email     String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   formulaireId Int
-  formulaire Formulaire @relation(fields: [formulaireId], references: [id])
+  formulaire   Formulaire @relation(fields: [formulaireId], references: [id])
 
   @@map("soumissions")
 }
