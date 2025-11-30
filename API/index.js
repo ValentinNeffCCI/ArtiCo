@@ -18,6 +18,8 @@ import { HttpError } from "./customclasses/HttpError.js";
 // .env
 dotenv.config();
 
+// todo connect DB
+
 const app = express();
 app.use(express.json());
 
