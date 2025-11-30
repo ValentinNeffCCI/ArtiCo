@@ -1,10 +1,9 @@
-import jwt from "jsonwebtoken";
-
 export default {
-    login: (email, password) => {
+    login: async (email, password) => {
+        return [email, password];
         // test connexion
     },
-    register: (user) => {
+    register: async (user) => {
         // vérifications (email unique) et ajout dans la DB
         const fields = [
             'email',
@@ -17,7 +16,8 @@ export default {
         }
         return user;
     },
-    resetPassword: (email) => {
+    reset: async (email) => {
+        return email;
         // recherche par email si user puis envoie mail selon id
     },
 };

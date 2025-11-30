@@ -1,0 +1,1 @@
+export const expiracy = '2h';
