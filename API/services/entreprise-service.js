@@ -1,20 +1,25 @@
+const entrepriseRepository = require("../repositories/entreprise-repository.js");
+
 module.exports = {
-  findOne: (id) => {
-    // code prisma ou brut pour findOne
+  findById: async (id) => {
+    return await entrepriseRepository.findById(id);
   },
-  findAll: () => {
-    // code pour findAll
+  findAll: async () => {
+    return await entrepriseRepository.findAll();
   },
-  create: (entreprise) => {
-    // vérifications et màj
+  create: async (entreprise) => {
+    return await entrepriseRepository.create(entreprise);
   },
-  update: (entreprise) => {
-    // vérifications et màj
+  update: async (entreprise) => {
+    return await entrepriseRepository.update(entreprise);
   },
-  delete: (id) => {
-    // delete
+  delete: async (id) => {
+    return await entrepriseRepository.delete(id);
   },
-  findByName: (name) => {
-    // recherche par email renvoie le premier résultat
+  findByName: async (name) => {
+    return await entrepriseRepository.findByName(name);
+  },
+  filter: async (fields) => {
+    return await entrepriseRepository.filter(fields);
   }
 };

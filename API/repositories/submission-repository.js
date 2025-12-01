@@ -1,0 +1,27 @@
+const prisma = require("../constants/client.js");
+
+module.exports = {
+    findAll: async () => {
+        return await prisma.soumission.findMany();
+    },
+    findById: async (id) => {
+        return await prisma.soumission.findUnique({
+            where: { id }
+        });
+    },
+    findByFormulaireId: async (formulaireId) => {
+        return await prisma.soumission.findMany({
+            where: { formulaireId }
+        });
+    },
+    create: async (data) => {
+        return await prisma.soumission.create({
+            data: data
+        });
+    },
+    delete: async (id) => {
+        return await prisma.soumission.delete({
+            where: { id }
+        });
+    }
+}

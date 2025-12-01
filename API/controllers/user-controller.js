@@ -1,10 +1,50 @@
 const userService = require("../services/user-service.js");
 
 module.exports = {
-    getAllUsers: (req, res, next) => {
+    getAllUsers: async (req, res, next) => {
         try {
-            const users = userService.getAllUsers();
+            const users = await userService.getAllUsers();
             res.status(200).json(users);
+        } catch (error) {
+            next(err);
+        }
+    },
+    getMe: async (req, res, next) => {
+        try {
+            const user = await userService.getUserById(req.user.id);
+            res.status(200).json(user);
+        } catch (error) {
+            next(err);
+        }
+    },
+    getUserById: async (req, res, next) => {
+        try {
+            const user = await userService.getUserById(req.params.id);
+            res.status(200).json(user);
+        } catch (error) {
+            next(err);
+        }
+    },
+    updateUser: async (req, res, next) => {
+        try {
+            const user = await userService.updateUser(req.params.id, req.body);
+            res.status(200).json(user);
+        } catch (error) {
+            next(err);
+        }
+    },
+    deleteUser: async (req, res, next) => {
+        try {
+            const user = await userService.deleteUser(req.params.id);
+            res.status(200).json(user);
+        } catch (error) {
+            next(err);
+        }
+    },
+    banUser: async (req, res, next) => {
+        try {
+            const user = await userService.banUser(req.params.id);
+            res.status(200).json(user);
         } catch (error) {
             next(err);
         }

@@ -8,8 +8,11 @@ const authenticated = require("../middlewares/authenticated.js");
 
 const router = express.Router();
 
-router.use(authenticated(true));
-
-router.get('/', userController.getAllUsers);
+router.get('/', authenticated(true),userController.getAllUsers);
+router.get('/me', authenticated(),userController.getMe);
+router.get('/:id', authenticated(true),userController.getUserById);
+router.put('/:id', authenticated(),userController.updateUser);
+router.delete('/:id', authenticated(),userController.deleteUser);
+router.post('/ban/:id', authenticated(true),userController.banUser);
 
 module.exports = router;
