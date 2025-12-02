@@ -6,7 +6,7 @@ module.exports = {
             const galeries = await galerieService.getAllGaleries();
             res.status(200).json(galeries);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
     getGalerieById: async (req, res, next) => {
@@ -14,7 +14,7 @@ module.exports = {
             const galerie = await galerieService.getGalerieById(req.params.id);
             res.status(200).json(galerie);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
     getGalerieByEntrepriseId: async (req, res, next) => {
@@ -22,15 +22,15 @@ module.exports = {
             const galerie = await galerieService.getGalerieByEntrepriseId(req.params.id);
             res.status(200).json(galerie);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
-    createGalerie:  async (req, res, next) => {
+    createGalerie: async (req, res, next) => {
         try {
             const galerie = await galerieService.createGalerie(req.body);
             res.status(201).json(galerie);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
     deleteGalerie: async (req, res, next) => {
@@ -38,7 +38,7 @@ module.exports = {
             const galerie = await galerieService.deleteGalerie(req.params.id);
             res.status(200).json(galerie);
         } catch (error) {
-            next(err);
+            next(error);
         }
     }
 }

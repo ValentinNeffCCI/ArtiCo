@@ -1,19 +1,20 @@
 const inputRepository = require("../repositories/input-repository.js");
-
+const inputResource = require("../resources/input-resource.js");
+const inputCollectionResource = require("../resources/collections/input-collection-resource.js");
 module.exports = {
     findById: async (id) => {
-        return await inputRepository.findById(id);
+        return inputResource(await inputRepository.findById(id));
     },
     findAll: async () => {
-        return await inputRepository.findAll();
+        return inputCollectionResource(await inputRepository.findAll());
     },
     create: async (data) => {
-        return await inputRepository.create(data);
+        return inputResource(await inputRepository.create(data));
     },
     update: async (id, data) => {
-        return await inputRepository.update(id, data);
+        return inputResource(await inputRepository.update(id, data));
     },
     delete: async (id) => {
-        return await inputRepository.delete(id);
+        return inputResource(await inputRepository.delete(id));
     }
 }

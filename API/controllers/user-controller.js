@@ -6,7 +6,7 @@ module.exports = {
             const users = await userService.getAllUsers();
             res.status(200).json(users);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
     getMe: async (req, res, next) => {
@@ -14,7 +14,7 @@ module.exports = {
             const user = await userService.getUserById(req.user.id);
             res.status(200).json(user);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
     getUserById: async (req, res, next) => {
@@ -22,7 +22,7 @@ module.exports = {
             const user = await userService.getUserById(req.params.id);
             res.status(200).json(user);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
     updateUser: async (req, res, next) => {
@@ -30,7 +30,7 @@ module.exports = {
             const user = await userService.updateUser(req.params.id, req.body);
             res.status(200).json(user);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
     deleteUser: async (req, res, next) => {
@@ -38,7 +38,7 @@ module.exports = {
             const user = await userService.deleteUser(req.params.id);
             res.status(200).json(user);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
     banUser: async (req, res, next) => {
@@ -46,7 +46,7 @@ module.exports = {
             const user = await userService.banUser(req.params.id);
             res.status(200).json(user);
         } catch (error) {
-            next(err);
+            next(error);
         }
     }
 }

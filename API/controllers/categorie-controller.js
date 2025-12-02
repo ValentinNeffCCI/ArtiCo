@@ -3,34 +3,42 @@ const categorieService = require("../services/categorie-service.js");
 module.exports = {
     getAllCategories: async (req, res, next) => {
         try {
-            const categories = await categorieService.getAllCategories();
+            const categories = await categorieService.findAll();
             res.status(200).json(categories);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
     getCategorieById: async (req, res, next) => {
         try {
-            const categorie = await categorieService.getCategorieById(req.params.id);
+            const categorie = await categorieService.findById(req.params.id);
             res.status(200).json(categorie);
         } catch (error) {
-            next(err);
+            next(error);
+        }
+    },
+    createCategorie: async (req, res, next) => {
+        try {
+            const categorie = await categorieService.create(req.body);
+            res.status(201).json(categorie);
+        } catch (error) {
+            next(error);
         }
     },
     updateCategorie: async (req, res, next) => {
         try {
-            const categorie = await categorieService.updateCategorie(req.params.id, req.body);
+            const categorie = await categorieService.update(req.params.id, req.body);
             res.status(200).json(categorie);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
     deleteCategorie: async (req, res, next) => {
         try {
-            const categorie = await categorieService.deleteCategorie(req.params.id);
+            const categorie = await categorieService.delete(req.params.id);
             res.status(200).json(categorie);
         } catch (error) {
-            next(err);
+            next(error);
         }
     }
 }

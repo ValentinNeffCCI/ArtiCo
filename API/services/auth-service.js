@@ -27,7 +27,6 @@ module.exports = {
         const testname = await UserRepository.findByName(name);
         if (testname) throw new HttpError("Ce nom est déjà utilisé", 409);
 
-        password = await bcrypt.hash(password, 10);
         const insertedUser = await UserRepository.create(email, password, name);
         const token = jwt.sign({ id: insertedUser.id, role: insertedUser.role }, SECRET, { expiresIn: expiracy });
         return { 
@@ -39,7 +38,6 @@ module.exports = {
     reset: async (password, id) => {
         const user = await UserRepository.findById(id);
         if (!user) throw new HttpError("Aucun utilisateur trouvé", 404);
-        password = await bcrypt.hash(password, 10);
         const updatedUser = await UserRepository.update(id, {password});
         const token = jwt.sign({ id: updatedUser.id, role: updatedUser.role }, SECRET, { expiresIn: expiracy });
         return { 

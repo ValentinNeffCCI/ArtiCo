@@ -5,13 +5,13 @@ module.exports = {
         return await prisma.entreprise.findMany();
     },
     findById: async (id) => {
-        return await prisma.entreprise.findUnique({ 
-            where: { id: id },
+        return await prisma.entreprise.findUnique({
+            where: { id: parseInt(id) },
             include: {
                 owner: true,
                 categories: true,
                 photos: true
-            } 
+            }
         });
     },
     filter: async (fields) => {
@@ -20,19 +20,19 @@ module.exports = {
         });
     },
     create: async (data) => {
-        return await prisma.entreprise.create({ 
-            data: data 
+        return await prisma.entreprise.create({
+            data: data
         });
     },
     update: async (id, data) => {
-        return await prisma.entreprise.update({ 
-            where: { id: id }, 
-            data: data 
+        return await prisma.entreprise.update({
+            where: { id: parseInt(id) },
+            data: data
         });
     },
     delete: async (id) => {
-        return await prisma.entreprise.delete({ 
-            where: { id: id } 
+        return await prisma.entreprise.delete({
+            where: { id: parseInt(id) }
         });
     }
 }

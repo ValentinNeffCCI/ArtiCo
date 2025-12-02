@@ -6,7 +6,7 @@ module.exports = {
     },
     findById: async (id) => {
         return await prisma.user.findUnique({
-            where: { id: id }, 
+            where: { id: parseInt(id) }, 
             include: {
                 entreprises: true
             }
@@ -29,13 +29,13 @@ module.exports = {
     },
     update: async (id, data) => {
         return await prisma.user.update({ 
-            where: { id: id }, 
+            where: { id: parseInt(id) }, 
             data: data 
         });
     },
     delete: async (id) => {
         return await prisma.user.delete({ 
-            where: { id: id } 
+            where: { id: parseInt(id) } 
         });
     }
 }

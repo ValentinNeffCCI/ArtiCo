@@ -1,19 +1,20 @@
 const galerieRepository = require("../repositories/galerie-repository.js");
-
+const galerieResource = require("../resources/galerie-resource.js");
+const galerieCollectionResource = require("../resources/collections/galerie-collection-resource.js");
 module.exports = {
     findById: async (id) => {
-        return await galerieRepository.findById(id);
+        return galerieResource(await galerieRepository.findById(id));
     },
     findAll: async () => {
-        return await galerieRepository.findAll();
+        return galerieCollectionResource(await galerieRepository.findAll());
     },
     findByEntrepriseId: async (entrepriseId) => {
-        return await galerieRepository.findByEntrepriseId(entrepriseId);
+        return galerieCollectionResource(await galerieRepository.findByEntrepriseId(entrepriseId));
     },
     create: async (data) => {
-        return await galerieRepository.create(data);
+        return galerieResource(await galerieRepository.create(data));
     },
     delete: async (id) => {
-        return await galerieRepository.delete(id);
+        return galerieResource(await galerieRepository.delete(id));
     }
 }

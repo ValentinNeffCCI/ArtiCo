@@ -1,25 +1,26 @@
 const entrepriseRepository = require("../repositories/entreprise-repository.js");
-
+const entrepriseResource = require("../resources/entreprise-resource.js");
+const entrepriseCollectionResource = require("../resources/collections/entreprise-collection-resource.js");
 module.exports = {
   findById: async (id) => {
-    return await entrepriseRepository.findById(id);
+    return entrepriseResource(await entrepriseRepository.findById(id));
   },
   findAll: async () => {
-    return await entrepriseRepository.findAll();
+    return entrepriseCollectionResource(await entrepriseRepository.findAll());
   },
   create: async (entreprise) => {
-    return await entrepriseRepository.create(entreprise);
+    return entrepriseResource(await entrepriseRepository.create(entreprise));
   },
   update: async (entreprise) => {
-    return await entrepriseRepository.update(entreprise);
+    return entrepriseResource(await entrepriseRepository.update(entreprise));
   },
   delete: async (id) => {
-    return await entrepriseRepository.delete(id);
+    return entrepriseResource(await entrepriseRepository.delete(id));
   },
   findByName: async (name) => {
-    return await entrepriseRepository.findByName(name);
+    return entrepriseResource(await entrepriseRepository.findByName(name));
   },
   filter: async (fields) => {
-    return await entrepriseRepository.filter(fields);
+    return entrepriseCollectionResource(await entrepriseRepository.filter(fields));
   }
 };

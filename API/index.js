@@ -3,6 +3,9 @@ const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
 
+// constants
+const initDB = require("./constants/init.js");
+
 // routers
 const AuthRouter = require("./routers/auth-router.js");
 const EntrepriseRouter = require("./routers/entreprise-router.js");
@@ -12,6 +15,7 @@ const InputRouter = require("./routers/input-router.js");
 const OptionRouter = require("./routers/option-router.js");
 const SubmissionRouter = require("./routers/submission-router.js");
 const UserRouter = require("./routers/user-router.js");
+const CategorieRouter = require("./routers/categorie-router.js");
 
 // middlewares
 const errorMiddleware = require("./middlewares/error-middleware.js");
@@ -29,6 +33,8 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
+initDB();
+
 app.use("/api/auth", AuthRouter);
 app.use("/api/entreprise", EntrepriseRouter);
 app.use("/api/formulaire", FormulaireRouter);
@@ -37,6 +43,7 @@ app.use("/api/input", InputRouter);
 app.use("/api/option", OptionRouter);
 app.use("/api/submission", SubmissionRouter);
 app.use("/api/user", UserRouter);
+app.use("/api/categorie", CategorieRouter);
 
 app.use(errorMiddleware);
 

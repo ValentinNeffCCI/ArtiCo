@@ -1,17 +1,20 @@
+const formulaireRepository = require("../repositories/formulaire-repository.js");
+const formulaireResource = require("../resources/formulaire-resource.js");
+const formulaireCollectionResource = require("../resources/collections/formulaire-collection-resource.js");
 module.exports = {
     findById: async (id) => {
-        return await formulaireRepository.findById(id);
+        return formulaireResource(await formulaireRepository.findById(id));
     },
     findAll: async () => {
-        return await formulaireRepository.findAll();
+        return formulaireCollectionResource(await formulaireRepository.findAll());
     },
     create: async (data) => {
-        return await formulaireRepository.create(data);
+        return formulaireResource(await formulaireRepository.create(data));
     },
     update: async (id, data) => {
-        return await formulaireRepository.update(id, data);
+        return formulaireResource(await formulaireRepository.update(id, data));
     },
     delete: async (id) => {
-        return await formulaireRepository.delete(id);
+        return formulaireResource(await formulaireRepository.delete(id));
     }
 }

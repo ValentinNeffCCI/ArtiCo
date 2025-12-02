@@ -1,19 +1,22 @@
 const userRepository = require("../repositories/user-repository.js");
+const userResource = require("../resources/user-resource.js");
+const userCollectionResource = require("../resources/collections/user-collection-resource.js");
+const bcrypt = require("bcrypt");
 
 module.exports = {
     getAllUsers: async () => {
-        return await userRepository.findAll();
+        return userCollectionResource(await userRepository.findAll());
     },
     getUserById: async (id) => {
-        return await userRepository.findById(id);
+        return userResource(await userRepository.findById(id));
     },
     banUser: async (id) => {
-        return await userRepository.update(id, { active: false });
+        return userResource(await userRepository.update(id, { active: false }));
     },
     updateUser: async (id, data) => {
-        return await userRepository.update(id, data);
+        return userResource(await userRepository.update(id, data));
     },
     deleteUser: async (id) => {
-        return await userRepository.delete(id);
+        return userResource(await userRepository.delete(id));
     }
 }

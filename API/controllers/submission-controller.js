@@ -6,7 +6,7 @@ module.exports = {
             const submissions = await submissionService.getAllSubmissions();
             res.status(200).json(submissions);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
     getSubmissionById: async (req, res, next) => {
@@ -14,7 +14,7 @@ module.exports = {
             const submission = await submissionService.getSubmissionById(req.params.id);
             res.status(200).json(submission);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
     getSubmissionByFormulaireId: async (req, res, next) => {
@@ -22,7 +22,7 @@ module.exports = {
             const submission = await submissionService.getSubmissionByFormulaireId(req.params.id);
             res.status(200).json(submission);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
     createSubmission: async (req, res, next) => {
@@ -30,7 +30,7 @@ module.exports = {
             const submission = await submissionService.createSubmission(req.body);
             res.status(201).json(submission);
         } catch (error) {
-            next(err);
+            next(error);
         }
     },
     deleteSubmission: async (req, res, next) => {
@@ -38,7 +38,7 @@ module.exports = {
             const submission = await submissionService.deleteSubmission(req.params.id);
             res.status(200).json(submission);
         } catch (error) {
-            next(err);
+            next(error);
         }
     }
 }
