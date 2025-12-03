@@ -11,10 +11,6 @@ const useForm = (url_suffix = "/", method = "GET", defaultValue = {}) => {
 
     let valueToStore = value;
 
-    if (import.meta.env.VITE_ENV_MODE == "demo" && type == "password") {
-      return;
-    }
-
     switch (type) {
       case "file":
         valueToStore = files[0];
@@ -52,7 +48,7 @@ const useForm = (url_suffix = "/", method = "GET", defaultValue = {}) => {
   const simulateRegister = (object) => {
     return {
       ...object,
-      role: object.email.includes("admin") ? "admin" : "user",
+      role: object.email.includes("ADMIN") ? "ADMIN" : "USER",
       active: true,
       reset_token: "123456",
     };

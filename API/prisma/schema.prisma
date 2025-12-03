@@ -47,9 +47,10 @@ model Entreprise {
   ownerId     Int
   categorieId Int
 
-  owner      User      @relation(fields: [ownerId], references: [id])
+  owner      User      @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   categories Categorie @relation(fields: [categorieId], references: [id])
   photos     Galerie[]
+  formulaires Formulaire[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -73,6 +74,9 @@ model Formulaire {
   name      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  entrepriseId Int
+
+  entreprise Entreprise @relation(fields: [entrepriseId], references: [id], onDelete: Cascade)
 
   inputs      Input[]
   soumissions Soumission[]
@@ -88,7 +92,7 @@ model Galerie {
 
   entrepriseId Int
 
-  entreprise Entreprise @relation(fields: [entrepriseId], references: [id])
+  entreprise Entreprise @relation(fields: [entrepriseId], references: [id], onDelete: Cascade)
 
   @@map("galeries")
 }
@@ -100,7 +104,7 @@ model Input {
   required     Boolean
   formulaireId Int
 
-  formulaire Formulaire @relation(fields: [formulaireId], references: [id])
+  formulaire Formulaire @relation(fields: [formulaireId], references: [id], onDelete: Cascade)
   options    Option[]
 
   @@map("inputs")
@@ -111,7 +115,7 @@ model Option {
   value   String @unique
   inputId Int
 
-  input Input @relation(fields: [inputId], references: [id])
+  input Input @relation(fields: [inputId], references: [id], onDelete: Cascade)
 
   @@map("options")
 }
@@ -124,7 +128,7 @@ model Soumission {
   updatedAt DateTime @updatedAt
 
   formulaireId Int
-  formulaire   Formulaire @relation(fields: [formulaireId], references: [id])
+  formulaire   Formulaire @relation(fields: [formulaireId], references: [id], onDelete: Cascade)
 
   @@map("soumissions")
 }

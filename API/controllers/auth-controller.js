@@ -15,7 +15,7 @@ module.exports = {
         try {
             const { email, password, name } = req.body;
             const user = await AuthService.register(email, password, name);
-            return res.status(user.user ? 200 : 409).json(user);
+            return res.status(200).json(user);
         } catch (error) {
             return next(new HttpError(error.message || "Erreur lors de la création du compte", error.status || 500));
         }

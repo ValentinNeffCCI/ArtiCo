@@ -42,7 +42,7 @@ const UserTableau = ({ limit = false }) => {
               <td>{user.id}</td>
               <td>{user.name}</td>
               <td>{user.email}</td>
-              <td>{user.role == "user" ? "Utilisateur" : "Administrateur"}</td>
+              <td>{user.role == "USER" ? "Utilisateur" : "Administrateur"}</td>
               <td>{user.active ? "Actif" : "Suspendu"}</td>
             </tr>
           ))}

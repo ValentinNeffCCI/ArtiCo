@@ -1,5 +1,5 @@
 const getHeaders = (isFormData = false) => {
-  const token = localStorage.getItem("artico_token");
+  const {token} = JSON.parse(localStorage.getItem("artico_user"));
 
   const headers = {};
 

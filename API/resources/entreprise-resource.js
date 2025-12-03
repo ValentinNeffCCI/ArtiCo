@@ -1,4 +1,7 @@
+const HttpError = require("../customclasses/HttpError");
+
 const entrepriseResource = (entreprise, details = false) => {
+    if(!entreprise) throw new HttpError("Aucune entreprise trouvée", 404);
     return {
         id: entreprise.id,
         name: entreprise.name,

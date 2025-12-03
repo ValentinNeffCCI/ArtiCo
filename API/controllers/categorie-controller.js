@@ -3,7 +3,8 @@ const categorieService = require("../services/categorie-service.js");
 module.exports = {
     getAllCategories: async (req, res, next) => {
         try {
-            const categories = await categorieService.findAll();
+            const limit = req.query.limit ? parseInt(req.query.limit) : false;
+            const categories = await categorieService.findAll(limit);
             res.status(200).json(categories);
         } catch (error) {
             next(error);

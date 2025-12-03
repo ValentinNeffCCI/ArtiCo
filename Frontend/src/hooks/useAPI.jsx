@@ -1,7 +1,9 @@
 import getHeaders from "../utils/getHeaders.js";
+import { useAuth } from "../contexts/UserContext.jsx";
 
 const useAPI = () => {
   const baseURL = import.meta.env.VITE_API_URL;
+  const {logout} = useAuth();
 
   const hasFileData = (obj) => {
     return Object.values(obj).some(
@@ -30,6 +32,10 @@ const useAPI = () => {
         }
       }
       const response = await fetch(baseURL + suffix, payload);
+      if(response.error) {
+        logout();
+        return false;
+      }
       return await response.json();
     } catch (error) {
       if (import.meta.env.VITE_ENV_MODE !== "prod") console.error(error);

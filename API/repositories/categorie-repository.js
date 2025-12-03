@@ -1,12 +1,17 @@
 const prisma = require("../constants/client.js")
 
 module.exports = {
-    findAll: async () => {
+    findAll: async (limit=false) => {
+        if (limit) {
+            return await prisma.categorie.findMany({
+                take: limit
+            });
+        }
         return await prisma.categorie.findMany();
     },
     findById: async (id) => {
         return await prisma.categorie.findUnique({
-            where: { id: parseInt(id) },
+            where: { id },
             include: {
                 entreprises: true
             }
@@ -19,13 +24,13 @@ module.exports = {
     },
     update: async (id, data) => {
         return await prisma.categorie.update({
-            where: { id: parseInt(id) },
+            where: { id },
             data: data
         });
     },
     delete: async (id) => {
         return await prisma.categorie.delete({
-            where: { id: parseInt(id) }
+            where: { id }
         });
     }
 }

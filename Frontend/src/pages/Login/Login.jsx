@@ -13,7 +13,7 @@ import { ToastContainer } from "react-toastify";
 const Login = () => {
   const { user } = useAuth();
 
-  if (user) return <Navigate to={user.role === "admin" ? "/admin" : "/"} />;
+  if (user) return <Navigate to={user.role === "ADMIN" ? "/admin" : "/"} />;
 
   const [isConnecting, setIsConnecting] = useState(true);
 
@@ -79,7 +79,7 @@ const Login = () => {
           <ArrowLeft />
           <span>Revenir à l'accueil</span>
         </LinkButton>
-        
+
         {isConnecting ? (
           <LoginForm>
             <CustomButton

@@ -10,7 +10,7 @@ export const Categories = () => {
 
   const fetchCategories = async () => {
     try {
-      const value = await callAPI("/categories?limit=6");
+      const value = await callAPI("/categorie?limit=6");
       value ? setCategories(value.splice(0, 6)) : setCategories([]);
     } catch (err) {
       setCategories([]);

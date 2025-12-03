@@ -1,4 +1,5 @@
 const formulaireResource = (formulaire, inputs = false) => {
+    if(!formulaire) throw new HttpError("Aucun formulaire trouvé", 404);
     return {
         id: formulaire.id,
         name: formulaire.name,

@@ -1,6 +1,7 @@
 const formulaireResource = require("./formulaire-resource.js");
 
 const soumissionResource = (soumission, formulaire = false) => {
+    if(!soumission) throw new HttpError("Aucune soumission trouvée", 404);
     return {
         id: soumission.id,
         content: soumission.content,

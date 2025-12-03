@@ -69,14 +69,14 @@
     {
       "id": "74dc",
       "active": true,
-      "role": "user",
+      "role": "USER",
       "email": "valentin.neff@ccicampus.fr",
       "name": "Test"
     },
     {
       "id": "5898",
       "active": true,
-      "role": "user",
+      "role": "USER",
       "name": "piniouf",
       "email": "projet_eclate@mail.fr"
     }

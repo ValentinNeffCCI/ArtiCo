@@ -5,6 +5,9 @@ module.exports = {
   findById: async (id) => {
     return entrepriseResource(await entrepriseRepository.findById(id));
   },
+  findByUserId: async (id) => {
+    return entrepriseCollectionResource(await entrepriseRepository.findByUserId(id));
+  },
   findAll: async () => {
     return entrepriseCollectionResource(await entrepriseRepository.findAll());
   },

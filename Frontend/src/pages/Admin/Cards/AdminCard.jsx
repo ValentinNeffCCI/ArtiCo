@@ -31,7 +31,7 @@ const AdminCard = ({
                     <>
                         |
                         <span>
-                            {entite.role == "user" ? "Utilisateur" : "Admin"}
+                            {entite.role == "USER" ? "Utilisateur" : "ADMIN"}
                         </span>
                     </>
                 }
@@ -41,11 +41,11 @@ const AdminCard = ({
                     onRoleChange &&
                     <ToggleButton entite={entite} onClick={onRoleChange} style={{
                         "--color": "white",
-                        "--bg-color": entite.role === "admin" ? "darkgreen" : "darkred"
+                        "--bg-color": entite.role === "ADMIN" ? "darkgreen" : "darkred"
                     }}>
-                        {entite.role === "admin" ? <User /> : <Shield />}
+                        {entite.role === "ADMIN" ? <User /> : <Shield />}
                         <span>
-                            {entite.role === "admin" ? "Promouvoir" : "Rétrograder"}
+                            {entite.role === "ADMIN" ? "Promouvoir" : "Rétrograder"}
                         </span>
                     </ToggleButton>
                 }

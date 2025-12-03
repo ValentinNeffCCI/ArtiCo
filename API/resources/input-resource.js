@@ -1,6 +1,7 @@
 const optionResource = require("./option-resource.js");
 
 const inputResource = (input, options = false) => {
+    if(!input) throw new HttpError("Aucun input trouvé", 404);
     return {
         id: input.id,
         name: input.name,

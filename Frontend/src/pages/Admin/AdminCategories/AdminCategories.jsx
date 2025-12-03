@@ -26,7 +26,6 @@ const AdminCategories = () => {
 
     const modifyCategorie = (categorie) => {
         setCategories(prev => prev.map(c => c.id === categorie.id ? categorie : c))
-        console.log(categories)
         setShowUpdateModale(false);
     }
 

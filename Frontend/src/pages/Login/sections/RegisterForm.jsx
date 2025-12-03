@@ -6,26 +6,18 @@ import { useAuth } from "../../../contexts/UserContext";
 import { toast } from "react-toastify";
 
 export const RegisterForm = ({ children }) => {
-  const AppMode = import.meta.env.VITE_ENV_MODE;
 
   const { login } = useAuth();
   const {
     changeListener,
     prepare,
-    simulateUserConnection: simulateRegister,
-  } = useForm(AppMode === "demo" ? "/users" : "/register", "POST", {
-    active: true,
-    role: "user"
-  });
+  } = useForm("/auth/register", "POST");
   const handleSubmit = async (e) => {
     e.preventDefault();
     let response = await prepare(e);
-    if (!response) {
-      toast.error("Cet e-mail est déjà utilisé");
+    if (response.error) {
+      toast.error(response.error);
       return;
-    }
-    if (AppMode === "demo") {
-      response = simulateRegister(response);
     }
     login(response);
   };

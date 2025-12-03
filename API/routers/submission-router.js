@@ -2,11 +2,12 @@ const express = require('express');
 const router = express.Router();
 const SubmissionController = require('../controllers/submission-controller.js');
 const authenticated = require('../middlewares/authenticated.js');
+const idParser = require('../middlewares/id-parser.js');
 
 router.get('/', authenticated(), SubmissionController.getAllSubmissions);
-router.get('/:id', authenticated(), SubmissionController.getSubmissionById);
-router.get('/formulaire/:id', authenticated(), SubmissionController.getSubmissionByFormulaireId);
+router.get('/:id', idParser, authenticated(), SubmissionController.getSubmissionById);
 router.post('/', authenticated(),SubmissionController.createSubmission);
-router.delete('/:id', authenticated(),SubmissionController.deleteSubmission);
+router.get('/formulaire/:id', idParser, authenticated(), SubmissionController.getSubmissionByFormulaireId);
+router.delete('/:id', idParser, authenticated(),SubmissionController.deleteSubmission);
 
 module.exports = router;

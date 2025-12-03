@@ -6,8 +6,8 @@ module.exports = {
     findById: async (id) => {
         return categorieResource(await categorieRepository.findById(id), true);
     },
-    findAll: async () => {
-        return categorieCollectionResource(await categorieRepository.findAll());
+    findAll: async (limit=false) => {
+        return categorieCollectionResource(await categorieRepository.findAll(limit));
     },
     create: async (data) => {
         return categorieResource(await categorieRepository.create(data));

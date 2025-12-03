@@ -1,5 +1,5 @@
 const userResource = (user) => {
-    if(!user) return null;
+    if(!user) throw new HttpError("Aucun utilisateur trouvé", 404);
     return {
         id: user.id ,
         email: user.email,

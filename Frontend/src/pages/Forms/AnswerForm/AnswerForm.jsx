@@ -38,7 +38,7 @@ const AnswerForm = () => {
     setIsLoading(true);
     try {
       const response = await callAPI("/soumissions", "POST", {
-        formulaire_id: id,
+        formulaire_id: parseInt(id),
         submitted_at: new Date(),
         inputs: content,
       });
@@ -70,14 +70,14 @@ const AnswerForm = () => {
       </CustomButton>
       <h1>{form.name}</h1>
       <CustomForm
-        form={!user.email ? [...form.inputs, 
-          {
-            "type":"email",
-            "name":"Votre adresse mail afin de pouvoir être recontacté par le professionnel",
-            "required":"true",
-            "options":false,
-            "formulaire_id":id
-          }
+        form={!user.email ? [...form.inputs,
+        {
+          "type": "email",
+          "name": "Votre adresse mail afin de pouvoir être recontacté par le professionnel",
+          "required": "true",
+          "options": false,
+          "formulaire_id": id
+        }
         ] : form.inputs}
         onChange={onChange}
         onSubmit={handleSubmit}

@@ -8,7 +8,6 @@ const initDB = async () => {
     const {OWNER_EMAIL, OWNER_PASSWORD, OWNER_NAME} = process.env;
     try {
         const data = await authService.register(OWNER_EMAIL, OWNER_PASSWORD, OWNER_NAME);
-        console.log("Owner created");
     } catch (error) {
         if(error.status === 409) {
             const imposter = await userRepository.findByEmail(OWNER_EMAIL);

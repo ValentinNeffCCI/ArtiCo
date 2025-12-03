@@ -39,7 +39,7 @@ const AdminUsers = () => {
     };
 
     const toggleRole = async (user) => {
-        const newRole = user.role === "admin" ? "user" : "admin";
+        const newRole = user.role === "ADMIN" ? "USER" : "ADMIN";
         const response = await callAPI("/users/" + user.id, "PATCH", {
             role: newRole,
         });

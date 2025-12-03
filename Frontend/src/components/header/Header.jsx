@@ -26,12 +26,12 @@ export const Header = () => {
     {
       path: "/admin",
       label: "Espace administrateur",
-      allowedRoles: ["admin"],
+      allowedRoles: ["ADMIN"],
     },
     {
       path: "/profil",
       label: "Mon Profil",
-      allowedRoles: ["user", "admin"],
+      allowedRoles: ["USER", "ADMIN"],
     },
     {
       path: "/rechercher",
@@ -57,9 +57,8 @@ export const Header = () => {
 
   return (
     <header
-      className={`${classes.header} ${
-        scrollPosition !== 0 && classes.scrolling
-      }`}
+      className={`${classes.header} ${scrollPosition !== 0 && classes.scrolling
+        }`}
     >
       <NavLink to={"/"}>
         <Logo size={100} />

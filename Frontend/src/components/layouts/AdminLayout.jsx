@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 
 export const AdminLayout = () => {
   return (
-    <div className={styles["admin"]}>
+    <div className={styles["ADMIN"]}>
       <ToastContainer />
       <AdminSidebar />
       <Outlet />

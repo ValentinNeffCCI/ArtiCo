@@ -28,7 +28,6 @@ const Responses = () => {
     const getResponses = async () => {
         setIsLoading(true);
         const soumissions = await query(`/soumissions?formulaire_id=${id}`);
-        console.log(soumissions);
         if(soumissions){
             setResponses(soumissions.reverse());
         }

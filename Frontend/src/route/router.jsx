@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     element: <AdminLayout />,
     children: [
       {
-        element: <ProtectedRoute allowedRoles={["admin"]} />,
+        element: <ProtectedRoute allowedRoles={["ADMIN"]} />,
         children: AdminRoutes,
       },
     ],

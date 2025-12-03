@@ -1,4 +1,5 @@
 const galerieResource = (galerie) => {
+    if(!galerie) throw new HttpError("Aucune galerie trouvée", 404);
     return {
         id: galerie.id,
         path: galerie.path
