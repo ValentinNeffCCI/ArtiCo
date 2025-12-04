@@ -1,3 +1,4 @@
+const HttpError = require("../customclasses/HttpError");
 const userResource = (user) => {
     if(!user) throw new HttpError("Aucun utilisateur trouvé", 404);
     return {

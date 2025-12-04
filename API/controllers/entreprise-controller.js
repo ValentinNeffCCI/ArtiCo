@@ -27,6 +27,9 @@ module.exports = {
     },
     createEntreprise: async (req, res, next) => {
         try {
+            // Bug multer ajoute double \ au path
+            req.body.image = req.file.path.replace('\\', '/');
+            req.body.ownerId = req.user.id;
             const entreprise = await entrepriseService.create(req.body);
             res.status(201).json(entreprise);
         } catch (error) {
@@ -35,6 +38,11 @@ module.exports = {
     },
     updateEntreprise: async (req, res, next) => {
         try {
+            if(req.file){
+                // Bug multer ajoute double \ au path
+                req.body.image = req.file.path.replace('\\', '/');
+            }
+            req.body.ownerId = req.user.id;
             const entreprise = await entrepriseService.update(req.params.id, req.body);
             res.status(200).json(entreprise);
         } catch (error) {
@@ -44,7 +52,7 @@ module.exports = {
     deleteEntreprise: async (req, res, next) => {
         try {
             const entreprise = await entrepriseService.delete(req.params.id);
-            res.status(200).json(entreprise);
+            res.status(204).send();
         } catch (error) {
             next(error);
         }

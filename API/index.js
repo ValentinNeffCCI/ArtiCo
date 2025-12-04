@@ -2,6 +2,7 @@
 const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 // constants
 const initDB = require("./constants/init.js");
@@ -22,6 +23,9 @@ const errorMiddleware = require("./middlewares/error-middleware.js");
 
 // .env
 dotenv.config();
+
+// temps pour le cache des images
+const cacheTime = 60*60*24*31
 
 const app = express();
 
@@ -46,6 +50,12 @@ app.use("/api/submission", SubmissionRouter);
 app.use("/api/user", UserRouter);
 app.use("/api/categorie", CategorieRouter);
 
+// Accéder aux uploads
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+    setHeaders: (res,path,stat) => res.set('Cache-Control', "public, max-age="+cacheTime)
+}));
+
+// Gérer les erreurs
 app.use(errorMiddleware);
 
 app.use((req, res) => {

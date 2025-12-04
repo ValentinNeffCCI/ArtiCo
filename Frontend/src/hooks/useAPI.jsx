@@ -3,40 +3,62 @@ import { useAuth } from "../contexts/UserContext.jsx";
 
 const useAPI = () => {
   const baseURL = import.meta.env.VITE_API_URL;
-  const {logout} = useAuth();
+  const { logout } = useAuth();
 
   const hasFileData = (obj) => {
-    return Object.values(obj).some(
-      (value) => value instanceof File || value instanceof Blob
-    );
+    return obj && typeof obj === "object" &&
+      Object.values(obj).some(
+        (value) => value instanceof File || value instanceof Blob
+      );
   };
+
+  const getUrl = baseURL.replace('/api', '');
 
   const callAPI = async (suffix, method = "GET", body = false) => {
     try {
       let payload = {
+        method,
         headers: getHeaders(),
-        method: method,
       };
+
       if (["PUT", "POST", "PATCH"].includes(method) && body) {
-        // Désactive l'upload de fichier en mode démo à cause de json-server
-        if (hasFileData(body) && import.meta.env.VITE_ENV_MODE !== "demo") {
+
+        if (body instanceof FormData) {
+          payload.body = body;
+          payload.headers = {
+            Authorization: getHeaders().Authorization,
+          };
+        }
+
+        else if (hasFileData(body)) {
           const formData = new FormData();
           Object.entries(body).forEach(([key, value]) =>
             formData.append(key, value)
           );
-          payload.headers = getHeaders(true);
           payload.body = formData;
-        } else {
-          payload.headers = getHeaders();
+          payload.headers = {
+            Authorization: getHeaders().Authorization,
+          };
+        }
+
+        else {
+          payload.headers = {
+            ...getHeaders(),
+            "Content-Type": "application/json",
+          };
           payload.body = JSON.stringify(body);
         }
       }
+
       const response = await fetch(baseURL + suffix, payload);
-      if(response.error) {
+
+      if (response.error) {
         logout();
         return false;
       }
+
       return await response.json();
+
     } catch (error) {
       if (import.meta.env.VITE_ENV_MODE !== "prod") console.error(error);
       return false;
@@ -45,6 +67,7 @@ const useAPI = () => {
 
   return {
     query: callAPI,
+    url: getUrl,
   };
 };
 

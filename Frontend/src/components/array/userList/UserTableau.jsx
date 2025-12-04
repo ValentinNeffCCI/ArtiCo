@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAPI from "../../../hooks/useAPI";
 import classes from "../Tableaux.module.css";
+import { toast } from "react-toastify";
 
 const UserTableau = ({ limit = false }) => {
   const [users, setUsers] = useState([]);

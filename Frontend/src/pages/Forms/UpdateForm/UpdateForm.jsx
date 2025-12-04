@@ -12,7 +12,7 @@ const UpdateForm = () => {
   const { query } = useAPI();
 
   const getFormById = async () => {
-    const response = await query("/formulaires/" + id);
+    const response = await query("/formulaire/entreprise/" + id);
     if (response) {
       setForm(response);
     }

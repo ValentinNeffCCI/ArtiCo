@@ -6,7 +6,7 @@ const idParser = require('../middlewares/id-parser.js');
 const imageUploader = require('../middlewares/image-uploader.js');
 const fieldVerification = require('../middlewares/field-verification.js');
 const emailFormatVerification = require('../middlewares/email-format-verification.js');
-const entrepriseFields = ['name', 'description', 'image'];
+const entrepriseFields = ['name', 'description', 'name', 'address1', 'city', 'cp', 'email', 'categorieId'];
 
 router.get('/', 
     entrepriseController.getAllEntreprises);

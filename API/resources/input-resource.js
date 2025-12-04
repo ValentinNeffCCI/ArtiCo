@@ -1,5 +1,5 @@
 const optionResource = require("./option-resource.js");
-
+const HttpError = require("../customclasses/HttpError");
 const inputResource = (input, options = false) => {
     if(!input) throw new HttpError("Aucun input trouvé", 404);
     return {

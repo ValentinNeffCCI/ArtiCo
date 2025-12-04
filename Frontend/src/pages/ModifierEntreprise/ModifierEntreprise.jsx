@@ -1,4 +1,5 @@
-import { ArrowLeft, Loader } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import Loader from "../../components/UX/loaders/Loader";
 import React, { Suspense, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
@@ -24,20 +25,20 @@ const ModifierEntreprise = () => {
   }
 
   const getEntrepriseById = async (id) => {
-    const response = await callAPI(`/entreprises/${id}`);
-    if (response) {
-      setEntreprise(response);
+    const response = await callAPI(`/entreprise/${id}`);
+    if (response.error) {
+      toast.error(response.error);
     } else {
-      navigation("/profil");
+      setEntreprise(response);
     }
   };
 
   const deleteUser = async () => {
-      const response = await callAPI("/entreprises/" + id, "DELETE");
-      if (response) {
-        navigation("/profil");
+      const response = await callAPI("/entreprise/" + id, "DELETE");
+      if (response.error) {
+        toast.error(response.error);
       } else {
-        toast.error("Une erreur est survenue");
+        navigation("/profil");
       }
   }
 
@@ -79,7 +80,7 @@ const ModifierEntreprise = () => {
           <CreateEntreprise
             defaultValues={entreprise}
             method="PUT"
-            url={"/entreprises/" + id}
+            url={"/entreprise/" + id}
           />
           <ManageGalerie entrepriseId={id} />
         </div>

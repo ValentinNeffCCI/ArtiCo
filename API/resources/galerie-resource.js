@@ -1,3 +1,4 @@
+const HttpError = require("../customclasses/HttpError");
 const galerieResource = (galerie) => {
     if(!galerie) throw new HttpError("Aucune galerie trouvée", 404);
     return {

@@ -7,11 +7,12 @@ import CustomForm from "../CustomForm/Displayer/CustomForm";
 import style from "./style.module.css";
 import { Upload } from "lucide-react";
 import placeholder from "../../../assets/photos/placeholder.jpeg";
+import { toast, ToastContainer } from "react-toastify";
 
 const CreateEntreprise = ({
   defaultValues = false,
   method = "POST",
-  url = "/entreprises",
+  url = "/entreprise",
 }) => {
   const { user } = useAuth();
   const { content, changeListener, prepare } = useForm(
@@ -20,7 +21,6 @@ const CreateEntreprise = ({
     defaultValues
       ? defaultValues
       : {
-          user_id: user.id,
           email: user.email,
         }
   );
@@ -30,7 +30,7 @@ const CreateEntreprise = ({
   const navigation = useNavigate();
 
   const retrieveCategories = async () => {
-    const response = await API.query("/categories");
+    const response = await API.query("/categorie");
     if (response) {
       setCategories(response);
     } else {
@@ -38,7 +38,7 @@ const CreateEntreprise = ({
     }
   };
 
-  const [image, setImage] = useState(false);
+  const [image, setImage] = useState(defaultValues && defaultValues.image ? `${API.url}/${defaultValues.image}` : false);
 
   useEffect(() => {
     window.scrollTo({
@@ -54,19 +54,12 @@ const CreateEntreprise = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (import.meta.env.VITE_ENV_MODE == "demo") {
-      changeListener({
-        target: {
-          name: "image",
-          value: null,
-          type: "text",
-        },
-      });
-    }
     const response = await prepare(e);
-    if (response) {
-      return navigation("/profil");
+    console.log(response);
+    if (response.error) {
+      return toast.error(response.error);
     }
+    return navigation("/profil");
   };
 
   const inputs = [
@@ -76,25 +69,25 @@ const CreateEntreprise = ({
       id: 1,
       required: true,
       label: "Nom de l'entreprise",
-      value: content.name ?? "",
+      value: content.name ? content.name : "",
       is_fix: false
     },
     {
-      name: "adress1",
+      name: "address1",
       type: "text",
       id: 2,
       required: true,
       label: "Adresse de l'entreprise",
-      value: content.adress1 ?? "",
+      value: content.address1 ? content.address1 : "",
       is_fix: false
     },
     {
-      name: "adress2",
+      name: "address2",
       type: "text",
       id: 3,
       required: false,
       label: "Complément d'adresse",
-      value: content.adress2 ?? "",
+      value: content.address2 ? content.address2 : "",
       is_fix: false
     },
     {
@@ -103,7 +96,7 @@ const CreateEntreprise = ({
       id: 8,
       required: true,
       label: "Ville",
-      value: content.city ?? "",
+      value: content.city ? content.city : "",
       is_fix: false
     },
     {
@@ -112,7 +105,7 @@ const CreateEntreprise = ({
       id: 9,
       required: true,
       label: "Code postal",
-      value: content.cp ?? "",
+      value: content.cp ? content.cp : "",
       is_fix: false
     },
     {
@@ -121,7 +114,7 @@ const CreateEntreprise = ({
       id: 4,
       required: true,
       label: "Téléphone de l'entreprise",
-      value: content.phone ?? "",
+      value: content.phone ? content.phone : "",
       is_fix: false
     },
     {
@@ -139,7 +132,7 @@ const CreateEntreprise = ({
       id: 5,
       required: false,
       label: "Bio de l'entreprise",
-      value: content.description ?? "",
+      value: content.description ? content.description : "",
       is_fix: false
     },
   ];
@@ -162,15 +155,16 @@ const CreateEntreprise = ({
           : "Je créé mon entreprise"
       }
     >
+      <ToastContainer/>
       {categories.length !== 0 && (
         <div className={[style["input"], style["select"]].join(" ")}>
-          <label htmlFor="categorie_id">Catégorie de votre entreprise :</label>
+          <label htmlFor="categorieId">Catégorie de votre entreprise :</label>
           <select
             type="file"
-            name="categorie_id"
-            id="categorie_id"
+            name="categorieId"
+            id="categorieId"
             onChange={changeListener}
-            defaultValue={defaultValues && defaultValues.categorie_id}
+            defaultValue={defaultValues && defaultValues.categorieId}
             required
           >
             <option value="">Toutes les options</option>
@@ -208,7 +202,7 @@ const CreateEntreprise = ({
       >
         <label htmlFor="image" className="pointer">
           <img
-            src={image ? image : placeholder}
+            src={typeof image === "string" ? image : placeholder}
             alt="photo de l'entreprise"
             style={{ width: "100%", objectFit: "cover" }}
           />

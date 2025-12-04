@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useAPI from "../../../hooks/useAPI";
 import { LinkButton } from "../../buttons/Link/LinkButton";
 import classes from "../Tableaux.module.css";
+import { toast } from "react-toastify";
 
 const EntrepriseTableau = ({ limit = false }) => {
   const [entreprises, setEntreprises] = useState([]);

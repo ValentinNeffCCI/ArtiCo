@@ -1,3 +1,4 @@
+const HttpError = require("../customclasses/HttpError");
 const categorieResource = (categorie, entreprises = false) => {
     if(!categorie) throw new HttpError("Aucune catégorie trouvée", 404);
     return {

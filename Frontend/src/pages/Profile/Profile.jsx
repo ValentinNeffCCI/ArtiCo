@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 
 const Profile = () => {
   const { user } = useAuth();
-  const { query } = useAPI();
+  const { query, url } = useAPI();
   const { logout } = useAuth();
 
   const [showModal, setShowModal] = useState(false);
@@ -24,7 +24,7 @@ const Profile = () => {
     const suffix =
       "/entreprise/user/" + user.id;
     const response = await query(suffix);
-    if (response) setEntreprises(response);
+    if (!response.error) setEntreprises(response);
   };
 
   const getMyinfo = async () => {
@@ -83,7 +83,7 @@ const Profile = () => {
                   <img
                     src={
                       typeof entreprise.image == "string"
-                        ? entreprise.image
+                        ? `${url}/${entreprise.image}`
                         : defaultImage
                     }
                     alt={entreprise.name}
