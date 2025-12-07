@@ -8,6 +8,7 @@ module.exports = {
             const user = await AuthService.login(email, password)
             return res.status(200).json(user);
         } catch (error) {
+            console.log(error)
             return next(new HttpError(error.message || "Erreur lors de la connexion", error.status || 500));
         }
     },

@@ -17,6 +17,7 @@ const OptionRouter = require("./routers/option-router.js");
 const SubmissionRouter = require("./routers/submission-router.js");
 const UserRouter = require("./routers/user-router.js");
 const CategorieRouter = require("./routers/categorie-router.js");
+const AdminRouter = require("./routers/admin-router.js");
 
 // middlewares
 const errorMiddleware = require("./middlewares/error-middleware.js");
@@ -29,12 +30,12 @@ const cacheTime = 60*60*24*31
 
 const app = express();
 
+app.use(express.json());
 app.use(cors({
     origin: "http://localhost:5173",
     credentials: true
 }));
 
-app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
@@ -48,6 +49,7 @@ app.use("/api/input", InputRouter);
 app.use("/api/option", OptionRouter);
 app.use("/api/submission", SubmissionRouter);
 app.use("/api/user", UserRouter);
+app.use("/api/admin", AdminRouter);
 app.use("/api/categorie", CategorieRouter);
 
 // Accéder aux uploads

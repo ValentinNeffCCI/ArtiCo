@@ -4,6 +4,9 @@ module.exports = {
     findAll: async () => {
         return await prisma.user.findMany();
     },
+    findAllWithAccess: async () => {
+        return await prisma.user.findMany();
+    },
     findById: async (id) => {
         return await prisma.user.findUnique({
             where: { id },

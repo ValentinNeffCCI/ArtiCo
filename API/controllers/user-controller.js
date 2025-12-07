@@ -41,10 +41,18 @@ module.exports = {
             next(error);
         }
     },
-    banUser: async (req, res, next) => {
+    modifyUserAccess: async (req, res, next) => {
         try {
-            const user = await userService.banUser(req.params.id);
+            const user = await userService.modifyUserAccess(req.params.id, req.body);
             res.status(200).json(user);
+        } catch (error) {
+            next(error);
+        }
+    },
+    getAllUsersWithAccess: async (req, res, next) => {
+        try {
+            const users = await userService.getAllUsersWithAccess();
+            res.status(200).json(users);
         } catch (error) {
             next(error);
         }

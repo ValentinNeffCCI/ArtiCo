@@ -33,7 +33,7 @@
     font-weight: 600;
 }
 
-.card span:first-of-type{
+.card span.userName{
     display: block;
     width: 15%;
 }

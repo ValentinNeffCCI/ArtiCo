@@ -2,7 +2,11 @@ const prisma = require("../constants/client.js")
 
 module.exports = {
     findAll: async () => {
-        return await prisma.entreprise.findMany();
+        return await prisma.entreprise.findMany({
+            include: {
+                categories: true
+            }
+        });
     },
     findById: async (id) => {
         return await prisma.entreprise.findUnique({

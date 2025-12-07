@@ -22,7 +22,7 @@ const Formulaires = () => {
     setIsLoading(true);
     try {
       const response = await query(
-        "/formulaires?entreprise_id=" + entrepriseID
+        "/formulaire/entreprise/" + entrepriseID
       );
       if (response) {
         setForms(

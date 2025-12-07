@@ -14,8 +14,8 @@ const entrepriseResource = (entreprise, details = false) => {
         phone: details ? entreprise.phone : false,
         description: details ? entreprise.description : false,
         image: entreprise.image,
-        owner: userResource(entreprise.owner),
-        categorie: entreprise.categorie,
+        owner: entreprise.owner ? userResource(entreprise.owner) : false,
+        categorie: entreprise.categories,
         photos: details ? entreprise.photos : false
     }
 }

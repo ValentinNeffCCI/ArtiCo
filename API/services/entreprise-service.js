@@ -10,7 +10,7 @@ module.exports = {
     return entrepriseCollectionResource(await entrepriseRepository.findByUserId(id));
   },
   findAll: async () => {
-    return entrepriseCollectionResource(await entrepriseRepository.findAll());
+    return entrepriseCollectionResource(await entrepriseRepository.findAll(), true);
   },
   create: async (entreprise) => {
     return entrepriseResource(await entrepriseRepository.create(entreprise));

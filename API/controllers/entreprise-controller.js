@@ -28,7 +28,9 @@ module.exports = {
     createEntreprise: async (req, res, next) => {
         try {
             // Bug multer ajoute double \ au path
-            req.body.image = req.file.path.replace('\\', '/');
+            if(req.file){
+                req.body.image = req.file.path.replace('\\', '/');
+            }
             req.body.ownerId = req.user.id;
             const entreprise = await entrepriseService.create(req.body);
             res.status(201).json(entreprise);

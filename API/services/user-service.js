@@ -7,20 +7,27 @@ module.exports = {
     getAllUsers: async () => {
         return userCollectionResource(await userRepository.findAll());
     },
+    getAllUsersWithAccess: async () => {
+        return userCollectionResource(await userRepository.findAllWithAccess());
+    },
     getUserById: async (id) => {
         return userResource(await userRepository.findById(id));
     },
-    banUser: async (id) => {
-        return userResource(await userRepository.update(id, { active: false }));
+    modifyUserAccess: async (id, data) => {
+        return userResource(await userRepository.update(id, data));
     },
     updateUser: async (id, data) => {
-        const isEmailTaken = await userRepository.findByEmail(data.email);
-        if (isEmailTaken && isEmailTaken.id != id) {
-            throw new HttpError("Email déjà utilisé", 409);
+        if(data.email){
+            const isEmailTaken = await userRepository.findByEmail(data.email);
+            if (isEmailTaken && isEmailTaken.id != id) {
+                throw new HttpError("Email déjà utilisé", 409);
+            }
         }
-        const nameTaken = await userRepository.findByName(data.name);
-        if (nameTaken && nameTaken.id != id) {
-            throw new HttpError("Nom déjà utilisé", 409);
+        if(data.name){
+            const nameTaken = await userRepository.findByName(data.name);
+            if (nameTaken && nameTaken.id != id) {
+                throw new HttpError("Nom déjà utilisé", 409);
+            }
         }
         return userResource(await userRepository.update(id, data));
     },

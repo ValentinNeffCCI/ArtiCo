@@ -163,4 +163,5 @@
     aspect-ratio: 1;
     height: auto;
     transition: transform .3s ease;
+    min-width: 80px;
 }

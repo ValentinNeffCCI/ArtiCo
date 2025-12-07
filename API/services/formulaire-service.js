@@ -8,6 +8,9 @@ module.exports = {
     findAll: async () => {
         return formulaireCollectionResource(await formulaireRepository.findAll());
     },
+    findByEntrepriseId: async (id) => {
+        return formulaireCollectionResource(await formulaireRepository.findByEntrepriseId(id));
+    },
     create: async (data) => {
         return formulaireResource(await formulaireRepository.create(data));
     },

@@ -16,6 +16,7 @@ router.get('/me', authenticated(),userController.getMe);
 router.get('/:id', idParser, authenticated(true),userController.getUserById);
 router.put('/:id', idParser, authenticated(), userAccess, autoHashingPassword, emailFormatVerification, userController.updateUser);
 router.delete('/:id', idParser, authenticated(), userAccess, userController.deleteUser);
-router.post('/ban/:id', idParser, authenticated(true),userController.banUser);
+router.put('/admin/:id', idParser, authenticated(true),userController.modifyUserAccess);
+router.get('/admin', authenticated(true),userController.getAllUsersWithAccess);
 
 module.exports = router;

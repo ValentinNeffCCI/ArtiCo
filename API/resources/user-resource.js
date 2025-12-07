@@ -6,7 +6,8 @@ const userResource = (user) => {
         email: user.email,
         name: user.name,
         entreprises: user.entreprises,
-        role: user.role
+        role: user.role,
+        active: user.active
     }
 }
 

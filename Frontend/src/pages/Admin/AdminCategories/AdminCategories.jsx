@@ -12,13 +12,13 @@ import { UpdateCategorie } from '../../../components/modales/UpdateCategorie/Upd
 const AdminCategories = () => {
     const inputRef = useRef();
     const { query: callAPI } = useAPI();
-    const { content, changeListener, prepare } = useForm('/categories', "POST");
+    const { content, changeListener, prepare } = useForm('/categorie', "POST");
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(false);
     const [showUpdateModale, setShowUpdateModale] = useState(false);
 
     const getCategories = async () => {
-        const response = await callAPI('/categories');
+        const response = await callAPI('/categorie');
         if (response) {
             setCategories(response);
         }
@@ -56,7 +56,7 @@ const AdminCategories = () => {
     }
 
     const deleteCategory = async (category) => {
-        const response = await callAPI('/categories/' + category.id, "DELETE");
+        const response = await callAPI('/categorie/' + category.id, "DELETE");
         if (response) {
             const copy = [...categories].filter((c) => c.id !== category.id)
             setCategories(copy);

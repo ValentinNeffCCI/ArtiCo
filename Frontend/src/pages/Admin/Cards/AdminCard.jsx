@@ -16,7 +16,7 @@ const AdminCard = ({
     return (
         <article className={classes['card']}>
             <div>
-                <span>
+                <span className={onRoleChange ? classes['userName'] : classes['entrepriseName']}>
                     {entite.name}
                 </span>
                 {entite.email &&
@@ -45,7 +45,7 @@ const AdminCard = ({
                     }}>
                         {entite.role === "ADMIN" ? <User /> : <Shield />}
                         <span>
-                            {entite.role === "ADMIN" ? "Promouvoir" : "Rétrograder"}
+                            {entite.role === "ADMIN" ? "Rétrograder" : "Promouvoir"}
                         </span>
                     </ToggleButton>
                 }
@@ -84,8 +84,8 @@ const AdminCard = ({
                     </ToggleButton>
                 }
                 <ToggleButton entite={entite} onClick={handleDelete} style={{
-                    "--color": "white",
-                    "--bg-color": "red"
+                    "--color": "red",
+                    "--bg-color": "transparent"
                 }}>
                     <Trash />
                     <span>

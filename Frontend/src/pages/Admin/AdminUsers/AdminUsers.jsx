@@ -22,7 +22,7 @@ const AdminUsers = () => {
     };
 
     const toggleBan = async (user) => {
-        const response = await callAPI("/users/" + user.id, "PATCH", {
+        const response = await callAPI("/admin/user/" + user.id, "PUT", {
             active: !user.active,
         });
         if (response) {
@@ -40,7 +40,7 @@ const AdminUsers = () => {
 
     const toggleRole = async (user) => {
         const newRole = user.role === "ADMIN" ? "USER" : "ADMIN";
-        const response = await callAPI("/users/" + user.id, "PATCH", {
+        const response = await callAPI("/admin/user/" + user.id, "PUT", {
             role: newRole,
         });
         if (response) {
@@ -57,7 +57,7 @@ const AdminUsers = () => {
     };
 
     const deleteUser = async (user) => {
-        const response = await callAPI('/users/' + user.id, "DELETE");
+        const response = await callAPI('/admin/user/' + user.id, "DELETE");
         if (response) {
             const copy = [...users].filter((u) => u.id !== user.id)
             setUsers(copy);
@@ -70,7 +70,7 @@ const AdminUsers = () => {
     }
 
     const getAllUsers = async () => {
-        const response = await callAPI("/users");
+        const response = await callAPI("/admin/users");
         if (response) {
             setUsers(response);
         }

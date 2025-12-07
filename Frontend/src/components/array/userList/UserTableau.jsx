@@ -8,7 +8,7 @@ const UserTableau = ({ limit = false }) => {
   const { query: callAPI } = useAPI();
 
   const getAllUsers = async () => {
-    const response = await callAPI("/users");
+    const response = await callAPI("/user");
     if (response) {
       setUsers(response);
     } else {

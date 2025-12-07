@@ -23,7 +23,7 @@ const AdminEntreprises = () => {
     };
 
     const deleteUser = async (user) => {
-        const response = await callAPI('/entreprises/' + user.id, "DELETE");
+        const response = await callAPI('/entreprise/' + user.id, "DELETE");
         if (response) {
             const copy = [...entreprises].filter((u) => u.id !== user.id)
             setEntreprises(copy);
@@ -36,7 +36,7 @@ const AdminEntreprises = () => {
     }
 
     const getAllEntreprises = async () => {
-        const response = await callAPI("/entreprises");
+        const response = await callAPI("/admin/entreprises");
         if (response) {
             setEntreprises(response);
         }
