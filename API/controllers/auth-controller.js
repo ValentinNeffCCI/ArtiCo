@@ -8,7 +8,6 @@ module.exports = {
             const user = await AuthService.login(email, password)
             return res.status(200).json(user);
         } catch (error) {
-            console.log(error)
             return next(new HttpError(error.message || "Erreur lors de la connexion", error.status || 500));
         }
     },
@@ -29,6 +28,20 @@ module.exports = {
             return res.status(reset_user ? 200 : 409).json(reset_user);
         } catch (error) {
             return next(new HttpError(error.message || "Erreur lors de la mise à jour du mot de passe", error.status || 500));
+        }
+    },
+    refresh: async (req, res, next) => {
+        try {
+            const token = await AuthService.refresh(req.body.idUser, req.body.token);
+            if (token) {
+                return res.status(200).json({
+                    token
+                })
+            } else {
+                return res.status(400).send();
+            }
+        } catch (error) {
+            next(error instanceof HttpError ? error : new HttpError(error.message, 500));
         }
     }
 }

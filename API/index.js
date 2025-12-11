@@ -3,6 +3,16 @@ const dotenv = require("dotenv");
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const cookieParser = require('cookie-parser');
+const helmet = require('helmet');
+const {rateLimit} = require('express-rate-limit');
+
+const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    limit: 200,
+    standardHeaders: "draft-8",
+    legacyHeaders: false
+})
 
 // constants
 const initDB = require("./constants/init.js");
@@ -32,9 +42,12 @@ const app = express();
 
 app.use(express.json());
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.FRONTEND_URL,
     credentials: true
 }));
+app.use(limiter);
+app.use(cookieParser());
+app.use(helmet())
 
 
 const PORT = process.env.PORT || 3000;

@@ -15,9 +15,9 @@ module.exports = {
             }
         });
     },
-    create: async (email, password, name) => {
+    create: async (email, password, name, admin = false) => {
         return await prisma.user.create({
-            data: { email, password, name }
+            data: { email, password, name, role: admin ? "ADMIN" : "USER" }
         });
     },
     findByEmail: async (email) => {
@@ -40,5 +40,5 @@ module.exports = {
         return await prisma.user.delete({
             where: { id }
         });
-    }
+    },
 }

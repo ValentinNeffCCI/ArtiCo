@@ -5,15 +5,21 @@ const UserContext = createContext(null);
 
 export const UserProvider = ({children}) => {
     const storage = useLocalStorage();
-    const [user, setUser] = useState(storage.user ?? false);
+    const [user, setUser] = useState(false);
+
+    useEffect(()=>{
+        storage.initUser().then(data=>setUser(data))
+    }, []);
 
     const login = (data) => {
         setUser(data);
-        storage.setValue(data)
+        storage.setValue(data.token);
+        storage.setValue(data.refresh, 'artico_refresh')
     };
 
     const logout = () => {
-        localStorage.removeItem('artico_user');
+        storage.deleteValue('artico_user');
+        storage.deleteValue('artico_refresh');
         setUser(false);
     };
 

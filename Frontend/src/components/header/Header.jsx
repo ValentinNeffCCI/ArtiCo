@@ -9,7 +9,6 @@ import { LinkButton } from "../buttons/Link/LinkButton";
 
 export const Header = () => {
   const mobileBreakpoint = 768;
-
   const { user, logout } = useAuth();
   const [isMobile, setIsMobile] = useState(
     window.innerWidth < mobileBreakpoint

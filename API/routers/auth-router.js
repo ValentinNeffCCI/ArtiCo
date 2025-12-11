@@ -10,5 +10,6 @@ const router = express.Router();
 router.post('/login', fieldVerification(['email', 'password']), AuthController.login);
 router.post('/register', fieldVerification(['email', 'password', 'name']), autoHashingPassword, emailFormatVerification, AuthController.register);
 router.post('/reset-password', authenticate(), fieldVerification(['password']), autoHashingPassword, AuthController.reset);
+router.post('/refresh', fieldVerification(['idUser', 'token']), AuthController.refresh);
 
 module.exports = router;

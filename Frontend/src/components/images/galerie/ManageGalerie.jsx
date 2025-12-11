@@ -31,7 +31,6 @@ const ManageGalerie = ({ entrepriseId = false }) => {
   const onFileChoice = async (e) => {
     const { files } = e.target;
     setIsLoading(true);
-    console.log(files)
     if(files.length == 0) return;
     try {
         const formData = new FormData();

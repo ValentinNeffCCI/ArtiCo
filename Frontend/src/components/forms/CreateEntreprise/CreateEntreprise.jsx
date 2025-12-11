@@ -55,7 +55,6 @@ const CreateEntreprise = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await prepare(e);
-    console.log(response);
     if (response.error) {
       return toast.error(response.error);
     }

@@ -6,13 +6,16 @@ const useAPI = () => {
   const { logout } = useAuth();
 
   const hasFileData = (obj) => {
-    return obj && typeof obj === "object" &&
+    return (
+      obj &&
+      typeof obj === "object" &&
       Object.values(obj).some(
         (value) => value instanceof File || value instanceof Blob
-      );
+      )
+    );
   };
 
-  const getUrl = baseURL.replace('/api', '');
+  const getUrl = baseURL.replace("/api", "");
 
   const callAPI = async (suffix, method = "GET", body = false) => {
     try {
@@ -21,44 +24,53 @@ const useAPI = () => {
         headers: getHeaders(),
       };
 
+      if(suffix === '/login'){
+        payload.credentials = "include";
+      }
+
       if (["PUT", "POST", "PATCH"].includes(method) && body) {
 
         if (body instanceof FormData) {
           payload.body = body;
-          payload.headers = {
-            Authorization: getHeaders().Authorization,
-          };
-        }
-
-        else if (hasFileData(body)) {
+        } else if (hasFileData(body)) {
           const formData = new FormData();
           Object.entries(body).forEach(([key, value]) =>
             formData.append(key, value)
           );
           payload.body = formData;
+        } else {
           payload.headers = {
-            Authorization: getHeaders().Authorization,
-          };
-        }
-
-        else {
-          payload.headers = {
-            ...getHeaders(),
+            ...payload.headers,
             "Content-Type": "application/json",
           };
           payload.body = JSON.stringify(body);
         }
       }
 
-      const response = await fetch(baseURL + suffix, payload);
+      let response = await fetch(baseURL + suffix, payload);
 
-      if (response.error) {
-        logout();
-        return false;
+      if (response.status === 401) {
+        const refresh = await fetch(baseURL + "/refresh", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include"
+        });
+        if(refresh.ok){
+          const token = await refresh.json()
+          window.localStorage.setItem('artico_user', token.refresh);
+          response = await fetch(baseURL + suffix, {
+            ...payload,
+            headers: getHeaders()
+          })
+        } else {
+          logout();
+          return false;
+        }
       }
 
       return await response.json();
-
     } catch (error) {
       if (import.meta.env.VITE_ENV_MODE !== "prod") console.error(error);
       return false;

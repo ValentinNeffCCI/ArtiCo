@@ -1,6 +1,5 @@
 const getHeaders = () => {
-  const {token} = JSON.parse(localStorage.getItem("artico_user"));
-
+  const token = localStorage.getItem("artico_user").replaceAll('"', "");
   const headers = {};
 
   if (token) {

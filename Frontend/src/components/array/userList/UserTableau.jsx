@@ -9,14 +9,15 @@ const UserTableau = ({ limit = false }) => {
 
   const getAllUsers = async () => {
     const response = await callAPI("/user");
-    if (response) {
-      setUsers(response);
-    } else {
+    if (response.error) {
       toast.error("Une erreur est survenue");
+    } else {
+      setUsers(response);
     }
   };
 
   const limitUsers = () => {
+    if(!users) return users;
     const copy = [...users];
     return limit ? copy.reverse().splice(0, limit) : copy.reverse();
   };
@@ -24,6 +25,7 @@ const UserTableau = ({ limit = false }) => {
   useEffect(() => {
     getAllUsers();
   }, []);
+
   return (
     <div className={classes["tableau"]}>
       <h2>Les nouveaux utilisateurs</h2>

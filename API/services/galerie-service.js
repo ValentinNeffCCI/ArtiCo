@@ -18,7 +18,6 @@ module.exports = {
     delete: async (id) => {
         const file = await galerieRepository.findById(id);
         if(file) {
-            console.log(file.path);
             fs.unlinkSync(file.path);
         }
         await galerieRepository.delete(id);

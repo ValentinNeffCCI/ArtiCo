@@ -9,10 +9,10 @@ const EntrepriseTableau = ({ limit = false }) => {
   const { query: callAPI } = useAPI();
   const getAllEntreprises = async () => {
     const response = await callAPI("/entreprise");
-    if (response) {
-      setEntreprises(response);
-    } else {
+    if (response.error) {
       toast.error("Une erreur est survenue");
+    } else {
+      setEntreprises(response);
     }
   };
 

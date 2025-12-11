@@ -19,6 +19,7 @@ model User {
   password  String
   role      EnumRole @default(USER)
   active    Boolean  @default(true)
+  refresh_token String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

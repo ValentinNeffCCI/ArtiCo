@@ -1,27 +1,46 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const useLocalStorage = () => {
-  const [storedValue, setStoredValue] = useState(() => {
+  const initUser = async () => {
     try {
       const item = window.localStorage.getItem("artico_user");
-      return item ? JSON.parse(item) : false;
+      const data = JSON.parse(item);
+      return await getUser(data);
     } catch (error) {
       return false;
     }
-  });
+  };
+
+  const getUser = async (token) => {
+    const response = await fetch(import.meta.env.VITE_API_URL + "/user/me", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.status === 401) {
+      return false;
+    }
+    const user = await response.json();
+    return user;
+  };
 
   const setValue = (value, key = "artico_user") => {
     try {
-      setStoredValue(value);
       window.localStorage.setItem(key, JSON.stringify(value));
     } catch (error) {
       console.error(error);
     }
   };
 
+  const getValue = (key) => window.localStorage.getItem(key);
+
+  const deleteValue = (key) => window.localStorage.removeItem(key);
+
   return {
-    user: storedValue,
+    initUser,
     setValue,
+    deleteValue,
+    getValue
   };
 };
 
