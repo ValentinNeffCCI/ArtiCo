@@ -5,6 +5,7 @@ datas/
 postgres_datas/
 /generated/prisma
 .env
+.env.*
 
 /generated/prisma
 uploads/
