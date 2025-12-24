@@ -4,13 +4,11 @@ import { useAuth } from "../../../contexts/UserContext";
 import useForm from "../../../hooks/useForm";
 import classes from "./Loginsection.module.css";
 import { LinkButton } from "../../../components/buttons/Link/LinkButton";
-import useAPI from "../../../hooks/useAPI";
 import { toast, ToastContainer } from "react-toastify";
 
 export const LoginForm = ({ children }) => {
-  const mode = import.meta.env.VITE_ENV_MODE;
-  const { changeListener, prepare, content, simulateUserConnection } = useForm(
-    "/login",
+  const { changeListener, prepare, content } = useForm(
+    "/auth/login",
     "POST"
   );
   const { login } = useAuth();
@@ -22,36 +20,16 @@ export const LoginForm = ({ children }) => {
       return;
     }
 
-    if (mode === "demo") {
-      e.preventDefault();
-      simulateUser();
+    const loginAccess = await prepare(e);
+    if(loginAccess.error){
+      toast.error(loginAccess.error);
       return;
     }
-
-    const loginAccess = await prepare(e);
-    if (!loginAccess) {
-      toast.error("Mot de passe incorrect");
-    }
-  };
-
-  const simulateUser = async () => {
-    const { query } = useAPI();
-    const { email } = content;
-    let response = await query(`/users?email=${email}`);
-    if (response.length > 0) {
-      if (mode === "demo") {
-        response[0] = simulateUserConnection(response[0]);
-      }
-      login(response[0]);
-    } else {
-      toast.error("Aucun compte n'a été trouvé avec cet e-mail");
-    }
-    return;
+    login(loginAccess);
   };
 
   return (
     <div className={classes["login_form"]}>
-      <ToastContainer/>
       <h1>Accéder à mon profil</h1>
       <form onSubmit={handleSubmit}>
         <input

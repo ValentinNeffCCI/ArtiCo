@@ -10,7 +10,7 @@ const FormList = ({ forms = [] }) => {
       <Fragment>
         <div className={classes["forms"]}>
           <h2>
-            <span>Questionnaires disponibles :</span>
+            <span>Questionnaires disponibles</span>
           </h2>
           <div className={classes["list"]}>
             {forms.map((form) => (

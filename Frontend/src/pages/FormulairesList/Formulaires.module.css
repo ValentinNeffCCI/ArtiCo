@@ -140,7 +140,7 @@
     --bg-color: var(--secondary);
     --color: var(--primary);
     margin: 0 auto;
-    height: 100%;
+    height: fit-content;
     aspect-ratio: 1/1;
     margin: 0 auto;
     border-radius: .5rem;
@@ -163,4 +163,5 @@
     aspect-ratio: 1;
     height: auto;
     transition: transform .3s ease;
+    min-width: 80px;
 }

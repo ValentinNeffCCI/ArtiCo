@@ -1,17 +1,14 @@
-const getHeaders = (isFormData = false) => {
-  const token = localStorage.getItem("artico_token");
+const getHeaders = () => {
+  const localData = localStorage.getItem("artico_user");
+  const token = localData ? localData.replaceAll('"', "") : "";
 
-  const headers = {};
-
-  if (!isFormData) {
-    headers["Content-Type"] = "application/json";
+  if(!token){
+    return {}
   }
 
-  if (token) {
-    headers["Authorization"] = `Bearer ${token}`;
-  }
-
-  return headers;
+  return {
+    "Authorization": `Bearer ${token}`
+  };
 };
 
 export default getHeaders;

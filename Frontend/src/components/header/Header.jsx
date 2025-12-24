@@ -9,7 +9,6 @@ import { LinkButton } from "../buttons/Link/LinkButton";
 
 export const Header = () => {
   const mobileBreakpoint = 768;
-
   const { user, logout } = useAuth();
   const [isMobile, setIsMobile] = useState(
     window.innerWidth < mobileBreakpoint
@@ -26,12 +25,12 @@ export const Header = () => {
     {
       path: "/admin",
       label: "Espace administrateur",
-      allowedRoles: ["admin"],
+      allowedRoles: ["ADMIN"],
     },
     {
       path: "/profil",
       label: "Mon Profil",
-      allowedRoles: ["user", "admin"],
+      allowedRoles: ["USER", "ADMIN"],
     },
     {
       path: "/rechercher",
@@ -57,9 +56,8 @@ export const Header = () => {
 
   return (
     <header
-      className={`${classes.header} ${
-        scrollPosition !== 0 && classes.scrolling
-      }`}
+      className={`${classes.header} ${scrollPosition !== 0 && classes.scrolling
+        }`}
     >
       <NavLink to={"/"}>
         <Logo size={100} />

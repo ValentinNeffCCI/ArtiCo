@@ -1,8 +1,9 @@
-import { ArrowLeft, Loader } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import Loader from "../../components/UX/loaders/Loader";
 import React, { Suspense, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
-import { toast, ToastContainer } from "react-toastify";
+import { toast, ToastContainer, Slide } from "react-toastify";
 import defaultImage from "../../assets/photos/Sora_Shimazaki/handshake.jpg";
 import CreateEntreprise from "../../components/forms/CreateEntreprise/CreateEntreprise";
 import { LinkButton } from "../../components/buttons/Link/LinkButton";
@@ -19,30 +20,30 @@ const ModifierEntreprise = () => {
   const [entreprise, setEntreprise] = useState(false);
   const [showModale, setShowModale] = useState(false);
 
-  const closeModale = ()=>{
-    setShowModale(false)
-  }
+  const closeModale = () => {
+    setShowModale(false);
+  };
 
   const getEntrepriseById = async (id) => {
-    const response = await callAPI(`/entreprises/${id}`);
-    if (response) {
+    const response = await callAPI(`/entreprise/${id}`);
+    if (response.error) {
+      toast.error(response.error);
+    } else {
       setEntreprise(response);
+    }
+  };
+
+  const deleteUser = async () => {
+    const response = await callAPI("/entreprise/" + id, "DELETE");
+    if (response.error) {
+      toast.error(response.error);
     } else {
       navigation("/profil");
     }
   };
 
-  const deleteUser = async () => {
-      const response = await callAPI("/entreprises/" + id, "DELETE");
-      if (response) {
-        navigation("/profil");
-      } else {
-        toast.error("Une erreur est survenue");
-      }
-  }
-
-  const displayModale = ()=>{
-    setShowModale(entreprise)
+  const displayModale = () => {
+    setShowModale(entreprise);
   };
 
   useEffect(() => {
@@ -50,7 +51,11 @@ const ModifierEntreprise = () => {
   }, [id]);
   return (
     <main className={style["page"]}>
-      {showModale && <DeleteConfirmation onClose={closeModale} onDelete={deleteUser}>Voulez-vous vraiment supprimer l'entreprise ?</DeleteConfirmation>}
+      {showModale && (
+        <DeleteConfirmation onClose={closeModale} onDelete={deleteUser}>
+          Voulez-vous vraiment supprimer l'entreprise ?
+        </DeleteConfirmation>
+      )}
       <LinkButton
         style={{
           display: "flex",
@@ -59,7 +64,7 @@ const ModifierEntreprise = () => {
           gap: ".5rem",
           margin: "0 3rem",
           width: "fit-content",
-          padding: "2rem 0"
+          padding: "2rem 0",
         }}
         path="/profil"
       >
@@ -79,7 +84,7 @@ const ModifierEntreprise = () => {
           <CreateEntreprise
             defaultValues={entreprise}
             method="PUT"
-            url={"/entreprises/" + id}
+            url={"/entreprise/" + id}
           />
           <ManageGalerie entrepriseId={id} />
         </div>
@@ -95,7 +100,19 @@ const ModifierEntreprise = () => {
       >
         Supprimer l'entreprise
       </CustomButton>
-      <ToastContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Slide}
+      />
     </main>
   );
 };

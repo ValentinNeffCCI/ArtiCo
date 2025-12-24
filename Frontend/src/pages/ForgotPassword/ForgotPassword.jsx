@@ -15,8 +15,7 @@ const ForgotPassword = () => {
         <Fragment>
           <h2>Vérifiez votre boîte mail</h2>
           <h3>
-            Si une adresse mail correspond à un compte, un mail vous a été
-            envoyé avec le lien de réinitalisation
+            Nous vous avons envoyé un lien pour modifier votre mot de passe
           </h3>
           <figure
             className="hidden-mobile"
@@ -30,7 +29,7 @@ const ForgotPassword = () => {
               src={ApprovingWorker}
               alt="Ouvrier heureux"
               style={{
-                width: "20%",
+                width: "70%",
               }}
             />
           </figure>
@@ -41,7 +40,7 @@ const ForgotPassword = () => {
             Nous sommes désolé d'apprendre que vous avez oublié votre mot de
             passe...
           </h1>
-          <PasswordRecoveryForm sendMail={sendMail} url={"/reset-password"}/>
+          <PasswordRecoveryForm sendMail={sendMail}/>
           <figure
             className="hidden-mobile"
             style={{

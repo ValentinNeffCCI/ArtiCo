@@ -5,14 +5,14 @@ const CustomInput = ({ input, children }) => {
   return (
     <div className={style["input"]}>
       {input.type == "radio" || input.type == "checkbox" ? (
-        <div>
-          {input.label ? input.label : input.name}{" "}
-          {input.required === "true" && "*"}
+        <div className={style["input_label"]}>
+          {input.name}{" "}
+          {input.required && "*"}
         </div>
       ) : (
         <label htmlFor={input.name.replaceAll(" ", "_") + "_" + input.id}>
           {input.label ? input.label : input.name}{" "}
-          {input.required === "true" && "*"}
+          {input.required && "*"}
         </label>
       )}
       <div className={style[input.type]}>{children}</div>

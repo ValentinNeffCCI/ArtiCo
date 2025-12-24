@@ -4,21 +4,21 @@ import { CustomButton } from "../../../components/buttons/Custom/CustomButton";
 import style from "./update.module.css";
 import { toast } from "react-toastify";
 
-const UpdateUserForm = () => {
-  const isDemo = import.meta.env.VITE_ENV_MODE == "demo";
-  const { user, login } = useAuth();
-  const { changeListener, prepare } = useForm("/users/" + user.id, "PATCH");
+const UpdateUserForm = ({user}) => {
+  const { changeListener, prepare } = useForm("/user/" + user.id, "PUT", {
+    name: user.name,
+    email: user.email
+  });
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await prepare(e);
+    if(response.error){
+      toast.error(response.error);
+      return;
+    }
     if (response) {
-      isDemo
-        ? login((prev) => ({
-            ...response,
-            role: prev.role,
-          }))
-        : login(response);
       toast.success("Modifications effectuées");
     } else {
       toast.error("Une erreur est survenue");

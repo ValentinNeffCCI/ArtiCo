@@ -6,7 +6,6 @@ import useForm from "../../hooks/useForm";
 import ChangePassword from "../../components/forms/ChangePassword/ChangePassword";
 
 const PasswordRecovery = () => {
-  const { content, changeListener: onChange, prepare } = useForm();
 
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
@@ -15,15 +14,8 @@ const PasswordRecovery = () => {
     return <Navigate to={"/"} />;
   }
 
-  const [isPasswordModified, setIsPasswordModified] = useState(false);
-
-  const modifyPassword = () => setIsPasswordModified((prev) => !prev);
-
   return (
     <main className={`${style.recovery}`}>
-      {isPasswordModified ? (
-        <Fragment></Fragment>
-      ) : (
         <Fragment>
           <figure
             className={`hidden-mobile ${style.figure}`}
@@ -41,7 +33,6 @@ const PasswordRecovery = () => {
           </figure>
           <ChangePassword token={token}/>
         </Fragment>
-      )}
     </main>
   );
 };

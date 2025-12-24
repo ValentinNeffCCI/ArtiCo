@@ -14,7 +14,7 @@ const FormCard = ({ onDelete, form }) => {
       <div className={style["form-buttons"]}>
         <LinkButton path={"/formulaire/" + form.id + "/reponses"}>
           <Eye size={15} />
-          <span>Reponses</span>
+          <span>Réponses</span>
         </LinkButton>
         <LinkButton path={"/formulaire/modifier/" + form.id}>
           <Pencil size={15} />

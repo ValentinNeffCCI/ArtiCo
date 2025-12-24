@@ -1,0 +1,49 @@
+.entreprise-card{
+    width: 80%;
+    border: 2px solid var(--primary);
+    margin: 1rem auto;
+    border-radius: 2rem;
+    padding-left: 1rem;
+    animation: fade-in-up .7s;
+    display: flex;
+}
+
+.entreprise-card p{
+    font-weight: 600;
+    padding: .5rem;
+}
+
+.button-section{
+    display: flex;
+    background-color: var(--primary);
+    align-items: center;
+    width: 25%;
+    border-radius: 2rem;
+    justify-content: space-between;
+}
+
+.button-section button{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+    align-items: center;
+    width: 48%;
+    height: 100%;
+}
+
+.button-section span {
+    font-size: 1rem;
+}
+
+.entreprise-card > div:first-of-type > p{
+    width: 50%;
+}
+
+@keyframes fade-in-up {
+    from{
+        transform: translateY(10px);
+        opacity: 0;
+    }
+}

@@ -2,13 +2,6 @@ import { useEffect, useState, useRef } from "react";
 
 const usePosition = () => {
   const [position, setPosition] = useState(false);
-  const hasRequested = useRef(false);
-
-  useEffect(() => {
-    return () => {
-      localStorage.removeItem("GPS");
-    };
-  }, []);
 
   const baseUrl =
     "https://geo.api.gouv.fr/communes?lat={latitude}&lon={longitude}&fields=code,nom,codesPostaux";
@@ -25,16 +18,18 @@ const usePosition = () => {
         if (data.length !== 0) {
           const localisation = data[0];
           const returnValue = {
-            ville: localisation.nom,
-            codesPostaux: localisation.codesPostaux,
-            fetched_at: new Date().toLocaleDateString(),
+            ville: localisation.nom ?? "Paris",
+            codesPostal: localisation.codesPostaux[0] ?? '75000'
           };
           localStorage.setItem("GPS", JSON.stringify(returnValue));
           setPosition(returnValue);
         }
       })
       .catch((error) => {
-        setPosition(false);
+        setPosition({
+            ville: "Paris",
+            codesPostal: 75000
+          });
       });
   };
 
@@ -43,15 +38,6 @@ const usePosition = () => {
   };
 
   const determineCity = () => {
-    const GPS = localStorage.getItem("GPS");
-    if (GPS) {
-      const datas = JSON.parse(GPS);
-      const today = new Date().toLocaleDateString();
-      if (datas.fetched_at === today) {
-        setPosition(datas);
-        return;
-      }
-    }
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         onLocalisationSuccess,
@@ -60,16 +46,10 @@ const usePosition = () => {
     } else {
       setPosition(false);
     }
+    return position;
   };
 
-  useEffect(() => {
-    if (!hasRequested.current) {
-      hasRequested.current = true;
-      determineCity();
-    }
-  }, []);
-
-  return position;
+  return determineCity;
 };
 
 export default usePosition;

@@ -21,15 +21,9 @@ const Formulaires = () => {
   const getEntrepriseForms = async () => {
     setIsLoading(true);
     try {
-      const response = await query(
-        "/formulaires?entreprise_id=" + entrepriseID
-      );
+      const response = await query("/formulaire/entreprise/" + entrepriseID);
       if (response) {
-        setForms(
-          response.filter(
-            (form) => form.entreprise_id && form.entreprise_id == entrepriseID
-          )
-        );
+        setForms(response);
       }
     } catch (error) {
       if (import.meta.env.VITE_ENV_MODE != "prod") {
@@ -45,9 +39,10 @@ const Formulaires = () => {
   };
 
   const handleDelete = async (form) => {
-    const response = await query("/formulaires/" + form.id, "DELETE");
+    const response = await query("/formulaire/" + form.id, "DELETE");
     if (response) {
-      setForms((prev) => prev.filter((item) => item.id != id));
+      setForms((prev) => prev.filter((item) => item.id != form.id));
+      closePopup();
     }
   };
 
@@ -66,7 +61,15 @@ const Formulaires = () => {
         <ArrowLeft />
         Revenir en arrière
       </CustomButton>
-      {showModale && <DeleteConfirmation onDelete={handleDelete} onClose={closePopup} />}
+      {showModale && (
+        <DeleteConfirmation
+          onDelete={handleDelete}
+          onClose={closePopup}
+          entite={showModale}
+        >
+          <h3>Voulez-vous vraiment supprimer "{showModale.name}"</h3>
+        </DeleteConfirmation>
+      )}
       <h1 className={["dangrek", style["title"]].join(" ")}>
         Les questionnaires de mon entreprise
       </h1>

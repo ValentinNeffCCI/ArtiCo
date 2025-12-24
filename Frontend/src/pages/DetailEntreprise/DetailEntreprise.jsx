@@ -4,43 +4,26 @@ import { useEffect, useState } from "react";
 import useAPI from "../../hooks/useAPI";
 import Loader from "../../components/UX/loaders/Loader";
 import { Mail, MapPin, Phone } from "lucide-react";
-import defaultImage from "../../assets/photos/Sora_Shimazaki/handshake.jpg";
 import Visionneuse from "../../components/images/Visionneuse/Visionneuse";
-import { filters } from "./filters";
+import ReactMarkdown from "react-markdown";
 import FormList from "../../components/forms/FormList/FormList";
 
 const DetailEntreprise = () => {
   const { id } = useParams();
-  const { query: callAPI } = useAPI();
+  const { query: callAPI, url: apiUrl } = useAPI();
   const [entreprise, setEntreprise] = useState(false);
   const [galerie, setGalerie] = useState([]);
   const [forms, setForms] = useState([]);
 
-  const getGalerie = async () => {
-    const url =
-      import.meta.env.VITE_ENV_MODE == "demo"
-        ? "/galeries?entreprise_id=" + id
-        : "/galerie/" + id;
-    const response = await callAPI(url);
-    if (response) {
-      setGalerie([
-        entreprise.image ?? defaultImage,
-        ...response.map((element) => element.path ?? defaultImage),
-      ]);
-    }
-  };
-
   const fetchEntreprise = async () => {
-    const response = await callAPI("/entreprises/" + id);
+    const response = await callAPI("/entreprise/" + id);
     setEntreprise(response);
-    getGalerie();
-    getForms();
+    setGalerie(
+      response.photos
+        ? [ response.image, ...response.photos.map(p=>p.path)]
+        : response.image
+    );
   };
-
-  const getForms = async () => {
-    const response = await callAPI('/formulaires?entreprise_id='+id)
-    setForms(response)
-  }
 
   useEffect(() => {
     fetchEntreprise();
@@ -53,19 +36,17 @@ const DetailEntreprise = () => {
   const mapsAdress = () =>
     "https://www.google.com/maps/place/" +
     [
-      entreprise.adress1.replaceAll(" ", "+"),
+      entreprise.adress1?.replaceAll(" ", "+"),
       entreprise.cp,
       entreprise.city,
     ].join("+");
 
   const sanitizeDescription = (text) => {
-    filters.forEach((filter) => {
-      text = text.replaceAll(`<${filter}`, "<div");
-      text = text.replaceAll(`</${filter}`, "</div");
-      text = text.replaceAll(`<${filter}/>`, "");
-    });
+    text = text.replaceAll(`<`, "<div");
     return text;
   };
+
+  if(!entreprise) return <Loader/>;
 
   return (
     <main className={classes["main"]}>
@@ -75,17 +56,20 @@ const DetailEntreprise = () => {
       <div>
         <div className={classes["content"]}>
           <Visionneuse galerie={galerie} />
+          <h2><span>Description de l'entreprise</span></h2>
           <div
             className={classes["description"]}
-            dangerouslySetInnerHTML={{
-              __html: sanitizeDescription(entreprise.description),
-            }}
-          ></div>
-            <FormList forms={forms}/>
+          ><ReactMarkdown>{entreprise.description ? sanitizeDescription(entreprise.description) : ""}</ReactMarkdown></div>
+          <FormList forms={entreprise.formulaires} />
         </div>
-          <div className={classes["contact"]}>
+        <div className={classes["contact"]}>
+          {entreprise.address1 && (
             <div className={classes["adress"]}>
-              <NavLink to={mapsAdress(entreprise.adress1)} target="_blank" title="Voir sur Google Maps">
+              <NavLink
+                to={mapsAdress(entreprise.address1)}
+                target="_blank"
+                title="Voir sur Google Maps"
+              >
                 <MapPin />
               </NavLink>
               <div>
@@ -96,23 +80,34 @@ const DetailEntreprise = () => {
                 </span>
               </div>
             </div>
+          )}
+          {entreprise.phone && entreprise.phone != "null" && (
             <div className={classes["phone"]}>
-              <NavLink to={`tel:${entreprise.phone}`} target="_blank" title="Contacter par téléphone">
+              <NavLink
+                to={`tel:${entreprise.phone}`}
+                target="_blank"
+                title="Contacter par téléphone"
+              >
                 <Phone />
               </NavLink>
               <div>
                 <span>{entreprise.phone}</span>
               </div>
             </div>
-            <div className={classes["mail"]}>
-              <NavLink to={`mailto:${entreprise.email}`} target="_blank" title="Contacter par mail">
-                <Mail />
-              </NavLink>
-              <div>
-                <span>{entreprise.email}</span>
-              </div>
+          )}
+          <div className={classes["mail"]}>
+            <NavLink
+              to={`mailto:${entreprise.email}`}
+              target="_blank"
+              title="Contacter par mail"
+            >
+              <Mail />
+            </NavLink>
+            <div>
+              <span>{entreprise.email}</span>
             </div>
           </div>
+        </div>
       </div>
     </main>
   );

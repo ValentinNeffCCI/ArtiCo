@@ -24,12 +24,11 @@
     gap: 2rem;
     border-left: 2px solid var(--primary);
     padding: 1rem;
-    width: 15%;
+    width: fit-content;
 }
 
 .content{
     width: 80%;
-    display: flex;
     margin: 2rem 0;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -40,11 +39,6 @@
 .content h2 span{
     padding-right: 1rem;
     border-bottom: 2px solid var(--secondary);
-}
-
-.content .description {
-    width: 50%;
-    padding: 1rem;
 }
 
 .adress, .phone, .mail{
@@ -65,4 +59,17 @@
 .adress > div {
     display: flex;
     flex-direction: column;
+}
+
+.content h2 {
+    margin-top: 2rem;
+}
+
+.content .description {
+    margin: 1rem 0;
+    width: 100%;
+}
+
+.content .description p{
+    margin-bottom: 1rem;
 }

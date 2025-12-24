@@ -4,16 +4,12 @@ import GaleriePhoto from "./GaleriePhoto";
 import { CustomButton } from "../../buttons/Custom/CustomButton";
 import { Plus } from "lucide-react";
 import Loader from "../../UX/loaders/Loader";
+import { toast } from "react-toastify";
 
 const ManageGalerie = ({ entrepriseId = false }) => {
   const [galerie, setGalerie] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const url =
-    import.meta.env.VITE_ENV_MODE == "demo"
-      ? 
-      "/galeries?entreprise_id=" + entrepriseId
-      :
-      "/galeries/" + entrepriseId;
+  const url = "/galerie/entreprise/" + entrepriseId;
 
   const { query: callAPI } = useAPI();
 
@@ -21,7 +17,9 @@ const ManageGalerie = ({ entrepriseId = false }) => {
 
   const getPhotos = async () => {
     const response = await callAPI(url, "GET");
-    if (response) {
+    if (response.error) {
+      toast.error(response.error);
+    } else {
       setGalerie(response);
     }
   };
@@ -33,32 +31,24 @@ const ManageGalerie = ({ entrepriseId = false }) => {
   const onFileChoice = async (e) => {
     const { files } = e.target;
     setIsLoading(true);
+    if(files.length == 0) return;
     try {
-      if (import.meta.env.VITE_ENV_MODE == "demo") {
-        for (let i = 0; i < files.length; i++) {
-          let response = await callAPI("/galeries", "POST", {
-            entreprise_id: entrepriseId,
-            path: "/perceuse.jpg",
-          });
-          if (response) {
-            setGalerie((prev) => [...prev, response]);
-          }
-        }
-      } else {
         const formData = new FormData();
-        formData.append("photos", files);
-        formData.append("entreprise_id", entrepriseId);
-        const response = await callAPI("/galeries/new");
-        if (response) {
-          setGalerie((prev) => [...prev, ...response]);
+        formData.append("photo", files[0]);
+        formData.append("entrepriseId", entrepriseId);
+        const response = await callAPI("/galerie", "POST", formData);
+        if (response.error) {
+          toast.error(response.error);
+        } else {
+          toast.success("Photo ajoutée");
+          setGalerie((prev) => [...prev, response]);
         }
-      }
     } catch (error) {
       if (import.meta.env.VITE_ENV_MODE !== "prod") {
         console.error(error);
       }
     } finally {
-      setIsLoading(false);
+      setTimeout(() => setIsLoading(false), 1000);
     }
   };
 
@@ -120,10 +110,9 @@ const ManageGalerie = ({ entrepriseId = false }) => {
       </CustomButton>
       <input
         type="file"
-        name="photo"
-        id="photo"
+        name="photos"
+        id="photos"
         ref={fileInputRef}
-        multiple={true}
         style={{
           width: 0.1,
           height: 0.1,

@@ -6,13 +6,11 @@ import { Plus, Save } from "lucide-react";
 import useAPI from "../../../../hooks/useAPI";
 import OptionDialog from "../../../dialog/OptionDialog/OptionDialog";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const defaultInput = (formId) => ({
   type: "text",
-  name: "",
-  required: "true",
-  options: false,
-  formulaire_id: formId,
+  formulaireId: formId,
 });
 
 const FormBuilder = ({
@@ -21,7 +19,7 @@ const FormBuilder = ({
   formId,
   formDatas = {
     name: "",
-    entreprise_id: false,
+    entrepriseId: false,
   },
 }) => {
   const [datas, setDatas] = useState(form.length > 0 ? form : []);
@@ -40,7 +38,7 @@ const FormBuilder = ({
   const { query: callAPI } = useAPI();
 
   const createInput = async () => {
-    return callAPI("/inputs", "POST", defaultInput(formId));
+    return callAPI("/input", "POST", defaultInput(formId));
   };
 
   const handleChange = (value, id) => {
@@ -68,17 +66,22 @@ const FormBuilder = ({
     e.preventDefault();
     const payLoad = {
       name: formDatas.name,
-      entreprise_id: formDatas.entreprise_id,
-      inputs: datas,
+      entrepriseId: formDatas.entrepriseId,
+      inputs: datas.map(i=>({
+        ...i,
+        required: i.required == "true" ? true : false 
+      })),
     };
-    const response = await callAPI("/formulaires/" + formId, "PUT", payLoad);
-    if (response) {
-      navigation(`/entreprise/${formDatas.entreprise_id}/formulaires`);
+    const response = await callAPI("/formulaire/" + formId, "PUT", payLoad);
+    if (!response.error) {
+      navigation(-1);
+    } else {
+      toast.error(await response.json().message);
     }
   };
 
   const onRemove = async (id) => {
-    const response = await callAPI("/inputs/" + id, "DELETE");
+    const response = await callAPI("/input/" + id, "DELETE");
     if (response) {
       setDatas((prev) => prev.filter((row) => row.id !== id));
     }
@@ -98,7 +101,7 @@ const FormBuilder = ({
   };
 
   const removeOption = async (id) => {
-    const response = await callAPI("/options/" + id, "DELETE");
+    const response = await callAPI("/option/" + id, "DELETE");
     if (response) {
       setDatas((prev) =>
         prev.map((item) =>

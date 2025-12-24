@@ -5,15 +5,15 @@ import ContactModale from '../modales/Contact/ContactModale';
 import { Bell, Pen } from 'lucide-react';
 
 export const Footer = () => {
-    const [showContactModale, setShowContactModale] = useState(false);
+    // const [showContactModale, setShowContactModale] = useState(false);
 
-    const toggleContactModale = () => {
-        setShowContactModale(!showContactModale);
-    };
+    // const toggleContactModale = () => {
+    //     setShowContactModale(!showContactModale);
+    // };
 
     return (
         <footer className={classes["footer"]}>
-            <CustomButton 
+            {/* <CustomButton 
             clickAction={toggleContactModale} 
             style={{
                 padding: '0.5rem 1rem',
@@ -21,7 +21,6 @@ export const Footer = () => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '0.5rem',
-                "--bg-color": "var(--light)",
                 "--color": "var(--dark)",
                 position: 'fixed',
                 bottom: '1rem',
@@ -31,14 +30,14 @@ export const Footer = () => {
             >
                 <span>Nous contacter</span>
                 <Pen size={20}/>
-            </CustomButton>
+            </CustomButton> */}
             <span>
                 &copy; {new Date().getFullYear()} Artico
             </span>
             <span>
                 Valentin NEFF
             </span>
-            {showContactModale && <ContactModale toggleModale={toggleContactModale} />}
+            {/* {showContactModale && <ContactModale toggleModale={toggleContactModale} />} */}
         </footer>
     )
 }

@@ -4,7 +4,7 @@ import useAPI from '../../../hooks/useAPI';
 import useForm from '../../../hooks/useForm';
 import { CustomButton } from '../../../components/buttons/Custom/CustomButton';
 import { Save } from 'lucide-react';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import DeleteConfirmation from "../../../components/modales/DeleteConfirmation/DeleteConfirmation.jsx";
 import EntiteList from "../../../components/listes/users/EntiteList.jsx";
 import { UpdateCategorie } from '../../../components/modales/UpdateCategorie/UpdateCategorie.jsx';
@@ -12,13 +12,13 @@ import { UpdateCategorie } from '../../../components/modales/UpdateCategorie/Upd
 const AdminCategories = () => {
     const inputRef = useRef();
     const { query: callAPI } = useAPI();
-    const { content, changeListener, prepare } = useForm('/categories', "POST");
+    const { content, changeListener, prepare } = useForm('/categorie', "POST");
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(false);
     const [showUpdateModale, setShowUpdateModale] = useState(false);
 
     const getCategories = async () => {
-        const response = await callAPI('/categories');
+        const response = await callAPI('/categorie');
         if (response) {
             setCategories(response);
         }
@@ -26,7 +26,6 @@ const AdminCategories = () => {
 
     const modifyCategorie = (categorie) => {
         setCategories(prev => prev.map(c => c.id === categorie.id ? categorie : c))
-        console.log(categories)
         setShowUpdateModale(false);
     }
 
@@ -44,20 +43,21 @@ const AdminCategories = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        if (content.name.length == 0) {
-            toast.error("Veuillez rentrer un nom valable")
+        if (!content.name || content.name.length == 0) {
+            toast.error("Veuillez rentrer un nom valide")
+            return;
         }
         const response = await prepare(e);
-        if (response) {
+        if (response.error) {
+            toast.error("Cette catégorie existe déjà")
+        } else {
             setCategories(prev => [...prev, response])
             inputRef.current.value = "";
-        } else {
-            toast.error("Veuillez rentrer un nom valable")
         }
     }
 
     const deleteCategory = async (category) => {
-        const response = await callAPI('/categories/' + category.id, "DELETE");
+        const response = await callAPI('/categorie/' + category.id, "DELETE");
         if (response) {
             const copy = [...categories].filter((c) => c.id !== category.id)
             setCategories(copy);
@@ -74,7 +74,8 @@ const AdminCategories = () => {
     }
 
     return (
-        <main className={classes["page"]}>
+        <main className={classes["categorie_page"]}>
+            <ToastContainer/>
             {
                 showUpdateModale &&
                 <UpdateCategorie categorie={showUpdateModale} onClose={closeCategorieToModify} onModify={modifyCategorie}/>

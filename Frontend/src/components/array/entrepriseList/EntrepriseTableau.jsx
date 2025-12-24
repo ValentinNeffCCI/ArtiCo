@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useAPI from "../../../hooks/useAPI";
 import { LinkButton } from "../../buttons/Link/LinkButton";
 import classes from "../Tableaux.module.css";
+import { toast } from "react-toastify";
 
 const EntrepriseTableau = ({ limit = false }) => {
   const [entreprises, setEntreprises] = useState([]);
   const { query: callAPI } = useAPI();
   const getAllEntreprises = async () => {
-    const response = await callAPI("/entreprises");
-    if (response) {
-      setEntreprises(response);
-    } else {
+    const response = await callAPI("/entreprise");
+    if (response.error) {
       toast.error("Une erreur est survenue");
+    } else {
+      setEntreprises(response);
     }
   };
 
@@ -30,8 +31,6 @@ const EntrepriseTableau = ({ limit = false }) => {
           <tr>
             <td>Identifiant</td>
             <td>Nom</td>
-            <td>Email</td>
-            <td>Adresse</td>
             <td>Ville</td>
             <td>Code Postal</td>
           </tr>
@@ -41,12 +40,6 @@ const EntrepriseTableau = ({ limit = false }) => {
             <tr key={entreprise.id}>
               <td>{entreprise.id}</td>
               <td>{entreprise.name}</td>
-              <td>{entreprise.email}</td>
-              <td>
-                {entreprise.adress1}
-                <br />
-                {entreprise.adress2}
-              </td>
               <td>{entreprise.city}</td>
               <td>{entreprise.cp}</td>
             </tr>

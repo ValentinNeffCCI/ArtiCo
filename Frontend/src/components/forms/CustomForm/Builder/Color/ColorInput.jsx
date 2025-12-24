@@ -15,7 +15,7 @@ const ColorInput = ({ input, onChange }) => {
               ? input.name.replaceAll(" ", "-") + "_" + input.id
               : "default_" + input.id
           }
-          required={input.required == "true"}
+          required={input.required}
           defaultValue={input.value ?? "#000"}
           ref={inputRef}
           onChange={onChange}

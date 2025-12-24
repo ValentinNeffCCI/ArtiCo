@@ -1,36 +1,44 @@
-//! remove when finished
-const users = require("../datas/users.js");
 const prisma = require("../constants/client.js");
 
-const responseSchema = (login = false) => {
-    return {
-        id: true,
-        name: true,
-        email: true,
-        role: true,
-        active: true,
-        entreprises: true,
-        password: login
-    }
-}
-
 module.exports = {
-    findAll: (req, res) => {
-        return prisma.user.findMany({ select: responseSchema() });
+    findAll: async () => {
+        return await prisma.user.findMany();
     },
-    findById: (id) => {
-        return prisma.user.findUnique({ where: { id: id }, select: responseSchema() });
+    findAllWithAccess: async () => {
+        return await prisma.user.findMany();
     },
-    create: (email, password, name) => {
-        return prisma.user.create({ data: { email, password, name }, select: responseSchema() });
+    findById: async (id) => {
+        return await prisma.user.findUnique({
+            where: { id },
+            include: {
+                entreprises: true
+            }
+        });
     },
-    findByEmail: (email, login = false) => {
-        return prisma.user.findUnique({ where: { email: email }, select: responseSchema(login) });
+    create: async (email, password, name, admin = false) => {
+        return await prisma.user.create({
+            data: { email, password, name, role: admin ? "ADMIN" : "USER" }
+        });
     },
-    findByName: (name) => {
-        return prisma.user.findUnique({ where: { name: name }, select: responseSchema() });
+    findByEmail: async (email) => {
+        return await prisma.user.findUnique({
+            where: { email: email }
+        });
     },
-    update: (id, data) => {
-        return prisma.user.update({ where: { id: id }, data: data, select: responseSchema() });
-    }
+    findByName: async (name) => {
+        return await prisma.user.findUnique({
+            where: { name: name }
+        });
+    },
+    update: async (id, data) => {
+        return await prisma.user.update({
+            where: { id },
+            data: data
+        });
+    },
+    delete: async (id) => {
+        return await prisma.user.delete({
+            where: { id }
+        });
+    },
 }

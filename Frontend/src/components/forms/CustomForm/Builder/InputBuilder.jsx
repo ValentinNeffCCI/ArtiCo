@@ -195,7 +195,7 @@ const InputBuilder = ({
                       onChange={handleChange}
                       type="radio"
                       value={true}
-                      defaultChecked={datas.required == "true"}
+                      defaultChecked={datas.required}
                       required
                       style={{ margin: 0 }}
                     />
@@ -213,7 +213,7 @@ const InputBuilder = ({
                       onChange={handleChange}
                       type="radio"
                       value={false}
-                      defaultChecked={datas.required == "false"}
+                      defaultChecked={!datas.required}
                       style={{ margin: 0 }}
                     />
                     <label

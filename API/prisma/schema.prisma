@@ -6,6 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  output = "./generated/client"
 }
 
 datasource db {
@@ -13,14 +14,16 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  email     String   @unique
+  id        Int         @id @default(autoincrement())
+  name      String      @unique
+  email     String      @unique
   password  String
-  role      EnumRole @default(USER)
-  active    Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  role      EnumRole    @default(USER)
+  active    Boolean     @default(true)
+  refresh_token String?
+  reset_token String?
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
 
   entreprises Entreprise[]
 
@@ -45,14 +48,15 @@ model Entreprise {
   description String?
   image       String?
   ownerId     Int
-  categorieId Int
+  categorieId Int?
 
-  owner      User      @relation(fields: [ownerId], references: [id])
-  categories Categorie @relation(fields: [categorieId], references: [id])
+  owner      User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  categorie  Categorie? @relation(fields: [categorieId], references: [id])
   photos     Galerie[]
+  formulaires Formulaire[]
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  updatedAt DateTime @updatedAt @default(now())
 
   @@map("entreprises")
 }
@@ -70,9 +74,12 @@ model Categorie {
 
 model Formulaire {
   id        Int      @id @default(autoincrement())
-  name      String   @unique
+  name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  entrepriseId Int
+
+  entreprise Entreprise @relation(fields: [entrepriseId], references: [id], onDelete: Cascade)
 
   inputs      Input[]
   soumissions Soumission[]
@@ -88,19 +95,19 @@ model Galerie {
 
   entrepriseId Int
 
-  entreprise Entreprise @relation(fields: [entrepriseId], references: [id])
+  entreprise Entreprise @relation(fields: [entrepriseId], references: [id], onDelete: Cascade)
 
   @@map("galeries")
 }
 
 model Input {
-  id           Int     @id @default(autoincrement())
-  name         String  @unique
-  type         String
-  required     Boolean
+  id           Int      @id @default(autoincrement())
+  name         String   @default("Nouveau champ")
+  type         String   @default("text")
+  required     Boolean  @default(true)
   formulaireId Int
 
-  formulaire Formulaire @relation(fields: [formulaireId], references: [id])
+  formulaire Formulaire @relation(fields: [formulaireId], references: [id], onDelete: Cascade)
   options    Option[]
 
   @@map("inputs")
@@ -108,10 +115,10 @@ model Input {
 
 model Option {
   id      Int    @id @default(autoincrement())
-  value   String @unique
+  value   String @default("Nouveau choix")
   inputId Int
 
-  input Input @relation(fields: [inputId], references: [id])
+  input Input @relation(fields: [inputId], references: [id], onDelete: Cascade)
 
   @@map("options")
 }

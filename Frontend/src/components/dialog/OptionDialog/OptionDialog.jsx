@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import classes from "./Dialog.module.css";
 import { CustomButton } from "../../buttons/Custom/CustomButton";
 import useForm from "../../../hooks/useForm";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const OptionDialog = ({addOption, inputId, onClose}) => {
 
     //Ajouter callAPI création d'option + addOption parent
 
-    const {content, changeListener:handleChange, prepare:save} = useForm('/options', 'POST', {
-      input_id: inputId
+    const {content, changeListener:handleChange, prepare:save} = useForm('/option', 'POST', {
+      inputId
     });
 
     const handleSubmit = async (e) => {

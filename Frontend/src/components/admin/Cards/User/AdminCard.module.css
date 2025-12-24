@@ -1,0 +1,67 @@
+.card{
+    width: 100%;
+    border: 2px solid var(--primary);
+    margin: 1rem auto;
+    border-radius: 2rem;
+    padding-left: 1rem;
+    animation: fade-in-up .7s;
+}
+
+.button-section{
+    display: flex;
+    gap: 1rem;
+    background-color: var(--dark);
+    min-width: 50%;
+    border-radius: 2rem;
+    justify-content: space-evenly;
+}
+
+.button-section button{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.button-section span {
+    font-size: 1rem;
+}
+
+.card > div:first-of-type {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    font-weight: 600;
+}
+
+.card span.userName{
+    display: block;
+    width: 15%;
+}
+
+.card span{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card span:first-of-type{
+    display: block;
+    width: 35%;
+}
+
+.card span:nth-of-type(2){
+    display: block;
+    width: 45%;
+}
+.card span:nth-of-type(3){
+    display: block;
+    width: 20%;
+}
+
+@keyframes fade-in-up {
+    from{
+        transform: translateY(10px);
+        opacity: 0;
+    }
+}

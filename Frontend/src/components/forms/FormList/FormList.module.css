@@ -44,12 +44,13 @@
     font-weight: 500;
     gap: 10px;
     justify-content: center;
+    padding: 1rem;
 }
 
 .list div span{
-    width: 50%;
+    text-align: center;
 }
 
 .list a:hover div svg{
-    transform: translateX(1rem);
+    transform: translateX(5px);
 }

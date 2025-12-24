@@ -2,13 +2,17 @@ import React from "react";
 import { CustomButton } from "../../buttons/Custom/CustomButton";
 import { X } from "lucide-react";
 import useAPI from "../../../hooks/useAPI";
+import { toast } from "react-toastify";
 
 const GaleriePhoto = ({ photo, onClick }) => {
-  const { query: callAPI } = useAPI();
+  const { query: callAPI, url } = useAPI();
 
   const handleDelete = async () => {
-    const response = await callAPI("/galeries/" + photo.id, "DELETE");
-    if (response) {
+    const response = await callAPI("/galerie/" + photo.id, "DELETE");
+    if (response.error) {
+      toast.error(response.error);
+    } else {
+      toast.success("Photo supprimée");
       onClick(photo.id);
     }
   };
@@ -23,7 +27,7 @@ const GaleriePhoto = ({ photo, onClick }) => {
         alignItems: "center",
       }}
     >
-      <img src={photo.path} alt="réalisation de l'entreprise" width={"70%"} style={{aspectRatio: 4/3, borderRadius: 10}}/>
+      <img src={url + "/" + photo.path} alt="réalisation de l'entreprise" width={"70%"} style={{aspectRatio: 4/3, borderRadius: 10}}/>
       <CustomButton
         style={{
           margin: 0,

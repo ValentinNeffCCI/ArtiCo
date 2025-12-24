@@ -10,10 +10,7 @@ const Accueil = () => {
   return (
     <main>
       <Attach user={user}/>
-      {
-        (!user || user.role !== 'artisan') && 
-        <Categories/>
-      }
+      <Categories/>
       <HowTo/>
     </main>
   );

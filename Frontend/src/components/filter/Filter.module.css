@@ -12,6 +12,8 @@
 .filter input[name="name"] {
     width: 75%;
     margin: 0 auto;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .filter input,

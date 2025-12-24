@@ -18,8 +18,8 @@ const NewForm = () => {
   }, []);
 
   const initForm = async () => {
-    const response = await query("/formulaires", "POST", {
-      entreprise_id: entrepriseID,
+    const response = await query("/formulaire", "POST", {
+      entrepriseId: parseInt(entrepriseID),
       name,
     });
     if (response) {
@@ -32,7 +32,7 @@ const NewForm = () => {
   };
 
   const cancelCreation = async () => {
-    const response = await query("/formulaires/" + id, "DELETE");
+    const response = await query("/formulaire/" + id, "DELETE");
     if (response) {
       navigation(`/entreprise/${entrepriseID}/formulaires`);
     }

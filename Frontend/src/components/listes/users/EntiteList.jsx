@@ -1,4 +1,4 @@
-import AdminCard from "../../../pages/Admin/Cards/AdminCard.jsx";
+import AdminCard from "../../admin/Cards/User/AdminCard.jsx";
 import classes from "./EntiteList.module.css"
 
 const EntiteList = ({
@@ -6,12 +6,12 @@ const EntiteList = ({
     onDelete,
     onChoose,
     onBan,
-    onRoleChange
+    onRoleChange,
 }) => {
     return (
         <section className={classes["list"]}>
             {entites.map((u) => (
-                <AdminCard key={u.id} entite={u} ban={onBan} onDelete={onDelete} onChoose={onChoose} onRoleChange={onRoleChange} />
+                <AdminCard key={u.id} entite={u} ban={onBan} onDelete={onDelete} onChoose={onChoose} onRoleChange={onRoleChange}/>
             ))}
         </section>)
 }

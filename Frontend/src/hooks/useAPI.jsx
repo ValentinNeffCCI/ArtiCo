@@ -1,35 +1,74 @@
-import getHeaders from "../utils/getHeaders.js";
+import { useAuth } from "../contexts/UserContext.jsx";
 
 const useAPI = () => {
   const baseURL = import.meta.env.VITE_API_URL;
+  const { resetUser } = useAuth();
 
   const hasFileData = (obj) => {
-    return Object.values(obj).some(
-      (value) => value instanceof File || value instanceof Blob
+    return (
+      obj &&
+      typeof obj === "object" &&
+      Object.values(obj).some(
+        (value) => value instanceof File || value instanceof Blob
+      )
     );
   };
+
+  const getUrl = baseURL.replace("/api", "");
 
   const callAPI = async (suffix, method = "GET", body = false) => {
     try {
       let payload = {
-        headers: getHeaders(),
-        method: method,
+        method,
+        credentials: "include",
       };
+
+      if (suffix.includes("/login")) {
+        payload.credentials = "include";
+      }
+
       if (["PUT", "POST", "PATCH"].includes(method) && body) {
-        // Désactive l'upload de fichier en mode démo à cause de json-server
-        if (hasFileData(body) && import.meta.env.VITE_ENV_MODE !== "demo") {
+        if (body instanceof FormData) {
+          payload.body = body;
+        } else if (hasFileData(body)) {
           const formData = new FormData();
           Object.entries(body).forEach(([key, value]) =>
             formData.append(key, value)
           );
-          payload.headers = getHeaders(true);
           payload.body = formData;
         } else {
-          payload.headers = getHeaders();
+          payload.headers = {
+            ...payload.headers,
+            "Content-Type": "application/json",
+          };
           payload.body = JSON.stringify(body);
         }
       }
-      const response = await fetch(baseURL + suffix, payload);
+
+      let response = await fetch(baseURL + suffix, payload);
+
+      if (response.status === 401) {
+        const refresh = await fetch(baseURL + "/auth/refresh", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        });
+        if (refresh.ok) {
+          const { token } = await refresh.json();
+          if (token) {
+            window.localStorage.setItem("artico_user", token);
+          }
+          response = await fetch(baseURL + suffix, {
+            ...payload,
+          });
+        } else {
+          resetUser();
+          return false;
+        }
+      }
+
       return await response.json();
     } catch (error) {
       if (import.meta.env.VITE_ENV_MODE !== "prod") console.error(error);
@@ -39,6 +78,7 @@ const useAPI = () => {
 
   return {
     query: callAPI,
+    url: getUrl,
   };
 };
 

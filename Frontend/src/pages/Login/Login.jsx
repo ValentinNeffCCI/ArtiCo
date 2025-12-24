@@ -8,12 +8,12 @@ import classes from "./Login.module.css";
 import { LinkButton } from "../../components/buttons/Link/LinkButton";
 import { ArrowLeft } from "lucide-react";
 import { CustomButton } from "../../components/buttons/Custom/CustomButton";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, Slide } from "react-toastify";
 
 const Login = () => {
   const { user } = useAuth();
 
-  if (user) return <Navigate to={user.role === "admin" ? "/admin" : "/"} />;
+  if (user) return <Navigate to={user.role === "ADMIN" ? "/admin" : "/"} />;
 
   const [isConnecting, setIsConnecting] = useState(true);
 
@@ -79,7 +79,20 @@ const Login = () => {
           <ArrowLeft />
           <span>Revenir à l'accueil</span>
         </LinkButton>
-        
+        <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        transition={Slide}
+        />
+
         {isConnecting ? (
           <LoginForm>
             <CustomButton

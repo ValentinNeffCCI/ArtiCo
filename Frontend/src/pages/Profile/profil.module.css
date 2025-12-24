@@ -1,6 +1,6 @@
 .profil {
     background-color: var(--light);
-    padding: 1rem 10%;
+    padding: 0;
     display: flex;
     min-height: auto;
     padding-right: 0;
@@ -15,11 +15,11 @@
 .modify {
     width: 70%;
     border-right: 2px solid var(--primary);
-    background-color: var(--secondary);
-    padding: 2rem;
+    padding-top: 0;
+    padding: 4rem;
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
-    height: 80vh;
+    min-height: 80vh;
     display: flex;
     flex-direction: column;
 }
@@ -31,7 +31,6 @@
     align-items: center;
     overflow: hidden;
     padding: 2rem 1rem;
-    background-color: var(--primary);
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     height: 80vh;
@@ -43,6 +42,7 @@
     border-top: 1px solid var(--secondary);
     border-bottom: 1px solid var(--secondary);
     padding: 1rem;
+    max-height: 60vh;
 }
 
 .entrepriseList>div::-webkit-scrollbar {
@@ -93,7 +93,6 @@
     margin: 0 3rem;
     --bg-color: transparent;
     color: red;
-    align-self: flex-end;
 }
 
 .deleteBtn:hover{

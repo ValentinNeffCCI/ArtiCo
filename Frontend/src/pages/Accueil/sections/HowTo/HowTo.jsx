@@ -1,5 +1,4 @@
 import classes from "./HowTo.module.css";
-import HandShake from '../../../../assets/photos/Sora_Shimazaki/handshake.jpg'
 
 export const HowTo = () => {
   const actions = [

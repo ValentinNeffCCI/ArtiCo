@@ -8,6 +8,7 @@ const PasswordInput = ({
   style,
   name = "password",
   placeholder = "Mot de passe",
+  children
 }) => {
   const [show, setShow] = useState(false);
 
@@ -20,7 +21,7 @@ const PasswordInput = ({
         flexDirection: "column",
       }}
     >
-      <label htmlFor="password">Nouveau mot de passe</label>
+      <label htmlFor="password">{children}</label>
       <div style={{
         width: "100%",
         display: "flex",

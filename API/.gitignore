@@ -4,5 +4,7 @@ package-lock.json
 datas/
 postgres_datas/
 /generated/prisma
+.env
 
 /generated/prisma
+uploads/

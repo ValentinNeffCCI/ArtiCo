@@ -1,26 +1,35 @@
 import { toast } from "react-toastify";
 import useForm from "../../../hooks/useForm";
 import { CustomButton } from "../../buttons/Custom/CustomButton";
+import { useState } from "react";
+import Loader from "../../UX/loaders/Loader";
 
 const PasswordRecoveryForm = ({ sendMail }) => {
-  const { changeListener: handleChange, prepare } = useForm(
-    "/reset-password",
-    "POST"
-  );
+  const [isLoading, setIsLoading] = useState(false);
+
+  const {
+    changeListener: handleChange,
+    prepare,
+    content,
+  } = useForm("/auth/forgot-password", "POST");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (import.meta.env.VITE_ENV_MODE !== "demo") {
-      const response = await prepare(e);
-      if (response) {
-        sendMail();
-      } else {
-        toast.error("Aucun utilisateur n'est associé à cette adresse mail");
-      }
+    if (!content.email || content.email.length === 0) {
+      toast.error("Pensez à renseigner une adresse mail");
+      return;
+    }
+    setIsLoading(true);
+    const response = await prepare(e);
+    if (response.error) {
+      toast.error("Aucun utilisateur n'est associé à cette adresse mail");
     } else {
+      toast.success('Lien de réinitialisation envoyé')
       sendMail();
     }
+    setIsLoading(false);
   };
+  if (isLoading) return <Loader />;
 
   return (
     <form

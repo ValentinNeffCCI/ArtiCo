@@ -12,7 +12,7 @@ const UpdateForm = () => {
   const { query } = useAPI();
 
   const getFormById = async () => {
-    const response = await query("/formulaires/" + id);
+    const response = await query("/formulaire/" + id);
     if (response) {
       setForm(response);
     }
@@ -45,7 +45,7 @@ const UpdateForm = () => {
           width: 'fit-content',
           padding: '2rem 0' 
         }}
-        path={`/entreprise/${form.entreprise_id}/formulaires`}
+        path={`/entreprise/${form.entrepriseId}/formulaires`}
       >
         <ArrowLeft />
         <span>Questionnaires</span>

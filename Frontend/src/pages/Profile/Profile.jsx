@@ -13,22 +13,33 @@ import { toast } from "react-toastify";
 
 const Profile = () => {
   const { user } = useAuth();
-  const { query } = useAPI();
+  const { query, url } = useAPI();
   const { logout } = useAuth();
 
   const [showModal, setShowModal] = useState(false);
-  const [entreprises, setEntreprises] = useState([]);
+  const [entreprises, setEntreprises] = useState(false);
+  const [me, setMe] = useState(false);
 
   const getEntreprises = async () => {
     const suffix =
-      "/entreprises" +
-      (import.meta.env.VITE_ENV_MODE == "demo" ? `?user_id=${user.id}` : "");
+      "/entreprise/user/" + user.id;
     const response = await query(suffix);
-    if (entreprises) setEntreprises(response);
+    if (!response.error) setEntreprises(response);
+  };
+
+  const getMyinfo = async () => {
+    const suffix = "/user/me";
+    const response = await query(suffix);
+    if (response.error) {
+      toast.error(response.error);
+      return;
+    };
+    setMe(response);
   };
 
   useEffect(() => {
     getEntreprises();
+    getMyinfo();
   }, []);
 
   const toggleModale = () => {
@@ -36,7 +47,7 @@ const Profile = () => {
   };
 
   const deleteAccount = async () => {
-    const response = await query("/users/" + user.id, "DELETE");
+    const response = await query("/user/" + user.id, "DELETE");
     if (response) {
       logout();
     } else {
@@ -50,7 +61,11 @@ const Profile = () => {
         <h1 className={["dangrek", style["title"]].join(" ")}>
           Modifier mon profil
         </h1>
-        <UpdateUserForm />
+        {me && <UpdateUserForm user={me}/>}
+        
+      <CustomButton className={style["deleteBtn"]} clickAction={toggleModale}>
+        Supprimer le compte
+      </CustomButton>
       </div>
       <div className={style["entrepriseList"]}>
         <h2
@@ -62,24 +77,25 @@ const Profile = () => {
         >
           Mes entreprises
         </h2>
-        {entreprises.length !== 0 ? (
+        {entreprises && entreprises.length !== 0 ?
           <div>
             {entreprises.map((entreprise) => (
               <div
-              className={style["card"]}
+                className={style["card"]}
+                key={entreprise.id}
               >
                 <figure>
                   <img
-                  src={
-                    typeof entreprise.image == "string"
-                      ? entreprise.image
-                      : defaultImage
-                  }
-                  alt={entreprise.name}
-                />
+                    src={
+                      typeof entreprise.image == "string"
+                        ? `${url}/${entreprise.image}`
+                        : defaultImage
+                    }
+                    alt={entreprise.name}
+                  />
                 </figure>
                 <div
-                className={style["card-content"]}
+                  className={style["card-content"]}
                 >
                   <h3 className="montserrat">{entreprise.name}</h3>
                   <div className={style["card-buttons"]}>
@@ -114,19 +130,19 @@ const Profile = () => {
               </div>
             ))}
           </div>
-        ) : (
-          <div
-            style={{
-              color: "var(--light)",
-              textAlign: "center",
-              height: "80vh",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            Vos entreprises seront répertoriées ici
-          </div>
-        )}
+          : (
+            <div
+              style={{
+                color: "var(--light)",
+                textAlign: "center",
+                height: "80vh",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              Vos entreprises seront répertoriées ici
+            </div>
+          )}
         <NavLink to="/entreprise/nouveau">
           <CustomButton
             style={{
@@ -139,9 +155,6 @@ const Profile = () => {
           </CustomButton>
         </NavLink>
       </div>
-      <CustomButton className={style["deleteBtn"]} clickAction={toggleModale}>
-        Supprimer le compte
-      </CustomButton>
       {showModal && (
         <Modale>
           <div className={style["deleteAccount"]}>

@@ -5,25 +5,30 @@ const UserContext = createContext(null);
 
 export const UserProvider = ({children}) => {
     const storage = useLocalStorage();
-    const [user, setUser] = useState(storage.user ?? false);
+    const [user, setUser] = useState(false);
+
+    useEffect(()=>{
+        storage.initUser().then(data=>setUser(data))
+    }, []);
 
     const login = (data) => {
         setUser(data);
-        storage.setValue(data)
     };
 
     const logout = () => {
-        localStorage.removeItem('artico_user');
+        // Supprimer le refresh_token
+        document.cookie = `refresh_token=; expires=${new Date(0).toUTCString()};`;
+        document.cookie = `artico_token=; expires=${new Date(0).toUTCString()};`;
         setUser(false);
     };
 
-    // useEffect(()=>{
-    //   localStorage.removeItem("GPS");
-    //   localStorage.removeItem("artico_user");
-    // }, [])
+    const resetUser = () => {
+        setUser(false);
+        storage.deleteValue('artico_user');
+    };
 
     return (
-        <UserContext.Provider value={{user, login, logout}}>
+        <UserContext.Provider value={{user, login, logout, resetUser}}>
             {children}
         </UserContext.Provider>
     );

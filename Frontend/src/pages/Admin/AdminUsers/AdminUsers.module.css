@@ -1,5 +1,5 @@
 .form-group {
-    width: 75%;
+    width: 80%;
     display: flex;
     margin: 1rem auto;
     align-items: center;
@@ -9,7 +9,7 @@
 }
 
 .form-group input{
-    width: 95%;
+    width: 80%;
     outline: 0;
     border: none;
     padding: .5rem 1rem;
@@ -17,4 +17,15 @@
 
 .form-group svg {
     margin: .5rem;
+}
+
+.search-entreprise {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.search-entreprise button{
+    width: 15%;
 }

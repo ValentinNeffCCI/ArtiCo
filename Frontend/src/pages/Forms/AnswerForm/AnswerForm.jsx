@@ -19,30 +19,36 @@ const AnswerForm = () => {
   const [form, setForm] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { content, changeListener: onChange } = useForm(
-    "/soumissions",
+    "/submission",
     "POST",
     {
-      "Votre adresse mail afin de pouvoir être recontacté par le professionnel": user.email ?? "",
+      "Votre adresse mail afin de pouvoir être recontacté par le professionnel": user.email ?? ""
     }
   );
 
   const getForm = async () => {
-    const response = await callAPI("/formulaires/" + id);
+    const response = await callAPI("/formulaire/" + id);
     if (response) {
       setForm(response);
     }
   };
 
+  const dateInputs = [
+    'date',
+    'datetime',
+    'datetime-local'
+  ]
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      const response = await callAPI("/soumissions", "POST", {
-        formulaire_id: id,
-        submitted_at: new Date(),
-        inputs: content,
+      const response = await callAPI("/submission", "POST", {
+        formulaireId: parseInt(id),
+        content,
+        email: content["Votre adresse mail afin de pouvoir être recontacté par le professionnel"]
       });
-      if (!response) {
+      if (response.error) {
         throw new Error();
       }
       toast.success("Votre formulaire a bien été transmis");
@@ -70,14 +76,14 @@ const AnswerForm = () => {
       </CustomButton>
       <h1>{form.name}</h1>
       <CustomForm
-        form={!user.email ? [...form.inputs, 
-          {
-            "type":"email",
-            "name":"Votre adresse mail afin de pouvoir être recontacté par le professionnel",
-            "required":"true",
-            "options":false,
-            "formulaire_id":id
-          }
+        form={!user.email ? [...form.inputs,
+        {
+          "type": "email",
+          "name": "Votre adresse mail afin de pouvoir être recontacté par le professionnel",
+          "required": true,
+          "options": false,
+          "formulaireId": id
+        }
         ] : form.inputs}
         onChange={onChange}
         onSubmit={handleSubmit}
