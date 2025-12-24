@@ -39,12 +39,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 7.1.0
- * Query Engine version: ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba
+ * Prisma Client JS version: 7.2.0
+ * Query Engine version: 0c8ef2ce45c83248ab3df073180d5eda9e8be7a3
  */
 Prisma.prismaVersion = {
-  client: "7.1.0",
-  engine: "ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba"
+  client: "7.2.0",
+  engine: "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -212,8 +212,8 @@ exports.Prisma.ModelName = {
  */
 const config = {
   "previewFeatures": [],
-  "clientVersion": "7.1.0",
-  "engineVersion": "ab635e6b9d606fa5c8fb8b1a7f909c3c3c1c98ba",
+  "clientVersion": "7.2.0",
+  "engineVersion": "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
   "activeProvider": "postgresql",
   "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id            Int      @id @default(autoincrement())\n  name          String   @unique\n  email         String   @unique\n  password      String\n  role          EnumRole @default(USER)\n  active        Boolean  @default(true)\n  refresh_token String?\n  reset_token   String?\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n\n  entreprises Entreprise[]\n\n  @@index([email, name])\n  @@map(\"users\")\n}\n\nenum EnumRole {\n  ADMIN\n  USER\n}\n\nmodel Entreprise {\n  id          Int     @id @default(autoincrement())\n  name        String\n  email       String\n  city        String\n  cp          String\n  address1    String\n  address2    String?\n  phone       String?\n  description String?\n  image       String?\n  ownerId     Int\n  categorieId Int?\n\n  owner       User         @relation(fields: [ownerId], references: [id], onDelete: Cascade)\n  categorie   Categorie?   @relation(fields: [categorieId], references: [id])\n  photos      Galerie[]\n  formulaires Formulaire[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @default(now()) @updatedAt\n\n  @@map(\"entreprises\")\n}\n\nmodel Categorie {\n  id        Int      @id @default(autoincrement())\n  name      String   @unique\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  entreprises Entreprise[]\n\n  @@map(\"categories\")\n}\n\nmodel Formulaire {\n  id           Int      @id @default(autoincrement())\n  name         String\n  createdAt    DateTime @default(now())\n  updatedAt    DateTime @updatedAt\n  entrepriseId Int\n\n  entreprise Entreprise @relation(fields: [entrepriseId], references: [id], onDelete: Cascade)\n\n  inputs      Input[]\n  soumissions Soumission[]\n\n  @@map(\"formulaires\")\n}\n\nmodel Galerie {\n  id        Int      @id @default(autoincrement())\n  path      String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  entrepriseId Int\n\n  entreprise Entreprise @relation(fields: [entrepriseId], references: [id], onDelete: Cascade)\n\n  @@map(\"galeries\")\n}\n\nmodel Input {\n  id           Int     @id @default(autoincrement())\n  name         String  @default(\"Nouveau champ\")\n  type         String  @default(\"text\")\n  required     Boolean @default(true)\n  formulaireId Int\n\n  formulaire Formulaire @relation(fields: [formulaireId], references: [id], onDelete: Cascade)\n  options    Option[]\n\n  @@map(\"inputs\")\n}\n\nmodel Option {\n  id      Int    @id @default(autoincrement())\n  value   String @default(\"Nouveau choix\")\n  inputId Int\n\n  input Input @relation(fields: [inputId], references: [id], onDelete: Cascade)\n\n  @@map(\"options\")\n}\n\nmodel Soumission {\n  id        Int      @id @default(autoincrement())\n  content   Json\n  email     String\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  formulaireId Int\n  formulaire   Formulaire @relation(fields: [formulaireId], references: [id])\n\n  @@map(\"soumissions\")\n}\n"
 }
