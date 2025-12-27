@@ -1,0 +1,23 @@
+const dotenv = require('dotenv');
+const fs = require('fs');
+const mailer = require('./mailer');
+
+dotenv.config();
+
+const destination = process.env.OWNER_EMAIL;
+const template = fs.readFileSync("./templates/mails/message_recap.html", {encoding: 'utf-8'});
+
+const sendRecap = async (submission) => {
+    const {formulaire, ...content} = submission.content;
+    const recap = Object.keys(content).map(key=>{
+        return `<tr><th style="padding: 15px">${key}</th><td style="padding: 15px">${content[key]}</td></tr>`
+    })
+    const mailContent = template.replace('{{content}}', recap.join(''));
+    mailer.sendMail({
+        to: destination,
+        html: mailContent,
+        subject: `Artico - Nouvelle réponse au questionnaire : ${formulaire}`
+    })
+}
+
+module.exports = sendRecap;

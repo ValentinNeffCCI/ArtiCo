@@ -4,6 +4,9 @@ const submissionCollectionResource = require("../resources/collections/soumissio
 const formulaireRepository = require("../repositories/formulaire-repository.js");
 const HttpError = require("../customclasses/HttpError.js");
 const soumissionCollectionResource = require("../resources/collections/soumission-collection-resource.js");
+const client = require("../utils/client.js");
+const sendMail = require("../utils/sendRecap.js");
+
 module.exports = {
     findById: async (id) => {
         return submissionResource(await submissionRepository.findById(id), true);
@@ -20,7 +23,9 @@ module.exports = {
         if(!form){
             throw new HttpError('Pas de formulaire trouvé !', 404);
         }
-        return submissionResource(await submissionRepository.create(data));
+        const submission = await submissionRepository.create(data)
+        sendMail(submission);
+        return submissionResource(submission);
     },
     delete: async (id) => {
         return submissionResource(await submissionRepository.delete(id));
