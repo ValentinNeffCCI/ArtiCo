@@ -6,6 +6,7 @@ const idParser = require('../middlewares/id-parser.js');
 const imageUploader = require('../middlewares/image-uploader.js');
 const fieldVerification = require('../middlewares/field-verification.js');
 const emailFormatVerification = require('../middlewares/email-format-verification.js');
+const verifyAccessEntreprise = require('../middlewares/entreprise-access.js');
 const entrepriseFields = ['name', 'description', 'name', 'address1', 'city', 'cp', 'email', 'categorieId'];
 
 router.get('/',
@@ -29,10 +30,12 @@ router.put('/:id',
     imageUploader.single('image'), 
     fieldVerification(entrepriseFields), 
     emailFormatVerification,
+    verifyAccessEntreprise,
     entrepriseController.updateEntreprise);
 router.delete('/:id', 
     idParser, 
     authenticated(), 
+    verifyAccessEntreprise,
     entrepriseController.deleteEntreprise);
 
 module.exports = router;

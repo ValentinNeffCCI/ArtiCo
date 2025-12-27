@@ -9,7 +9,7 @@ const registerSchema = require('../schemas/Auth/registerSchema.js')
 
 const router = express.Router();
 
-router.post('/login', fieldVerification(['email', 'password']), AuthController.login);
+router.post('/login', fieldVerification(['email', 'password']), emailFormatVerification, AuthController.login);
 router.post('/register', fieldVerification(['email', 'password', 'name']), checkSchema(registerSchema), autoHashingPassword, emailFormatVerification, AuthController.register);
 router.post('/forgot-password', fieldVerification(['email']), AuthController.forgotPassword);
 router.post('/change-password', fieldVerification(['password']), autoHashingPassword, AuthController.reset);
