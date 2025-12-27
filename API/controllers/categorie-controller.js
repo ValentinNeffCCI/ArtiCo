@@ -7,7 +7,7 @@ module.exports = {
             const categories = await categorieService.findAll(limit);
             res.status(200).json(categories);
         } catch (error) {
-            next(error);
+            return next(error);
         }
     },
     getCategorieById: async (req, res, next) => {
@@ -15,7 +15,7 @@ module.exports = {
             const categorie = await categorieService.findById(req.params.id);
             res.status(200).json(categorie);
         } catch (error) {
-            next(error);
+            return next(error);
         }
     },
     createCategorie: async (req, res, next) => {
@@ -23,7 +23,7 @@ module.exports = {
             const categorie = await categorieService.create(req.body);
             res.status(201).json(categorie);
         } catch (error) {
-            next(error);
+            return next(error);
         }
     },
     updateCategorie: async (req, res, next) => {
@@ -31,7 +31,7 @@ module.exports = {
             const categorie = await categorieService.update(req.params.id, req.body);
             res.status(200).json(categorie);
         } catch (error) {
-            next(error);
+            return next(error);
         }
     },
     deleteCategorie: async (req, res, next) => {
@@ -39,7 +39,7 @@ module.exports = {
             const categorie = await categorieService.delete(req.params.id);
             res.status(200).json(categorie);
         } catch (error) {
-            next(error);
+            return next(error);
         }
     }
 }

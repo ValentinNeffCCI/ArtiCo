@@ -7,7 +7,7 @@ module.exports = {
             const entreprises = await entrepriseService.findAll(query);
             res.status(200).json(entreprises);
         } catch (error) {
-            next(error);
+            return next(error);
         }
     },
     getEntrepriseById: async (req, res, next) => {
@@ -15,7 +15,7 @@ module.exports = {
             const entreprise = await entrepriseService.findById(req.params.id);
             res.status(200).json(entreprise);
         } catch (error) {
-            next(error);
+            return next(error);
         }
     },
     getEntreprisesByUserId: async (req, res, next) => {
@@ -23,7 +23,7 @@ module.exports = {
             const entreprises = await entrepriseService.findByUserId(req.params.id);
             res.status(200).json(entreprises);
         } catch (error) {
-            next(error);
+            return next(error);
         }
     },
     createEntreprise: async (req, res, next) => {
@@ -36,7 +36,7 @@ module.exports = {
             const entreprise = await entrepriseService.create(req.body);
             res.status(201).json(entreprise);
         } catch (error) {
-            next(error);
+            return next(error);
         }
     },
     updateEntreprise: async (req, res, next) => {
@@ -49,7 +49,7 @@ module.exports = {
             const entreprise = await entrepriseService.update(req.params.id, req.body);
             res.status(200).json(entreprise);
         } catch (error) {
-            next(error);
+            return next(error);
         }
     },
     deleteEntreprise: async (req, res, next) => {
@@ -57,7 +57,7 @@ module.exports = {
             const entreprise = await entrepriseService.delete(req.params.id);
             res.status(204).send();
         } catch (error) {
-            next(error);
+            return next(error);
         }
     }
 }

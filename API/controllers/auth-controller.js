@@ -93,7 +93,7 @@ module.exports = {
         return res.status(400).send();
       }
     } catch (error) {
-      next(
+      return next(
         error instanceof HttpError ? error : new HttpError(error.message, 500)
       );
     }
@@ -103,7 +103,7 @@ module.exports = {
       await AuthService.forgotPassword(req.body.email);
       return res.status(204).send()
     } catch (error) {
-      next(
+      return next(
         error instanceof HttpError ? error : new HttpError(error.message, 500)
       );
     }
