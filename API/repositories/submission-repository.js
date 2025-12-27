@@ -12,7 +12,7 @@ module.exports = {
   findByFormulaireId: async (formulaireId) => {
     return await prisma.soumission.findMany({
       where: {
-        formulaireId
+        formulaireId,
       },
       include: {
         formulaire: true,
@@ -22,6 +22,14 @@ module.exports = {
   create: async (data) => {
     return await prisma.soumission.create({
       data: data,
+      select: {
+        content: true,
+        formulaire: {
+          select: {
+            name: true,
+          },
+        },
+      },
     });
   },
   delete: async (id) => {

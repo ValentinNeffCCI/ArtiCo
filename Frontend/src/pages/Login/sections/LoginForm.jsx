@@ -25,6 +25,7 @@ export const LoginForm = ({ children }) => {
       toast.error(loginAccess.error);
       return;
     }
+    console.log(loginAccess)
     login(loginAccess);
   };
 

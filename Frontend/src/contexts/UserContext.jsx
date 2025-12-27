@@ -16,7 +16,6 @@ export const UserProvider = ({children}) => {
     };
 
     const logout = () => {
-        // Supprimer le refresh_token
         document.cookie = `refresh_token=; expires=${new Date(0).toUTCString()};`;
         document.cookie = `artico_token=; expires=${new Date(0).toUTCString()};`;
         setUser(false);
