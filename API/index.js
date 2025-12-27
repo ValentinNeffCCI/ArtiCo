@@ -21,8 +21,6 @@ const AdminRouter = require("./routers/admin-router.js");
 
 // middlewares
 const errorMiddleware = require("./middlewares/error-middleware.js");
-const mailer = require("./constants/mailer.js");
-const { readFileSync, readFile } = require("fs");
 
 // .env
 dotenv.config();

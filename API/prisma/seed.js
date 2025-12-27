@@ -1,6 +1,6 @@
 const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
-const prisma = require("../constants/client.js");
+const prisma = require("../utils/client.js");
 dotenv.config();
 
 const main = async () => {

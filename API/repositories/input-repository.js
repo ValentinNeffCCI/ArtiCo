@@ -1,4 +1,4 @@
-const prisma = require("../constants/client.js");
+const prisma = require("../utils/client.js");
 
 module.exports = {
     findAll: async () => {

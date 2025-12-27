@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 const HttpError = require("../customclasses/HttpError.js");
 
 const fs = require("fs");
-const mailer = require("../constants/mailer.js");
+const mailer = require("../utils/mailer.js");
 
 dotenv.config();
 
