@@ -7,9 +7,6 @@ const cookieParser = require("cookie-parser");
 const helmet = require("helmet");
 const { rateLimit } = require("express-rate-limit");
 
-// initialisation du compte propriétaire
-const initDB = require("./constants/init.js");
-
 // routers
 const AuthRouter = require("./routers/auth-router.js");
 const EntrepriseRouter = require("./routers/entreprise-router.js");
@@ -72,8 +69,6 @@ app.use(
 );
 
 const PORT = process.env.PORT || 3000;
-
-initDB();
 
 app.use("/api/auth", AuthRouter);
 app.use("/api/entreprise", EntrepriseRouter);
