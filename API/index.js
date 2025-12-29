@@ -21,6 +21,7 @@ const AdminRouter = require("./routers/admin-router.js");
 
 // middlewares
 const errorMiddleware = require("./middlewares/error-middleware.js");
+const logger = require("./middlewares/logger.js");
 
 // .env
 dotenv.config();
@@ -67,6 +68,9 @@ app.use(
 );
 
 const PORT = process.env.PORT || 3000;
+
+// log
+app.use(logger);
 
 app.use("/api/auth", AuthRouter);
 app.use("/api/entreprise", EntrepriseRouter);
