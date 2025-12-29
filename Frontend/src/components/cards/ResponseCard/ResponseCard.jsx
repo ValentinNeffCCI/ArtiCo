@@ -17,7 +17,7 @@ const ResponseCard = ({ reponse }) => {
     const data = {
       date: formatDate(reponse.submittedAt),
       "envoyé par": getUserEmail(),
-      "nom du questionnaire": response.content.formulaire,
+      "nom du questionnaire": reponse.formulaire.name,
       réponses: Object.entries(reponse.content).map(([key, value]) => ({
         question: key,
         réponse: value,
@@ -32,7 +32,7 @@ const ResponseCard = ({ reponse }) => {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `${reponse.content.formulaire}-${reponse.id}.json`;
+    a.download = `${reponse.formulaire.name}-${reponse.id}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };

@@ -6,6 +6,7 @@ const soumissionResource = (soumission, formulaire = false) => {
         id: soumission.id,
         content: soumission.content,
         submittedAt: soumission.createdAt,
+        formulaire: formulaire ? soumission.formulaire : false
     }
 }
 
