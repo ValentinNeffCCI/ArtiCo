@@ -1,14 +1,10 @@
 FROM node:25-alpine
 
-RUN apk add --no-cache openssl
-
 WORKDIR /app
 
-COPY package*.json ./
+COPY . /app
 
 RUN npm install
-
-COPY . .
 
 EXPOSE 3000
 

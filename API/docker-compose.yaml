@@ -17,26 +17,27 @@ services:
       - "${DB_PORT}:5432"
     volumes:
       - ./postgres_datas:/var/lib/postgresql
-    # networks:
-    #   - connectDB
+    networks:
+      - connectDB
 
-  # backend:
-  #   container_name: artico_back
-  #   build: .
-  #   env_file:
-  #     - .env
-  #   ports:
-  #     - "${PORT}:${PORT}"
-  #   volumes:
-  #     - .:/app
-  #     - /app/node_modules
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
-  #   networks:
-  #     - connectDB
+  backend:
+    container_name: artico_back
+    restart: always
+    build: .
+    env_file:
+      - .env
+    ports:
+      - "${PORT}:${PORT}"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - connectDB
 volumes:
   postgres_datas:
 
-# networks:
-#   connectDB:
+networks:
+  connectDB:
