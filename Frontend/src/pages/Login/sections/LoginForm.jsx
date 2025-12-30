@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CustomButton } from "../../../components/buttons/Custom/CustomButton";
 import { useAuth } from "../../../contexts/UserContext";
 import useForm from "../../../hooks/useForm";
-import classes from "./Loginsection.module.css";
+import classes from "./LoginSection.module.css";
 import { LinkButton } from "../../../components/buttons/Link/LinkButton";
 import { toast, ToastContainer } from "react-toastify";
 
@@ -25,7 +25,6 @@ export const LoginForm = ({ children }) => {
       toast.error(loginAccess.error);
       return;
     }
-    console.log(loginAccess)
     login(loginAccess);
   };
 
