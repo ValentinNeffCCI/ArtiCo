@@ -50,3 +50,5 @@ npm run dev
 - **Lucide** : Librairie qui va nous permettre d'avoir des icônes
 - **json-server** : Librairie qui va nous permettre de simuler un backend
 - **sass** : Librairie qui va nous permettre de faciliter la génération du style de l'application
+
+#### Faire makefile pour initialisation prisma côté serveur
