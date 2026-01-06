@@ -9,10 +9,10 @@ start-app:
 	make prisma-seed
 
 prisma-seed:
-	docker exec -it $(CONTAINER) npx prisma db seed
+	sudo docker exec -it $(CONTAINER) npx prisma db seed
 
 prisma-migrate:
-	docker exec -it $(CONTAINER) npx prisma migrate deploy
+	sudo docker exec -it $(CONTAINER) npx prisma migrate deploy
 
 prisma-reset:
-	docker exec -it $(CONTAINER) npx prisma migrate reset --force
+	sudo docker exec -it $(CONTAINER) npx prisma migrate reset --force
