@@ -21,7 +21,7 @@ services:
       - connectDB
 
   backend:
-    container_name: artico_back
+    container_name: api-backend
     restart: always
     build: .
     env_file:
@@ -38,7 +38,7 @@ services:
       - connectDB
 
   server:
-    container_name: nginx
+    container_name: nginx 
     image: nginx:latest
     ports: 
     - "80:80"
