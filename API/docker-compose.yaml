@@ -1,6 +1,6 @@
 services:
   db:
-    container_name: api-db
+    container_name: artico-db
     image: postgres:latest
     restart: always
     healthcheck:
@@ -21,7 +21,7 @@ services:
       - connectDB
 
   backend:
-    container_name: api-backend
+    container_name: artico-backend
     restart: always
     build: .
     env_file:

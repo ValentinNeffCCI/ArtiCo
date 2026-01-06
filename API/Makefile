@@ -1,4 +1,4 @@
-CONTAINER=api-backend
+CONTAINER=artico-backend
 
 .PHONY: start-app prisma-seed prisma-migrate prisma-reset
 

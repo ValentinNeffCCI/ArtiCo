@@ -19,7 +19,10 @@ module.exports = {
         secure: false,
         expires: new Date(Date.now() + 7 * 24 * 3600 * 1000),
       });
-      return res.status(200).json(user);
+      return res.status(200).json({
+        role: user.role,
+        id: user.id
+      });
     } catch (error) {
       return next(
         new HttpError(
@@ -46,7 +49,10 @@ module.exports = {
         secure: false,
         expires: new Date(Date.now() + 7 * 24 * 3600 * 1000),
       });
-      return res.status(200).json(user);
+      return res.status(200).json({
+        role: user.role,
+        id: user.id
+      });
     } catch (error) {
       return next(
         new HttpError(
@@ -73,7 +79,10 @@ module.exports = {
         secure: false,
         expires: new Date(Date.now() + 7 * 24 * 3600 * 1000),
       });
-      return res.status(200).json(user);
+      return res.status(200).json({
+        role: user.role,
+        id: user.id
+      });
     } catch (error) {
       return next(
         new HttpError(
