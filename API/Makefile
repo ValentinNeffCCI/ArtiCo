@@ -1,5 +1,5 @@
 #? Permet d'avoir dynamiquement le container qui contient le back-end 
-CONTAINER := $(shell docker compose ps -q node-app)
+CONTAINER := $(shell docker compose ps -q backend)
 
 .PHONY: start-app prisma-seed prisma-migrate prisma-reset wait-db
 
