@@ -8,13 +8,13 @@ module.exports = {
       const user = await AuthService.login(email, password);
       res.cookie("artico_token", user.token, {
         httpOnly: true,
-        sameSite: "Lax",
+        sameSite: "none",
         // http bug
         secure: false,
       });
       res.cookie("refresh_token", user.refresh, {
         httpOnly: true,
-        sameSite: "Lax",
+        sameSite: "none",
         // http bug
         secure: false,
         expires: new Date(Date.now() + 7 * 24 * 3600 * 1000),
@@ -38,13 +38,13 @@ module.exports = {
       const user = await AuthService.register(email, password, name);
       res.cookie("artico_token", user.token, {
         httpOnly: true,
-        sameSite: "Lax",
+        sameSite: "none",
         // http bug
         secure: false,
       });
       res.cookie("refresh_token", user.refresh, {
         httpOnly: true,
-        sameSite: "Lax",
+        sameSite: "none",
         // http bug
         secure: false,
         expires: new Date(Date.now() + 7 * 24 * 3600 * 1000),
@@ -68,13 +68,13 @@ module.exports = {
       const user = await AuthService.reset(req.body.token, password);
       res.cookie("artico_token", user.token, {
         httpOnly: true,
-        sameSite: "Lax",
+        sameSite: "none",
         // http bug
         secure: false,
       });
       res.cookie("refresh_token", user.refresh, {
         httpOnly: true,
-        sameSite: "Lax",
+        sameSite: "none",
         // http bug
         secure: false,
         expires: new Date(Date.now() + 7 * 24 * 3600 * 1000),
@@ -98,7 +98,7 @@ module.exports = {
       if (token) {
         res.cookie("artico_token", token, {
           httpOnly: true,
-          sameSite: "Lax",
+          sameSite: "none",
           // http bug
           secure: false,
         });
