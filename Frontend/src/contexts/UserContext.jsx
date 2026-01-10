@@ -12,6 +12,7 @@ export const UserProvider = ({children}) => {
     }, []);
 
     const login = (data) => {
+        console.log("Utilisateur connecté :" + JSON.stringify(data))
         setUser(data);
     };
 

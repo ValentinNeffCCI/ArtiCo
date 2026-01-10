@@ -10,13 +10,13 @@ module.exports = {
         httpOnly: true,
         sameSite: "Lax",
         // http bug
-        secure: false,
+        secure: true,
       });
       res.cookie("refresh_token", user.refresh, {
         httpOnly: true,
         sameSite: "Lax",
         // http bug
-        secure: false,
+        secure: true,
         expires: new Date(Date.now() + 7 * 24 * 3600 * 1000),
       });
       return res.status(200).json({
@@ -40,13 +40,13 @@ module.exports = {
         httpOnly: true,
         sameSite: "Lax",
         // http bug
-        secure: false,
+        secure: true,
       });
       res.cookie("refresh_token", user.refresh, {
         httpOnly: true,
         sameSite: "Lax",
         // http bug
-        secure: false,
+        secure: true,
         expires: new Date(Date.now() + 7 * 24 * 3600 * 1000),
       });
       return res.status(200).json({
@@ -70,13 +70,13 @@ module.exports = {
         httpOnly: true,
         sameSite: "Lax",
         // http bug
-        secure: false,
+        secure: true,
       });
       res.cookie("refresh_token", user.refresh, {
         httpOnly: true,
         sameSite: "Lax",
         // http bug
-        secure: false,
+        secure: true,
         expires: new Date(Date.now() + 7 * 24 * 3600 * 1000),
       });
       return res.status(200).json({
@@ -100,7 +100,7 @@ module.exports = {
           httpOnly: true,
           sameSite: "Lax",
           // http bug
-          secure: false,
+          secure: true,
         });
         return res.status(200).send({
           token,

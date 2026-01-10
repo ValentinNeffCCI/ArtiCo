@@ -17,6 +17,7 @@ module.exports = (superAuth = false) => (req, res, next) => {
     // const token = authHeader && authHeader.split(" ")[1];
 
     const token = req.cookies.artico_token;
+    console.log("Token généré :" +  token);
     if(!token) {
         return res.status(401).send();
     }
@@ -25,6 +26,7 @@ module.exports = (superAuth = false) => (req, res, next) => {
         error: expiredLabel + " : Pas de token"
     });
     const SECRET = process.env.SECRET_KEY;
+
 
     jwt.verify(token, SECRET, async (err, user) => {
         if (err) return res.status(401).json({
