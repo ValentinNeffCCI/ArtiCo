@@ -10,13 +10,13 @@ module.exports = {
         httpOnly: true,
         sameSite: "none",
         // http bug
-        secure: false,
+        secure: process.env.NODE_ENV == "production",
       });
       res.cookie("refresh_token", user.refresh, {
         httpOnly: true,
         sameSite: "none",
         // http bug
-        secure: false,
+        secure: process.env.NODE_ENV == "production",
         expires: new Date(Date.now() + 7 * 24 * 3600 * 1000),
       });
       return res.status(200).json({
@@ -40,13 +40,13 @@ module.exports = {
         httpOnly: true,
         sameSite: "none",
         // http bug
-        secure: false,
+        secure: process.env.NODE_ENV == "production",
       });
       res.cookie("refresh_token", user.refresh, {
         httpOnly: true,
         sameSite: "none",
         // http bug
-        secure: false,
+        secure: process.env.NODE_ENV == "production",
         expires: new Date(Date.now() + 7 * 24 * 3600 * 1000),
       });
       return res.status(200).json({
@@ -70,13 +70,13 @@ module.exports = {
         httpOnly: true,
         sameSite: "none",
         // http bug
-        secure: false,
+        secure: process.env.NODE_ENV == "production",
       });
       res.cookie("refresh_token", user.refresh, {
         httpOnly: true,
         sameSite: "none",
         // http bug
-        secure: false,
+        secure: process.env.NODE_ENV == "production",
         expires: new Date(Date.now() + 7 * 24 * 3600 * 1000),
       });
       return res.status(200).json({
@@ -100,7 +100,7 @@ module.exports = {
           httpOnly: true,
           sameSite: "none",
           // http bug
-          secure: false,
+          secure: process.env.NODE_ENV == "production",
         });
         return res.status(200).send({
           token,
