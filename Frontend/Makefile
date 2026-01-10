@@ -1,4 +1,4 @@
 .PHONY: create_build
 
 create_build:
-	npm run build && cp -r ./dist/* /var/www/artico
+	npm run build && sudo cp -r ./dist/* /var/www/artico
