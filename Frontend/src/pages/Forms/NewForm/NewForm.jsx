@@ -31,6 +31,10 @@ const NewForm = () => {
     setName(e.target.value);
   };
 
+  const onSubmit = (e)=>{
+    e.preventDefault();
+  }
+
   const cancelCreation = async () => {
     const response = await query("/formulaire/" + id, "DELETE");
     if (response) {
@@ -65,6 +69,7 @@ const NewForm = () => {
           margin: "0 auto",
           padding: "0 1rem",
         }}
+        onSubmit={onSubmit}
       >
         <input
           type="text"

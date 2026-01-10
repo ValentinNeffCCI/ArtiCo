@@ -1,4 +1,3 @@
-
 .title {
     font-size: 2em;
     width: 80%;
@@ -18,7 +17,7 @@
 
 .formulaires{
     padding: 2rem 10%;
-    min-height: auto;
+    min-height: 100vh;
 }
 
 .formList{
