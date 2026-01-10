@@ -8,6 +8,8 @@ postgres_datas/
 .env.*
 
 /generated/prisma
-uploads/
+
+uploads/*
+!uploads/.gitkeep
 
 brouillo*
