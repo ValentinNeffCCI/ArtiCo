@@ -6,6 +6,7 @@ const autoHashingPassword = require("../middlewares/auto-hashing-password.js");
 const emailFormatVerification = require("../middlewares/email-format-verification.js");
 const { checkSchema } = require("express-validator");
 const registerSchema = require('../schemas/Auth/registerSchema.js')
+const authenticated = require('../middlewares/authenticated.js');
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.post('/register', fieldVerification(['email', 'password', 'name']), check
 router.post('/forgot-password', fieldVerification(['email']), AuthController.forgotPassword);
 router.post('/change-password', fieldVerification(['password']), autoHashingPassword, AuthController.reset);
 router.get('/refresh', refreshMiddleware, AuthController.refresh);
+router.post('/logout', authenticated(), AuthController.logout);
 
 module.exports = router;

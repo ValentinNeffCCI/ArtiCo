@@ -12,23 +12,28 @@ export const UserProvider = ({children}) => {
     }, []);
 
     const login = (data) => {
-        console.log("Utilisateur connecté :" + JSON.stringify(data))
         setUser(data);
     };
 
-    const logout = () => {
-        document.cookie = `refresh_token=; expires=${new Date(0).toUTCString()};`;
-        document.cookie = `artico_token=; expires=${new Date(0).toUTCString()};`;
-        setUser(false);
-    };
-
-    const resetUser = () => {
-        setUser(false);
-        storage.deleteValue('artico_user');
+    const logout = async () => {
+        try {
+            const response = await fetch(import.meta.env.VITE_API_URL + '/auth/logout', {
+                method: 'POST',
+                credentials: 'include',
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            })
+            if(response.ok){
+                setUser(false);
+            }
+        } catch (error) {
+            console.error("une erreur côté serveur est survenue");
+        }
     };
 
     return (
-        <UserContext.Provider value={{user, login, logout, resetUser}}>
+        <UserContext.Provider value={{user, login, logout}}>
             {children}
         </UserContext.Provider>
     );

@@ -4,7 +4,6 @@ const verifyAccessEntreprise = async (req, res, next) => {
 
     const {id} = req.params;
     const entreprise = user.entreprises.find(entreprise => entreprise.id == id);
-    console.log(entreprise)
 
     if(!entreprise){
         return res.status(404).json({

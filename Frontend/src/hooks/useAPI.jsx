@@ -2,7 +2,7 @@ import { useAuth } from "../contexts/UserContext.jsx";
 
 const useAPI = () => {
   const baseURL = import.meta.env.VITE_API_URL;
-  const { resetUser } = useAuth();
+  const { logout } = useAuth();
 
   const hasFileData = (obj) => {
     return (
@@ -22,10 +22,6 @@ const useAPI = () => {
         method,
         credentials: "include",
       };
-
-      if (suffix.includes("/login")) {
-        payload.credentials = "include";
-      }
 
       if (["PUT", "POST", "PATCH"].includes(method) && body) {
         if (body instanceof FormData) {
@@ -56,15 +52,11 @@ const useAPI = () => {
           credentials: "include",
         });
         if (refresh.ok) {
-          const { token } = await refresh.json();
-          if (token) {
-            window.localStorage.setItem("artico_user", token);
-          }
           response = await fetch(baseURL + suffix, {
             ...payload,
           });
         } else {
-          resetUser();
+          logout();
           return false;
         }
       }

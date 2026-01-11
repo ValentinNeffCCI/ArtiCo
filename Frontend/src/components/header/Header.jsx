@@ -82,7 +82,7 @@ export const Header = () => {
             border: "none",
             fontSize: "1.1rem"
           }}
-          onClickAction={user && logout}
+          onClickAction={logout}
         >
           {user ? "Deconnexion" : "Connexion"}
         </LinkButton>

@@ -7,37 +7,34 @@ dotenv.config();
 const expiredLabel = "Session expirée, veuillez vous reconnecter";
 const invalidLabel = "Session invalide, veuillez vous reconnecter";
 
-module.exports = (superAuth = false) => (req, res, next) => {
-    // const authHeader = req.headers["authorization"];
-    // if (!authHeader) {
-    //     return res.status(401).json({
-    //         error: expiredLabel + " : Pas de token"
-    //     });
-    // }
-    // const token = authHeader && authHeader.split(" ")[1];
+module.exports = (superAuth = false) => async (req, res, next) => {
+    try {
+        const token = req.cookies.artico_token;
+        
+        if (!token) {
+            return res.status(401).json({
+                error: expiredLabel + " : Pas de token"
+            });
+        }
+        
+        const SECRET = process.env.SECRET_KEY;
 
-    const token = req.cookies.artico_token;
-    console.log("Token généré :" +  token);
-    if(!token) {
-        return res.status(401).send();
-    }
+        let decoded;
+        try {
+            decoded = jwt.verify(token, SECRET);
+        } catch (err) {
+            return res.status(401).json({
+                error: invalidLabel + " : Token invalide"
+            });
+        }
 
-    if (!token) return res.status(401).json({
-        error: expiredLabel + " : Pas de token"
-    });
-    const SECRET = process.env.SECRET_KEY;
+        const user = await UserRepository.findById(decoded.id);
+        if (!user) {
+            return res.status(401).json({
+                error: invalidLabel + " : Utilisateur non trouvé"
+            });
+        }
 
-
-    jwt.verify(token, SECRET, async (err, user) => {
-        if (err) return res.status(401).json({
-            error: invalidLabel + " : Token invalide"
-        });
-
-        // user = getUserById...;
-        user = await UserRepository.findById(user.id);
-        if (!user) return res.status(401).json({
-            error: invalidLabel + " : Utilisateur non trouvé"
-        });
 
         req.user = user;
 
@@ -46,7 +43,13 @@ module.exports = (superAuth = false) => (req, res, next) => {
                 error: "Accès non autorisé : Utilisateur non autorisé"
             });
         }
-
+        
         next();
-    });
+        
+    } catch (error) {
+        console.error('Authentication middleware error:', error);
+        return res.status(500).json({
+            error: "Erreur d'authentification"
+        });
+    }
 };
