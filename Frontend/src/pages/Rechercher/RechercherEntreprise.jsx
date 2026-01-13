@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import EntrepriseList from "../../components/listes/entreprises/EntrepriseList.jsx";
 import useAPI from "../../hooks/useAPI";
+import { usePosition } from "../../hooks/usePosition.jsx";
 
 const RechercherEntreprise = () => {
   const { query: callAPI } = useAPI();

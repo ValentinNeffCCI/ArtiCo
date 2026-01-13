@@ -5,13 +5,17 @@ import EntrepriseFilter from "../../filter/EntrepriseFilter.jsx";
 import useForm from "../../../hooks/useForm.jsx";
 import useAPI from "../../../hooks/useAPI.jsx";
 import Loader from '../../UX/loaders/Loader.jsx'
+import { usePosition } from "../../../hooks/usePosition.jsx";
 
 const EntrepriseList = ({ categorie = false, allCategories }) => {
 
+  const position = usePosition();
   const [isLoading, setIsLoading] = useState(false);
 
   const { content: filters, changeListener } = useForm("/entreprise", "GET", {
-    categorieId : categorie ?? ""
+    categorieId : categorie ?? "",
+    name: position ? position.ville : "",
+    cp: position ? position.codesPostal : ""
   });
   const { query: callAPI } = useAPI();
 

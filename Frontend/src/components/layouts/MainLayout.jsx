@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import { Header } from "../header/Header";
 import { Footer } from "../footer/Footer..jsx";
 import { ToastContainer, Slide } from "react-toastify";
-import usePosition from "../../hooks/usePosition.jsx";
+import { PositionProvider } from "../../hooks/usePosition.jsx";
 
 const MainLayout = () => {
   return (
@@ -19,9 +19,12 @@ const MainLayout = () => {
         draggable
         pauseOnHover
         theme="colored"
-        transition={Slide}/>
+        transition={Slide}
+      />
       <Header />
-      <Outlet />
+      <PositionProvider>
+        <Outlet />
+      </PositionProvider>
       <Footer />
     </Fragment>
   );

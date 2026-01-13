@@ -1,13 +1,15 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, createContext, useContext } from "react";
 
-const usePosition = () => {
-  const [position, setPosition] = useState(false);
+const PositionContext = createContext();
+
+export const PositionProvider = ({ children }) => {
+  const [position, setPosition] = useState(null);
 
   const baseUrl =
     "https://geo.api.gouv.fr/communes?lat={latitude}&lon={longitude}&fields=code,nom,codesPostaux";
 
-  const onLocalisationSuccess = (position) => {
-    const { latitude, longitude } = position.coords;
+  const onLocalisationSuccess = (pos) => {
+    const { latitude, longitude } = pos.coords;
 
     let url = baseUrl.replace("{latitude}", latitude);
     url = url.replace("{longitude}", longitude);
@@ -19,22 +21,23 @@ const usePosition = () => {
           const localisation = data[0];
           const returnValue = {
             ville: localisation.nom ?? "Paris",
-            codesPostal: localisation.codesPostaux[0] ?? '75000'
+            codesPostal: localisation.codesPostaux[0] ?? "75000",
           };
-          localStorage.setItem("GPS", JSON.stringify(returnValue));
           setPosition(returnValue);
+        } else {
+          setPosition({
+            ville: "Paris",
+            codesPostal: "75000",
+          });
         }
       })
       .catch((error) => {
-        setPosition({
-            ville: "Paris",
-            codesPostal: 75000
-          });
+        setPosition(null);
       });
   };
 
   const onLocalisationFailure = (error) => {
-    setPosition(false);
+    setPosition(null);
   };
 
   const determineCity = () => {
@@ -44,12 +47,28 @@ const usePosition = () => {
         onLocalisationFailure
       );
     } else {
-      setPosition(false);
+      setPosition({
+        ville: "Paris",
+        codesPostal: "75000",
+      });
     }
-    return position;
   };
 
-  return determineCity;
+  useEffect(() => {
+    determineCity();
+  }, []);
+
+  return (
+    <PositionContext.Provider value={position}>
+      {children}
+    </PositionContext.Provider>
+  );
 };
 
-export default usePosition;
+export const usePosition = () => {
+  const context = useContext(PositionContext);
+  if (context === undefined) {
+    throw new Error("usePosition ne fonctionne que dans un provider");
+  }
+  return context;
+};

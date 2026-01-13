@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CustomButton } from "../buttons/Custom/CustomButton";
 import style from "./Filter.module.css";
+import { usePosition } from "../../hooks/usePosition";
 
 const EntrepriseFilter = ({
   filters,
@@ -8,6 +9,7 @@ const EntrepriseFilter = ({
   categorieList = [],
   onSubmit,
 }) => {
+  const position = usePosition();
   return (
     <form onSubmit={onSubmit} className={style["filter"]}>
       <input
@@ -15,7 +17,7 @@ const EntrepriseFilter = ({
         name="name"
         onChange={onChange}
         placeholder="Rechercher"
-        defaultValue={""}
+        defaultValue={position ? position.ville : ""}
       />
       <div>
         <div>
@@ -46,7 +48,7 @@ const EntrepriseFilter = ({
               inputMode="numeric"
               placeholder="Ex : 67000"
               onChange={onChange}
-              defaultValue={""}
+              defaultValue={position ? position.codesPostal : ""}
             />
           </div>
         </div>
