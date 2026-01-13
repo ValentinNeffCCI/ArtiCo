@@ -20,15 +20,12 @@ export const PositionProvider = ({ children }) => {
         if (data.length !== 0) {
           const localisation = data[0];
           const returnValue = {
-            ville: localisation.nom ?? "Paris",
-            codesPostal: localisation.codesPostaux[0] ?? "75000",
+            ville: localisation.nom ?? "Strasbourg",
+            codesPostal: localisation.codesPostaux[0] ?? "67000",
           };
           setPosition(returnValue);
         } else {
-          setPosition({
-            ville: "Paris",
-            codesPostal: "75000",
-          });
+          setPosition(null);
         }
       })
       .catch((error) => {
