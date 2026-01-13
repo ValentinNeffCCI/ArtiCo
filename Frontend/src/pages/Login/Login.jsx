@@ -13,7 +13,7 @@ import { ToastContainer, Slide } from "react-toastify";
 const Login = () => {
   const { user } = useAuth();
 
-  if (user) return <Navigate to={user.role === "ADMIN" ? "/admin" : "/"} />;
+  if (user) return <Navigate to={"/"} />;
 
   const [isConnecting, setIsConnecting] = useState(true);
 

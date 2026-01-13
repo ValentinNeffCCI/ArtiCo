@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import useAPI from '../../hooks/useAPI'
 import Loader from '../../components/UX/loaders/Loader'
 import { useNavigate } from 'react-router-dom'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, TextAlignCenter } from 'lucide-react'
 import { CustomButton } from '../../components/buttons/Custom/CustomButton'
 import style from './Responses.module.css'
 import ResponseCard from '../../components/cards/ResponseCard/ResponseCard'
@@ -40,9 +40,17 @@ const Responses = () => {
         <h1>Réponses au questionnaire</h1>
         <div>
            {
+            responses.length != 0 ? 
             responses.map((response) => (
                 <ResponseCard key={response.id} reponse={response} />
             ))
+            :
+            <div style={{
+                textAlign: 'center',
+                marginTop: "3rem"
+            }}>
+                Il semblerait que personne n'ai encore répondu à ce questionnaire 🤔
+            </div>
            }
         </div>
     </main>
