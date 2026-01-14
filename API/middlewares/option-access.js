@@ -30,7 +30,7 @@ const verifyAccessOptions = async (req, res, next) => {
     
     const entreprise = req.user.entreprises.find(entreprise=>entreprise.id === option.input.formulaire.entrepriseId);
 
-    if(entreprise) return res.status(403).json({error: "Vous n'avez pas les droits nécessaire pour supprimer cette option"})
+    if(!entreprise) return res.status(403).json({error: "Vous n'avez pas les droits nécessaire pour supprimer cette option"})
 
     next();
 }

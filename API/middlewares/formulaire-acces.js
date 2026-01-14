@@ -15,13 +15,14 @@ const verifyAccessFormulaire = async (req, res, next) => {
 
     if(!formulaire){
         return res.status(404).json({
-            error: "Champ introuvable"
+            error: "Champ introuvable",
+            status: 404
         })
     }
 
     const entreprise = req.user.entreprises.find(entreprise=>entreprise.id === formulaire.entrepriseId);
 
-    if(entreprise) return res.status(403).json({error: "Vous n'avez pas les droits sur ce formulaire"})
+    if(!entreprise) return res.status(403).json({error: "Vous n'avez pas les droits sur ce formulaire"})
 
     next();
 }
