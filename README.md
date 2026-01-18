@@ -80,7 +80,7 @@ NODE_ENV="dev" // environnement de dev
 
 ### Lancer l'API + la base de données
 ```
-docker compose up
+docker compose up -d --build
 ```
 
 ### Initialiser la Base de données
