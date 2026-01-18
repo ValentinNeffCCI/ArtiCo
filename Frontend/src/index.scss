@@ -133,6 +133,11 @@ button{
   display: flex;
 }
 
+.row{
+  display: flex;
+  flex-direction: row;
+}
+
 .items-center{
   align-items: center;
 }
@@ -185,4 +190,29 @@ tbody tr:nth-of-type(2n+1){
     to {
         opacity: 1;
     }
+}
+
+.modale{
+    position: fixed;
+    z-index: 10;
+    height: 100vh;
+    width: 100vw;
+    background: rgba(0,0,0,.6);
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modale-content{
+    background: var(--light);
+    width: fit-content;
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    max-width: 70vw;
 }
