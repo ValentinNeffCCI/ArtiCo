@@ -1,14 +1,33 @@
-import {createContext, useContext, useEffect, useState} from "react";
-import useLocalStorage from "../hooks/useLocalStorage.jsx";
+import {createContext, useContext, useState, useEffect} from "react";
 
 const UserContext = createContext(null);
 
 export const UserProvider = ({children}) => {
-    const storage = useLocalStorage();
     const [user, setUser] = useState(false);
 
+    const getUser = async () => {
+        const response = await fetch(import.meta.env.VITE_API_URL + '/user/me', {
+            method: 'GET',
+            credentials: 'include',
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        });
+        if(response.ok){
+            const data = await response.json();
+            setUser({
+                id: data.id,
+                role: data.role
+            });
+            return data;
+        }else{
+            setUser(false);
+            return false;
+        }
+    }
+
     useEffect(()=>{
-        storage.initUser().then(data=>setUser(data))
+        getUser();
     }, []);
 
     const login = (data) => {

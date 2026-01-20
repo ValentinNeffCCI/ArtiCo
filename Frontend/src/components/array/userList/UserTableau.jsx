@@ -32,11 +32,11 @@ const UserTableau = ({ limit = false }) => {
       <table>
         <thead>
           <tr>
-            <td>Identifiant</td>
-            <td>Pseudo</td>
-            <td>Email</td>
-            <td>Role</td>
-            <td>Statut du compte</td>
+            <th>Identifiant</th>
+            <th>Pseudo</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Statut du compte</th>
           </tr>
         </thead>
         <tbody>

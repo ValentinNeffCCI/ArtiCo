@@ -162,6 +162,7 @@ const CreateEntreprise = ({
             name="categorieId"
             id="categorieId"
             onChange={changeListener}
+            className={style["select"]}
             defaultValue={defaultValues && defaultValues.categorieId}
             required
           >

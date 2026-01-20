@@ -22,7 +22,7 @@ const Admin = () => {
         theme="colored"
         transition={Slide}
         />
-      <h1>Bienvenue {user.name}</h1>
+      <h1>Bienvenue sur l'espace administrateur</h1>
       <div className={classes['tableaux']}>
       <UserTableau limit={5}/>
       <EntrepriseTableau limit={5}/>

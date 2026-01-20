@@ -33,7 +33,7 @@ export const Categories = () => {
       <h3 className="itim">De nombreux secteurs</h3>
       <div>
         <div>
-          {categories && categories.splice(0, 9).map((category) => (
+          {categories && [...categories].splice(0, 9).map((category) => (
             <LinkButton
               key={category.id}
               className={classes["categorie"]}

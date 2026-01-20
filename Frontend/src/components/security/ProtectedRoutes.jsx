@@ -5,12 +5,16 @@ import { Fragment } from "react";
 const ProtectedRoute = ({ allowedRoles }) => {
   const { user } = useAuth();
 
+  const redirect = () => {
+    return <Navigate to="/" />;
+  }
+
   if (!user) {
-    return <Navigate to="/connexion" />;
+    return redirect();
   }
 
   if (allowedRoles && !allowedRoles.includes(user.role)) {
-    return <Navigate to="/" />;
+    return redirect();
   }
 
   return (
