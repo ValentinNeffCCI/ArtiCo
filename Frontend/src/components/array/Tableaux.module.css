@@ -10,3 +10,11 @@
 .tableau{
     width: 100%;
 }
+
+.tableau tfoot{
+    background-color: var(--secondary);
+}
+
+.tableau table tr:nth-of-type(even){
+    background-color: #dddcdc;
+}

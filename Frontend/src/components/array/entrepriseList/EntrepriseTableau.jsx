@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import useAPI from "../../../hooks/useAPI";
-import { LinkButton } from "../../buttons/Link/LinkButton";
 import classes from "../Tableaux.module.css";
 import { toast } from "react-toastify";
 
 const EntrepriseTableau = ({ limit = false }) => {
-  const [entreprises, setEntreprises] = useState([]);
+  const [entreprises, setEntreprises] = useState(false);
   const { query: callAPI } = useAPI();
   const getAllEntreprises = async () => {
     const response = await callAPI("/entreprise");
@@ -17,11 +16,13 @@ const EntrepriseTableau = ({ limit = false }) => {
   };
 
   const limitEntreprise = () =>
-    limit ? entreprises.reverse().splice(0, limit) : entreprises.reverse();
+    limit ? [...entreprises].reverse().slice(0, limit) : [...entreprises].reverse();
 
   useEffect(() => {
     getAllEntreprises();
   }, []);
+
+  if(!entreprises) return;
 
   return (
     <div className={classes["tableau"]}>
@@ -29,10 +30,10 @@ const EntrepriseTableau = ({ limit = false }) => {
       <table>
         <thead>
           <tr>
-            <td>Identifiant</td>
-            <td>Nom</td>
-            <td>Ville</td>
-            <td>Code Postal</td>
+            <th>Identifiant</th>
+            <th>Nom</th>
+            <th>Ville</th>
+            <th>Code Postal</th>
           </tr>
         </thead>
         <tbody>

@@ -11,7 +11,7 @@ const EntrepriseCard = ({ entreprise, style={} }) => {
       title={`Accéder à la page de ${entreprise.name}`}
     >
       <figure>
-        <img src={entreprise.image.startsWith('http') ? entreprise.image : url + '/' + entreprise.image} alt={entreprise.name} />
+        <img src={entreprise.image && (entreprise.image.startsWith('http') ? entreprise.image : url + '/' + entreprise.image)} alt={entreprise.name} />
       </figure>
       <div className={classes["description"]}>
         <h3 className="itim">{entreprise.name}</h3>
