@@ -10,7 +10,7 @@ module.exports = (err, req, res, next) => {
     if (err.status) {
         return res.status(err.status).json(err)
     }
-    return res.status(500).json({
-        error: (err.message || "Erreur serveur")
-    })
+
+    // Dans tous les autres cas 404
+    next();
 }
