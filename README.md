@@ -384,9 +384,9 @@ Ajoutez la ligne suivante:
 
 Cela va permettre de renouveler le certificat SSL (si nécessaire) tous les lundis à midi.
 
-**Attention** : dans les dernières versions de certbot un cron automatique est instancié par défaut.
-
 Vous devrez cependant redémarrer le service nginx pour que le nouveau certificat SSL soit pris en compte.
+
+**Attention** : dans les dernières versions de certbot un cron automatique est instancié par défaut.
 
 Vous pouvez donc modifier le fichier ``/etc/letsencrypt/renewal/mondomaine.conf`` pour ajouter la ligne suivante:
 ```bash
