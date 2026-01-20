@@ -266,13 +266,13 @@ To                      Action          From
 
 Si ce n'est pas le cas, les étapes suivantes sont nécessaires:
 - Définir les règles du pare-feu
-```
+```bash
 sudo ufw allow 80 // Accès HTTP
 sudo ufw allow 443 // Accès HTTPS
 sudo ufw allow 22 // Accès SSH
 ```
 - Activer le pare-feu avec les nouvelles règles
-```
+```bash
 sudo ufw enable
 ```
 
@@ -280,12 +280,12 @@ sudo ufw enable
 
 Tout d'abord il va nous falloir le premier certificat SSL qui pourra être raffraichit à l'avenir. Nous allons donc installer **certbot** avec la commande
 
-```
+```bash
 sudo apt install certbot python3-certbot-nginx
 ```
 
 Puis demander la génération du certificat via
-```
+```bash
 sudo certbot --nginx -d mondomaine.fr -d www.mondomaine.fr
 ```
 
@@ -296,7 +296,7 @@ Désormais il va falloir également :
 Pour cela vous trouverez le fichier ``/API/conf/nginx.conf`` avec la configuration nécessaire qui remplacera votre fichier situé à l'emplacement ``/etc/nginx/sites-available/mondomaine``
 
 Il faut alors redémarrer **nginx**
-```
+```bash
 sudo systemctl restart nginx
 ```
 
@@ -328,13 +328,13 @@ Cela vaut aussi bien pour le nom du dossier dans le fichier de configuration ngi
 
 - Si vos containers ne démarrent pas, il est possible qu'un container avec le même nom tourne en arrière plan
 
-```
+```bash
 docker stop <nom du container>
 ```
 
 et relancer le container
 
-```
+```bash
 docker compose up -d --build --remove-orphans
 ```
 
@@ -343,8 +343,8 @@ docker compose up -d --build --remove-orphans
 ### Transmission des cookies à l'API
 
 Si l'application utiise HTTP et non HTTPS, il est probable que vos cookies ne soient pas transmis à l'API. Pour corriger cela, il suffit de modiifer le fichier ``/API/.env`` et de modifier cette variable :
-```
-NODE_ENV=productionhttp # autre chose que production
+```bash
+NODE_ENV=production_http # par exemple
 ```
 
 Cela va permettre d'envoyer les cookies via HTTP et non HTTPS.
@@ -356,7 +356,7 @@ Cela va permettre d'envoyer les cookies via HTTP et non HTTPS.
 
 A chaque modification de l'API il va falloir relancer le container:
 
-```
+```bash
 docker compose down
 docker compose up -d --build
 ```
@@ -367,18 +367,18 @@ Cette étape est nécessaire car elle va installer les nouveaux packages et pass
 
 Le certificat SSL possède une durée de vie de 3 mois, il faut donc le renouveler tous les 2-3 mois.
 
-```
+```bash
 certbot renew
 sudo systemctl reload nginx
 ```
 
-Vous pouvez tout à fait automatiser ce processus avec un cron job:
-```
+Vous pouvez tout à fait automatiser ce processus avec un cron job (accès root):
+```bash
 sudo crontab -e
 ```
 
 Ajoutez la ligne suivante:
-```
+```bash
 0 12 * * 1 /usr/bin/certbot renew --quiet
 ```
 
@@ -389,16 +389,43 @@ Cela va permettre de renouveler le certificat SSL (si nécessaire) tous les lund
 Vous devrez cependant redémarrer le service nginx pour que le nouveau certificat SSL soit pris en compte.
 
 Vous pouvez donc modifier le fichier ``/etc/letsencrypt/renewal/mondomaine.conf`` pour ajouter la ligne suivante:
-```
+```bash
 # Après le renouvellement du certificat
 renew_hook = systemctl reload nginx
 ```
 
 ## Conclusion
 
+
+### Architecture finale
+
 Vous avez maintenant une application déployée sur un serveur Linux.
 
-Etapes réalisées :
+```mermaid
+graph TD
+    REQ([Requete])
+
+    subgraph VPS
+        NGINX[Nginx]
+        FRONT[Frontend]
+        
+        subgraph Docker
+            subgraph Node_Container[Node.js]
+                API[API NodeJS]
+                UPLOADS(Uploads)
+            end
+            DB[(PostgreSQL)]
+        end
+    end
+
+    REQ <--> NGINX
+    NGINX <--> API
+    NGINX <--> FRONT
+    API <--> DB
+    API <---> UPLOADS
+```
+
+### Etapes réalisées :
 - [x] Installer NodeJS / npm
 - [x] Installer Docker
 - [x] Installer Nginx
