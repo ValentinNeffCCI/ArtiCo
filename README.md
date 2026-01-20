@@ -29,6 +29,8 @@
 
 Artico est une application développé avec **React** pour la partie client et **NodeJS** pour la partie serveur (API). La base de données privilégiée pour ce projet est **PostgreSQL**.
 
+L'objectif de cette application est de permettre à des artisans de renseigner leur(s) entreprise(s) et de proposer des questionnaires à des potentiels prospects / futurs clients. 
+
 Au cours de ce guide vous trouverez toutes les étapes qui permettront de déployer votre application en ligne.
 
 ### Prérequis nécessaire
