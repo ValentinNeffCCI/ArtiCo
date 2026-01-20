@@ -40,6 +40,10 @@ Au cours de ce guide vous trouverez toutes les étapes qui permettront de déplo
 - **Nginx**
 - **Let's Encrypt**
 
+- un **accès SSH** au serveur
+- un **nom de domaine**
+- une **clé d'application gmail** pour l'envoi de mail
+
 ## Préparation du serveur
 
 Avant toute chose, veuillez mettre à jour les dépôts Linux :
