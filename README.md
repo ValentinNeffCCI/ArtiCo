@@ -49,7 +49,7 @@ Au cours de ce guide vous trouverez toutes les étapes qui permettront de déplo
 Avant toute chose, veuillez mettre à jour les dépôts Linux :
 
 ```
-sudo apt update
+sudo apt update et sudo apt upgrade -y
 ```
 
 ### Installer Make
