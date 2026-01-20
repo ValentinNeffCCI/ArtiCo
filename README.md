@@ -48,19 +48,19 @@ Au cours de ce guide vous trouverez toutes les étapes qui permettront de déplo
 
 Avant toute chose, veuillez mettre à jour les dépôts Linux :
 
-```
+```bash
 sudo apt update et sudo apt upgrade -y
 ```
 
 ### Installer Make
 
-```
+```bash
 sudo apt install make
 ```
 
 ### Installer Node et npm
 
-```
+```bash
 sudo apt install nodejs
 sudo apt install npm
 ```
@@ -68,7 +68,7 @@ sudo apt install npm
 Assurez-vous que les installations ce soient correctement déroulées.
 Vous devriez avoir quelque chose ressemblant à cela :
 
-```
+```bash
 user@ubuntu ~ node -v 
 v25.3.0
 
@@ -81,12 +81,12 @@ user@ubuntu ~ npm -v
 Si Docker n'est pas encore installer sur votre machine: [Installer Docker](https://docs.docker.com/engine/install/ubuntu/)
 
 Vous pouvez vérifier que docker est bien installé
-```
+```bash
 docker -v
 ```
 
 Il ne reste plus qu'à permettre à docker de se lancer automatiquement au lancement du serveur
-```
+```bash
 sudo systemctl enable docker
 ```
 
@@ -96,7 +96,7 @@ sudo systemctl enable docker
 
 Il faut se déplacer dans le dossier ``/API``.
 
-```
+```bash
 cd API/
 ```
 
@@ -126,12 +126,12 @@ Afin de pouvoir monter nos containers et accéder à la base de données et à n
 ### Lancer les containers
 Il faut alors lancer la commande suivante afin de démarrer les containers docker :
 
-```
+```bash
 docker compose up -d --build
 ```
 
 Pour vérifier le bon fonctionnement des containers entrez la commande 
-```
+```bash
 docker ps
 ```
 
@@ -139,14 +139,14 @@ Vos 2 containers doivent être présents.
 
 Afin de vérifier que l'API tourne bien, vous pouvez effectué la commande suivante
 
-```
+```bash
 curl -L http://localhost:3000/api/categorie
 ```
 vous devriez recevoir cette réponse : ``[]``
 
 Il suffit de lancer la commande :
 
-```
+```bash
 make start-app
 ```
 
@@ -158,7 +158,7 @@ Cette commande va :
 
 il ne reste plus qu'à retourner à la racine du projet
 
-```
+```bash
 cd ..
 ```
 
@@ -166,7 +166,7 @@ cd ..
 
 Il faut se déplacer dans le dossier ``Frontend/``
 
-```
+```bash
 cd Frontend/
 ```
 
@@ -180,7 +180,7 @@ Dans le fichier ``.env`` il faut ajouter la variable suivante :
 
 Lancez la commande :
 
-```
+```bash
 make create-app
 ```
 
@@ -191,7 +191,7 @@ Cette commande :
 ---
 ### Configuration Nginx
 
-```
+```bash
 sudo apt install nginx
 ```
 #### Mise en place du serveur HTTP
@@ -204,7 +204,7 @@ Il va falloir :
 
 Pour cela vous pouvez utiliser cette configuration dans le fichier ``/etc/nginx/sites-available/mondomaine``
 
-```
+```bash
 server {
     listen 80;
     server_name mondomaine.fr www.mondomaine.fr;
@@ -234,12 +234,12 @@ server {
 ```
 
 Sans oublier de créer le lien symbolique vers le dossier **sites-enabled** de nginx
-```
+```bash
 ln -s /etc/nginx/sites-available/mondomaine /etc/nginx/sites-enabled/mondomaine
 ```
 
 Puis il faut redémarrer le process **nginx**
-```
+```bash
 sudo systemctl restart nginx
 ```
 
@@ -247,21 +247,21 @@ sudo systemctl restart nginx
 
 Tout d'abord nous devons vérifier le statut du pare-feu pour voir si ce dernier est activé.
 
-```
+```bash
 sudo ufw status
 ```
 Ce dernier doit nous renvoyer quelque chose comme : 
-```
+```bash
 Status: active
 
-To                          Action         From
---                            ------          ----
-443                       ALLOW       Anywhere
-80                         ALLOW       Anywhere
-22                         ALLOW       Anywhere
-443 (v6)                ALLOW       Anywhere (v6)
-80 (v6)                  ALLOW       Anywhere (v6)
-22 (v6)                  ALLOW       Anywhere (v6)
+To                      Action          From
+--                      ------          ----
+443                     ALLOW           Anywhere
+80                      ALLOW           Anywhere
+22                      ALLOW           Anywhere
+443 (v6)                ALLOW           Anywhere (v6)
+80 (v6)                 ALLOW           Anywhere (v6)
+22 (v6)                 ALLOW           Anywhere (v6)
 ```
 
 Si ce n'est pas le cas, les étapes suivantes sont nécessaires:
