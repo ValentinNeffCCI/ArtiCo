@@ -12,10 +12,9 @@ import { ToastContainer, Slide } from "react-toastify";
 
 const Login = () => {
   const { user } = useAuth();
+  const [isConnecting, setIsConnecting] = useState(true);
 
   if (user) return <Navigate to={"/"} />;
-
-  const [isConnecting, setIsConnecting] = useState(true);
 
   const switchScreen = () => setIsConnecting((prev) => !prev);
 
@@ -27,6 +26,7 @@ const Login = () => {
         overflow: "hidden"
       }}
     >
+      <ToastContainer/>
       <div
         className={`hidden-mobile`}
         style={{
