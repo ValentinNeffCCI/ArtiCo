@@ -15,8 +15,8 @@ export const RegisterForm = ({ children }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     let response = await prepare(e);
-    if (response.message) {
-      toast.error(response.error);
+    if (response.message || response.error) {
+      toast.error(response.message || response.error);
       return;
     }
     login(response);
