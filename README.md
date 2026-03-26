@@ -227,7 +227,7 @@ server {
     }
 
 
-    location /uploads {
+    location / {
         proxy_pass http://localhost:3000;
     }
 }
