@@ -20,10 +20,8 @@ services:
 
   backend:
     container_name: artico-backend
+    image: ${DOCKERHUB_USERNAME}/artico-backend:${IMAGE_TAG:-latest}
     restart: unless-stopped
-    build:
-      context: .
-      dockerfile: docker/backend/Dockerfile.prod
     env_file:
       - .env
     environment:
@@ -38,11 +36,8 @@ services:
 
   client:
     container_name: artico-client
-    build:
-      context: .
-      dockerfile: docker/frontend/Dockerfile.prod
-      args:
-        - VITE_API_URL=${VITE_API_URL}
+    image: ${DOCKERHUB_USERNAME}/artico-client:${IMAGE_TAG:-latest}
+    restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
@@ -51,7 +46,6 @@ services:
       - /etc/letsencrypt/archive/valentinneff.dev:/etc/letsencrypt/archive/valentinneff.dev:ro
     depends_on:
       - backend
-    restart: unless-stopped
     networks:
       - client_server
 

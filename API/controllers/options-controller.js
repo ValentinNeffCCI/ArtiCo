@@ -3,7 +3,7 @@ const optionsService = require("../services/option-service.js");
 module.exports = {
     getAllOptions: async (req, res, next) => {
         try {
-            const options = await optionsService.getAllOptions();
+            const options = await optionsService.findAll();
             res.status(200).json(options);
         } catch (error) {
             return next(error);
@@ -11,7 +11,7 @@ module.exports = {
     },
     getOptionById: async (req, res, next) => {
         try {
-            const option = await optionsService.getOptionById(req.params.id);
+            const option = await optionsService.findById(req.params.id);
             res.status(200).json(option);
         } catch (error) {
             return next(error);
@@ -19,7 +19,7 @@ module.exports = {
     },
     getOptionByInputId: async (req, res, next) => {
         try {
-            const option = await optionsService.getOptionByInputId(req.params.id);
+            const option = await optionsService.findByInputId(req.params.id);
             res.status(200).json(option);
         } catch (error) {
             return next(error);

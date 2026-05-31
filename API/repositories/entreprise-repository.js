@@ -103,6 +103,12 @@ module.exports = {
       where: { id },
     });
   },
+  findByName: async (name) => {
+    // name n'est pas unique sur Entreprise => findFirst.
+    return await prisma.entreprise.findFirst({
+      where: { name },
+    });
+  },
   filter: async (filters) => {
     const { name, limit, ...restFilters } = filters;
 

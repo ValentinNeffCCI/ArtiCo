@@ -1,0 +1,105 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-main
+  cancel-in-progress: false
+
+jobs:
+  test-api:
+    name: Tests API (Jest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: API
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: API/package-lock.json
+      - run: npm ci
+      - run: npm test
+
+  build-push:
+    name: Build & push images (Docker Hub)
+    needs: [test-api]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/setup-buildx-action@v3
+      - name: Login Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build & push backend
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/backend/Dockerfile.prod
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/artico-backend:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/artico-backend:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Build & push client
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: docker/frontend/Dockerfile.prod
+          build-args: |
+            VITE_API_URL=/api
+          push: true
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/artico-client:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/artico-client:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    name: Déploiement SSH
+    needs: [build-push]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Déploiement sur le VPS
+        uses: appleboy/ssh-action@v1.2.0
+        env:
+          PROD_ENV: ${{ secrets.PROD_ENV }}
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+          IMAGE_TAG: ${{ github.sha }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT || 22 }}
+          envs: PROD_ENV,DOCKERHUB_USERNAME,DOCKERHUB_TOKEN,IMAGE_TAG
+          script: |
+            set -e
+            cd "${{ secrets.DEPLOY_PATH }}"
+
+            # Récupère le dernier compose de déploiement (le .env, non suivi, est préservé).
+            git fetch origin main
+            git checkout main
+            git reset --hard origin/main
+
+            # Écrit le .env de prod depuis le secret, puis injecte le namespace + tag d'image.
+            printf '%s\n' "$PROD_ENV" > .env
+            echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME" >> .env
+            echo "IMAGE_TAG=$IMAGE_TAG" >> .env
+
+            # Login Docker Hub pour tirer les images, pull, démarrage, nettoyage.
+            echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker compose -f docker-compose.deploy.yaml pull
+            docker compose -f docker-compose.deploy.yaml up -d
+            docker logout
+            docker image prune -f

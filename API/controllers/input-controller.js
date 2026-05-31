@@ -3,7 +3,7 @@ const inputService = require("../services/input-service.js");
 module.exports = {
     getAllInputs: async (req, res, next) => {
         try {
-            const inputs = await inputService.getAllInputs();
+            const inputs = await inputService.findAll();
             res.status(200).json(inputs);
         } catch (error) {
             return next(error);
@@ -11,7 +11,7 @@ module.exports = {
     },
     getInputById: async (req, res, next) => {
         try {
-            const input = await inputService.getInputById(req.params.id);
+            const input = await inputService.findById(req.params.id);
             res.status(200).json(input);
         } catch (error) {
             return next(error);
@@ -19,7 +19,7 @@ module.exports = {
     },
     getInputByFormulaireId: async (req, res, next) => {
         try {
-            const input = await inputService.getInputByFormulaireId(req.params.id);
+            const input = await inputService.findByFormulaireId(req.params.id);
             res.status(200).json(input);
         } catch (error) {
             return next(error);
