@@ -61,23 +61,25 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-  copy_compose:
-    name: Copy compose file
+  copy_files:
+    name: Copy compose file and script
     needs: [build-push]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Copy compose file
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "docker/compose.prod.yml"
-          target: "${{ secrets.DEPLOY_PATH }}/docker-compose.deploy.yml"
+          port: ${{ secrets.SSH_PORT }}
+          source: "docker-compose.deploy.yaml,docker/backend/production.sh"
+          target: "${{ secrets.DEPLOY_PATH }}"
 
   deploy:
     name: Déploiement SSH
-    needs: [build-push]
+    needs: [copy_files]
     runs-on: ubuntu-latest
     steps:
       - name: Déploiement sur le VPS
@@ -95,8 +97,8 @@ jobs:
           envs: PROD_ENV,DOCKERHUB_USERNAME,DOCKERHUB_TOKEN,IMAGE_TAG
           script: |
             set -e
-            mkdir -p {{ secrets.DEPLOY_PATH }}
-            cd {{ secrets.DEPLOY_PATH }}
+            mkdir -p ${{ secrets.DEPLOY_PATH }}
+            cd ${{ secrets.DEPLOY_PATH }}
 
             # Écrit le .env de prod depuis le secret, puis injecte le namespace + tag d'image.
             printf '%s\n' "$PROD_ENV" > .env
