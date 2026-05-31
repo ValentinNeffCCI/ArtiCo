@@ -85,7 +85,8 @@ jobs:
           envs: PROD_ENV,DOCKERHUB_USERNAME,DOCKERHUB_TOKEN,IMAGE_TAG
           script: |
             set -e
-            cd "${{ secrets.DEPLOY_PATH }}"
+            mkdir -p {{ secrets.DEPLOY_PATH }}
+            cd {{ secrets.DEPLOY_PATH }}
 
             # Récupère le dernier compose de déploiement (le .env, non suivi, est préservé).
             git fetch origin main
