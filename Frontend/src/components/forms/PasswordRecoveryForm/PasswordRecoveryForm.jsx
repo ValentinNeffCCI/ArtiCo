@@ -32,13 +32,7 @@ const PasswordRecoveryForm = ({ sendMail }) => {
   if (isLoading) return <Loader />;
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        marginTop: "1.5rem",
-        width: "50%",
-      }}
-    >
+    <form onSubmit={handleSubmit}>
       <input
         onChange={handleChange}
         type="email"

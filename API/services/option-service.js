@@ -8,6 +8,9 @@ module.exports = {
     findAll: async () => {
         return optionCollectionResource(await optionRepository.findAll());
     },
+    findByInputId: async (id) => {
+        return optionCollectionResource(await optionRepository.findByInputId(id));
+    },
     create: async (data) => {
         return optionResource(await optionRepository.create(data));
     },

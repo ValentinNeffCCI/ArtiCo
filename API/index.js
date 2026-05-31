@@ -39,6 +39,9 @@ const cacheTime = 60 * 60 * 24 * 31;
 
 const app = express();
 
+// derrière le reverse proxy nginx (X-Forwarded-For)
+app.set("trust proxy", 1);
+
 app.use(express.json());
 app.use(cookieParser());
 app.use(
@@ -72,26 +75,41 @@ const PORT = process.env.PORT || 3000;
 // log
 app.use(logger);
 
-app.use("/api/auth", AuthRouter);
-app.use("/api/entreprise", EntrepriseRouter);
-app.use("/api/formulaire", FormulaireRouter);
-app.use("/api/galerie", GalerieRouter);
-app.use("/api/input", InputRouter);
-app.use("/api/option", OptionRouter);
-app.use("/api/submission", SubmissionRouter);
-app.use("/api/user", UserRouter);
-app.use("/api/admin", AdminRouter);
-app.use("/api/categorie", CategorieRouter);
+app.get('/', (req, res) => {
+  res.json({ message: 'Welcome to the ArtiCo API' });
+});
+
+const apiRouter = express.Router();
+app.use("/api", apiRouter);
+
+apiRouter.use("/auth", AuthRouter);
+apiRouter.use("/entreprise", EntrepriseRouter);
+apiRouter.use("/formulaire", FormulaireRouter);
+apiRouter.use("/galerie", GalerieRouter);
+apiRouter.use("/input", InputRouter);
+apiRouter.use("/option", OptionRouter);
+apiRouter.use("/submission", SubmissionRouter);
+apiRouter.use("/user", UserRouter);
+apiRouter.use("/admin", AdminRouter);
+apiRouter.use("/categorie", CategorieRouter);
 
 // Accéder aux uploads
 app.use(
   "/uploads",
   express.static(path.join(__dirname, "uploads"), {
     setHeaders: (res, filePath, stat) => {
-      // Bug sur les jpg/jpeg
+
       const ext = path.extname(filePath).toLowerCase();
+
+      const authorizedExtensions = [".jpg", ".jpeg", ".png", ".gif", "webp"];
+      if(ext && !authorizedExtensions.includes(ext)) {
+        return;
+      }
+      
       if (ext === ".jpg" || ext === ".jpeg") {
         res.setHeader("Content-Type", "image/jpeg");
+      } else {
+        res.setHeader("Content-Type", `image/${ext.slice(1)}`);
       }
 
       res.set("Cross-Origin-Resource-Policy", "cross-origin");
@@ -107,6 +125,6 @@ app.use((req, res) => {
   res.status(404).send();
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, process.env.HOSTNAME , () => {
   console.log(`Server running at http://localhost:${PORT} : ${new Date().toLocaleDateString()}`);
 });

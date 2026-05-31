@@ -1,8 +1,8 @@
 .input {
     display: flex;
     flex-direction: column;
-    margin: 1rem;
-    gap: .3rem;
+    margin: .6rem 0;
+    gap: .4rem;
     overflow: auto;
 }
 
@@ -12,7 +12,7 @@
 }
 
 .input input{
-    margin: 1rem auto;
+    margin: 0;
 }
 
 .input input {

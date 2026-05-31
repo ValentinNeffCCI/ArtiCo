@@ -105,6 +105,7 @@ const CustomForm = ({
             return (
               <CustomInput key={input.id} input={input}>
                 <select
+                  key={`${input.id}-${input.value ?? ""}-${input.options?.length ?? 0}`}
                   name={
                     input.is_fix
                       ? input.name.length !== 0
