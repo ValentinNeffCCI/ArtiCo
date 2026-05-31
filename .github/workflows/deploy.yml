@@ -65,6 +65,20 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+  copy_compose:
+    name: Copy compose file
+    needs: [build-push]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copy compose file
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "docker/compose.prod.yml"
+          target: "${{ secrets.DEPLOY_PATH }}/docker-compose.deploy.yml"
+
   deploy:
     name: Déploiement SSH
     needs: [build-push]
@@ -87,11 +101,6 @@ jobs:
             set -e
             mkdir -p {{ secrets.DEPLOY_PATH }}
             cd {{ secrets.DEPLOY_PATH }}
-
-            # Récupère le dernier compose de déploiement (le .env, non suivi, est préservé).
-            git fetch origin main
-            git checkout main
-            git reset --hard origin/main
 
             # Écrit le .env de prod depuis le secret, puis injecte le namespace + tag d'image.
             printf '%s\n' "$PROD_ENV" > .env
