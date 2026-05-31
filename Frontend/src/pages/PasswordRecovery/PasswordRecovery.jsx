@@ -17,21 +17,10 @@ const PasswordRecovery = () => {
   return (
     <main className={`${style.recovery}`}>
         <Fragment>
-          <figure
-            className={`hidden-mobile ${style.figure}`}
-            style={{
-              width: "15%",
-            }}
-          >
-            <img
-              src={ApprovingWorker}
-              alt="Ouvrier heureux"
-              style={{
-                width: "100%",
-              }}
-            />
+          <figure className={`hidden-mobile ${style.figure}`}>
+            <img src={ApprovingWorker} alt="Ouvrier heureux" />
           </figure>
-          <ChangePassword token={token}/>
+          <ChangePassword token={token} />
         </Fragment>
     </main>
   );

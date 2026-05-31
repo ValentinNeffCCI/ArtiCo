@@ -19,6 +19,17 @@ const main = async () => {
       email: OWNER_EMAIL,
     },
   });
+
+  const verifyCategorie = await prisma.categorie.findUnique({
+    where: { name: "Autre" },
+  });
+
+  if (!verifyCategorie) {
+    await prisma.categorie.create({
+      data: { name: "Autre" },
+    });
+  }
+
 };
 
 main()

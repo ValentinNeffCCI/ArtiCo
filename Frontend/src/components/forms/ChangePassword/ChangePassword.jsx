@@ -2,7 +2,7 @@ import style from "./ChangePassword.module.css";
 import useForm from "../../../hooks/useForm";
 import { CustomButton } from "../../buttons/Custom/CustomButton";
 import PasswordInput from "../inputs/PasswordInput";
-import { Slide, toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useAuth } from "../../../contexts/UserContext";
 import { Navigate } from "react-router-dom";
 
@@ -38,9 +38,9 @@ const ChangePassword = ({ token }) => {
       return;
     }
 
-    const response = prepare(e);
+    const response = await prepare(e);
 
-    if (response.error) {
+    if (!response || response.error) {
       toast.error("Une erreur est survenue");
     } else {
       login(response);
@@ -49,19 +49,6 @@ const ChangePassword = ({ token }) => {
 
   return (
     <form className={style["form"]} onSubmit={handleSubmit}>
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-        transition={Slide}
-      />
       <h1 className={style["title"]}>Nouveau mot de passe</h1>
       <PasswordInput
         onChange={changeListener}
@@ -82,8 +69,8 @@ const ChangePassword = ({ token }) => {
       <CustomButton
         style={{
           width: "fit-content",
-          "--bg-color": "var(--light)",
-          "--color": "var(--dark)",
+          "--bg-color": "var(--primary)",
+          "--color": "var(--light)",
           margin: "1rem auto",
           fontSize: 18,
         }}

@@ -3,7 +3,7 @@ const galerieService = require("../services/galerie-service.js");
 module.exports = {
     getAllGaleries: async (req, res, next) => {
         try {
-            const galeries = await galerieService.getAllGaleries();
+            const galeries = await galerieService.findAll();
             res.status(200).json(galeries);
         } catch (error) {
             return next(error);
@@ -11,7 +11,7 @@ module.exports = {
     },
     getGalerieById: async (req, res, next) => {
         try {
-            const galerie = await galerieService.getGalerieById(req.params.id);
+            const galerie = await galerieService.findById(req.params.id);
             res.status(200).json(galerie);
         } catch (error) {
             return next(error);

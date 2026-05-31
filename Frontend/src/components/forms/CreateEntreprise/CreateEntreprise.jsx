@@ -158,12 +158,11 @@ const CreateEntreprise = ({
         <div className={[style["input"], style["select"]].join(" ")}>
           <label htmlFor="categorieId">Catégorie de votre entreprise :</label>
           <select
-            type="file"
             name="categorieId"
             id="categorieId"
             onChange={changeListener}
             className={style["select"]}
-            defaultValue={defaultValues && defaultValues.categorieId}
+            value={content.categorieId ?? ""}
             required
           >
             <option value="">Toutes les options</option>

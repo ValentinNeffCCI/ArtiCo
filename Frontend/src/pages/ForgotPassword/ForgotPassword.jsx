@@ -13,49 +13,27 @@ const ForgotPassword = () => {
     <main className={styles["forgot"]}>
       {isMailSend ? (
         <Fragment>
-          <h2>Vérifiez votre boîte mail</h2>
-          <h3>
-            Nous vous avons envoyé un lien pour modifier votre mot de passe
-          </h3>
-          <figure
-            className="hidden-mobile"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "2rem",
-            }}
-          >
-            <img
-              src={ApprovingWorker}
-              alt="Ouvrier heureux"
-              style={{
-                width: "70%",
-              }}
-            />
+          <div className={styles["card"]}>
+            <h2>Vérifiez votre boîte mail</h2>
+            <h3>
+              Nous vous avons envoyé un lien pour modifier votre mot de passe
+            </h3>
+          </div>
+          <figure className={`hidden-mobile ${styles["figure"]}`}>
+            <img src={ApprovingWorker} alt="Ouvrier heureux" />
           </figure>
         </Fragment>
       ) : (
         <Fragment>
-          <h1>
-            Nous sommes désolé d'apprendre que vous avez oublié votre mot de
-            passe...
-          </h1>
-          <PasswordRecoveryForm sendMail={sendMail}/>
-          <figure
-            className="hidden-mobile"
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              marginTop: "2rem",
-            }}
-          >
-            <img
-              src={LostWorker}
-              alt="Ouvrier perdu"
-              style={{
-                width: "20%",
-              }}
-            />
+          <div className={styles["card"]}>
+            <h1>
+              Nous sommes désolé d'apprendre que vous avez oublié votre mot de
+              passe...
+            </h1>
+            <PasswordRecoveryForm sendMail={sendMail} />
+          </div>
+          <figure className={`hidden-mobile ${styles["figure"]}`}>
+            <img src={LostWorker} alt="Ouvrier perdu" />
           </figure>
         </Fragment>
       )}

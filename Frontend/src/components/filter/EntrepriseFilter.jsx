@@ -27,7 +27,7 @@ const EntrepriseFilter = ({
               name="categorieId"
               id="categorie"
               onChange={onChange}
-              defaultValue={filters.categorieId ?? ""}
+              value={filters.categorieId ?? ""}
             >
               <option value="">Tous les domaines</option>
               {categorieList.map((categorie) => (

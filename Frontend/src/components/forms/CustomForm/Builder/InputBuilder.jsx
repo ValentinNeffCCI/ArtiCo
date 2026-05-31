@@ -171,7 +171,7 @@ const InputBuilder = ({
               name={"type_" + input.id}
               id={"type_" + input.id}
               onChange={handleChange}
-              defaultValue={datas.type}
+              value={datas.type ?? ""}
             >
               {types.map((type, index) => (
                 <option key={index} value={type.type}>
