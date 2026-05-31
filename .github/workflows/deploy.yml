@@ -66,13 +66,14 @@ jobs:
     needs: [build-push]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Copy compose file
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: "docker/compose.prod.yml"
+          source: "docker/docker-compose.deploy.yml"
           target: "${{ secrets.DEPLOY_PATH }}/docker-compose.deploy.yml"
 
   deploy:
