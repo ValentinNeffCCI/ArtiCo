@@ -78,7 +78,7 @@ jobs:
 
   deploy:
     name: Déploiement SSH
-    needs: [build-push]
+    needs: [copy_compose]
     runs-on: ubuntu-latest
     steps:
       - name: Déploiement sur le VPS
