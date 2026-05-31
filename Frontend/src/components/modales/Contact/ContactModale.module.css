@@ -26,13 +26,15 @@
 .modale-content h2 {
     margin-top: 0;
     color: #333;
+    padding-bottom: .75rem;
+    border-bottom: 1px solid var(--secondary);
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+    gap: 0.4rem;
+    margin-bottom: .75rem;
 }
 
 .form-group label {

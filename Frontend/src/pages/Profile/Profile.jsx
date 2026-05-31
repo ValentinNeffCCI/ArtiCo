@@ -58,14 +58,15 @@ const Profile = () => {
   return (
     <main className={style["profil"]}>
       <div className={style["modify"]}>
-        <h1 className={["dangrek", style["title"]].join(" ")}>
-          Modifier mon profil
-        </h1>
+        <div className={style["modify-header"]}>
+          <h1 className={["dangrek", style["title"]].join(" ")}>
+            Modifier mon profil
+          </h1>
+          <CustomButton className={style["deleteBtn"]} clickAction={toggleModale}>
+            Supprimer le compte
+          </CustomButton>
+        </div>
         {me && <UpdateUserForm user={me}/>}
-        
-      <CustomButton className={style["deleteBtn"]} clickAction={toggleModale}>
-        Supprimer le compte
-      </CustomButton>
       </div>
       <div className={style["entrepriseList"]}>
         <h2
@@ -78,7 +79,7 @@ const Profile = () => {
           Mes entreprises
         </h2>
         {entreprises && entreprises.length !== 0 ?
-          <div>
+          <div className={style["grid"]}>
             {entreprises.map((entreprise) => (
               <div
                 className={style["card"]}
@@ -131,15 +132,7 @@ const Profile = () => {
             ))}
           </div>
           : (
-            <div
-              style={{
-                color: "var(--light)",
-                textAlign: "center",
-                height: "80vh",
-                display: "flex",
-                alignItems: "center",
-              }}
-            >
+            <div className={style["empty"]}>
               Vos entreprises seront répertoriées ici
             </div>
           )}

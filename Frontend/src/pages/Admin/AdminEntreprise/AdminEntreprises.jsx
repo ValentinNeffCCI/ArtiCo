@@ -1,10 +1,11 @@
 import classes from "../AdminUsers/AdminUsers.module.css";
-import { Search } from "lucide-react";
+import table from "../../../components/admin/AdminTable.module.css";
+import { Search, Eye, Trash2 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import useAPI from "../../../hooks/useAPI";
 import {toast} from 'react-toastify';
 import DeleteConfirmation from "../../../components/modales/DeleteConfirmation/DeleteConfirmation.jsx";
-import AdminEntrepriseCard from "../../../components/admin/Cards/EntrepriseCard/AdminEntrepriseCard.jsx";
 import { CustomButton } from "../../../components/buttons/Custom/CustomButton.jsx";
 import useForm from '../../../hooks/useForm.jsx';
 
@@ -14,6 +15,7 @@ const AdminEntreprises = () => {
 
   const { query: callAPI } = useAPI();
   const {content, changeListener: onChange} = useForm();
+  const navigation = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -97,12 +99,51 @@ const AdminEntreprises = () => {
         </CustomButton>
       </form>
       {entreprises && (
-        <section>
-          {entreprises.map(e => {
-            return (
-            <AdminEntrepriseCard key={e.id} entite={e} onDelete={confirmDeletion} />
-          )})}
-        </section>
+        <div className={table["wrapper"]}>
+          <table className={table["table"]}>
+            <thead>
+              <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th className={table["actionsHead"]}>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {entreprises.length === 0 ? (
+                <tr className={table["empty"]}>
+                  <td colSpan={3}>Aucune entreprise à afficher</td>
+                </tr>
+              ) : (
+                entreprises.map((e) => (
+                  <tr key={e.id}>
+                    <td className={table["name"]}>{e.name}</td>
+                    <td className={table["ellipsis"]}>
+                      {e.email ? e.email : "Pas d'email renseigné"}
+                    </td>
+                    <td>
+                      <div className={table["actions"]}>
+                        <CustomButton
+                          clickAction={() => navigation("/artisan/" + e.id)}
+                          style={{ "--bg-color": "var(--secondary)", "--color": "var(--dark)" }}
+                        >
+                          <Eye />
+                          <span>Voir</span>
+                        </CustomButton>
+                        <CustomButton
+                          clickAction={() => confirmDeletion(e)}
+                          style={{ "--bg-color": "red", "--color": "white" }}
+                        >
+                          <Trash2 />
+                          <span>Supprimer</span>
+                        </CustomButton>
+                      </div>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
       )}
     </main>
   );

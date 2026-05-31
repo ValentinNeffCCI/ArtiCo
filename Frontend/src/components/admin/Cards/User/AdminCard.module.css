@@ -5,15 +5,40 @@
     border-radius: 2rem;
     padding-left: 1rem;
     animation: fade-in-up .7s;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
+/* Section infos (nom / email / rôle) */
+.card > div:first-of-type {
+    flex: 1 1 320px;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-weight: 600;
+}
+
+.card > div:first-of-type > span {
+    flex: 1 1 0;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Section boutons : ne se compresse jamais */
 .button-section{
     display: flex;
+    flex-shrink: 0;
+    flex-wrap: wrap;
     gap: 1rem;
     background-color: var(--dark);
-    min-width: 50%;
     border-radius: 2rem;
     justify-content: space-evenly;
+    padding: .25rem .5rem;
 }
 
 .button-section button{
@@ -25,38 +50,7 @@
 
 .button-section span {
     font-size: 1rem;
-}
-
-.card > div:first-of-type {
-    width: 70%;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    font-weight: 600;
-}
-
-.card span.userName{
-    display: block;
-    width: 15%;
-}
-
-.card span{
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.card span:first-of-type{
-    display: block;
-    width: 35%;
-}
-
-.card span:nth-of-type(2){
-    display: block;
-    width: 45%;
-}
-.card span:nth-of-type(3){
-    display: block;
-    width: 20%;
+    white-space: nowrap;
 }
 
 @keyframes fade-in-up {
