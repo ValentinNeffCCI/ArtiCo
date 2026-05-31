@@ -108,6 +108,8 @@ jobs:
             # Login Docker Hub pour tirer les images, pull, démarrage, nettoyage.
             echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
             docker compose -f docker-compose.deploy.yaml pull
+            docker stop artico-client
+            docker stop artico-backend
             docker compose -f docker-compose.deploy.yaml up -d
             docker logout
             docker image prune -f
