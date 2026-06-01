@@ -17,7 +17,6 @@ const mailer = require("../../../utils/mailer.js");
 // pas de fichier lu, pas de mail envoyé.
 jest.mock("../../../repositories/user-repository.js");
 jest.mock("jsonwebtoken");
-// bcrypt est un module natif : on fournit une factory pour éviter de charger le binaire.
 jest.mock("bcrypt", () => ({
   compare: jest.fn(),
   hash: jest.fn(),
@@ -63,12 +62,12 @@ describe("auth-service", () => {
       });
     });
 
-    it("lève une 404 quand l'utilisateur n'existe pas", async () => {
+    it("lève une 403 quand l'utilisateur n'existe pas", async () => {
       UserRepository.findByEmail.mockResolvedValue(null);
 
       await expect(
         authService.login("inconnu@artico.fr", "x")
-      ).rejects.toMatchObject({ status: 404 });
+      ).rejects.toMatchObject({ status: 403 });
       expect(bcrypt.compare).not.toHaveBeenCalled();
     });
 
@@ -78,7 +77,7 @@ describe("auth-service", () => {
 
       await expect(
         authService.login("test@artico.fr", "mauvais")
-      ).rejects.toMatchObject({ status: 403, message: "Mot de passe incorrect" });
+      ).rejects.toMatchObject({ status: 403, message: authService.wrongCredentials.message });
     });
 
     it("lève une 403 quand le compte est inactif", async () => {
