@@ -1,3 +1,4 @@
+import ProtectedRoute from "../../components/security/ProtectedRoutes.jsx";
 import AddEntreprise from "../../pages/CreerEntreprise/AddEntreprise.jsx";
 import Formulaires from "../../pages/FormulairesList/Formulaires.jsx";
 import ModifierEntreprise from "../../pages/ModifierEntreprise/ModifierEntreprise.jsx";
@@ -12,8 +13,15 @@ const userRoutes = [
     element: <Profile />,
   },
   {
-    path: "/entreprise/nouveau",
-    element: <AddEntreprise />,
+    // La gestion d'entreprise (création incluse) est réservée aux USER,
+    // les administrateurs n'y ont pas accès.
+    element: <ProtectedRoute allowedRoles={["USER"]} />,
+    children: [
+      {
+        path: "/entreprise/nouveau",
+        element: <AddEntreprise />,
+      },
+    ],
   },
   {
     path: "/entreprise/:id",

@@ -1,24 +1,31 @@
 .profil {
     background-color: var(--light);
-    padding: 0;
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
-    min-height: auto;
+    gap: 2rem;
+    padding: 2.5rem clamp(1rem, 6vw, 5rem);
+}
+
+/* ---------- Panneaux ---------- */
+.panel {
+    width: 100%;
+    background-color: white;
+    border: 1px solid rgba(40, 5, 70, .1);
+    border-radius: 1.25rem;
+    box-shadow: 0 6px 24px rgba(40, 5, 70, .07);
+    padding: 2rem clamp(1.25rem, 3vw, 2.5rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    animation: fadeIn .4s ease;
 }
 
 .title {
-    font-size: 3em;
+    font-size: clamp(2rem, 4vw, 2.75em);
     padding: 0;
     margin: 0;
-}
-
-.modify {
-    width: 100%;
-    border-bottom: 2px solid var(--primary);
-    padding: 2rem 3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    color: var(--primary);
 }
 
 .modify-header {
@@ -27,141 +34,206 @@
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 1rem;
+    border-bottom: 1px solid rgba(40, 5, 70, .08);
+    padding-bottom: 1.25rem;
 }
 
-.entrepriseList {
-    width: 100%;
+/* ---------- En-tête de section ---------- */
+.section-header {
     display: flex;
-    flex-direction: column;
-    padding: 2rem 3rem;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
+.section-header h2 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin: 0;
+}
+
+.addBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .65rem 1.25rem;
+    border-radius: .6rem;
+    background-color: var(--secondary);
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+.addBtn:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: translateY(-.15rem);
+    box-shadow: 0 6px 16px rgba(40, 5, 70, .2);
+}
+
+/* ---------- Grille des entreprises ---------- */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
-    padding: 1rem 0;
 }
 
 .empty {
-    color: var(--dark);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .75rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
     text-align: center;
     padding: 3rem 1rem;
-    min-height: 33vh;
-    font-style: italic;
+    min-height: 30vh;
+    border: 2px dashed var(--secondary);
+    border-radius: 1rem;
+    background-color: rgba(139, 135, 255, .05);
+    transition: background-color .25s ease, border-color .25s ease;
 }
 
-.entrepriseList>div::-webkit-scrollbar {
-    width: 12px;
-    background-color: #F5F5F5;
+.empty:hover {
+    background-color: var(--accent);
+    border-color: var(--primary);
 }
 
-.entrepriseList h2 {
-    color: var(--dark);
-}
-
-.entreprise-link {
-    transition: transform .2s, box-shadow .2s;
-}
-
-.entreprise-link:hover {
-    transform: translateY(-.5rem);
-    box-shadow: 0 0 1rem var(--primary);
-}
-
-.card-buttons {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    margin-top: .5rem;
-    border-top: 1px solid #ccc;
-}
-
-.card-buttons a {
-    margin: 0;
-    width: 50%;
-    border: none;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: .3rem;
-    height: 100%;
-    transition: color .2s ease;
-}
-
-.card-buttons a:hover{
-    color: var(--secondary);
-    font-weight: 600;
-} 
-
-.deleteBtn{
-    margin: 0;
-    --bg-color: transparent;
-    color: red;
-}
-
-.deleteBtn:hover{
-    background-color: red;
-    box-shadow: 0 0 1rem red;
-    color: white
-}
-
-.deleteAccount{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2rem
-}
-
-.deleteAccount > div{
-    display: flex;
-    flex-direction: column;
-}
-
-.delete-btns{
-    margin-top: 3rem;
-    display: flex;
-    justify-content: space-between;
-}
-
-.card{
-    background-color: var(--light);
-    padding: .5rem;
-    border-radius: .3rem;
-    margin: 0;
+/* ---------- Carte entreprise ---------- */
+.card {
+    background-color: white;
+    padding: .6rem;
+    border-radius: .9rem;
     overflow: hidden;
     width: 100%;
-    border: 1px solid var(--secondary);
-    transition: transform .2s, box-shadow .2s;
+    border: 1px solid rgba(40, 5, 70, .12);
+    box-shadow: 0 3px 12px rgba(40, 5, 70, .05);
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 
-.card:hover{
-    transform: translateY(-.3rem);
-    box-shadow: 0 0 1rem var(--primary);
+.card:hover {
+    transform: translateY(-.4rem);
+    box-shadow: 0 12px 28px rgba(40, 5, 70, .16);
+    border-color: var(--secondary);
 }
 
-.card figure{
-    padding: .3rem;
-    padding-bottom: .8rem;
-    border: 1px solid var(--primary);
+.card figure {
     overflow: hidden;
+    border-radius: .6rem;
     margin-bottom: .8rem;
     width: 100%;
     aspect-ratio: 16/9;
 }
 
-.card figure img{
+.card figure img {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.card-content{
-    padding: .5rem;
-    padding-bottom: 0;
+.card-content {
+    padding: .25rem .5rem .5rem;
     display: flex;
     flex-direction: column;
+    gap: .5rem;
+}
+
+.card-content h3 {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.card-buttons {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-evenly;
+    margin-top: .25rem;
+    border-top: 1px solid rgba(40, 5, 70, .08);
+}
+
+.card-buttons a {
+    margin: 0;
+    width: 50%;
+    border: none;
+    padding: .9rem .5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: .3rem;
+    color: var(--dark);
+    text-decoration: none;
+    transition: color .2s ease, background-color .2s ease;
+}
+
+.card-buttons a p {
+    font-size: .8rem;
+}
+
+.card-buttons a:first-child {
+    border-right: 1px solid rgba(40, 5, 70, .08);
+}
+
+.card-buttons a:hover {
+    color: var(--secondary);
+    font-weight: 600;
+    background-color: rgba(139, 135, 255, .08);
+}
+
+/* ---------- Bouton suppression compte ---------- */
+.deleteBtn {
+    margin: 0;
+    --bg-color: transparent;
+    color: red;
+    border: 1px solid red;
+    border-radius: .6rem;
+    transition: background-color .2s ease, color .2s ease, box-shadow .2s ease;
+}
+
+.deleteBtn:hover {
+    background-color: red;
+    box-shadow: 0 6px 16px rgba(255, 0, 0, .3);
+    color: white;
+}
+
+/* ---------- Modale suppression compte ---------- */
+.deleteAccount {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.deleteAccount > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.delete-btns {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
