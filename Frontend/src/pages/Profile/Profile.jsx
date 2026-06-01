@@ -6,7 +6,7 @@ import useAPI from "../../hooks/useAPI";
 import { CustomButton } from "../../components/buttons/Custom/CustomButton";
 import defaultImage from "../../assets/photos/Sora_Shimazaki/handshake.jpg";
 import { NavLink } from "react-router-dom";
-import { FolderCode, FormInput, Pencil } from "lucide-react";
+import { FolderCode, Pencil, Plus } from "lucide-react";
 import Modale from "../../components/modales/DeleteAccount/DeleteAccountModale.jsx";
 import { LostWorker } from "../../components/images/workers/LostWorker";
 import { toast } from "react-toastify";
@@ -38,9 +38,11 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    getEntreprises();
     getMyinfo();
+    if (user?.role !== "ADMIN") getEntreprises();
   }, []);
+
+  const isAdmin = user?.role === "ADMIN";
 
   const toggleModale = () => {
     setShowModal((prev) => !prev);
@@ -57,97 +59,72 @@ const Profile = () => {
 
   return (
     <main className={style["profil"]}>
-      <div className={style["modify"]}>
+      <section className={style["panel"]}>
         <div className={style["modify-header"]}>
           <h1 className={["dangrek", style["title"]].join(" ")}>
-            Modifier mon profil
+            Mon profil
           </h1>
           <CustomButton className={style["deleteBtn"]} clickAction={toggleModale}>
             Supprimer le compte
           </CustomButton>
         </div>
-        {me && <UpdateUserForm user={me}/>}
-      </div>
-      <div className={style["entrepriseList"]}>
-        <h2
-          className="itim"
-          style={{
-            fontSize: "2rem",
-            margin: "1rem",
-          }}
-        >
-          Mes entreprises
-        </h2>
-        {entreprises && entreprises.length !== 0 ?
-          <div className={style["grid"]}>
-            {entreprises.map((entreprise) => (
-              <div
-                className={style["card"]}
-                key={entreprise.id}
-              >
-                <figure>
-                  <img
-                    src={
-                      typeof entreprise.image == "string"
-                        ? `${url}/${entreprise.image}`
-                        : defaultImage
-                    }
-                    alt={entreprise.name}
-                  />
-                </figure>
-                <div
-                  className={style["card-content"]}
-                >
-                  <h3 className="montserrat">{entreprise.name}</h3>
-                  <div className={style["card-buttons"]}>
-                    <NavLink
-                      to={"/entreprise/" + entreprise.id}
-                      title={"Mettre à jour les informations"}
-                    >
-                      <Pencil size={20} />
-                      <p
-                        style={{
-                          fontSize: ".8rem",
-                        }}
+        {me && <UpdateUserForm user={me} />}
+      </section>
+
+      {!isAdmin && (
+        <section className={[style["panel"], style["entrepriseList"]].join(" ")}>
+          <div className={style["section-header"]}>
+            <h2 className="itim">Mes entreprises</h2>
+            <NavLink to="/entreprise/nouveau" className={style["addBtn"]}>
+              <Plus size={18} />
+              <span>Ajouter une entreprise</span>
+            </NavLink>
+          </div>
+          {entreprises && entreprises.length !== 0 ? (
+            <div className={style["grid"]}>
+              {entreprises.map((entreprise) => (
+                <div className={style["card"]} key={entreprise.id}>
+                  <figure>
+                    <img
+                      src={
+                        typeof entreprise.image == "string"
+                          ? `${url}/${entreprise.image}`
+                          : defaultImage
+                      }
+                      alt={entreprise.name}
+                    />
+                  </figure>
+                  <div className={style["card-content"]}>
+                    <h3 className="montserrat">{entreprise.name}</h3>
+                    <div className={style["card-buttons"]}>
+                      <NavLink
+                        to={"/entreprise/" + entreprise.id}
+                        title={"Mettre à jour les informations"}
                       >
-                        Modifier
-                      </p>
-                    </NavLink>
-                    <NavLink
-                      to={"/entreprise/" + entreprise.id + "/formulaires"}
-                      title={"Gérer les questionnaires"}
-                    >
-                      <FolderCode size={20} />
-                      <p
-                        style={{
-                          fontSize: ".8rem",
-                        }}
+                        <Pencil size={20} />
+                        <p>Modifier</p>
+                      </NavLink>
+                      <NavLink
+                        to={"/entreprise/" + entreprise.id + "/formulaires"}
+                        title={"Gérer les questionnaires"}
                       >
-                        Questionnaires
-                      </p>
-                    </NavLink>
+                        <FolderCode size={20} />
+                        <p>Questionnaires</p>
+                      </NavLink>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          : (
-            <div className={style["empty"]}>
-              Vos entreprises seront répertoriées ici
+              ))}
             </div>
+          ) : (
+            <NavLink to="/entreprise/nouveau" className={style["empty"]}>
+              <Plus size={28} />
+              <span>Ajoutez votre première entreprise</span>
+            </NavLink>
           )}
-        <NavLink to="/entreprise/nouveau">
-          <CustomButton
-            style={{
-              "--bg-color": "var(--secondary)",
-              "--color": "var(--dark)",
-              margin: "1rem auto",
-            }}
-          >
-            Ajouter une entreprise
-          </CustomButton>
-        </NavLink>
-      </div>
+        </section>
+      )}
+
       {showModal && (
         <Modale>
           <div className={style["deleteAccount"]}>
