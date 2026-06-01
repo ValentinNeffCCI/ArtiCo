@@ -28,7 +28,6 @@ services:
       - .env
     environment:
       NODE_ENV: production
-      FRONTEND_URL: https://valentinneff.dev
     depends_on:
       db:
         condition: service_healthy
@@ -47,8 +46,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - /etc/letsencrypt/live/valentinneff.dev:/usr/share/nginx/config:ro
-      - /etc/letsencrypt/archive/valentinneff.dev:/etc/letsencrypt/archive/valentinneff.dev:ro
+      - /opt/artico/certs:/usr/share/nginx/config:ro
     depends_on:
       - backend
     restart: unless-stopped

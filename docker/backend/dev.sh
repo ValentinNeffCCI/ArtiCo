@@ -7,4 +7,4 @@ npx prisma migrate dev
 
 npx prisma db seed
 
-node index.js
+node --watch index.js

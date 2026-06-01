@@ -1,116 +1,208 @@
-.title {
-    font-size: 2em;
-    width: 80%;
-    padding: 1rem;
-    margin: 0 auto;
-}
-
-.no-content{
-    width: 75%;
-    text-align: center;
-    margin: 1rem auto;
-}
-
-.no-content{
-    font-weight: 500;
-}
-
-.formulaires{
-    padding: 2rem 10%;
+.formulaires {
+    padding: 2rem 6%;
     min-height: 100vh;
 }
 
-.formList{
+/* ---------- En-tête de page ---------- */
+.pageHead {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    padding: 1rem;
-    margin: 2rem 0;
-}
-
-.form-display > div {
-    width: 70%;
-}
-
-.form {
-    padding: 1rem;
-    border: 2px solid var(--primary);
-    border-radius: .5rem;
-    height: fit-content;
-    width: 100%;
-    display: flex;
-    aspect-ratio: 4/3;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.formList h2{
-    font-size: 1rem;
     text-align: center;
+    margin: 1rem auto 2.5rem;
 }
 
-.form-buttons{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1rem;
-    width: 90%;
-    gap: .5rem;
-}
-
-.form-buttons a{
-    --bg-color: var(--secondary);
-    --color: var(--dark);
-}
-
-.form-buttons a, .form-buttons button{
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    border: none;
-    font-weight: 400;
-    margin: 0;
-    padding: .5rem;
-    justify-content: center;
-    transition: background-color .2s ease;
-    border-radius: .3rem;
-}
-
-.form-buttons a:hover, .form-buttons button:hover{
-    font-weight: 600;
-}
-
-.form-buttons a, .form-buttons button{
-    border-width: 1px;
-    border-style: solid;
-    border-color: var(--bg-color);
+.title {
+    font-size: 2.2em;
     width: 100%;
+    padding: 1rem 0 .25rem;
+    margin: 0 auto;
+    color: var(--primary);
 }
 
-.form-buttons a:hover{
-    background-color: var(--secondary);
+.subtitle {
+    color: var(--dark);
+    opacity: .65;
+    font-weight: 500;
+    font-size: 1rem;
 }
 
-.form-buttons button:hover{
-    background-color: red;
-    color: white;
-}
-
-.form-display{
-    display: flex;
-    width: 80%;
+/* ---------- Grille des questionnaires ---------- */
+.formList {
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.5rem;
     margin: 0 auto;
 }
 
-.form-display figure{
-    width: 30%;
+/* ---------- Carte de questionnaire ---------- */
+.form {
+    padding: 1.5rem 1.25rem;
+    background-color: white;
+    border: 1px solid rgba(40, 5, 70, .12);
+    border-radius: .9rem;
+    box-shadow: 0 4px 16px rgba(40, 5, 70, .06);
+    min-height: 230px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1rem;
+    animation: fadeIn .4s ease;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 
-.form-display img{
+.form:hover {
+    transform: translateY(-.4rem);
+    box-shadow: 0 12px 28px rgba(40, 5, 70, .16);
+    border-color: var(--secondary);
+}
+
+.form-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .75rem;
+    text-align: center;
+}
+
+.form-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background-color: var(--accent);
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.formList h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-align: center;
+    word-break: break-word;
+}
+
+/* ---------- Boutons d'action de la carte ---------- */
+.form-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: .5rem;
+}
+
+.form-buttons a,
+.form-buttons button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .4rem;
+    width: 100%;
+    margin: 0;
+    padding: .55rem;
+    font-size: .95rem;
+    font-weight: 500;
+    border-radius: .5rem;
+    border: 1px solid var(--secondary);
+    color: var(--primary);
+    background-color: transparent;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+
+.form-buttons a:hover {
+    background-color: var(--secondary);
+    color: white;
+}
+
+.form-buttons button:hover {
+    background-color: #e11d48;
+    border-color: #e11d48;
+    color: white;
+}
+
+/* ---------- Carte "Nouveau questionnaire" ---------- */
+.newForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    min-height: 230px;
+    padding: 1.5rem;
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: .9rem;
+    border: 2px dashed var(--secondary);
+    background-color: rgba(139, 135, 255, .06);
+    transition: background-color .25s ease, border-color .25s ease, transform .25s ease;
+}
+
+.newForm:hover {
+    background-color: var(--accent);
+    border-color: var(--primary);
+    transform: translateY(-.4rem);
+}
+
+.newForm svg {
+    width: 2.5rem;
+    height: 2.5rem;
+    transition: transform .25s ease;
+}
+
+.newForm:hover svg {
+    transform: scale(1.15);
+}
+
+/* ---------- État vide ---------- */
+.empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    text-align: center;
+    max-width: 480px;
+    margin: 1rem auto;
+    padding: 2rem;
+}
+
+.empty figure {
+    width: 200px;
+    max-width: 60%;
+}
+
+.empty img {
     width: 100%;
 }
+
+.empty p {
+    color: var(--dark);
+    opacity: .75;
+    font-weight: 500;
+}
+
+.emptyCta {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .75rem 1.5rem;
+    border-radius: .6rem;
+    background-color: var(--primary);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color .25s ease, transform .2s ease;
+}
+
+.emptyCta:hover {
+    background-color: var(--secondary);
+    transform: translateY(-.2rem);
+}
+
+/* ---------- Bouton retour ---------- */
 .goBack {
     display: flex;
     margin: 0;
@@ -118,49 +210,41 @@
     align-items: center;
 }
 
-.goBack:hover{
+.goBack:hover {
     color: var(--secondary);
 }
 
-.goBack svg{
+.goBack svg {
     transition: transform .3s ease;
 }
 
-.goBack:hover svg{
+.goBack:hover svg {
     transform: translateX(-1rem);
 }
 
-.newForm{
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: .3rem;
-    --bg-color: var(--secondary);
-    --color: var(--primary);
-    margin: 0 auto;
-    height: fit-content;
-    aspect-ratio: 1/1;
-    margin: 0 auto;
-    border-radius: .5rem;
-    border: .5rem solid var(--primary);
-    transition: border-color .3s ease, border-width .3s ease, background-color .3s ease;
+/* ---------- Responsive ---------- */
+@media screen and (max-width: 768px) {
+    .formulaires {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .title {
+        font-size: 1.7em;
+    }
+
+    .formList {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
 }
 
-.newForm:hover{
-    background-color: var(--secondary);
-    border-color: var(--primary);
-    border-width: .3rem;
-}
-
-.newForm:hover svg{
-    transform: scale(1.2);
-}
-
-.newForm svg{
-    width: 20%;
-    aspect-ratio: 1;
-    height: auto;
-    transition: transform .3s ease;
-    min-width: 80px;
+@keyframes fadeIn {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

@@ -19,8 +19,6 @@ WORKDIR /usr/share/nginx/html
 
 COPY --from=build /app/dist/ /usr/share/nginx/html/
 
-# Les certificats TLS ne sont PAS copiés dans l'image : ils sont montés en volume
-# read-only au runtime (voir docker-compose.prod.yaml) pour suivre les renouvellements.
 COPY ./nginx/nginx.prod.conf /etc/nginx/conf.d/default.conf
 
 CMD [ "nginx", "-g", "daemon off;" ]

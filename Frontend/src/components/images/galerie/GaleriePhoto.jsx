@@ -27,7 +27,16 @@ const GaleriePhoto = ({ photo, onClick }) => {
         alignItems: "center",
       }}
     >
-      <img src={url + "/" + photo.path} alt="réalisation de l'entreprise" width={"70%"} style={{aspectRatio: 4/3, borderRadius: 10}}/>
+      <img
+        src={url + "/" + photo.path}
+        alt="réalisation de l'entreprise"
+        style={{
+          width: "70%",
+          aspectRatio: "4 / 3",
+          objectFit: "cover",
+          borderRadius: 10,
+        }}
+      />
       <CustomButton
         style={{
           margin: 0,

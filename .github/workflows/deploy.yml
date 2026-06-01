@@ -85,7 +85,6 @@ jobs:
       - name: Déploiement sur le VPS
         uses: appleboy/ssh-action@v1.2.0
         env:
-          PROD_ENV: ${{ secrets.PROD_ENV }}
           DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
           DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
           IMAGE_TAG: ${{ github.sha }}
@@ -94,14 +93,13 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
-          envs: PROD_ENV,DOCKERHUB_USERNAME,DOCKERHUB_TOKEN,IMAGE_TAG
+          envs: DOCKERHUB_USERNAME,DOCKERHUB_TOKEN,IMAGE_TAG
           script: |
             set -e
             mkdir -p ${{ secrets.DEPLOY_PATH }}
             cd ${{ secrets.DEPLOY_PATH }}
 
             # Écrit le .env de prod depuis le secret, puis injecte le namespace + tag d'image.
-            printf '%s\n' "$PROD_ENV" > .env
             echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME" >> .env
             echo "IMAGE_TAG=$IMAGE_TAG" >> .env
 
