@@ -16,14 +16,17 @@ const SECRET = process.env.SECRET_KEY;
 const REFRESH_KEY = process.env.REFRESH_KEY;
 const RESET_KEY = process.env.RESET_KEY;
 
+const wrongCredentials = new HttpError("Identifiants incorrects", 403);
+
 module.exports = {
+  wrongCredentials,
   login: async (email, password) => {
     const user = await UserRepository.findByEmail(email, true);
-    if (!user) throw new HttpError("Aucun utilisateur trouvé", 404);
+    if (!user) throw wrongCredentials;
     const validPassword = await bcrypt.compare(password, user.password);
-    if (!validPassword) throw new HttpError("Mot de passe incorrect", 403);
+    if (!validPassword) throw wrongCredentials;
     if (!user.active)
-      throw new HttpError("Ce compte est momentanément indisponible", 403);
+      throw wrongCredentials;
     const token = jwt.sign({ id: user.id }, SECRET, {
       expiresIn: access_expiracy,
     });
@@ -63,7 +66,7 @@ module.exports = {
   reset: async (token, password) => {
 
     const id = jwt.verify(token, RESET_KEY, (err, decoded) => {
-        if(err) throw new HttpError(`Ce lien n'est plus à jour`)
+        if(err) throw new HttpError(`Ce lien a expiré`)
         return decoded.id
     });
     const user = await UserRepository.findById(id);
@@ -111,7 +114,7 @@ module.exports = {
   forgotPassword: async (email) => {
     const user = await UserRepository.findByEmail(email);
     if (!user) {
-      throw new HttpError("Pas d'utilisateur associé à cet email");
+      throw new HttpError("Aucun utilisateur n'est associé à cet email");
     }
     const token = jwt.sign({ id: user.id }, RESET_KEY, {
       expiresIn: access_expiracy,
@@ -143,6 +146,5 @@ module.exports = {
     } catch (error) {
       throw new HttpError(`Erreur lors de l'envoi de mail`, 500);
     }
-    // envoi mail
   },
 };

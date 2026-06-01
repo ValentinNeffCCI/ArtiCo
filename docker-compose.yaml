@@ -29,6 +29,8 @@ services:
       - .env
     environment:
       NODE_ENV: dev
+    ports:
+      - "${PORT}:3000"
     volumes:
       - ./API:/app
       - /app/node_modules
@@ -43,12 +45,15 @@ services:
     container_name: artico-client
     build:
       dockerfile: docker/frontend/Dockerfile
-      args:
-        - VITE_API_URL=${VITE_API_URL}
+    environment:
+      VITE_API_URL: ${VITE_API_URL}
+      VITE_PROXY_TARGET: http://backend:3000
+      FRONTEND_PORT: ${LOCAL_PORT}
     ports:
-      - "${LOCAL_PORT}:80"
+      - "${LOCAL_PORT}:5173"
     volumes:
       - ./Frontend:/app
+      - /app/node_modules
     depends_on:
       - backend
     restart: unless-stopped
