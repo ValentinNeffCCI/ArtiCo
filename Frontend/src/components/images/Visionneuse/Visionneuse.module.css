@@ -50,9 +50,20 @@
     animation: fadeIn .5s ease;
 }
 
+.zoom_modal figure {
+    aspect-ratio: auto;
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
 .zoom_modal img {
+    width: auto;
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
     background-color: white;
     margin: 0 auto;
+    border-radius: 1rem;
 }
 
 .carroussel {

@@ -70,28 +70,47 @@ const Formulaires = () => {
           <h3>Voulez-vous vraiment supprimer "{showModale.name}"</h3>
         </DeleteConfirmation>
       )}
-      <h1 className={["dangrek", style["title"]].join(" ")}>
-        Les questionnaires de mon entreprise
-      </h1>
-      <div className={style["form-display"]}>
-        <div>
-          <div className={style["formList"]}>
-            {forms &&
-              forms.map((form) => (
-                <FormCard form={form} onDelete={showPopup} />
-              ))}
-            <NavLink
-              to={`/entreprise/${entrepriseID}/formulaire/nouveau`}
-              className={style["newForm"]}
-            >
-              <Plus />
-            </NavLink>
-          </div>
+      <header className={style["pageHead"]}>
+        <h1 className={["dangrek", style["title"]].join(" ")}>
+          Les questionnaires de mon entreprise
+        </h1>
+        {!isLoading && (
+          <p className={style["subtitle"]}>
+            {forms.length === 0
+              ? "Aucun questionnaire pour le moment"
+              : `${forms.length} questionnaire${forms.length > 1 ? "s" : ""}`}
+          </p>
+        )}
+      </header>
+
+      {!isLoading && forms.length === 0 ? (
+        <section className={style["empty"]}>
+          <figure>
+            <img src={worker} alt="Artisan heureux" />
+          </figure>
+          <p>Créez votre premier questionnaire pour commencer à collecter des réponses.</p>
+          <NavLink
+            to={`/entreprise/${entrepriseID}/formulaire/nouveau`}
+            className={style["emptyCta"]}
+          >
+            <Plus size={18} />
+            <span>Nouveau questionnaire</span>
+          </NavLink>
+        </section>
+      ) : (
+        <div className={style["formList"]}>
+          {forms.map((form) => (
+            <FormCard key={form.id} form={form} onDelete={showPopup} />
+          ))}
+          <NavLink
+            to={`/entreprise/${entrepriseID}/formulaire/nouveau`}
+            className={style["newForm"]}
+          >
+            <Plus />
+            <span>Nouveau questionnaire</span>
+          </NavLink>
         </div>
-        <figure>
-          <img src={worker} alt="Artisan heureux" />
-        </figure>
-      </div>
+      )}
     </main>
   );
 };
