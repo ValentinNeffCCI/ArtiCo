@@ -19,6 +19,7 @@ const RESET_KEY = process.env.RESET_KEY;
 const wrongCredentials = new HttpError("Identifiants incorrects", 403);
 
 module.exports = {
+  wrongCredentials,
   login: async (email, password) => {
     const user = await UserRepository.findByEmail(email, true);
     if (!user) throw wrongCredentials;
