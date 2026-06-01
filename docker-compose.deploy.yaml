@@ -26,7 +26,6 @@ services:
       - .env
     environment:
       NODE_ENV: production
-      FRONTEND_URL: https://valentinneff.dev
     depends_on:
       db:
         condition: service_healthy
