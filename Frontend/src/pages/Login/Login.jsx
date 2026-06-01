@@ -69,7 +69,7 @@ const Login = () => {
             alignItems: "center",
             gap: ".5rem",
             fontWeight: 600,
-            position: window.innerWidth < 768 ? "absolute" : "static",
+            position: "fixed",
             top: "1rem",
             color: window.innerWidth < 768 ? "white" : " ",
             width: "fit-content",
