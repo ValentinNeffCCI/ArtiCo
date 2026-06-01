@@ -1,438 +1,287 @@
-# Guide de déploiement de l'application Artico
+# ArtiCo
+
+Application web permettant à des artisans de référencer leur(s) entreprise(s) et de proposer des questionnaires à de potentiels prospects / futurs clients.
+
+- **Frontend** : React (Vite)
+- **Backend** : Node.js / Express (API REST)
+- **Base de données** : PostgreSQL (via Prisma)
+- **Infrastructure** : Docker, images publiées sur Docker Hub, reverse proxy Nginx (dans le conteneur client), déploiement automatisé via GitHub Actions.
+
+---
 
 ## Sommaire
 
-- [Introduction](#introduction)
-- - [Prérequis Nécessaires](#prerequis-nécessaire)
-- [Préparation du serveur](#préparation-du-serveur)
-- - [Installer Make](#installer-make)
-- - [Installer Node et npm](#installer-node-et-npm)
-- - [Installer Docker](#installer-docker)
-- [Lancer l'API et et la base de données](#lancer-lapi-et-et-la-base-de-données)
-- [Mise en place de l'application React](#mise-en-place-de-lapplication-react)
-- [Configuration Nginx](#configuration-nginx)
-- - [Mise en place du serveur HTTP](#mise-en-place-du-serveur-http)
-- - [Mettre en place le pare-feu](#mettre-en-place-le-pare-feu)
-- - [Passer sur HTTPS](#passer-sur-https)
-- [Test de l'application](#test-de-lapplication)
-- [Potentielles erreurs fréquentes](#potentielles-erreurs-fréquentes)
-- - [Chemin d'accès au build](#chemin-daccès-au-build)
-- - [Erreur lors de la réception du certificat SSL](#erreur-lors-de-la-reception-du-certificat-ssl)
-- - [Erreur lors du montage des containers](#erreur-lors-du-montage-des-containers-docker)
-- - [Transmission des cookies](#transmission-des-cookies-a-lapi)
+- [Architecture](#architecture)
+- [Structure Docker du dépôt](#structure-docker-du-dépôt)
+- [Variables d'environnement](#variables-denvironnement)
+- [Environnement de développement](#environnement-de-développement)
+- [Intégration continue (CI)](#intégration-continue-ci)
+- [Déploiement (CD)](#déploiement-cd)
+  - [Vue d'ensemble du pipeline](#vue-densemble-du-pipeline)
+  - [Secrets GitHub requis](#secrets-github-requis)
+  - [Première mise en place du VPS](#première-mise-en-place-du-vps)
+  - [Migrations et seed](#migrations-et-seed)
+  - [Déclenchement manuel et rollback](#déclenchement-manuel-et-rollback)
 - [Maintenance](#maintenance)
-- - [Mettre à jour l'application](#mettre-a-jour-lapplication)
-- - [Renouvellement du certificat SSL](#rafraichir-le-certificat-ssl)
+- [Dépannage](#dépannage)
 
-
-## Introduction
-
-Artico est une application développé avec **React** pour la partie client et **NodeJS** pour la partie serveur (API). La base de données privilégiée pour ce projet est **PostgreSQL**.
-
-L'objectif de cette application est de permettre à des artisans de renseigner leur(s) entreprise(s) et de proposer des questionnaires à des potentiels prospects / futurs clients. 
-
-Au cours de ce guide vous trouverez toutes les étapes qui permettront de déployer votre application en ligne.
-
-### Prérequis nécessaire
-
-- **NodeJS** et **npm**
-- **Docker**
-- **Nginx**
-- **Let's Encrypt**
-
-- un **accès SSH** au serveur
-- un **nom de domaine**
-- une **clé d'application gmail** pour l'envoi de mail
-
-## Préparation du serveur
-
-Avant toute chose, veuillez mettre à jour les dépôts Linux :
-
-```bash
-sudo apt update et sudo apt upgrade -y
-```
-
-### Installer Make
-
-```bash
-sudo apt install make
-```
-
-### Installer Node et npm
-
-```bash
-sudo apt install nodejs
-sudo apt install npm
-```
-
-Assurez-vous que les installations ce soient correctement déroulées.
-Vous devriez avoir quelque chose ressemblant à cela :
-
-```bash
-user@ubuntu ~ node -v 
-v25.3.0
-
-user@ubuntu ~ npm -v
-11.7.0
-```
 ---
-### Installer Docker
 
-Si Docker n'est pas encore installer sur votre machine: [Installer Docker](https://docs.docker.com/engine/install/ubuntu/)
+## Architecture
 
-Vous pouvez vérifier que docker est bien installé
-```bash
-docker -v
+En production, **Nginx tourne à l'intérieur du conteneur client** : il sert le build statique du frontend, termine le TLS (HTTPS) et fait office de reverse proxy vers l'API (`/api` et `/uploads`). Il n'y a donc **pas de Nginx ni de build à installer sur l'hôte** — le serveur n'a besoin que de Docker.
+
+```mermaid
+graph LR
+    subgraph GitHub
+        PUSH([push sur main]) --> GHA[GitHub Actions]
+    end
+
+    GHA -->|build & push| HUB[(Docker Hub)]
+    GHA -->|scp compose + ssh| VPS
+
+    subgraph VPS
+        subgraph client[Conteneur client]
+            NGINX[Nginx + build React]
+        end
+        subgraph back[Conteneur backend]
+            API[API Node.js]
+            UPLOADS(uploads)
+        end
+        DB[(PostgreSQL)]
+        CERTS[/opt/artico/certs/]
+    end
+
+    HUB -->|pull images| VPS
+    NGINX <--> API
+    API <--> DB
+    API <--> UPLOADS
+    CERTS -. monté en lecture seule .-> NGINX
+    NAVIGATEUR([Navigateur]) <-->|443/80| NGINX
 ```
 
-Il ne reste plus qu'à permettre à docker de se lancer automatiquement au lancement du serveur
+---
+
+## Structure Docker du dépôt
+
+| Fichier | Rôle |
+|--|--|
+| `docker-compose.yaml` | **Développement** : hot reload front (Vite) + back (`node --watch`), base de données locale. |
+| `docker-compose.prod.yaml` | **Build** des images de production en local (utilisé aussi en CI pour valider le build). |
+| `docker-compose.deploy.yaml` | **Déploiement sur le VPS** : tire les images depuis Docker Hub (aucun build sur le serveur). |
+| `docker/backend/Dockerfile` · `Dockerfile.prod` | Images backend (dev / prod). |
+| `docker/frontend/Dockerfile` · `Dockerfile.prod` | Images client (dev = serveur Vite, prod = build + Nginx). |
+| `docker/backend/dev.sh` · `production.sh` | Entrypoints backend (migrations + seed + démarrage). |
+| `nginx/nginx.conf` · `nginx.prod.conf` | Configurations Nginx (dev / prod). |
+
+---
+
+## Variables d'environnement
+
+Toutes les variables sont centralisées dans un unique fichier `.env` à la racine (voir `.env.example`).
+
+| Variable | Description |
+|--|--|
+| `DB_PASSWORD` | Mot de passe PostgreSQL |
+| `DB_USER` | Utilisateur PostgreSQL |
+| `DB_NAME` | Nom de la base |
+| `DB_PORT` | Port exposé de la base (hôte) |
+| `DB_HOST` | Hôte de la base (`db` en conteneur) |
+| `DATABASE_URL` | URL de connexion Prisma |
+| `PORT` | Port de l'API (3000) |
+| `OWNER_EMAIL` / `OWNER_NAME` / `OWNER_PASSWORD` | Compte propriétaire créé par le seed |
+| `APP_EMAIL` | Adresse d'envoi des mails |
+| `GOOGLE_APP_PASSWORD` | Clé d'application Gmail (SMTP) |
+| `SECRET_KEY` / `REFRESH_KEY` / `RESET_KEY` | Clés de signature JWT (access / refresh / reset) |
+| `ACCESS_EXPIRACY` / `REFRESH_EXPIRACY` | Durées de vie des tokens |
+| `PASSWORD_SALT` | Sel de hachage des mots de passe |
+| `FRONTEND_URL` | Origine autorisée par CORS (ex : `https://valentinneff.dev`) |
+| `VITE_API_URL` | URL de l'API côté front (`/api`) |
+| `NODE_ENV` | `dev` ou `production` (active les cookies `secure` + `SameSite=None` en prod) |
+| `LOCAL_PORT` / `LOCAL_PORT_SSL` | Ports publiés en local |
+| `HOSTNAME` | Adresse de bind du serveur Node (`0.0.0.0` en conteneur) |
+
+> En production, le pipeline ajoute automatiquement `DOCKERHUB_USERNAME` et `IMAGE_TAG` au `.env` du VPS pour résoudre le nom et le tag des images à tirer.
+
+---
+
+## Environnement de développement
+
+Prérequis : **Docker** et **Docker Compose**.
+
+```bash
+cp .env.example .env   # puis renseigner les valeurs
+docker compose up --build
+```
+
+| Service | URL / port |
+|--|--|
+| Frontend (Vite, hot reload) | `http://localhost:${LOCAL_PORT}` |
+| API | `http://localhost:${PORT}` (proxifiée derrière `/api`) |
+| PostgreSQL | `localhost:${DB_PORT}` |
+
+- Le front et l'API se rechargent automatiquement à chaque modification (volumes montés + `node --watch` + HMR Vite).
+- Le serveur Vite proxifie `/api` et `/uploads` vers le backend : pas de souci de CORS, le navigateur ne parle qu'à une seule origine.
+- L'entrypoint dev (`dev.sh`) exécute `prisma migrate dev` puis `prisma db seed` au démarrage.
+
+---
+
+## Intégration continue (CI)
+
+Workflow : `.github/workflows/ci.yml` — déclenché sur chaque **Pull Request** vers `develop` et `main`.
+
+| Job (status check) | Action |
+|--|--|
+| `Tests API (Jest)` | `npm test` dans `API/` |
+| `Build Frontend (Vite)` | `npm run build` dans `Frontend/` |
+| `Build images de prod (build only, sans certs)` | `docker compose -f docker-compose.prod.yaml build` |
+
+> Ces trois jobs sont configurés comme **status checks requis** dans une *branch ruleset* couvrant `main` et `develop` : une PR ne peut pas être mergée tant qu'ils ne passent pas.
+
+---
+
+## Déploiement (CD)
+
+### Vue d'ensemble du pipeline
+
+Workflow : `.github/workflows/deploy.yml` — déclenché sur **push vers `main`** (ou manuellement via *workflow_dispatch*).
+
+1. **`Tests API (Jest)`** — relance les tests ; un échec stoppe tout le déploiement.
+2. **`Build & push images (Docker Hub)`** — construit les images de prod backend (`docker/backend/Dockerfile.prod`) et client (`docker/frontend/Dockerfile.prod`, avec `VITE_API_URL=/api`), puis les pousse sur Docker Hub taggées `latest` **et** `${{ github.sha }}`.
+3. **`Copy compose file and script`** — copie via SCP `docker-compose.deploy.yaml` et `docker/backend/production.sh` vers `DEPLOY_PATH` sur le VPS.
+4. **`Déploiement SSH`** — se connecte en SSH au VPS et exécute :
+   - ajout de `DOCKERHUB_USERNAME` et `IMAGE_TAG` au `.env`,
+   - `docker login`, puis `docker compose -f docker-compose.deploy.yaml pull`,
+   - arrêt des anciens conteneurs, `up -d`, `docker logout`, `docker image prune -f`.
+
+### Secrets GitHub requis
+
+À renseigner dans **Settings → Secrets and variables → Actions** :
+
+| Secret | Rôle |
+|--|--|
+| `DOCKERHUB_USERNAME` | Namespace Docker Hub |
+| `DOCKERHUB_TOKEN` | Token d'accès Docker Hub (push/pull) |
+| `SSH_HOST` | Adresse du VPS |
+| `SSH_USER` | Utilisateur SSH |
+| `SSH_PRIVATE_KEY` | Clé privée SSH |
+| `SSH_PORT` | Port SSH |
+| `DEPLOY_PATH` | Dossier de déploiement sur le VPS (ex : `/opt/artico`) |
+
+### Première mise en place du VPS
+
+Le serveur n'héberge que Docker — aucune installation de Node, Nginx ou build n'est nécessaire.
+
+**1. Installer Docker** ([documentation officielle](https://docs.docker.com/engine/install/ubuntu/)) et l'activer au démarrage :
+
 ```bash
 sudo systemctl enable docker
 ```
 
----
-
-## Lancer l'API et et la base de données
-
-Il faut se déplacer dans le dossier ``/API``.
+**2. Ouvrir le pare-feu** (HTTP, HTTPS, SSH) :
 
 ```bash
-cd API/
-```
-
-### Variables d'environnement
-
-Afin de pouvoir monter nos containers et accéder à la base de données et à notre backend, il va falloir créer un fichier ``/API/.env`` avec les informations suivantes :
-- **DB_PASSWORD** : Mot de passe de la base de données
-- **DB_USER** : Nom d'utilisateur utilisé pour accéder à la DB
-- **DB_NAME** : Nom de la base de données à créer
-- **DB_PORT** : Port sur lequel la base données va être exposée
-- **DB_HOST** : Nom de l'hôte via docker
-- **DATABASE_URL** : URL de la base de données
-- **PORT** : Port de l'API (par défaut 3000)
-- **OWNER_EMAIL** : Adresse email de l'application
-- **OWNER_NAME** : Nom du Propriétaire
-- **OWNER_PASSWORD** : Mot de passe pour le seed
-- **APP_EMAIL** : Email de l'application
-- **SECRET_KEY** : Clé secrète pour la génération des access_token
-- **REFRESH_KEY** : Clé secrète pour la génération des refresh_token
-- **RESET_KEY** : Clé secrète pour la génération des reset_token
-- **ACCESS_EXPIRACY** : Durée de vie de l'access_token
-- **REFRESH_EXPIRACY** : Durée de vie du refresh_token
-- **FRONTEND_URL** : URL du client
-- **GOOGLE_APP_PASSWORD** : Clé d'application pour l'envoi de mails via le smtp de gmail
-- **NODE_ENV** : Environnement ('production' pour le déploiement)
-
-### Lancer les containers
-Il faut alors lancer la commande suivante afin de démarrer les containers docker :
-
-```bash
-docker compose up -d --build
-```
-
-Pour vérifier le bon fonctionnement des containers entrez la commande 
-```bash
-docker ps
-```
-
-Vos 2 containers doivent être présents.
-
-Afin de vérifier que l'API tourne bien, vous pouvez effectué la commande suivante
-
-```bash
-curl -L http://localhost:3000/api/categorie
-```
-vous devriez recevoir cette réponse : ``[]``
-
-Il suffit de lancer la commande :
-
-```bash
-make start-app
-```
-
-Cette commande va :
-- recréer les containers
-- attendre 5 secondes pour s'assurer que les containers soient bien montés
-- créer la base de données 
-- créer le premier utilisateur
-
-il ne reste plus qu'à retourner à la racine du projet
-
-```bash
-cd ..
-```
-
-## Mise en place de l'application React
-
-Il faut se déplacer dans le dossier ``Frontend/``
-
-```bash
-cd Frontend/
-```
-
-### Variables d'environnement
-
-Dans le fichier ``.env`` il faut ajouter la variable suivante :
-- **VITE_API_URL** : URL de l'API
-
-
-### Création du build
-
-Lancez la commande :
-
-```bash
-make create-app
-```
-
-Cette commande :
-- Crée le build de l'application dans le dossier ``dist``
-- Copie le contenu du dossier ``dist`` dans le dossier ``/var/www/mondomaine`` (/var/www/artico dans notre cas)
-
----
-### Configuration Nginx
-
-```bash
-sudo apt install nginx
-```
-#### Mise en place du serveur HTTP
-
-Il va falloir : 
-- Ecouter sur le **port 80** (HTTP)
-- Définir le dossier ou se trouve notre Frontend
-- Rediriger les requêtes commençant par "**/API**" et "**/uploads**" vers notre backend
-- Retourner toutes les autres urls vers notre Frontend
-
-Pour cela vous pouvez utiliser cette configuration dans le fichier ``/etc/nginx/sites-available/mondomaine``
-
-```bash
-server {
-    listen 80;
-    server_name mondomaine.fr www.mondomaine.fr;
-
-    root /var/www/mondomaine;
-    index index.html;
-
-    location /uploads {
-        proxy_pass http://localhost:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-
-    location /api {
-        proxy_pass http://localhost:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-    }
-
-
-    location / {
-        proxy_pass http://localhost:3000;
-    }
-}
-```
-
-Sans oublier de créer le lien symbolique vers le dossier **sites-enabled** de nginx
-```bash
-ln -s /etc/nginx/sites-available/mondomaine /etc/nginx/sites-enabled/mondomaine
-```
-
-Puis il faut redémarrer le process **nginx**
-```bash
-sudo systemctl restart nginx
-```
-
-#### Mettre en place le pare-feu
-
-Tout d'abord nous devons vérifier le statut du pare-feu pour voir si ce dernier est activé.
-
-```bash
-sudo ufw status
-```
-Ce dernier doit nous renvoyer quelque chose comme : 
-```bash
-Status: active
-
-To                      Action          From
---                      ------          ----
-443                     ALLOW           Anywhere
-80                      ALLOW           Anywhere
-22                      ALLOW           Anywhere
-443 (v6)                ALLOW           Anywhere (v6)
-80 (v6)                 ALLOW           Anywhere (v6)
-22 (v6)                 ALLOW           Anywhere (v6)
-```
-
-Si ce n'est pas le cas, les étapes suivantes sont nécessaires:
-- Définir les règles du pare-feu
-```bash
-sudo ufw allow 80 // Accès HTTP
-sudo ufw allow 443 // Accès HTTPS
-sudo ufw allow 22 // Accès SSH
-```
-- Activer le pare-feu avec les nouvelles règles
-```bash
+sudo ufw allow 80
+sudo ufw allow 443
+sudo ufw allow 22 # (ou autre selon la configuration de votre serveur)
 sudo ufw enable
 ```
 
-#### Passer sur HTTPS
-
-Tout d'abord il va nous falloir le premier certificat SSL qui pourra être raffraichit à l'avenir. Nous allons donc installer **certbot** avec la commande
+**3. Préparer le dossier de déploiement** (`DEPLOY_PATH`, ex : `/opt/artico`) avec un fichier **`.env` de production** contenant toutes les variables ci-dessus, avec notamment :
 
 ```bash
-sudo apt install certbot python3-certbot-nginx
+NODE_ENV=production
+DB_HOST=db
+DATABASE_URL=postgresql://<user>:<password>@db:5432/<dbname>
+FRONTEND_URL=https://mondomaine.fr
+VITE_API_URL=/api
 ```
 
-Puis demander la génération du certificat via
+**4. Fournir les certificats TLS.** Le conteneur client monte `/opt/artico/certs` en lecture seule (cf. `docker-compose.deploy.yaml`) et Nginx y attend `fullchain.pem` et `privkey.pem`. On les génère avec certbot :
+
 ```bash
-sudo certbot --nginx -d mondomaine.fr -d www.mondomaine.fr
+sudo apt install certbot
+sudo certbot certonly --standalone -d mondomaine.fr -d www.mondomaine.fr
+sudo mkdir -p /opt/artico/certs
+sudo cp /etc/letsencrypt/live/mondomaine.fr/fullchain.pem /opt/artico/certs/
+sudo cp /etc/letsencrypt/live/mondomaine.fr/privkey.pem  /opt/artico/certs/
 ```
 
-Désormais il va falloir également :
-- Ecouter sur le **port 443** (HTTPS)
-- Rediriger les requêtes de **HTTP** vers **HTTPS**
+Une fois ces étapes faites, **chaque push sur `main` déclenche le déploiement complet** automatiquement.
 
-Pour cela vous trouverez le fichier ``/API/conf/nginx.conf`` avec la configuration nécessaire qui remplacera votre fichier situé à l'emplacement ``/etc/nginx/sites-available/mondomaine``
+### Migrations et seed
 
-Il faut alors redémarrer **nginx**
-```bash
-sudo systemctl restart nginx
+L'entrypoint de production (`docker/backend/production.sh`) exécute à **chaque démarrage** du conteneur backend :
+
+```sh
+npx prisma generate
+npx prisma migrate deploy   # applique les migrations en attente
+npx prisma db seed          # crée le compte propriétaire si absent ainsi que la catégorie "Autre" par défaut
+node index.js
 ```
 
-## Test de l'application
+Les migrations de base de données sont donc appliquées automatiquement à chaque déploiement.
 
-Il ne vous reste plus qu'à vous rendre sur votre application via votre nom de domaine (par exemple : mondomaine.fr).
+### Déclenchement manuel et rollback
 
-## Potentielles erreurs fréquentes
+- **Manuel** : onglet *Actions → Deploy → Run workflow*.
+- **Rollback** : sur le VPS, fixer le tag de l'image précédente puis relancer :
 
-### Chemin d'accès au build
+  ```bash
+  cd "$DEPLOY_PATH"
+  sed -i 's/^IMAGE_TAG=.*/IMAGE_TAG=<sha_precedent>/' .env
+  docker compose -f docker-compose.deploy.yaml pull
+  docker compose -f docker-compose.deploy.yaml up -d
+  ```
 
-Le nom ``mondomaine`` est un exemple, n'hésitez pas à le remplacer par le nom de votre application.
-
-Cela vaut aussi bien pour le nom du dossier dans le fichier de configuration nginx (``/etc/nginx/sites-available/mondomaine``) que pour le nom du dossier dans le fichier ``/Frontend/Makefile``.
+  (chaque build pousse une image taggée avec le SHA du commit, ce qui permet de revenir à n'importe quelle version.)
 
 ---
-
-### Erreur lors de la réception du certificat SSL
-
-- Si vous obtenez une erreur lors de la réception du certificat SSL, il est possible que le nom de domaine ne soit pas correctement configuré. Vérifiez avec la commande ``sudo ufw status`` que le pare-feu est bien configuré et que les ports 80 et 443 sont ouverts.
-
-- Si vous n'arrivez pas a recevoir de certificat assurez vous que vous avez un certificat valide et si ce n'est pas le cas remplacez le fichier de configuration nginx par celui cité plus haut pour effectuer la demande du premier certificat SSL. 
-
----
-
-### Erreur lors du montage des containers Docker
-
-- Si vous obtenez une erreur lors du démarrage de l'application, vérifiez que les containers docker sont bien lancés avec la commande ``docker ps``.
-
-- Si vos containers ne démarrent pas, il est possible qu'un container avec le même nom tourne en arrière plan
-
-```bash
-docker stop <nom du container>
-```
-
-et relancer le container
-
-```bash
-docker compose up -d --build --remove-orphans
-```
-
----
-
-### Transmission des cookies à l'API
-
-Si l'application utiise HTTP et non HTTPS, il est probable que vos cookies ne soient pas transmis à l'API. Pour corriger cela, il suffit de modiifer le fichier ``/API/.env`` et de modifier cette variable :
-```bash
-NODE_ENV=production_http # par exemple
-```
-
-Cela va permettre d'envoyer les cookies via HTTP et non HTTPS.
-
 
 ## Maintenance
 
 ### Mettre à jour l'application
 
-A chaque modification de l'API il va falloir relancer le container:
+Aucune action manuelle : un merge / push sur `main` relance le pipeline qui reconstruit, republie et redéploie les images.
+
+### Renouvellement du certificat SSL
+
+Les certificats Let's Encrypt expirent au bout de 3 mois. Comme Nginx tourne dans le conteneur, après renouvellement il faut recopier les certificats dans `/opt/artico/certs` puis recharger Nginx du conteneur :
 
 ```bash
-docker compose down
-docker compose up -d --build
+sudo certbot renew
+sudo cp /etc/letsencrypt/live/mondomaine.fr/{fullchain,privkey}.pem /opt/artico/certs/
+docker exec artico-client nginx -s reload
 ```
 
-Cette étape est nécessaire car elle va installer les nouveaux packages et passer le nouveau contenu du dossier ``API/`` au container.
+Automatisable via un *deploy-hook* certbot. Dans `/etc/letsencrypt/renewal/mondomaine.conf` :
 
-### Rafraichir le certificat SSL
+```ini
+renew_hook = cp /etc/letsencrypt/live/mondomaine.fr/fullchain.pem /etc/letsencrypt/live/mondomaine.fr/privkey.pem /opt/artico/certs/ && docker exec artico-client nginx -s reload
+```
 
-Le certificat SSL possède une durée de vie de 3 mois, il faut donc le renouveler tous les 2-3 mois.
+### Consulter les logs
 
 ```bash
-certbot renew
-sudo systemctl reload nginx
+docker logs artico-backend
+docker logs artico-client
 ```
 
-Vous pouvez tout à fait automatiser ce processus avec un cron job (accès root):
+L'API journalise par ailleurs ses erreurs dans `/app/logs/error.log` à l'intérieur du conteneur backend.
+
+---
+
+## Dépannage
+
+**Les conteneurs ne démarrent pas / nom déjà utilisé**
+
 ```bash
-sudo crontab -e
+docker ps -a
+docker compose -f docker-compose.deploy.yaml up -d --remove-orphans
 ```
 
-Ajoutez la ligne suivante:
-```bash
-0 12 * * 1 /usr/bin/certbot renew --quiet
-```
+**Erreur de certificat / HTTPS indisponible** — vérifier que `fullchain.pem` et `privkey.pem` sont bien présents dans `/opt/artico/certs` et que les ports 80/443 sont ouverts (`sudo ufw status`).
 
-Cela va permettre de renouveler le certificat SSL (si nécessaire) tous les lundis à midi.
+**Les cookies ne sont pas transmis à l'API** — s'assurer que l'application est servie en **HTTPS** et que `NODE_ENV=production` (les cookies sont alors `Secure` + `SameSite=None`).
 
-Vous devrez cependant redémarrer le service nginx pour que le nouveau certificat SSL soit pris en compte.
-
-**Attention** : dans les dernières versions de certbot un cron automatique est instancié par défaut.
-
-Vous pouvez donc modifier le fichier ``/etc/letsencrypt/renewal/mondomaine.conf`` pour ajouter la ligne suivante:
-```bash
-# Après le renouvellement du certificat
-renew_hook = systemctl reload nginx
-```
-
-## Conclusion
-
-
-### Architecture finale
-
-Vous avez maintenant une application déployée sur un serveur Linux.
-
-```mermaid
-graph TD
-    REQ([Requete])
-
-    subgraph VPS
-        NGINX[Nginx]
-        FRONT[Frontend]
-        
-        subgraph Docker
-            subgraph Node_Container[Node.js]
-                API[API NodeJS]
-                UPLOADS(Uploads)
-            end
-            DB[(PostgreSQL)]
-        end
-    end
-
-    REQ <--> NGINX
-    NGINX <--> API
-    NGINX <--> FRONT
-    API <--> DB
-    API <---> UPLOADS
-```
-
-### Etapes réalisées :
-- [x] Installer NodeJS / npm
-- [x] Installer Docker
-- [x] Installer Nginx
-- [x] Installer Certbot
-- [x] Configurer Nginx
-- [x] Configurer Certbot
-- [x] Configurer Docker
-- [x] Créer et déplacer le build du frontend dans le dossier défini dans la configuration de Nginx
-- [x] Lancer l'API et la base de données avec Docker
-- [x] Installer et configurer le rafraichissement automatique du certificat SSL
+**Le déploiement reste bloqué / images non tirées** — vérifier les secrets `DOCKERHUB_*` et que le `.env` du VPS contient bien `DOCKERHUB_USERNAME` et `IMAGE_TAG` (ajoutés par le pipeline).
