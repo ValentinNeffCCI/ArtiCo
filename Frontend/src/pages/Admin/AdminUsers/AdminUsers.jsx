@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import useAPI from "../../../hooks/useAPI";
 import DeleteConfirmation from "../../../components/modales/DeleteConfirmation/DeleteConfirmation.jsx";
 import UserList from "../../../components/listes/users/EntiteList.jsx";
+import { useAuth } from "../../../contexts/UserContext.jsx";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState(false);
@@ -11,14 +12,17 @@ const AdminUsers = () => {
   const [selectedUser, setSelectedUser] = useState(false);
 
   const { query: callAPI } = useAPI();
+  const { user: currentUser } = useAuth();
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
   };
 
   const filterUsers = () => {
-    if (search.length === 0) return users;
-    return users.filter(
+    // On exclut toujours l'utilisateur connecté de la liste.
+    const visibleUsers = users.filter((u) => u.id !== currentUser?.id);
+    if (search.length === 0) return visibleUsers;
+    return visibleUsers.filter(
       (u) => u.email.includes(search) || u.name.toLowerCase().includes(search)
     );
   };
@@ -74,11 +78,7 @@ const AdminUsers = () => {
   const getAllUsers = async () => {
     const response = await callAPI("/admin/users");
     if (!response.error) {
-      setUsers(
-        response.sort((a, b) => {
-            if(a.role === "ADMIN") return -1;
-        })
-      );
+      setUsers(response.sort((a) => (a.role === "ADMIN" ? -1 : 0)));
     }
   };
 
