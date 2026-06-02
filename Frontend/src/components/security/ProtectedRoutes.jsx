@@ -3,10 +3,14 @@ import { useAuth } from "../../contexts/UserContext.jsx";
 import { Fragment } from "react";
 
 const ProtectedRoute = ({ allowedRoles }) => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
   const redirect = () => {
     return <Navigate to="/" />;
+  }
+
+  if (loading) {
+    return null;
   }
 
   if (!user) {
