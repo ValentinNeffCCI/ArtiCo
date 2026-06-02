@@ -4,25 +4,30 @@ const UserContext = createContext(null);
 
 export const UserProvider = ({children}) => {
     const [user, setUser] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const getUser = async () => {
-        const response = await fetch(import.meta.env.VITE_API_URL + '/user/me', {
-            method: 'GET',
-            credentials: 'include',
-            headers:{
-                'Content-Type': 'application/json'
-            }
-        });
-        if(response.ok){
-            const data = await response.json();
-            setUser({
-                id: data.id,
-                role: data.role
+        try {
+            const response = await fetch(import.meta.env.VITE_API_URL + '/user/me', {
+                method: 'GET',
+                credentials: 'include',
+                headers:{
+                    'Content-Type': 'application/json'
+                }
             });
-            return data;
-        }else{
-            setUser(false);
-            return false;
+            if(response.ok){
+                const data = await response.json();
+                setUser({
+                    id: data.id,
+                    role: data.role
+                });
+                return data;
+            }else{
+                setUser(false);
+                return false;
+            }
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -52,7 +57,7 @@ export const UserProvider = ({children}) => {
     };
 
     return (
-        <UserContext.Provider value={{user, login, logout}}>
+        <UserContext.Provider value={{user, loading, login, logout}}>
             {children}
         </UserContext.Provider>
     );
