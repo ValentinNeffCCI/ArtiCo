@@ -64,7 +64,6 @@ module.exports = {
     };
   },
   reset: async (token, password) => {
-
     const id = jwt.verify(token, RESET_KEY, (err, decoded) => {
         if(err) throw new HttpError(`Ce lien a expiré`)
         return decoded.id

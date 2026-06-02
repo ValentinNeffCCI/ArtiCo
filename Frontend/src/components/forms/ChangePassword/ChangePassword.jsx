@@ -9,10 +9,6 @@ import { Navigate } from "react-router-dom";
 const ChangePassword = ({ token }) => {
   const { login, user } = useAuth();
 
-  if (user || !token) {
-    return <Navigate to={"/"} />;
-  }
-
   const { content, changeListener, prepare } = useForm(
     "/auth/change-password",
     "POST",
@@ -21,15 +17,14 @@ const ChangePassword = ({ token }) => {
     }
   );
 
+  if (user || !token) {
+    return <Navigate to={"/"} />;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!content.password) {
-      toast.error("Votre mot de passe doit contenir au moins 8 caractères");
-      return;
-    }
-
-    if (content.password.length < 8) {
-      toast.error("Votre mot de passe doit contenir au moins 8 caractères");
+    if (!content.password || content.password.length < 12) {
+      toast.error("Votre mot de passe doit contenir au moins 12 caractères");
       return;
     }
 
@@ -41,7 +36,7 @@ const ChangePassword = ({ token }) => {
     const response = await prepare(e);
 
     if (!response || response.error) {
-      toast.error("Une erreur est survenue");
+      toast.error(response.error || "Une erreur est survenue");
     } else {
       login(response);
     }
