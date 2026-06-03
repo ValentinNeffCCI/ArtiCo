@@ -4,7 +4,7 @@ module.exports = {
     getAllFormulaires: async (req, res, next) => {
         try {
             const formulaires = await formulaireService.findAll();
-            res.status(200).json(formulaires);
+            return res.status(200).json(formulaires);
         } catch (error) {
             return next(error);
         }
@@ -12,7 +12,7 @@ module.exports = {
     getFormulaireById: async (req, res, next) => {
         try {
             const formulaire = await formulaireService.findById(req.params.id);
-            res.status(200).json(formulaire);
+            return res.status(200).json(formulaire);
         } catch (error) {
             return next(error);
         }
@@ -20,7 +20,7 @@ module.exports = {
     getFormulaireByEntrepriseId: async (req, res, next) => {
         try {
             const formulaire = await formulaireService.findByEntrepriseId(req.params.id);
-            res.status(200).json(formulaire);
+            return res.status(200).json(formulaire);
         } catch (error) {
             return next(error);
         }
@@ -28,7 +28,7 @@ module.exports = {
     createFormulaire: async (req, res, next) => {
         try {
             const formulaire = await formulaireService.create(req.body);
-            res.status(201).json(formulaire);
+            return res.status(201).json(formulaire);
         } catch (error) {
             return next(error);
         }
@@ -36,7 +36,7 @@ module.exports = {
     updateFormulaire: async (req, res, next) => {
         try {
             const formulaire = await formulaireService.update(req.params.id, req.body);
-            res.status(200).json(formulaire);
+            return res.status(200).json(formulaire);
         } catch (error) {
             return next(error);
         }
@@ -44,7 +44,7 @@ module.exports = {
     deleteFormulaire: async (req, res, next) => {
         try {
             const formulaire = await formulaireService.delete(req.params.id);
-            res.status(200).json(formulaire);
+            return res.status(200).json(formulaire);
         } catch (error) {
             return next(error);
         }

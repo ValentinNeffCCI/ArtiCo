@@ -4,10 +4,10 @@ const authenticated = require('../middlewares/authenticated.js');
 const entrepriseController = require('../controllers/entreprise-controller.js');
 const idParser = require('../middlewares/id-parser.js');
 const imageUploader = require('../middlewares/image-uploader.js');
-const fieldVerification = require('../middlewares/field-verification.js');
-const emailFormatVerification = require('../middlewares/email-format-verification.js');
 const verifyAccessEntreprise = require('../middlewares/entreprise-access.js');
-const entrepriseFields = ['name', 'description', 'name', 'address1', 'city', 'cp', 'email', 'categorieId'];
+const validate = require('../middlewares/validate.js');
+const entrepriseCreateSchema = require('../schemas/Entreprise/entrepriseCreateSchema.js');
+const entrepriseUpdateSchema = require('../schemas/Entreprise/entrepriseUpdateSchema.js');
 
 router.get('/',
     entrepriseController.getAllEntreprises);
@@ -18,18 +18,16 @@ router.get('/user/:id',
     idParser, 
     authenticated(),
     entrepriseController.getEntreprisesByUserId);
-router.post('/', 
-    authenticated(), 
-    imageUploader.single('image'), 
-    fieldVerification(entrepriseFields), 
-    emailFormatVerification,
+router.post('/',
+    authenticated(),
+    imageUploader.single('image'),
+    validate(entrepriseCreateSchema),
     entrepriseController.createEntreprise);
-router.put('/:id', 
-    idParser, 
-    authenticated(), 
-    imageUploader.single('image'), 
-    fieldVerification(entrepriseFields), 
-    emailFormatVerification,
+router.put('/:id',
+    idParser,
+    authenticated(),
+    imageUploader.single('image'),
+    validate(entrepriseUpdateSchema),
     verifyAccessEntreprise,
     entrepriseController.updateEntreprise);
 router.delete('/:id', 

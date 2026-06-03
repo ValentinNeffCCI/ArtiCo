@@ -1,75 +1,149 @@
-.main{
-    padding: 3rem 10%;
+.main {
+    padding: 3rem clamp(1.25rem, 7vw, 6rem);
+    min-height: 80vh;
 }
 
-.main h1{
+/* ---------- Disposition générale ---------- */
+.layout {
+    display: grid;
+    grid-template-columns: minmax(300px, 400px) minmax(0, 1fr);
+    gap: 15rem;
+    align-items: start;
+}
+
+/* ---------- Colonne média (gauche, sticky) ---------- */
+.media {
+    position: sticky;
+    top: 6rem;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 0;
+}
+
+.media h1 {
     margin: 0;
     padding: 0;
-    margin-bottom: 2rem;
-    font-size: 3rem;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    line-height: 1.15;
     color: var(--primary);
 }
 
-.main h1 span{
-    font-family: 'itim';
+.media h1 span {
+    font-family: "itim";
     text-transform: uppercase;
 }
 
-.contact{
-    position: fixed;
-    right: 5%;
-    top: 30%;
+/* ---------- Contenu central ---------- */
+.content {
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
-    border-left: 2px solid var(--primary);
-    padding: 1rem;
-    width: fit-content;
+    row-gap: 2.5rem;
+    padding: 2rem;
 }
 
-.content{
-    width: 80%;
-    margin: 2rem 0;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    row-gap: 3rem;
-    align-items: center;
+.content h2 {
+    margin: 0;
+    color: var(--primary);
 }
 
-.content h2 span{
+.content h2 span {
     padding-right: 1rem;
     border-bottom: 2px solid var(--secondary);
 }
 
-.adress, .phone, .mail{
+.content .description {
+    margin: 0;
+    width: 100%;
+    line-height: 1.6;
+}
+
+.content .description p {
+    margin-bottom: 1rem;
+}
+
+/* ---------- Carte contact (dans la colonne média) ---------- */
+.contact {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: white;
+    border: 1px solid rgba(40, 5, 70, 0.1);
+    border-radius: 1rem;
+    box-shadow: 0 6px 24px rgba(40, 5, 70, 0.08);
+    padding: 1.25rem 1.5rem;
+}
+
+.adress,
+.phone,
+.mail {
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-weight: 600;
+    font-weight: 500;
 }
 
-.adress svg, .phone svg, .mail svg{
-    transition: stroke .3s ease;
+/* Pastille d'icône */
+.adress > a,
+.phone > a,
+.mail > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    aspect-ratio: 1/1;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: var(--accent);
+    color: var(--primary);
+    transition:
+        background-color 0.25s ease,
+        transform 0.25s ease;
 }
 
-.adress:hover svg, .phone:hover svg, .mail:hover svg{
-    stroke: var(--secondary);
+.adress svg,
+.phone svg,
+.mail svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    stroke: var(--primary);
+    transition: stroke 0.25s ease;
 }
 
-.adress > div {
+.adress > a:hover,
+.phone > a:hover,
+.mail > a:hover {
+    background-color: var(--primary);
+    transform: translateY(-0.15rem);
+}
+
+.adress > a:hover svg,
+.phone > a:hover svg,
+.mail > a:hover svg {
+    stroke: white;
+}
+
+.adress > div,
+.phone > div,
+.mail > div {
     display: flex;
     flex-direction: column;
+    word-break: break-word;
+    min-width: 0;
 }
 
-.content h2 {
-    margin-top: 2rem;
-}
+/* ---------- Responsive ---------- */
+@media screen and (max-width: 900px) {
+    .layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 
-.content .description {
-    margin: 1rem 0;
-    width: 100%;
-}
-
-.content .description p{
-    margin-bottom: 1rem;
+    .media {
+        position: static;
+    }
 }

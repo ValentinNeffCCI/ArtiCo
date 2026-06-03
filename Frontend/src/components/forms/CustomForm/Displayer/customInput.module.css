@@ -1,27 +1,30 @@
-.input {
+.form {
     display: flex;
     flex-direction: column;
-    margin: .6rem 0;
-    gap: .4rem;
-    overflow: auto;
-}
-
-.input label{
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.input input{
-    margin: 0;
-}
-
-.input input {
+    gap: 1.1rem;
     width: 100%;
 }
 
-.input_label{
-    font-size: 1.1rem;
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: .45rem;
+    width: 100%;
+}
+
+.input label,
+.input_label {
+    font-size: .95rem;
+    font-weight: 600;
+    color: var(--primary);
     cursor: pointer;
+}
+
+.input input,
+.input textarea,
+.input select {
+    width: 100%;
+    margin: 0;
 }
 
 .form textarea {
@@ -29,58 +32,77 @@
     width: 100%;
 }
 
-.form input, .form textarea, .form select {
-    padding: .5rem 1rem;
-}
-
-.select{
+.select {
     display: flex;
     width: 100%;
 }
 
-.checkArea{
+/* Bouton d'envoi du formulaire */
+.submit {
+    --bg-color: var(--primary);
+    --color: var(--light);
+    margin: 1.5rem auto 0;
+    align-self: center;
+}
+
+/* ---------- Cases à cocher / boutons radio (chips) ---------- */
+.checkArea {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     width: 100%;
     gap: 1rem;
-    font-size: .7rem;
-    margin: 1rem auto;
+    margin: .25rem 0;
 }
 
-.checkArea > div {
+.checkbox,
+.radio {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: .75rem;
     width: 100%;
-    height: fit-content;
-    display: flex;
 }
 
-.checkArea input[type="radio"], .checkArea input[type="checkbox"]{
+.checkArea input[type="radio"],
+.checkArea input[type="checkbox"],
+.checkbox input[type="radio"],
+.checkbox input[type="checkbox"],
+.radio input[type="radio"],
+.radio input[type="checkbox"] {
     width: .1px;
     height: .1px;
+    opacity: 0;
+    margin: 0;
 }
 
-.checkArea input[type="radio"] + label, .checkArea input[type="checkbox"] + label{
-    padding: .8rem .4rem;
+.checkbox input + label,
+.radio input + label,
+.checkArea input[type="radio"] + label,
+.checkArea input[type="checkbox"] + label {
+    padding: .7rem .9rem;
     width: 100%;
     display: flex;
     margin: 0;
     justify-content: center;
-    border: 1px solid var(--primary);
-    transition: background .3s ease;
+    text-align: center;
+    border: 1px solid rgba(40, 5, 70, .25);
+    border-radius: .6rem;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
 
-.checkArea input[type="radio"] + label:hover, .checkArea input[type="checkbox"] + label:hover{
-    background-color: var(--secondary);
+.checkbox input + label:hover,
+.radio input + label:hover,
+.checkArea input[type="radio"] + label:hover,
+.checkArea input[type="checkbox"] + label:hover {
+    background-color: var(--accent);
+    border-color: var(--secondary);
 }
 
-.checkArea input[type="radio"]:checked + label, .checkArea input[type="checkbox"]:checked + label{
+.checkbox input:checked + label,
+.radio input:checked + label,
+.checkArea input[type="radio"]:checked + label,
+.checkArea input[type="checkbox"]:checked + label {
     background-color: var(--primary);
+    border-color: var(--primary);
     color: white;
-}
-
-.checkbox, .radio{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    width: 100%;
 }

@@ -1,30 +1,44 @@
-.colorInput{
+.colorInput {
     display: flex;
     align-items: center;
-    flex-direction: column;
-    gap: 0;
-    width: 10%;
+    gap: .75rem;
+    width: fit-content;
     background-color: white;
-    border: 1px solid var(--dark);
-    margin: auto;
+    border: 1px solid rgba(40, 5, 70, .2);
+    border-radius: .6rem;
+    padding: .35rem .9rem .35rem .35rem;
 }
 
-.colorInput input{
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-    width: 100%;
+.colorInput input {
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    width: 2.5rem;
+    height: 2.5rem;
     aspect-ratio: 1/1;
-    height: auto;
-    padding: 0!important;
+    padding: 0 !important;
     box-shadow: none;
     background-color: transparent;
     caret-color: transparent;
+    border: none;
+    border-radius: .4rem;
     margin: 0;
+    cursor: pointer;
 }
 
-.colorInput label{
-    padding: 1rem;
-    margin: 0!important;
-    width: 100%;
+.colorInput input::-webkit-color-swatch {
+    border: none;
+    border-radius: .4rem;
+}
+
+.colorInput input::-moz-color-swatch {
+    border: none;
+    border-radius: .4rem;
+}
+
+.colorInput label {
+    padding: 0;
+    margin: 0 !important;
+    color: var(--primary);
+    font-weight: 500;
 }

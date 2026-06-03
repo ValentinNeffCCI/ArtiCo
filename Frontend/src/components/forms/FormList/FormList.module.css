@@ -1,56 +1,76 @@
-.forms{
-    margin-top: 2rem;
+.forms {
+    margin-top: 1rem;
     width: 100%;
+}
+
+.forms h2 {
+    margin: 0;
+    color: var(--primary);
+}
+
+.forms h2 span {
+    padding-right: 1rem;
+    border-bottom: 2px solid var(--secondary);
 }
 
 .list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     width: 100%;
-    margin-top: 2rem;
-    gap: 1rem;
-    justify-content: space-evenly;
+    margin-top: 1.5rem;
+    gap: 1.25rem;
 }
 
-.list *{
-    transition: all .3s;
-}
-
-.list > a{
+.list > a {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
-    border-radius: 1rem;
-    width: 25%;
-    border: .5rem solid var(--dark);
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.5rem 1rem;
+    border-radius: .9rem;
+    background-color: white;
+    border: 1px solid rgba(40, 5, 70, .12);
+    box-shadow: 0 4px 16px rgba(40, 5, 70, .06);
     color: var(--dark);
-    aspect-ratio: 4/3;
+    text-decoration: none;
+    transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease, background-color .25s ease;
 }
 
-.list a:hover{
-    color: var(--primary);
-    border-color: var(--primary);
-    background-color: var(--secondary);
+.list img {
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit: contain;
+    transition: transform .25s ease;
 }
 
-.list img{
-    width: 30%;
-}
-
-.list div{
+.list div {
     display: flex;
     align-items: center;
-    font-weight: 500;
-    gap: 10px;
     justify-content: center;
-    padding: 1rem;
-}
-
-.list div span{
+    gap: .5rem;
+    font-weight: 600;
+    color: var(--primary);
     text-align: center;
 }
 
-.list a:hover div svg{
-    transform: translateX(5px);
+.list div svg {
+    flex-shrink: 0;
+    transition: transform .25s ease;
+}
+
+@media (hover: hover) {
+    .list > a:hover {
+        transform: translateY(-.4rem);
+        box-shadow: 0 12px 28px rgba(40, 5, 70, .16);
+        border-color: var(--secondary);
+    }
+
+    .list > a:hover img {
+        transform: scale(1.08);
+    }
+
+    .list > a:hover div svg {
+        transform: translateX(.35rem);
+    }
 }

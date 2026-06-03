@@ -4,7 +4,7 @@ module.exports = {
     getAllUsers: async (req, res, next) => {
         try {
             const users = await userService.getAllUsers();
-            res.status(200).json(users);
+            return res.status(200).json(users);
         } catch (error) {
             return next(error);
         }
@@ -12,7 +12,7 @@ module.exports = {
     getMe: async (req, res, next) => {
         try {
             const user = await userService.getUserById(req.user.id);
-            res.status(200).json(user);
+            return res.status(200).json(user);
         } catch (error) {
             return next(error);
         }
@@ -20,7 +20,7 @@ module.exports = {
     getUserById: async (req, res, next) => {
         try {
             const user = await userService.getUserById(req.params.id);
-            res.status(200).json(user);
+            return res.status(200).json(user);
         } catch (error) {
             return next(error);
         }
@@ -28,7 +28,7 @@ module.exports = {
     updateUser: async (req, res, next) => {
         try {
             const user = await userService.updateUser(req.params.id, req.body);
-            res.status(200).json(user);
+            return res.status(200).json(user);
         } catch (error) {
             return next(error);
         }
@@ -36,7 +36,7 @@ module.exports = {
     deleteUser: async (req, res, next) => {
         try {
             const user = await userService.deleteUser(req.params.id);
-            res.status(200).json(user);
+            return res.status(200).json(user);
         } catch (error) {
             return next(error);
         }
@@ -44,7 +44,7 @@ module.exports = {
     modifyUserAccess: async (req, res, next) => {
         try {
             const user = await userService.modifyUserAccess(req.params.id, req.body);
-            res.status(200).json(user);
+            return res.status(200).json(user);
         } catch (error) {
             return next(error);
         }
@@ -52,7 +52,7 @@ module.exports = {
     getAllUsersWithAccess: async (req, res, next) => {
         try {
             const users = await userService.getAllUsersWithAccess();
-            res.status(200).json(users);
+            return res.status(200).json(users);
         } catch (error) {
             return next(error);
         }

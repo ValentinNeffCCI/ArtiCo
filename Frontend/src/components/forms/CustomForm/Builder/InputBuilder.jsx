@@ -131,25 +131,24 @@ const InputBuilder = ({
   return (
     <div className={classes["input"]}>
       <div className={classes["onglets"]}>
-        {onglets.map((item, index) => (
-          <button
-            key={item}
-            onClick={(e) => changeOnglet(e, index)}
-            style={{
-              background: index == onglet ? "var(--secondary)" : "",
-            }}
-          >
-            {item}
-          </button>
-        ))}
-        <CustomButton
-          style={{
-            "--bg-color": "red",
-            borderRadius: 0,
-            height: "100%",
-          }}
-          clickAction={onRemove}
-        >
+        <div className={classes["tabs"]}>
+          {onglets.map((item, index) => {
+            if (index == 1 && !optionnalFields.includes(input.type)) {
+              return null;
+            }
+            return (
+              <button
+                key={item}
+                type="button"
+                onClick={(e) => changeOnglet(e, index)}
+                className={index == onglet ? classes["active"] : ""}
+              >
+                {item}
+              </button>
+            );
+          })}
+        </div>
+        <CustomButton className={classes["remove"]} clickAction={onRemove}>
           Retirer
         </CustomButton>
       </div>
@@ -236,10 +235,16 @@ const InputBuilder = ({
             <div className={classes["options"]}>
               {input.options && input.options.length != 0 ? (
                 input.options.map((option) => (
-                  <OptionBuilder option={option} onDelete={onRemoveOption} />
+                  <OptionBuilder
+                    key={option.id}
+                    option={option}
+                    onDelete={onRemoveOption}
+                  />
                 ))
               ) : (
-                <div className="montserrat">Vos options s'afficheront ici</div>
+                <div className="montserrat" style={{ width: "100%" }}>
+                  Vos options s'afficheront ici
+                </div>
               )}
             </div>
             <CustomButton

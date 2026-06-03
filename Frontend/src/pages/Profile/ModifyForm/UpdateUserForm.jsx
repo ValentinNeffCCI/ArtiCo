@@ -38,6 +38,7 @@ const UpdateUserForm = ({user}) => {
           placeholder="Pseudo"
           id="name"
           defaultValue={user.name}
+          style={{paddingLeft: 0, borderRadius: 0}}
           />
       </div>
       <div>
@@ -50,6 +51,7 @@ const UpdateUserForm = ({user}) => {
           type="email"
           placeholder="E-mail"
           defaultValue={user.email}
+          style={{paddingLeft: 0, borderRadius: 0}}
           />
       </div>
       <div>
@@ -60,6 +62,7 @@ const UpdateUserForm = ({user}) => {
           onChange={changeListener}
           type="password"
           placeholder="Mot de passe (Laissez vide pour ne pas le modifier)"
+          style={{paddingLeft: 0, borderRadius: 0}}
           />
       </div>
       <CustomButton
