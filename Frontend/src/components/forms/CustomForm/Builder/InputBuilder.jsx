@@ -132,16 +132,21 @@ const InputBuilder = ({
     <div className={classes["input"]}>
       <div className={classes["onglets"]}>
         <div className={classes["tabs"]}>
-          {onglets.map((item, index) => (
-            <button
-              key={item}
-              type="button"
-              onClick={(e) => changeOnglet(e, index)}
-              className={index == onglet ? classes["active"] : ""}
-            >
-              {item}
-            </button>
-          ))}
+          {onglets.map((item, index) => {
+            if (index == 1 && !optionnalFields.includes(input.type)) {
+              return null;
+            }
+            return (
+              <button
+                key={item}
+                type="button"
+                onClick={(e) => changeOnglet(e, index)}
+                className={index == onglet ? classes["active"] : ""}
+              >
+                {item}
+              </button>
+            );
+          })}
         </div>
         <CustomButton className={classes["remove"]} clickAction={onRemove}>
           Retirer
@@ -230,10 +235,16 @@ const InputBuilder = ({
             <div className={classes["options"]}>
               {input.options && input.options.length != 0 ? (
                 input.options.map((option) => (
-                  <OptionBuilder key={option.id} option={option} onDelete={onRemoveOption} />
+                  <OptionBuilder
+                    key={option.id}
+                    option={option}
+                    onDelete={onRemoveOption}
+                  />
                 ))
               ) : (
-                <div className="montserrat">Vos options s'afficheront ici</div>
+                <div className="montserrat" style={{ width: "100%" }}>
+                  Vos options s'afficheront ici
+                </div>
               )}
             </div>
             <CustomButton
