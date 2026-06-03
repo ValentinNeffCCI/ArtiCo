@@ -41,9 +41,8 @@ const UpdateForm = () => {
           alignItems: "center",
           border: "none",
           gap: ".5rem",
-          margin: '0 5%',
-          width: 'fit-content',
-          padding: '2rem 0' 
+          margin: "0 0 1rem",
+          width: "fit-content",
         }}
         path={`/entreprise/${form.entrepriseId}/formulaires`}
       >
@@ -52,24 +51,13 @@ const UpdateForm = () => {
       </LinkButton>
       <h1>Modifiez votre questionnaire</h1>
       {form && (
-        <form
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            width: "80%",
-            margin: "1rem auto",
-            padding: "1rem",
-          }}
-        >
+        <form className={classes["nameForm"]}>
           <input
             type="text"
             placeholder="Nom du Questionnaire"
             name="name"
             id="name"
-            style={{
-              padding: ".4rem",
-              background: "transparent",
-            }}
+            className={classes["nameInput"]}
             defaultValue={form.name}
             onChange={handleChange}
             required
@@ -83,10 +71,6 @@ const UpdateForm = () => {
           name: form.name,
         }}
         form={form.inputs}
-        style={{
-          width: "100%",
-          display: "flex",
-        }}
       />
     </main>
   );

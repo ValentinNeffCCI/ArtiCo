@@ -49,14 +49,13 @@ const AnswerForm = () => {
         email: content["Votre adresse mail afin de pouvoir être recontacté par le professionnel"]
       });
       if (response.error) {
-        throw new Error();
+        throw response;
       }
       toast.success("Votre formulaire a bien été transmis");
       setTimeout(() => navigation(-1), 1000);
     } catch (exception) {
-      toast.error(
-        "Une erreur est survenue veuillez vérifier que tous les champs sont bien remplis"
-      );
+      console.log(exception.errors)
+      exception.errors.forEach((error) => toast.error(error.message));
       setIsLoading(false);
     }
   };
@@ -75,24 +74,22 @@ const AnswerForm = () => {
         Revenir en arrière
       </CustomButton>
       <h1>{form.name}</h1>
-      <CustomForm
-        form={!user.email ? [...form.inputs,
-        {
-          "type": "email",
-          "name": "Votre adresse mail afin de pouvoir être recontacté par le professionnel",
-          "required": true,
-          "options": false,
-          "formulaireId": id
-        }
-        ] : form.inputs}
-        onChange={onChange}
-        onSubmit={handleSubmit}
-        submitButton={"Envoyer"}
-        style={{
-          width: "70%",
-          margin: "1rem auto",
-        }}
-      ></CustomForm>
+      <div className={classes["card"]}>
+        <CustomForm
+          form={!user.email ? [...form.inputs,
+          {
+            "type": "email",
+            "name": "Votre adresse mail afin de pouvoir être recontacté par le professionnel",
+            "required": true,
+            "options": false,
+            "formulaireId": id
+          }
+          ] : form.inputs}
+          onChange={onChange}
+          onSubmit={handleSubmit}
+          submitButton={"Envoyer"}
+        ></CustomForm>
+      </div>
     </main>
   );
 };

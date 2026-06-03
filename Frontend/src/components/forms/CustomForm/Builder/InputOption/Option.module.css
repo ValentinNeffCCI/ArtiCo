@@ -1,20 +1,25 @@
-.option{
-    padding: .5rem;
-    border-radius: 5px;
-    width: 90%;
-    font-size: .8rem;
-    background-color: white;
-    border: 2px solid var(--primary);
+.option {
+    padding: .35rem .25rem .35rem .75rem;
+    border-radius: .5rem;
+    width: 100%;
+    font-size: .85rem;
+    background-color: rgba(139, 135, 255, .1);
+    border: 1px solid var(--secondary);
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: .25rem;
 }
 
-.option span{
-    width: 90%;
+.option span {
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--primary);
+    font-weight: 500;
 }
 
-.option button{
+.option button {
     padding: 2px;
     height: fit-content;
     margin: 0;

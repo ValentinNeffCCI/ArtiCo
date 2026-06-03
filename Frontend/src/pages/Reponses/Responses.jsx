@@ -38,17 +38,14 @@ const Responses = () => {
             Revenir en arrière
         </CustomButton>
         <h1>Réponses au questionnaire</h1>
-        <div>
+        <div className={style["list"]}>
            {
-            responses.length != 0 ? 
+            responses.length != 0 ?
             responses.map((response) => (
                 <ResponseCard key={response.id} reponse={response} />
             ))
             :
-            <div style={{
-                textAlign: 'center',
-                marginTop: "3rem"
-            }}>
+            <div className={style["empty"]}>
                 Il semblerait que personne n'ai encore répondu à ce questionnaire 🤔
             </div>
            }

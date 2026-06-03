@@ -4,7 +4,7 @@ module.exports = {
     getAllInputs: async (req, res, next) => {
         try {
             const inputs = await inputService.findAll();
-            res.status(200).json(inputs);
+            return res.status(200).json(inputs);
         } catch (error) {
             return next(error);
         }
@@ -12,7 +12,7 @@ module.exports = {
     getInputById: async (req, res, next) => {
         try {
             const input = await inputService.findById(req.params.id);
-            res.status(200).json(input);
+            return res.status(200).json(input);
         } catch (error) {
             return next(error);
         }
@@ -20,7 +20,7 @@ module.exports = {
     getInputByFormulaireId: async (req, res, next) => {
         try {
             const input = await inputService.findByFormulaireId(req.params.id);
-            res.status(200).json(input);
+            return res.status(200).json(input);
         } catch (error) {
             return next(error);
         }
@@ -28,7 +28,7 @@ module.exports = {
     createInput: async (req, res, next) => {
         try {
             const input = await inputService.create(req.body);
-            res.status(201).json(input);
+            return res.status(201).json(input);
         } catch (error) {
             return next(error);
         }
@@ -36,7 +36,7 @@ module.exports = {
     updateInput: async (req, res, next) => {
         try {
             const input = await inputService.update(req.params.id, req.body);
-            res.status(200).json(input);
+            return res.status(200).json(input);
         } catch (error) {
             return next(error);
         }
@@ -44,7 +44,7 @@ module.exports = {
     deleteInput: async (req, res, next) => {
         try {
             const input = await inputService.delete(req.params.id);
-            res.status(200).json(input);
+            return res.status(200).json(input);
         } catch (error) {
             return next(error);
         }

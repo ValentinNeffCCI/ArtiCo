@@ -132,23 +132,11 @@ const FormBuilder = ({
         <CustomButton
           clickAction={addField}
           className={classes["addField"]}
-          style={{
-            "--color": "var(--primary)",
-          }}
         >
           <span>Ajouter un champ</span>
-          <Plus size={12} />
+          <Plus size={16} />
         </CustomButton>
-        <CustomButton
-          style={{
-            display: "flex",
-            alignItems: "center",
-            fontSize: 15,
-            gap: 5,
-            "--bg-color": "var(--secondary)",
-            marginTop: 20,
-          }}
-        >
+        <CustomButton className={classes["save"]}>
           <span>Enregistrer</span>
           <Save size={15} />
         </CustomButton>

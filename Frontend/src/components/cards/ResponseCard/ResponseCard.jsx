@@ -15,7 +15,7 @@ const ResponseCard = ({ reponse }) => {
 
   const formatDataToFile = () => {
     const data = {
-      date: formatDate(reponse.submittedAt),
+      date: formatDate(reponse.createdAt),
       "envoyé par": getUserEmail(),
       "nom du questionnaire": reponse.formulaire.name,
       réponses: Object.entries(reponse.content).map(([key, value]) => ({
@@ -45,7 +45,7 @@ const ResponseCard = ({ reponse }) => {
     <div className={style["card"]}>
       <p className={style["card-header"]}>
         <span className={style["card-header-date"]}>
-          Le {formatDate(reponse.submittedAt)}
+          Le {formatDate(reponse.createdAt)}
         </span>
         &nbsp;:&nbsp;
         <span className={style["card-header-user"]}>

@@ -5,7 +5,7 @@ module.exports = {
         try {
             const query = req.query;
             const entreprises = await entrepriseService.findAll(query);
-            res.status(200).json(entreprises);
+            return res.status(200).json(entreprises);
         } catch (error) {
             return next(error);
         }
@@ -13,7 +13,7 @@ module.exports = {
     getEntrepriseById: async (req, res, next) => {
         try {
             const entreprise = await entrepriseService.findById(req.params.id);
-            res.status(200).json(entreprise);
+            return res.status(200).json(entreprise);
         } catch (error) {
             return next(error);
         }
@@ -21,7 +21,7 @@ module.exports = {
     getEntreprisesByUserId: async (req, res, next) => {
         try {
             const entreprises = await entrepriseService.findByUserId(req.params.id);
-            res.status(200).json(entreprises);
+            return res.status(200).json(entreprises);
         } catch (error) {
             return next(error);
         }
@@ -34,7 +34,7 @@ module.exports = {
             }
             req.body.ownerId = req.user.id;
             const entreprise = await entrepriseService.create(req.body);
-            res.status(201).json(entreprise);
+            return res.status(201).json(entreprise);
         } catch (error) {
             return next(error);
         }
@@ -47,7 +47,7 @@ module.exports = {
             }
             req.body.ownerId = req.user.id;
             const entreprise = await entrepriseService.update(req.params.id, req.body);
-            res.status(200).json(entreprise);
+            return res.status(200).json(entreprise);
         } catch (error) {
             return next(error);
         }
@@ -55,7 +55,7 @@ module.exports = {
     deleteEntreprise: async (req, res, next) => {
         try {
             const entreprise = await entrepriseService.delete(req.params.id);
-            res.status(204).send();
+            return res.status(204).send();
         } catch (error) {
             return next(error);
         }
