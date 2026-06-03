@@ -1,145 +1,186 @@
-.input{
+/* ---------- Bloc champ (carte) ---------- */
+.input {
     display: flex;
     flex-direction: column;
-    border: 2px solid var(--primary);
+    background-color: white;
+    border: 1px solid rgba(40, 5, 70, .12);
+    border-radius: .9rem;
+    box-shadow: 0 4px 16px rgba(40, 5, 70, .06);
+    overflow: hidden;
 }
 
-.input button{
-    margin: 0;
+.input h5 {
+    color: var(--primary);
+    margin: 0 0 .5rem;
 }
 
-.mainPart{
-    width: 100%;
-    padding: 0 1rem;
+/* ---------- Barre d'onglets ---------- */
+.onglets {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: .5rem;
+    background-color: var(--light);
+    border-bottom: 1px solid rgba(40, 5, 70, .08);
 }
 
-.mainPart label{
-    font-size: .8rem;
+.tabs {
+    display: flex;
+    gap: .25rem;
+    background-color: rgba(40, 5, 70, .05);
+    border-radius: .6rem;
+    padding: .25rem;
 }
 
-.mainPart select {
-    background-color: white!important;
-    border-radius: 1px !important;
+.tabs button {
     border: none;
+    background: transparent;
+    font-family: itim;
+    font-size: 1rem;
+    color: var(--primary);
+    padding: .5rem 1.1rem;
+    border-radius: .45rem;
+    transition: background-color .2s ease, color .2s ease;
 }
 
-.params{
+.tabs button:hover {
+    background-color: rgba(139, 135, 255, .25);
+}
+
+.tabs button.active {
+    background-color: var(--primary);
+    color: white;
+}
+
+.onglets .remove {
+    --bg-color: #e11d48;
+    --color: white;
+    margin: 0;
+    font-size: .9rem;
+}
+
+/* ---------- Sections (Général / Options / Aperçu) ---------- */
+.params {
     display: flex;
-    margin-bottom: 0!important;
-    width: 80%;
-    margin-left: 10%;
+    width: 100%;
+    padding: 1.25rem;
+}
+
+.preview,
+.options-holder {
+    width: 100%;
+    padding: 1.25rem;
 }
 
 .preview {
-    width: 80%;
-    margin-left: 10%;
     display: flex;
     flex-direction: column;
 }
 
-.preview > div {
-    justify-self: center;
+.mainPart {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
 }
 
+.mainPart label {
+    font-size: .85rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-top: .5rem;
+}
+
+/* ---------- Choix « Obligatoire » (chips radio) ---------- */
 .required {
     display: flex;
     align-items: center;
-    margin-top: 1rem;
+    gap: .5rem;
+    margin-top: .5rem;
 }
 
 .required > div {
     display: flex;
     align-items: center;
-    gap: .2rem;
 }
 
-.required input[type='radio']{
+.required input[type='radio'] {
+    position: absolute;
     opacity: 0;
     width: .1px;
     height: .1px;
 }
 
-.required label, .required input[type='radio'], .required > div {
+.required label {
     margin: 0;
-    padding: .3rem .5rem;
+    padding: .5rem 1.2rem;
     cursor: pointer;
-    padding: .8rem;
+    border: 1px solid rgba(40, 5, 70, .2);
+    border-radius: .5rem;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
 
 .required input[type='radio']:checked + label {
-    color: red;
     background-color: var(--primary);
+    border-color: var(--primary);
     color: var(--light);
     font-weight: 600;
-    border-radius: .4rem;
 }
 
-.options-holder{
-    width: 80%;
-    margin-left: 10%;
-}
-
-.options{
+/* ---------- Liste des options ---------- */
+.options {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     margin: 1rem 0;
     gap: .5rem;
 }
 
-.checkArea{
+/* ---------- Aperçu : cases / boutons ---------- */
+.checkArea {
     display: flex;
     flex-wrap: wrap;
-    width: 80%;
+    width: 100%;
     gap: 1rem;
-    font-size: .7rem;
     margin: 1rem auto;
 }
 
 .checkArea > div {
-    width: 45%;
+    flex: 1 1 160px;
     height: fit-content;
     display: flex;
 }
 
-.checkArea input[type="radio"], .checkArea input[type="checkbox"]{
+.checkArea input[type="radio"],
+.checkArea input[type="checkbox"] {
     width: .1px;
     height: .1px;
+    opacity: 0;
 }
 
-.checkArea input[type="radio"] + label, .checkArea input[type="checkbox"] + label{
+.checkArea input[type="radio"] + label,
+.checkArea input[type="checkbox"] + label {
     padding: .8rem .4rem;
     width: 100%;
     display: flex;
     margin: 0;
     justify-content: center;
-    border: 1px solid var(--primary);
-    transition: background .3s ease;
+    border: 1px solid rgba(40, 5, 70, .25);
+    border-radius: .6rem;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease;
 }
 
-.checkArea input[type="radio"] + label:hover, .checkArea input[type="checkbox"] + label:hover{
-    background-color: var(--secondary);
+.checkArea input[type="radio"] + label:hover,
+.checkArea input[type="checkbox"] + label:hover {
+    background-color: var(--accent);
+    border-color: var(--secondary);
 }
 
-.checkArea input[type="radio"]:checked + label, .checkArea input[type="checkbox"]:checked + label{
+.checkArea input[type="radio"]:checked + label,
+.checkArea input[type="checkbox"]:checked + label {
     background-color: var(--primary);
+    border-color: var(--primary);
     color: white;
-}
-
-.onglets{
-    width: 100%;
-    background-color: var(--light);
-    display: flex;
-}
-
-.onglets button{
-    width: 25%;
-    border: 1px solid;
-    font-family: itim;
-    font-size: 1rem;
-}
-
-.onglets button:not(:last-of-type){
-    background-color: transparent;
 }

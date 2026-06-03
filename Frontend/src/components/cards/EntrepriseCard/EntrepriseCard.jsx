@@ -15,7 +15,9 @@ const EntrepriseCard = ({ entreprise, style={} }) => {
       </figure>
       <div className={classes["description"]}>
         <h3 className="itim">{entreprise.name}</h3>
-        <h4 className="montserrat">{entreprise.categorie?.name}</h4>
+        {entreprise.categorie?.name && (
+          <h4 className="montserrat">{entreprise.categorie.name}</h4>
+        )}
         <h5>
           <span>{entreprise.address1}</span>
           <span>

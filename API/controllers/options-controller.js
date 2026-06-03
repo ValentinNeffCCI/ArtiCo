@@ -4,7 +4,7 @@ module.exports = {
     getAllOptions: async (req, res, next) => {
         try {
             const options = await optionsService.findAll();
-            res.status(200).json(options);
+            return res.status(200).json(options);
         } catch (error) {
             return next(error);
         }
@@ -12,7 +12,7 @@ module.exports = {
     getOptionById: async (req, res, next) => {
         try {
             const option = await optionsService.findById(req.params.id);
-            res.status(200).json(option);
+            return res.status(200).json(option);
         } catch (error) {
             return next(error);
         }
@@ -20,7 +20,7 @@ module.exports = {
     getOptionByInputId: async (req, res, next) => {
         try {
             const option = await optionsService.findByInputId(req.params.id);
-            res.status(200).json(option);
+            return res.status(200).json(option);
         } catch (error) {
             return next(error);
         }
@@ -28,7 +28,7 @@ module.exports = {
     createOption: async (req, res, next) => {
         try {
             const option = await optionsService.create(req.body);
-            res.status(201).json(option);
+            return res.status(201).json(option);
         } catch (error) {
             return next(error);
         }
@@ -36,7 +36,7 @@ module.exports = {
     updateOption: async (req, res, next) => {
         try {
             const option = await optionsService.update(req.params.id, req.body);
-            res.status(200).json(option);
+            return res.status(200).json(option);
         } catch (error) {
             return next(error);
         }
@@ -44,7 +44,7 @@ module.exports = {
     deleteOption: async (req, res, next) => {
         try {
             const option = await optionsService.delete(req.params.id);
-            res.status(200).json(option);
+            return res.status(200).json(option);
         } catch (error) {
             return next(error);
         }

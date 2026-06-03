@@ -36,7 +36,7 @@ const DetailEntreprise = () => {
   const mapsAdress = () =>
     "https://www.google.com/maps/place/" +
     [
-      entreprise.adress1?.replaceAll(" ", "+"),
+      entreprise.address1?.replaceAll(" ", "+"),
       entreprise.cp,
       entreprise.city,
     ].join("+");
@@ -50,20 +50,14 @@ const DetailEntreprise = () => {
 
   return (
     <main className={classes["main"]}>
-      <h1>
-        <span>{entreprise.name}</span>
-      </h1>
-      <div>
-        <div className={classes["content"]}>
+      <div className={classes["layout"]}>
+        <aside className={classes["media"]}>
+          <h1>
+            <span>{entreprise.name}</span>
+          </h1>
           <Visionneuse galerie={galerie} />
-          <h2><span>Description de l'entreprise</span></h2>
-          <div
-            className={classes["description"]}
-          ><ReactMarkdown>{entreprise.description ? sanitizeDescription(entreprise.description) : ""}</ReactMarkdown></div>
-          <FormList forms={entreprise.formulaires} />
-        </div>
-        <div className={classes["contact"]}>
-          {entreprise.address1 && (
+          <div className={classes["contact"]}>
+            {entreprise.address1 && (
             <div className={classes["adress"]}>
               <NavLink
                 to={mapsAdress(entreprise.address1)}
@@ -73,7 +67,7 @@ const DetailEntreprise = () => {
                 <MapPin />
               </NavLink>
               <div>
-                <span>{entreprise.adress1}</span>
+                <span>{entreprise.address1}</span>
                 <span>
                   {entreprise.cp}&nbsp;
                   {entreprise.city}
@@ -95,18 +89,30 @@ const DetailEntreprise = () => {
               </div>
             </div>
           )}
-          <div className={classes["mail"]}>
-            <NavLink
-              to={`mailto:${entreprise.email}`}
-              target="_blank"
-              title="Contacter par mail"
-            >
-              <Mail />
-            </NavLink>
-            <div>
-              <span>{entreprise.email}</span>
+            <div className={classes["mail"]}>
+              <NavLink
+                to={`mailto:${entreprise.email}`}
+                target="_blank"
+                title="Contacter par mail"
+              >
+                <Mail />
+              </NavLink>
+              <div>
+                <span>{entreprise.email}</span>
+              </div>
             </div>
           </div>
+        </aside>
+        <div className={classes["content"]}>
+          <h2>
+            <span>Description de l'entreprise</span>
+          </h2>
+          <div className={classes["description"]}>
+            <ReactMarkdown>
+              {entreprise.description ? sanitizeDescription(entreprise.description) : ""}
+            </ReactMarkdown>
+          </div>
+          <FormList forms={entreprise.formulaires} />
         </div>
       </div>
     </main>

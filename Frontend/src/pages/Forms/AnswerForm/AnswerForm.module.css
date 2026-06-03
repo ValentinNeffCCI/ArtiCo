@@ -1,5 +1,5 @@
-.page{
-    padding: 2rem 10%;
+.page {
+    padding: 2rem clamp(1.25rem, 7vw, 6rem);
     min-height: 80vh;
 }
 
@@ -10,18 +10,38 @@
     align-items: center;
 }
 
-.goBack:hover{
+.goBack:hover {
     color: var(--secondary);
 }
 
-.goBack svg{
+.goBack svg {
     transition: transform .3s ease;
 }
 
-.goBack:hover svg{
+.goBack:hover svg {
     transform: translateX(-1rem);
 }
 
-.page h1{
+.page h1 {
     text-align: center;
+    color: var(--primary);
+    margin: 1.5rem 0 0;
+}
+
+/* Carte qui encadre le formulaire à remplir */
+.card {
+    width: 100%;
+    max-width: 720px;
+    margin: 1.5rem auto 0;
+    background-color: white;
+    border: 1px solid rgba(40, 5, 70, .1);
+    border-radius: 1rem;
+    box-shadow: 0 6px 24px rgba(40, 5, 70, .08);
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+    animation: fadeIn .4s ease;
+}
+
+@keyframes fadeIn {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }

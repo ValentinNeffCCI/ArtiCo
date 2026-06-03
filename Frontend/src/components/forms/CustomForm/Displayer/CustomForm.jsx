@@ -160,11 +160,8 @@ const CustomForm = ({
       })}
       {children}
       <CustomButton
+        className={classes["submit"]}
         style={{
-          margin: "1.5rem auto",
-          alignSelf: "center",
-          "--bg-color": "var(--primary)",
-          "--color": "var(--light)",
           pointerEvents: active ? "auto" : "none",
           display: active ? "block" : "none",
         }}
