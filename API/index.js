@@ -28,7 +28,7 @@ dotenv.config();
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: 200,
+  limit: 50,
   standardHeaders: "draft-8",
   legacyHeaders: false,
   skipSuccessfulRequests: true
@@ -63,7 +63,6 @@ app.use(
           "data:",
           "blob:",
           process.env.FRONTEND_URL,
-          "http://localhost:3000",
         ],
       },
     },

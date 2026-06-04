@@ -131,7 +131,7 @@ model Soumission {
   updatedAt DateTime @updatedAt
 
   formulaireId Int
-  formulaire   Formulaire @relation(fields: [formulaireId], references: [id])
+  formulaire   Formulaire @relation(fields: [formulaireId], references: [id], onDelete: Cascade)
 
   @@map("soumissions")
 }

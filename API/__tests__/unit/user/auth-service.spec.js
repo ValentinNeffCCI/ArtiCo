@@ -12,6 +12,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
 const mailer = require("../../../utils/mailer.js");
+// Non mocké : on veut le vrai hachage déterministe pour vérifier ce qui est stocké.
+const hashToken = require("../../../utils/hashToken.js");
 
 // Toutes les dépendances externes sont mockées : pas de DB, pas de crypto réelle,
 // pas de fichier lu, pas de mail envoyé.
@@ -52,7 +54,7 @@ describe("auth-service", () => {
 
       expect(bcrypt.compare).toHaveBeenCalledWith("password", "hashed-password");
       expect(UserRepository.update).toHaveBeenCalledWith(1, {
-        refresh_token: "refresh-token",
+        refresh_token: hashToken("refresh-token"),
       });
       expect(result).toEqual({
         id: 1,
@@ -141,7 +143,7 @@ describe("auth-service", () => {
   describe("refresh", () => {
     it("renvoie un nouveau access token quand le refresh token correspond", async () => {
       UserRepository.findById.mockResolvedValue(
-        makeUser({ refresh_token: "valid-refresh" })
+        makeUser({ refresh_token: hashToken("valid-refresh") })
       );
       jwt.sign.mockReturnValue("new-access-token");
 
@@ -180,7 +182,7 @@ describe("auth-service", () => {
       const result = await authService.forgotPassword("test@artico.fr");
 
       expect(UserRepository.update).toHaveBeenCalledWith(1, {
-        reset_token: "reset-token",
+        reset_token: hashToken("reset-token"),
       });
       // Le template doit être interpolé avant l'envoi.
       const sentMessage = mailer.sendMail.mock.calls[0][0];
@@ -217,7 +219,7 @@ describe("auth-service", () => {
       // jwt.verify est appelé avec un callback (err, decoded).
       jwt.verify.mockImplementation((token, key, cb) => cb(null, { id: 1 }));
       UserRepository.findById.mockResolvedValue(
-        makeUser({ reset_token: "valid-token" })
+        makeUser({ reset_token: hashToken("valid-token") })
       );
       jwt.sign
         .mockReturnValueOnce("refresh-token")
@@ -228,7 +230,7 @@ describe("auth-service", () => {
 
       expect(UserRepository.update).toHaveBeenCalledWith(1, {
         password: "new-password",
-        refresh_token: "refresh-token",
+        refresh_token: hashToken("refresh-token"),
         reset_token: null,
       });
       expect(result).toMatchObject({ id: 1, token: "access-token" });
