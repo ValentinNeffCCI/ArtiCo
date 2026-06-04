@@ -6,7 +6,7 @@ const getCookieOptions = (isRefreshToken = false) => {
   
   const options = {
     httpOnly: true,
-    sameSite: isProduction ? "None" : "Lax",
+    sameSite: "Strict",
     secure: isProduction,
     path: "/",
   };
