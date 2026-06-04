@@ -69,6 +69,7 @@ input[type="tel"],
 input[type="url"],
 input[type="date"],
 input[type="time"],
+input[type="phone"],
 textarea,
 select {
   font-family: 'Montserrat', sans-serif;
@@ -90,6 +91,7 @@ input[type="tel"]:focus,
 input[type="url"]:focus,
 input[type="date"]:focus,
 input[type="time"]:focus,
+input[type="phone"]:focus,
 textarea:focus,
 select:focus {
   outline: none;
