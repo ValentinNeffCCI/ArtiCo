@@ -137,8 +137,6 @@ const CustomForm = ({
               <CustomInput key={input.id} input={input}>
                 <input
                   type={input.type}
-                  min={input.min ?? 0}
-                  max={input.max ?? 100}
                   placeholder={input.label ?? input.name}
                   name={
                     input.is_fix ?
