@@ -55,8 +55,11 @@ const CreateEntreprise = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await prepare(e);
-    if (response.error) {
-      return toast.error(response.error);
+    if (response.error || response.errors) {
+      response.errors.forEach(err => {
+        toast.error(err.message);
+      })
+      return;
     }
     return navigation("/profil");
   };
