@@ -117,7 +117,7 @@ module.exports = {
   logout: (req, res) => {
     try {
       res.clearCookie("artico_token", getCookieOptions(false));
-      res.clearCookie("refresh_token", getCookieOptions(false)); 
+      res.clearCookie("refresh_token", getCookieOptions(true)); 
       return res.status(200).json({ 
         success: true, 
         message: "Logged out successfully" 

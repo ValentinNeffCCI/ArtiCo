@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
 const HttpError = require("../customclasses/HttpError.js");
+const hashToken = require("../utils/hashToken.js");
 
 const fs = require("fs");
 const mailer = require("../utils/mailer.js");
@@ -33,7 +34,7 @@ module.exports = {
     const refresh = jwt.sign({ id: user.id }, REFRESH_KEY, {
       expiresIn: refresh_expiracy,
     });
-    await UserRepository.update(user.id, { refresh_token: refresh });
+    await UserRepository.update(user.id, { refresh_token: hashToken(refresh) });
     return {
       id: user.id,
       role: user.role,
@@ -50,7 +51,7 @@ module.exports = {
     const refresh = jwt.sign({ id: insertedUser.id }, REFRESH_KEY, {
       expiresIn: refresh_expiracy,
     });
-    await UserRepository.update(insertedUser.id, { refresh_token: refresh });
+    await UserRepository.update(insertedUser.id, { refresh_token: hashToken(refresh) });
     const token = jwt.sign(
       { id: insertedUser.id, role: insertedUser.role },
       SECRET,
@@ -71,7 +72,7 @@ module.exports = {
     const user = await UserRepository.findById(id);
 
     if (!user) throw new HttpError("Aucun utilisateur trouvé", 404);
-    if (!user.reset_token || user.reset_token !== token) throw new HttpError(
+    if (!user.reset_token || user.reset_token !== hashToken(token)) throw new HttpError(
         "Aucune demande réinitialisation de mot de passe",
         403
     );
@@ -82,7 +83,7 @@ module.exports = {
 
     await UserRepository.update(id, {
       password,
-      refresh_token: refresh,
+      refresh_token: hashToken(refresh),
       reset_token: null,
     });
 
@@ -104,7 +105,7 @@ module.exports = {
     if (!user) {
       throw new HttpError("Utilisateur non trouvé", 404);
     }
-    if (user.refresh_token !== token) {
+    if (user.refresh_token !== hashToken(token)) {
       throw new HttpError("Session expirée", 401);
     } else {
       return jwt.sign({ id: user.id }, SECRET, { expiresIn: access_expiracy });
@@ -120,7 +121,7 @@ module.exports = {
     });
 
     await UserRepository.update(user.id, {
-      reset_token: token,
+      reset_token: hashToken(token),
     });
 
     const template = fs.readFileSync("./templates/mails/password_oublie.html", {
