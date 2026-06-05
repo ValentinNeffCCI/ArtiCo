@@ -18,6 +18,25 @@ services:
     networks:
       - connectDB
 
+  logs-db:
+    container_name: artico-logs-db
+    image: mongo:7
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: ${MONGO_DB}
+    volumes:
+      - ./mongo_datas:/data/db
+    networks:
+      - connectDB
+
   backend:
     container_name: artico-backend
     image: ${DOCKERHUB_USERNAME}/artico-backend:${IMAGE_TAG:-latest}
@@ -31,6 +50,8 @@ services:
       - ./uploads:/app/uploads
     depends_on:
       db:
+        condition: service_healthy
+      logs-db:
         condition: service_healthy
     networks:
       - connectDB
