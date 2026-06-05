@@ -88,6 +88,9 @@ Toutes les variables sont centralisées dans un unique fichier `.env` à la raci
 | `DB_PORT` | Port exposé de la base (hôte) |
 | `DB_HOST` | Hôte de la base (`db` en conteneur) |
 | `DATABASE_URL` | URL de connexion Prisma |
+| `MONGO_USER` / `MONGO_PASSWORD` / `MONGO_DB` | Identifiants et base MongoDB (logs) |
+| `MONGO_PORT` / `MONGO_HOST` | Port (hôte) et hôte de MongoDB (`logs-db` en conteneur) |
+| `MONGO_URL` | URL de connexion Mongoose à la base de logs |
 | `PORT` | Port de l'API (3000) |
 | `OWNER_EMAIL` / `OWNER_NAME` / `OWNER_PASSWORD` | Compte propriétaire créé par le seed |
 | `APP_EMAIL` | Adresse d'envoi des mails |
@@ -267,7 +270,17 @@ docker logs artico-backend
 docker logs artico-client
 ```
 
-L'API journalise par ailleurs ses erreurs dans `/app/logs/error.log` à l'intérieur du conteneur backend.
+L'API journalise ses accès et ses erreurs sous forme de **documents structurés dans MongoDB** (service `logs-db`, collection `logs`). Pour les consulter :
+
+```bash
+docker exec -it artico-logs-db mongosh -u "$MONGO_USER" -p "$MONGO_PASSWORD" \
+  --authenticationDatabase admin "$MONGO_DB" \
+  --eval "db.logs.find().sort({ createdAt: -1 }).limit(20).pretty()"
+```
+
+Chaque log contient notamment `type` (`access` / `error`), `method`, `url`, `status`, `responseTimeMs`, `message`, `stack`, `ip` et `userId`. Si MongoDB est indisponible, l'API bascule automatiquement sur un **repli fichier** (`/app/logs/access.log` et `/app/logs/error.log`) + la console, sans jamais faire échouer une requête.
+
+> Sur le VPS, le `.env` de production doit contenir les variables `MONGO_*` (le pipeline ne copie que `docker-compose.deploy.yaml` et `production.sh`).
 
 ---
 

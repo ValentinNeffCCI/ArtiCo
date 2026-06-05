@@ -23,8 +23,13 @@ const AdminRouter = require("./routers/admin-router.js");
 const errorMiddleware = require("./middlewares/error-middleware.js");
 const logger = require("./middlewares/logger.js");
 
+
 // .env
 dotenv.config();
+
+// connexion base de logs (MongoDB)
+const { connectMongo } = require("./utils/mongo.js");
+connectMongo();
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,

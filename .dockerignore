@@ -3,6 +3,8 @@ node_modules
 .git
 .gitignore
 logs
+postgres_datas
+mongo_datas
 
 dist
 Frontend/**/.env*
