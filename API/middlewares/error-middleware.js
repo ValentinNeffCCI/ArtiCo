@@ -1,24 +1,21 @@
-const fs = require('fs');
-const path = require('path');
-
-const logsDir = path.join(__dirname, '..', 'logs');
-fs.mkdirSync(logsDir, { recursive: true });
+const { writeLog } = require('../utils/logStore.js');
 
 module.exports = (err, req, res, next) => {
-    // method - Status - Date + heure - path - erreur
-    const today = new Date();
-    const log = `${err.status ?? 500} ${req.method} ${today.toLocaleDateString()}-${today.toTimeString().split(' ')[0]} ${req.originalUrl} "${err.message}"\n`
-
-    try {
-        fs.appendFileSync(path.join(logsDir, 'error.log'), log);
-    } catch (e) {
-        console.error('Failed to write error log:', e.message);
-    }
+    writeLog({
+        type: 'error',
+        status: err.status ?? 500,
+        method: req.method,
+        url: req.originalUrl,
+        message: err.message,
+        stack: err.stack,
+        ip: req.ip,
+        userId: req.user?.id,
+    });
 
     if (err.status) {
-        return res.status(err.status).json(err)
+        return res.status(err.status).json(err);
     }
 
     // Dans tous les autres cas 404
     next();
-}
+};

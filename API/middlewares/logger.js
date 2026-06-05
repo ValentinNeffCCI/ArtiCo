@@ -1,16 +1,22 @@
-const fs = require('fs');
-const path = require('path');
+const { writeLog } = require('../utils/logStore.js');
 
-const logsDir = path.join(__dirname, '..', 'logs');
-fs.mkdirSync(logsDir, { recursive: true });
+// Log d'accès structuré. On enregistre à la fin de la réponse (`finish`)
+// pour disposer du code de statut et du temps de traitement.
+module.exports = (req, res, next) => {
+    const start = Date.now();
 
-module.exports = (req,res,next)=>{
-    const today = new Date();
-    const log = `${req.method} ${req.originalUrl} ${req.ip} ${today.toLocaleDateString()}-${today.toTimeString().split(' ')[0]}\n`;
-    try {
-        fs.appendFileSync(path.join(logsDir, 'access.log'), log);
-    } catch (e) {
-        console.error('Failed to write access log:', e.message);
-    }
+    res.on('finish', () => {
+        writeLog({
+            type: 'access',
+            method: req.method,
+            url: req.originalUrl,
+            ip: req.ip,
+            status: res.statusCode,
+            responseTimeMs: Date.now() - start,
+            userId: req.user?.id,
+            userAgent: req.get('user-agent'),
+        });
+    });
+
     next();
-}
+};
