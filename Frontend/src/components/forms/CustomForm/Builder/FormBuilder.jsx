@@ -76,7 +76,7 @@ const FormBuilder = ({
     if (!response.error) {
       navigation(-1);
     } else {
-      toast.error(await response.json().message);
+      toast.error(await response.message);
     }
   };
 
