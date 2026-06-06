@@ -101,7 +101,9 @@ jobs:
 
             touch .env
             sed -i '/^IMAGE_TAG=/d' .env
+            sed -i '/^DOCKERHUB_USERNAME=/d' .env
             echo "IMAGE_TAG=$IMAGE_TAG" >> .env
+            echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME" >> .env
 
             # Login Docker Hub pour tirer les images, pull, démarrage, nettoyage.
             echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
