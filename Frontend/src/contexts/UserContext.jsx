@@ -41,16 +41,14 @@ export const UserProvider = ({children}) => {
 
     const logout = async () => {
         try {
-            const response = await fetch(import.meta.env.VITE_API_URL + '/auth/logout', {
+            fetch(import.meta.env.VITE_API_URL + '/auth/logout', {
                 method: 'POST',
                 credentials: 'include',
                 headers:{
                     'Content-Type': 'application/json'
                 }
             })
-            if(response.ok){
-                setUser(false);
-            }
+            setUser(false);
         } catch (error) {
             console.error("une erreur côté serveur est survenue");
         }
