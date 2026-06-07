@@ -55,12 +55,25 @@ const CreateEntreprise = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     const response = await prepare(e);
-    if (response.error || response.errors) {
-      response.errors.forEach(err => {
-        toast.error(err.message);
-      })
+
+    // Erreur réseau / session expirée : useAPI renvoie false
+    if (!response) {
+      toast.error("Une erreur est survenue, veuillez réessayer.");
       return;
     }
+
+    // Deux formes d'erreur possibles côté API :
+    // - validation : { error, errors: [{ field, message }] }
+    // - métier (HttpError) : { status, error }
+    if (response.error || response.errors) {
+      if (Array.isArray(response.errors)) {
+        response.errors.forEach((err) => toast.error(err.message));
+      } else {
+        toast.error(response.error);
+      }
+      return;
+    }
+
     return navigation("/profil");
   };
 
