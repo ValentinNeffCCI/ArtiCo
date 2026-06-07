@@ -39,7 +39,6 @@ module.exports = {
   },
   description: {
     trim: true,
-    notEmpty: { errorMessage: "La description est requise" },
   },
   categorieId: {
     notEmpty: { errorMessage: "La catégorie est requise" },
