@@ -158,7 +158,7 @@ const CreateEntreprise = ({
       onChange={changeListener}
       onSubmit={handleSubmit}
       style={{
-        width: "50%",
+        width: "min(560px, 92%)",
         margin: "0 auto",
         padding: "0 0 2rem 0",
         display: "flex",
@@ -209,7 +209,7 @@ const CreateEntreprise = ({
       </div>
       <figure
         style={{
-          width: "50%",
+          width: "min(280px, 80%)",
           margin: "0 auto",
           border: "1px solid var(--dark)",
         }}

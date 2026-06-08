@@ -62,7 +62,7 @@ const ModifierEntreprise = () => {
           alignItems: "center",
           border: "none",
           gap: ".5rem",
-          margin: "0 3rem",
+          margin: 0,
           width: "fit-content",
           padding: "2rem 0",
         }}
@@ -94,7 +94,7 @@ const ModifierEntreprise = () => {
       <CustomButton
         style={{
           "--color": "red",
-          marginLeft: "10%",
+          margin: "1rem auto 0",
         }}
         clickAction={displayModale}
       >

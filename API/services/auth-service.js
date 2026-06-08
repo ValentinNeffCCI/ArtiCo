@@ -101,6 +101,9 @@ module.exports = {
     };
   },
   refresh: async (iduser, token) => {
+    if (!token) {
+      throw new HttpError("Token Invalide", 400);
+    }
     const user = await UserRepository.findById(iduser);
     if (!user) {
       throw new HttpError("Utilisateur non trouvé", 404);
