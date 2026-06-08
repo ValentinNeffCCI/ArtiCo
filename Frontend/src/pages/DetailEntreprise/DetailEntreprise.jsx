@@ -10,18 +10,17 @@ import FormList from "../../components/forms/FormList/FormList";
 
 const DetailEntreprise = () => {
   const { id } = useParams();
-  const { query: callAPI, url: apiUrl } = useAPI();
+  const { query: callAPI } = useAPI();
   const [entreprise, setEntreprise] = useState(false);
   const [galerie, setGalerie] = useState([]);
-  const [forms, setForms] = useState([]);
 
   const fetchEntreprise = async () => {
     const response = await callAPI("/entreprise/" + id);
     setEntreprise(response);
     setGalerie(
       response.photos
-        ? [ response.image, ...response.photos.map(p=>p.path)]
-        : response.image
+        ? [response.image, ...response.photos.map((p) => p.path)]
+        : response.image,
     );
   };
 
@@ -46,7 +45,7 @@ const DetailEntreprise = () => {
     return text;
   };
 
-  if(!entreprise) return <Loader/>;
+  if (!entreprise) return <Loader />;
 
   return (
     <main className={classes["main"]}>
@@ -58,37 +57,37 @@ const DetailEntreprise = () => {
           <Visionneuse galerie={galerie} />
           <div className={classes["contact"]}>
             {entreprise.address1 && (
-            <div className={classes["adress"]}>
-              <NavLink
-                to={mapsAdress(entreprise.address1)}
-                target="_blank"
-                title="Voir sur Google Maps"
-              >
-                <MapPin />
-              </NavLink>
-              <div>
-                <span>{entreprise.address1}</span>
-                <span>
-                  {entreprise.cp}&nbsp;
-                  {entreprise.city}
-                </span>
+              <div className={classes["adress"]}>
+                <NavLink
+                  to={mapsAdress(entreprise.address1)}
+                  target="_blank"
+                  title="Voir sur Google Maps"
+                >
+                  <MapPin />
+                </NavLink>
+                <div>
+                  <span>{entreprise.address1}</span>
+                  <span>
+                    {entreprise.cp}&nbsp;
+                    {entreprise.city}
+                  </span>
+                </div>
               </div>
-            </div>
-          )}
-          {entreprise.phone && entreprise.phone != "null" && (
-            <div className={classes["phone"]}>
-              <NavLink
-                to={`tel:${entreprise.phone}`}
-                target="_blank"
-                title="Contacter par téléphone"
-              >
-                <Phone />
-              </NavLink>
-              <div>
-                <span>{entreprise.phone}</span>
+            )}
+            {entreprise.phone && entreprise.phone != "null" && (
+              <div className={classes["phone"]}>
+                <NavLink
+                  to={`tel:${entreprise.phone}`}
+                  target="_blank"
+                  title="Contacter par téléphone"
+                >
+                  <Phone />
+                </NavLink>
+                <div>
+                  <span>{entreprise.phone}</span>
+                </div>
               </div>
-            </div>
-          )}
+            )}
             <div className={classes["mail"]}>
               <NavLink
                 to={`mailto:${entreprise.email}`}
@@ -107,11 +106,15 @@ const DetailEntreprise = () => {
           <h2>
             <span>Description de l'entreprise</span>
           </h2>
-          <div className={classes["description"]}>
-            <ReactMarkdown>
-              {entreprise.description ? sanitizeDescription(entreprise.description) : ""}
-            </ReactMarkdown>
-          </div>
+          {entreprise.description?.length != 0 && (
+            <div className={classes["description"]}>
+              <ReactMarkdown>
+                {entreprise.description
+                  ? sanitizeDescription(entreprise.description)
+                  : ""}
+              </ReactMarkdown>
+            </div>
+          )}
           <FormList forms={entreprise.formulaires} />
         </div>
       </div>

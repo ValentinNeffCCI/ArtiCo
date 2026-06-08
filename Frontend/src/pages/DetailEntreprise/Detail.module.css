@@ -20,6 +20,7 @@
     flex-direction: column;
     gap: 1.5rem;
     min-width: 0;
+    width: fit-content;
 }
 
 .media h1 {
@@ -145,5 +146,6 @@
 
     .media {
         position: static;
+        width: 100%;
     }
 }

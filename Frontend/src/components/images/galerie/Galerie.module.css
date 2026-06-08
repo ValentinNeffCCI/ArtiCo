@@ -1,0 +1,24 @@
+.visionneuse {
+    width: "100%";
+    display: "flex";
+    justify-content: "space-between";
+    gap: "1rem";
+    align-items: "center";
+
+    img {
+        width: "70%";
+        aspect-ratio: "4 / 3";
+        object-fit: "cover";
+        border-radius: 10;
+    }
+
+    button {
+        margin: 0;
+        --bg-color: "red";
+        --color: "var(--light)";
+        height: "fit-content";
+        width: "fit-content";
+        padding: 2;
+        display: "flex";
+    }
+}
