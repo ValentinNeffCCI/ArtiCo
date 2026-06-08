@@ -1,5 +1,8 @@
 .galerie {
     width: 100%;
+    max-width: 100%;
+    /* garde-fou : le carrousel ne déborde jamais hors de la page en mobile */
+    overflow: hidden;
 }
 
 .galerie figure {
@@ -12,6 +15,7 @@
     border: none;
     padding: 1rem 1rem;
     width: 4rem;
+    flex-shrink: 0;
     transition: background .3s ease-in;
 }
 
