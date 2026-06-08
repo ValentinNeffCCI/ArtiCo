@@ -2,8 +2,10 @@ const AuthService = require("../../../services/auth-service.js");
 const HttpError = require("../../../customclasses/HttpError.js");
 
 jest.mock("../../../services/auth-service.js");
+jest.mock("../../../repositories/user-repository.js");
 
 const authController = require("../../../controllers/auth-controller.js");
+const userRepository = require("../../../repositories/user-repository.js");
 
 const makeRes = () => {
   const res = {};
@@ -36,36 +38,41 @@ describe("auth-controller", () => {
       await authController.login(
         { body: { email: "a@b.fr", password: "pw" } },
         res,
-        next
+        next,
       );
 
       expect(AuthService.login).toHaveBeenCalledWith("a@b.fr", "pw");
       expect(res.cookie).toHaveBeenCalledWith(
         "artico_token",
         "access",
-        expect.any(Object)
+        expect.any(Object),
       );
       expect(res.cookie).toHaveBeenCalledWith(
         "refresh_token",
         "refresh",
-        expect.objectContaining({ expires: expect.any(Date) })
+        expect.objectContaining({ expires: expect.any(Date) }),
       );
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith({ role: "USER", id: 1 });
     });
 
     it("encapsule l'erreur du service dans un HttpError et la passe à next()", async () => {
-      AuthService.login.mockRejectedValue(new HttpError("Identifiants incorrects", 403));
+      AuthService.login.mockRejectedValue(
+        new HttpError("Identifiants incorrects", 403),
+      );
 
       await authController.login(
         { body: { email: "a@b.fr", password: "bad" } },
         res,
-        next
+        next,
       );
 
       const passed = next.mock.calls[0][0];
       expect(passed).toBeInstanceOf(HttpError);
-      expect(passed).toMatchObject({ status: 403, message: "Identifiants incorrects" });
+      expect(passed).toMatchObject({
+        status: 403,
+        message: "Identifiants incorrects",
+      });
       expect(res.cookie).not.toHaveBeenCalled();
     });
 
@@ -75,7 +82,7 @@ describe("auth-controller", () => {
       await authController.login(
         { body: { email: "a@b.fr", password: "pw" } },
         res,
-        next
+        next,
       );
 
       expect(next.mock.calls[0][0]).toMatchObject({ status: 500 });
@@ -94,7 +101,7 @@ describe("auth-controller", () => {
       await authController.register(
         { body: { email: "a@b.fr", password: "pw", name: "Bob" } },
         res,
-        next
+        next,
       );
 
       expect(AuthService.register).toHaveBeenCalledWith("a@b.fr", "pw", "Bob");
@@ -104,13 +111,13 @@ describe("auth-controller", () => {
 
     it("transmet une 409 à next() en cas de conflit", async () => {
       AuthService.register.mockRejectedValue(
-        new HttpError("Cet email est déjà utilisé", 409)
+        new HttpError("Cet email est déjà utilisé", 409),
       );
 
       await authController.register(
         { body: { email: "a@b.fr", password: "pw", name: "Bob" } },
         res,
-        next
+        next,
       );
 
       expect(next.mock.calls[0][0]).toMatchObject({ status: 409 });
@@ -129,7 +136,7 @@ describe("auth-controller", () => {
       await authController.reset(
         { body: { token: "reset-token", password: "newpw" } },
         res,
-        next
+        next,
       );
 
       expect(AuthService.reset).toHaveBeenCalledWith("reset-token", "newpw");
@@ -145,14 +152,14 @@ describe("auth-controller", () => {
       await authController.refresh(
         { user: { id: 1 }, token: "refresh-token" },
         res,
-        next
+        next,
       );
 
       expect(AuthService.refresh).toHaveBeenCalledWith(1, "refresh-token");
       expect(res.cookie).toHaveBeenCalledWith(
         "artico_token",
         "new-access",
-        expect.any(Object)
+        expect.any(Object),
       );
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.send).toHaveBeenCalledWith({ token: "new-access" });
@@ -164,7 +171,7 @@ describe("auth-controller", () => {
       await authController.refresh(
         { user: { id: 1 }, token: "refresh-token" },
         res,
-        next
+        next,
       );
 
       expect(res.status).toHaveBeenCalledWith(400);
@@ -178,7 +185,7 @@ describe("auth-controller", () => {
       await authController.refresh(
         { user: { id: 1 }, token: "bad" },
         res,
-        next
+        next,
       );
 
       expect(next).toHaveBeenCalledWith(error);
@@ -192,7 +199,7 @@ describe("auth-controller", () => {
       await authController.forgotPassword(
         { body: { email: "a@b.fr" } },
         res,
-        next
+        next,
       );
 
       expect(AuthService.forgotPassword).toHaveBeenCalledWith("a@b.fr");
@@ -206,7 +213,7 @@ describe("auth-controller", () => {
       await authController.forgotPassword(
         { body: { email: "a@b.fr" } },
         res,
-        next
+        next,
       );
 
       expect(next).toHaveBeenCalled();
@@ -214,20 +221,27 @@ describe("auth-controller", () => {
   });
 
   describe("logout", () => {
-    it("efface les deux cookies et répond 200", () => {
-      authController.logout({}, res);
+    it("efface les deux cookies et répond 200", async () => {
+      userRepository.update.mockResolvedValue({
+        refresh_token: null,
+      });
+      await authController.logout({ user: { id: 1 } }, res);
+
+      expect(userRepository.update).toHaveBeenCalledWith(1, {
+        refresh_token: null,
+      });
 
       expect(res.clearCookie).toHaveBeenCalledWith(
         "artico_token",
-        expect.any(Object)
+        expect.any(Object),
       );
       expect(res.clearCookie).toHaveBeenCalledWith(
         "refresh_token",
-        expect.any(Object)
+        expect.any(Object),
       );
       expect(res.status).toHaveBeenCalledWith(200);
       expect(res.json).toHaveBeenCalledWith(
-        expect.objectContaining({ success: true })
+        expect.objectContaining({ success: true }),
       );
     });
   });

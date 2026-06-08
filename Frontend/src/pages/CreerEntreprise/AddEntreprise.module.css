@@ -1,5 +1,5 @@
 .main{
-    padding: 2rem;
+    padding: clamp(1.25rem, 5vw, 2rem);
 }
 
 .main textarea{
