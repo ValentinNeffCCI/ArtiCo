@@ -3,6 +3,7 @@ import { CustomButton } from "../../buttons/Custom/CustomButton";
 import { X } from "lucide-react";
 import useAPI from "../../../hooks/useAPI";
 import { toast } from "react-toastify";
+import classes from './Galerie.module.css'
 
 const GaleriePhoto = ({ photo, onClick }) => {
   const { query: callAPI, url } = useAPI();
@@ -19,34 +20,13 @@ const GaleriePhoto = ({ photo, onClick }) => {
 
   return (
     <figure
-      style={{
-        width: "100%",
-        display: "flex",
-        justifyContent: "space-between",
-        gap: "1rem",
-        alignItems: "center",
-      }}
+      className={classes.visionneuse}
     >
       <img
         src={url + "/" + photo.path}
         alt="réalisation de l'entreprise"
-        style={{
-          width: "70%",
-          aspectRatio: "4 / 3",
-          objectFit: "cover",
-          borderRadius: 10,
-        }}
       />
       <CustomButton
-        style={{
-          margin: 0,
-          "--bg-color": "red",
-          "--color": "var(--light)",
-          height: "fit-content",
-          width: "fit-content",
-          padding: 2,
-          display: "flex",
-        }}
         clickAction={handleDelete}
       >
         <X />
