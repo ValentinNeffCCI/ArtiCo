@@ -53,6 +53,7 @@ const Visionneuse = ({ index = 0, galerie }) => {
           style={{
             opacity: carouselIndex == 0 ? "0.3" : "1",
             pointerEvents: carouselIndex == 0 ? "none" : "auto",
+            display: galerie.length != 1 ? "block" : "none"
           }}
           onClick={previousSlide}
         >
@@ -75,6 +76,7 @@ const Visionneuse = ({ index = 0, galerie }) => {
             opacity: carouselIndex == galerie.length - 1 ? "0.3" : "1",
             pointerEvents:
               carouselIndex == galerie.length - 1 ? "none" : "auto",
+            display: galerie.length != 1 ? "block" : "none"
           }}
           onClick={nextSlide}
         >

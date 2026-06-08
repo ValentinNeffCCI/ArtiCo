@@ -1,13 +1,23 @@
 .galerie {
     width: 100%;
     max-width: 100%;
-    /* garde-fou : le carrousel ne déborde jamais hors de la page en mobile */
+    overflow: hidden;
+    border-radius: 1rem;
     overflow: hidden;
 }
 
 .galerie figure {
     display: flex;
-    aspect-ratio: 16/9;
+}
+
+@media screen and (min-width: 768px) {
+    .galerie figure{
+        aspect-ratio: 16/9;
+    }
+
+    .galerie img {
+        width: calc(100% - 8rem);
+    }
 }
 
 .galerie figure button {
@@ -28,10 +38,11 @@
 }
 
 .galerie img {
-    width: calc(100% - 8rem);
+    width: 100%;
     animation: fadeIn .3s;
     background-color: var(--light);
     border-radius: 1rem;
+    object-position: center center;
 }
 
 .galerie_list {

@@ -70,7 +70,6 @@ const ManageGalerie = ({ entrepriseId = false }) => {
     >
       {isLoading && <Loader />}
       <h2 className="dangrek text-center">Galerie de photos</h2>
-      {/* todo: Ajouter photos galerie */}
       {galerie && galerie.length != 0 ? (
         <div
           style={{
