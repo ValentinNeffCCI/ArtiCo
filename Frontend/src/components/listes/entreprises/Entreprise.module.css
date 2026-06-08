@@ -4,6 +4,13 @@
     margin: 1rem;
 }
 
+.no-content {
+    text-align: center;
+    font-weight: 600;
+    color: var(--light);
+    padding: 2rem 1rem;
+}
+
 @media screen and (min-width: 768px) {
     .grid {
         grid-template-columns: repeat(3, 1fr);
