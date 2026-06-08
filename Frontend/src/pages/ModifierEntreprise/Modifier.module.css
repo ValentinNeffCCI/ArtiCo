@@ -1,7 +1,17 @@
 .update{
     display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
 }
 
 .page{
-    padding: 3rem;
+    padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+@media screen and (max-width: 768px) {
+    .update{
+        flex-direction: column;
+        align-items: center;
+    }
 }

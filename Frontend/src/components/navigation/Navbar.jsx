@@ -17,9 +17,16 @@ export function Navbar({ links = [], user = false }) {
   const navLinks = filteredLinks.map((lien, index) => {
     if (lien) {
       return (
-        <NavLink key={index} to={lien.path} style={{
-          backgroundColor: "transparent"
-        }} className={classes['link']}>
+        <NavLink
+          key={index}
+          to={lien.path}
+          style={{
+            backgroundColor: "transparent",
+          }}
+          className={({ isActive }) =>
+            `${classes["link"]} ${isActive ? classes["active"] : ""}`
+          }
+        >
           {lien.label}
         </NavLink>
       );
