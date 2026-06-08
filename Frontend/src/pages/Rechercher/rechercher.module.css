@@ -1,5 +1,10 @@
 .rechercher{
     background-color: var(--secondary);
+    display: flex;
+    flex-direction: column;
+    /* empêche la marge basse de la grille de "s'échapper" du main
+       (margin collapse) et de laisser une bande blanche avant le footer */
+    padding-bottom: 1rem;
 }
 
 .rechercher h1 {
