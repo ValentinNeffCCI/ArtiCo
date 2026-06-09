@@ -45,7 +45,6 @@
     align-self: center;
 }
 
-/* ---------- Cases à cocher / boutons radio (chips) ---------- */
 .checkArea {
     display: flex;
     flex-wrap: wrap;

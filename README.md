@@ -5,6 +5,7 @@ Application web permettant à des artisans de référencer leur(s) entreprise(s)
 - **Frontend** : React (Vite)
 - **Backend** : Node.js / Express (API REST)
 - **Base de données** : PostgreSQL (via Prisma)
+- **Logs** : MongoDB (via Mongoose) — accès et erreurs journalisés en documents structurés, avec repli fichier/console si Mongo est indisponible.
 - **Infrastructure** : Docker, images publiées sur Docker Hub, reverse proxy Nginx (dans le conteneur client), déploiement automatisé via GitHub Actions.
 
 ---
@@ -31,6 +32,8 @@ Application web permettant à des artisans de référencer leur(s) entreprise(s)
 
 En production, **Nginx tourne à l'intérieur du conteneur client** : il sert le build statique du frontend, termine le TLS (HTTPS) et fait office de reverse proxy vers l'API (`/api` et `/uploads`). Il n'y a donc **pas de Nginx ni de build à installer sur l'hôte** — le serveur n'a besoin que de Docker.
 
+L'API s'appuie sur **deux bases de données** : **PostgreSQL** (données métier, via Prisma) et **MongoDB** (`logs-db`) pour la journalisation des accès et des erreurs. Le backend ne démarre qu'une fois les deux bases saines (`depends_on: condition: service_healthy`), mais une indisponibilité de Mongo *en cours de route* ne bloque jamais une requête : les logs basculent alors sur un repli fichier/console.
+
 ```mermaid
 graph LR
     subgraph GitHub
@@ -49,12 +52,14 @@ graph LR
             UPLOADS(uploads)
         end
         DB[(PostgreSQL)]
+        LOGS[(MongoDB logs)]
         CERTS[/opt/artico/certs/]
     end
 
     HUB -->|pull images| VPS
     NGINX <--> API
     API <--> DB
+    API -->|logs accès / erreurs| LOGS
     API <--> UPLOADS
     CERTS -. monté en lecture seule .-> NGINX
     NAVIGATEUR([Navigateur]) <-->|443/80| NGINX
@@ -122,6 +127,7 @@ docker compose up --build
 | Frontend (Vite, hot reload) | `http://localhost:${LOCAL_PORT}` |
 | API | `http://localhost:${PORT}` (proxifiée derrière `/api`) |
 | PostgreSQL | `localhost:${DB_PORT}` |
+| MongoDB (logs) | `localhost:${MONGO_PORT}` |
 
 - Le front et l'API se rechargent automatiquement à chaque modification (volumes montés + `node --watch` + HMR Vite).
 - Le serveur Vite proxifie `/api` et `/uploads` vers le backend : pas de souci de CORS, le navigateur ne parle qu'à une seule origine.

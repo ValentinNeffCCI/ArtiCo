@@ -5,7 +5,7 @@ import style from "./update.module.css";
 import { toast, ToastContainer } from "react-toastify";
 
 const UpdateUserForm = ({user}) => {
-  const { changeListener, prepare } = useForm("/user/" + user.id, "PUT", {
+  const { changeListener, submitForm } = useForm("/user/" + user.id, "PUT", {
     name: user.name,
     email: user.email
   });
@@ -13,7 +13,7 @@ const UpdateUserForm = ({user}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await prepare(e);
+    const response = await submitForm(e);
     if(response.error){
       toast.error(response.error);
       return;

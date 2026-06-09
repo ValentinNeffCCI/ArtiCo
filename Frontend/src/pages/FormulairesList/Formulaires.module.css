@@ -3,7 +3,6 @@
     min-height: 100vh;
 }
 
-/* ---------- En-tête de page ---------- */
 .pageHead {
     width: 100%;
     text-align: center;
@@ -25,7 +24,6 @@
     font-size: 1rem;
 }
 
-/* ---------- Grille des questionnaires ---------- */
 .formList {
     width: 100%;
     max-width: 1100px;
@@ -35,7 +33,6 @@
     margin: 0 auto;
 }
 
-/* ---------- Carte de questionnaire ---------- */
 .form {
     padding: 1.5rem 1.25rem;
     background-color: white;
@@ -85,7 +82,6 @@
     word-break: break-word;
 }
 
-/* ---------- Boutons d'action de la carte ---------- */
 .form-buttons {
     display: flex;
     flex-direction: column;
@@ -123,7 +119,6 @@
     color: white;
 }
 
-/* ---------- Carte "Nouveau questionnaire" ---------- */
 .newForm {
     display: flex;
     flex-direction: column;
@@ -157,7 +152,6 @@
     transform: scale(1.15);
 }
 
-/* ---------- État vide ---------- */
 .empty {
     display: flex;
     flex-direction: column;
@@ -202,7 +196,6 @@
     transform: translateY(-.2rem);
 }
 
-/* ---------- Bouton retour ---------- */
 .goBack {
     display: flex;
     margin: 0;
@@ -222,7 +215,6 @@
     transform: translateX(-1rem);
 }
 
-/* ---------- Responsive ---------- */
 @media screen and (max-width: 768px) {
     .formulaires {
         padding: 1.5rem 1.25rem;

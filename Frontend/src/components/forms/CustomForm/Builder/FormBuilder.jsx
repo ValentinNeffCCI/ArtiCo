@@ -1,52 +1,100 @@
-import { Fragment, useEffect, useState } from "react";
-import InputBuilder from "./InputBuilder";
-import classes from "./form.module.css";
-import { CustomButton } from "../../../buttons/Custom/CustomButton";
+import { useState, useRef, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { Plus, Save } from "lucide-react";
-import useAPI from "../../../../hooks/useAPI";
-import OptionDialog from "../../../dialog/OptionDialog/OptionDialog";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import InputBuilder from "./InputBuilder";
+import { CustomButton } from "../../../buttons/Custom/CustomButton";
+import useForm from "../../../../hooks/useForm";
+import classes from "./form.module.css";
+import dialogClasses from "../../../dialog/OptionDialog/Dialog.module.css";
 
-const defaultInput = (formId) => ({
+const OPTION_TYPES = ["select", "radio", "checkbox"];
+
+const defaultInput = () => ({
+  id: uuidv4(),
+  name: "",
   type: "text",
-  formulaireId: formId,
+  required: true,
+  options: [],
 });
 
-const FormBuilder = ({
-  form = [],
-  style = {},
-  formId,
-  formDatas = {
-    name: "",
-    entrepriseId: false,
-  },
-}) => {
-  const [datas, setDatas] = useState(form.length > 0 ? form : []);
+const LocalOptionDialog = ({ inputId, onClose, addOption }) => {
+  const [value, setValue] = useState("");
+
+  const inputRef = useRef(null);
+  
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!value.trim()) return;
+    addOption({ id: uuidv4(), value: value.trim() }, inputId);
+    onClose();
+  };
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, []);
+
+  return (
+    <div className={dialogClasses["dialog"]} onClick={onClose}>
+      <div
+        className={dialogClasses["dialog-body"]}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h3>Ajouter un choix</h3>
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="value">Intitulé du choix</label>
+          <input
+            ref={inputRef}
+            type="text"
+            name="value"
+            id="value"
+            required
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+          <CustomButton>
+            <span>Enregistrer</span>
+          </CustomButton>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+const FormBuilder = ({ entrepriseId = false, form = null, onSuccess }) => {
+  const isEdit = Boolean(form?.id);
+
+  const { content, changeListener, setContent, submitForm } = useForm(
+    isEdit ? `/formulaire/${form.id}` : "/formulaire",
+    isEdit ? "PUT" : "POST",
+    {
+      name: form?.name ?? "",
+      entrepriseId: form?.entrepriseId ?? entrepriseId,
+      inputs: form?.inputs ?? [],
+    }
+  );
+  const fields = content.inputs;
+
   const [showDialog, setShowDialog] = useState(false);
 
-  const navigation = useNavigate();
+  const openDialog = (id) => setShowDialog(id);
+  const closeDialog = () => setShowDialog(false);
 
-  const openDialog = (id) => {
-    setShowDialog(id);
-  };
+  const updateInputs = (updater) =>
+    setContent((prev) => ({ ...prev, inputs: updater(prev.inputs) }));
 
-  const closeDialog = () => {
-    setShowDialog(false);
-  };
-
-  const { query: callAPI } = useAPI();
-
-  const createInput = async () => {
-    return callAPI("/input", "POST", defaultInput(formId));
+  const addField = (e) => {
+    e.preventDefault();
+    updateInputs((inputs) => [...inputs, defaultInput()]);
   };
 
   const handleChange = (value, id) => {
-    setDatas((prev) =>
-      prev.map((item) =>
+    updateInputs((inputs) =>
+      inputs.map((item) =>
         item.id === id
           ? {
               ...value,
+              required: value.required === true || value.required === "true",
               options: item.options,
             }
           : item
@@ -54,42 +102,13 @@ const FormBuilder = ({
     );
   };
 
-  const addField = async (e) => {
-    e.preventDefault();
-    const response = await createInput();
-    if (response) {
-      setDatas((prev) => [...prev, response]);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const payLoad = {
-      name: formDatas.name,
-      entrepriseId: formDatas.entrepriseId,
-      inputs: datas.map(i=>({
-        ...i,
-        required: i.required == "true" ? true : false 
-      })),
-    };
-    const response = await callAPI("/formulaire/" + formId, "PUT", payLoad);
-    if (!response.error) {
-      navigation(-1);
-    } else {
-      toast.error(await response.message);
-    }
-  };
-
-  const onRemove = async (id) => {
-    const response = await callAPI("/input/" + id, "DELETE");
-    if (response) {
-      setDatas((prev) => prev.filter((row) => row.id !== id));
-    }
+  const onRemove = (id) => {
+    updateInputs((inputs) => inputs.filter((field) => field.id !== id));
   };
 
   const addOption = (option, id) => {
-    setDatas((prev) =>
-      prev.map((item) =>
+    updateInputs((inputs) =>
+      inputs.map((item) =>
         item.id === id
           ? {
               ...item,
@@ -100,26 +119,66 @@ const FormBuilder = ({
     );
   };
 
-  const removeOption = async (id) => {
-    const response = await callAPI("/option/" + id, "DELETE");
-    if (response) {
-      setDatas((prev) =>
-        prev.map((item) =>
-          item.options && item.options.find((option) => option.id == id)
-            ? {
-                ...item,
-                options: item.options.filter((option) => option.id !== id),
-              }
-            : item
-        )
+  const removeOption = (optionId) => {
+    updateInputs((inputs) =>
+      inputs.map((item) =>
+        item.options?.find((option) => option.id === optionId)
+          ? {
+              ...item,
+              options: item.options.filter((option) => option.id !== optionId),
+            }
+          : item
+      )
+    );
+  };
+
+  const handleSubmit = async (e) => {
+    const invalidField = fields.find(
+      (field) =>
+        OPTION_TYPES.includes(field.type) &&
+        (!field.options || field.options.length === 0)
+    );
+    if (invalidField) {
+      e.preventDefault();
+      toast.error(
+        `Le champ "${
+          invalidField.name || "sans nom"
+        }" doit proposer au moins une option`
       );
+      return;
+    }
+
+    const response = await submitForm(e);
+
+    if (response && !response.error) {
+      toast.success(
+        isEdit ? "Formulaire mis à jour" : "Formulaire créé avec succès"
+      );
+      if (onSuccess) {
+        onSuccess(response);
+      } else if (!isEdit) {
+        setContent({ name: "", entrepriseId, inputs: [] });
+      }
+    } else {
+      toast.error(response?.error || "Une erreur est survenue");
     }
   };
 
   return (
-    <div style={style} className={classes["builder"]}>
+    <div className={classes["builder"]}>
       <form onSubmit={handleSubmit}>
-        {datas.map((input, index) => (
+        <label htmlFor="form-name">Nom du formulaire :</label>
+        <input
+          id="form-name"
+          name="name"
+          type="text"
+          value={content.name}
+          onChange={changeListener}
+          placeholder="Nom du formulaire"
+          required
+        />
+
+        {fields.map((input) => (
           <InputBuilder
             key={input.id}
             input={input}
@@ -129,20 +188,20 @@ const FormBuilder = ({
             onRemoveOption={removeOption}
           />
         ))}
-        <CustomButton
-          clickAction={addField}
-          className={classes["addField"]}
-        >
+
+        <CustomButton clickAction={addField} className={classes["addField"]}>
           <span>Ajouter un champ</span>
           <Plus size={16} />
         </CustomButton>
+
         <CustomButton className={classes["save"]}>
           <span>Enregistrer</span>
           <Save size={15} />
         </CustomButton>
       </form>
+
       {showDialog && (
-        <OptionDialog
+        <LocalOptionDialog
           inputId={showDialog}
           onClose={closeDialog}
           addOption={addOption}

@@ -10,11 +10,11 @@ export const RegisterForm = ({ children }) => {
   const { login } = useAuth();
   const {
     changeListener,
-    prepare,
+    submitForm,
   } = useForm("/auth/register", "POST");
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let response = await prepare(e);
+    let response = await submitForm(e);
     if (response.message || response.error) {
       toast.error(response.message || response.error);
       return;

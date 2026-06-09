@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAPI from "../../../hooks/useAPI";
 import classes from "../NewForm/NewForm.module.css";
 import FormBuilder from "../../../components/forms/CustomForm/Builder/FormBuilder";
@@ -10,6 +10,7 @@ const UpdateForm = () => {
   const { id } = useParams();
   const [form, setForm] = useState();
   const { query } = useAPI();
+  const navigation = useNavigate();
 
   const getFormById = async () => {
     const response = await query("/formulaire/" + id);
@@ -22,20 +23,16 @@ const UpdateForm = () => {
     getFormById();
   }, [id]);
 
-  const handleChange = (e) => {
-    setForm((prev) => ({
-      ...prev,
-      name: e.target.value,
-    }));
-  };
-
   if (!form) {
     return;
   }
 
+  const goToList = () =>
+    navigation(`/entreprise/${form.entrepriseId}/formulaires`);
+
   return (
     <main className={classes["builder"]}>
-        <LinkButton
+      <LinkButton
         style={{
           display: "flex",
           alignItems: "center",
@@ -50,27 +47,10 @@ const UpdateForm = () => {
         <span>Questionnaires</span>
       </LinkButton>
       <h1>Modifiez votre questionnaire</h1>
-      {form && (
-        <form className={classes["nameForm"]}>
-          <input
-            type="text"
-            placeholder="Nom du Questionnaire"
-            name="name"
-            id="name"
-            className={classes["nameInput"]}
-            defaultValue={form.name}
-            onChange={handleChange}
-            required
-          />
-        </form>
-      )}
       <FormBuilder
-        formId={form.id}
-        formDatas={{
-          entreprise_id: form.entreprise_id,
-          name: form.name,
-        }}
-        form={form.inputs}
+        form={form}
+        entrepriseId={form.entrepriseId}
+        onSuccess={goToList}
       />
     </main>
   );

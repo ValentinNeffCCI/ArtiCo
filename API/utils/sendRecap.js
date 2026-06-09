@@ -9,7 +9,7 @@ const template = fs.readFileSync("./templates/mails/message_recap.html", {
   encoding: "utf-8",
 });
 
-const sendRecap = async (submission) => {
+const sendRecap = async (submission, destinataire = destination) => {
   const { ...content } = submission.content;
   const { formulaire } = submission;
   const recap = Object.keys(content).map((key) => {
@@ -17,7 +17,7 @@ const sendRecap = async (submission) => {
   });
   const mailContent = template.replace("{{content}}", recap.join(""));
   mailer.sendMail({
-    to: destination,
+    to: destinataire,
     html: mailContent,
     subject: `Artico - Nouvelle réponse au questionnaire : ${formulaire.name}`,
   });

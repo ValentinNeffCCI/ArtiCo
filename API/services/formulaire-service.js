@@ -12,10 +12,10 @@ module.exports = {
         return formulaireCollectionResource(await formulaireRepository.findByEntrepriseId(id));
     },
     create: async (data) => {
-        return formulaireResource(await formulaireRepository.create(data));
+        return formulaireResource(await formulaireRepository.create(data), true);
     },
     update: async (id, data) => {
-        return formulaireResource(await formulaireRepository.update(id, data));
+        return formulaireResource(await formulaireRepository.update(id, data), true);
     },
     delete: async (id) => {
         return formulaireResource(await formulaireRepository.delete(id));
