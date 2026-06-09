@@ -7,7 +7,6 @@
     padding: 2.5rem clamp(1rem, 6vw, 5rem);
 }
 
-/* ---------- Panneaux ---------- */
 .panel {
     width: 100%;
     background-color: white;
@@ -38,7 +37,6 @@
     padding-bottom: 1.25rem;
 }
 
-/* ---------- En-tête de section ---------- */
 .section-header {
     display: flex;
     align-items: center;
@@ -73,7 +71,6 @@
     box-shadow: 0 6px 16px rgba(40, 5, 70, .2);
 }
 
-/* ---------- Grille des entreprises ---------- */
 .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -103,7 +100,6 @@
     border-color: var(--primary);
 }
 
-/* ---------- Carte entreprise ---------- */
 .card {
     background-color: white;
     padding: .6rem;
@@ -184,7 +180,6 @@
     background-color: rgba(139, 135, 255, .08);
 }
 
-/* ---------- Bouton suppression compte ---------- */
 .deleteBtn {
     margin: 0;
     --bg-color: transparent;
@@ -200,7 +195,6 @@
     color: white;
 }
 
-/* ---------- Modale suppression compte ---------- */
 .deleteAccount {
     display: flex;
     flex-direction: column;

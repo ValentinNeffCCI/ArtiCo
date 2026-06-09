@@ -9,7 +9,7 @@ const PasswordRecoveryForm = ({ sendMail }) => {
 
   const {
     changeListener: handleChange,
-    prepare,
+    submitForm,
     content,
   } = useForm("/auth/forgot-password", "POST");
 
@@ -20,7 +20,7 @@ const PasswordRecoveryForm = ({ sendMail }) => {
       return;
     }
     setIsLoading(true);
-    const response = await prepare(e);
+    const response = await submitForm(e);
     if (response.error) {
       toast.error("Aucun utilisateur n'est associé à cette adresse mail");
     } else {

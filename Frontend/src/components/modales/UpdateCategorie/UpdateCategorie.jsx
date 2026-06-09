@@ -10,10 +10,10 @@ export const UpdateCategorie = ({
     onModify,
     categorie
 }) => {
-    const { prepare, changeListener } = useForm('/categorie/' + categorie.id, "PUT")
+    const { submitForm, changeListener } = useForm('/categorie/' + categorie.id, "PUT")
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await prepare(e);
+        const response = await submitForm(e);
         if(response){
             onModify(response);
             onClose();

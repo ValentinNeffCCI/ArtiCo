@@ -8,7 +8,7 @@ const OptionDialog = ({addOption, inputId, onClose}) => {
 
     //Ajouter callAPI création d'option + addOption parent
 
-    const {content, changeListener:handleChange, prepare:save} = useForm('/option', 'POST', {
+    const {content, changeListener:handleChange, submitForm:save} = useForm('/option', 'POST', {
       inputId
     });
 

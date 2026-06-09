@@ -12,7 +12,7 @@ import { UpdateCategorie } from '../../../components/modales/UpdateCategorie/Upd
 const AdminCategories = () => {
     const inputRef = useRef();
     const { query: callAPI } = useAPI();
-    const { content, changeListener, prepare } = useForm('/categorie', "POST");
+    const { content, changeListener, submitForm } = useForm('/categorie', "POST");
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState(false);
     const [showUpdateModale, setShowUpdateModale] = useState(false);
@@ -47,7 +47,7 @@ const AdminCategories = () => {
             toast.error("Veuillez rentrer un nom valide")
             return;
         }
-        const response = await prepare(e);
+        const response = await submitForm(e);
         if (response.error) {
             toast.error("Cette catégorie existe déjà")
         } else {

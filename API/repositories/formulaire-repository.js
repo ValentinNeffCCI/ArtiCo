@@ -1,5 +1,17 @@
 const prisma = require("../utils/client.js");
 
+// Construit le payload `inputs.create` imbriqué pour Prisma.
+// On retire les ids (uuid côté front ou Int existants) et les clés
+// relationnelles scalaires (formulaireId/inputId) : Prisma les gère via les
+// relations, et les envoyer provoquerait une erreur de type / un conflit.
+const buildInputsCreate = (inputs = []) =>
+  inputs.map(({ id, formulaireId, options = [], ...input }) => ({
+    ...input,
+    options: {
+      create: options.map(({ id, inputId, ...option }) => option),
+    },
+  }));
+
 module.exports = {
   findAll: async () => {
     return await prisma.formulaire.findMany();
@@ -25,7 +37,7 @@ module.exports = {
   },
 
   create: async (data) => {
-    const { name, entrepriseId } = data;
+    const { name, entrepriseId, inputs = [] } = data;
     return await prisma.formulaire.create({
       data: {
         name,
@@ -34,30 +46,10 @@ module.exports = {
             id: entrepriseId,
           },
         },
-      },
-    });
-  },
-
-  update: async (id, { name, inputs }) => {
-    await prisma.formulaire.update({
-      where: { id },
-      data: { name },
-    });
-
-    for (const input of inputs) {
-      const { id: inputId, name: inputName, type, required } = input;
-      await prisma.input.update({
-        where: { id: inputId },
-        data: {
-          name: inputName,
-          type,
-          required,
+        inputs: {
+          create: buildInputsCreate(inputs),
         },
-      });
-    }
-
-    return await prisma.formulaire.findUnique({
-      where: { id },
+      },
       include: {
         inputs: {
           include: {
@@ -65,6 +57,40 @@ module.exports = {
           },
         },
       },
+    });
+  },
+
+  update: async (id, { name, inputs = [] }) => {
+    // Le builder envoie l'état complet du formulaire. On synchronise en
+    // remplaçant tous les inputs (la suppression cascade les options), puis
+    // en les recréant. Le tout dans une transaction pour rester cohérent.
+    return await prisma.$transaction(async (tx) => {
+      await tx.formulaire.update({
+        where: { id },
+        data: { name },
+      });
+
+      await tx.input.deleteMany({ where: { formulaireId: id } });
+
+      for (const input of buildInputsCreate(inputs)) {
+        await tx.input.create({
+          data: {
+            ...input,
+            formulaire: { connect: { id } },
+          },
+        });
+      }
+
+      return await tx.formulaire.findUnique({
+        where: { id },
+        include: {
+          inputs: {
+            include: {
+              options: true,
+            },
+          },
+        },
+      });
     });
   },
 
