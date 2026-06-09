@@ -9,7 +9,7 @@ import { Navigate } from "react-router-dom";
 const ChangePassword = ({ token }) => {
   const { login, user } = useAuth();
 
-  const { content, changeListener, prepare } = useForm(
+  const { content, changeListener, submitForm } = useForm(
     "/auth/change-password",
     "POST",
     {
@@ -33,7 +33,7 @@ const ChangePassword = ({ token }) => {
       return;
     }
 
-    const response = await prepare(e);
+    const response = await submitForm(e);
 
     if (!response || response.error) {
       toast.error(response.error || "Une erreur est survenue");

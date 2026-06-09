@@ -3,7 +3,6 @@
     min-height: 80vh;
 }
 
-/* ---------- Disposition générale ---------- */
 .layout {
     display: grid;
     grid-template-columns: minmax(300px, 400px) minmax(0, 1fr);
@@ -11,7 +10,6 @@
     align-items: start;
 }
 
-/* ---------- Colonne média (gauche, sticky) ---------- */
 .media {
     position: sticky;
     top: 6rem;
@@ -36,7 +34,6 @@
     text-transform: uppercase;
 }
 
-/* ---------- Contenu central ---------- */
 .content {
     min-width: 0;
     display: flex;
@@ -65,7 +62,6 @@
     margin-bottom: 1rem;
 }
 
-/* ---------- Carte contact (dans la colonne média) ---------- */
 .contact {
     width: 100%;
     display: flex;
@@ -137,7 +133,6 @@
     min-width: 0;
 }
 
-/* ---------- Responsive ---------- */
 @media screen and (max-width: 900px) {
     .layout {
         grid-template-columns: 1fr;

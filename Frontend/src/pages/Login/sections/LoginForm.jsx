@@ -7,7 +7,7 @@ import { LinkButton } from "../../../components/buttons/Link/LinkButton";
 import { toast, ToastContainer } from "react-toastify";
 
 export const LoginForm = ({ children }) => {
-  const { changeListener, prepare, content } = useForm(
+  const { changeListener, submitForm, content } = useForm(
     "/auth/login",
     "POST"
   );
@@ -20,7 +20,7 @@ export const LoginForm = ({ children }) => {
       return;
     }
 
-    const loginAccess = await prepare(e);
+    const loginAccess = await submitForm(e);
     if(loginAccess.error){
       toast.error(loginAccess.error);
       return;

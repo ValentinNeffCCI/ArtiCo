@@ -15,7 +15,7 @@ const CreateEntreprise = ({
   url = "/entreprise",
 }) => {
   const { user } = useAuth();
-  const { content, changeListener, prepare } = useForm(
+  const { content, changeListener, submitForm } = useForm(
     url,
     method,
     defaultValues
@@ -54,7 +54,7 @@ const CreateEntreprise = ({
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await prepare(e);
+    const response = await submitForm(e);
 
     // Erreur réseau / session expirée : useAPI renvoie false
     if (!response) {

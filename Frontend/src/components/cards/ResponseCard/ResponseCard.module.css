@@ -24,7 +24,6 @@
     font-size: 1rem;
 }
 
-/* ---------- Tableau des réponses ---------- */
 .card table {
     width: 100%;
     border-collapse: collapse;
@@ -59,11 +58,21 @@
     color: var(--primary);
 }
 
-/* ---------- Pied de carte ---------- */
 .card-footer {
     margin-top: 1.25rem;
     display: flex;
+    align-items: center;
     justify-content: flex-end;
+    gap: .5rem;
+}
+
+.card-format {
+    padding: .4rem .6rem;
+    border: 1px solid var(--secondary);
+    border-radius: 6px;
+    background: #fff;
+    font-size: .85rem;
+    cursor: pointer;
 }
 
 .card-button {

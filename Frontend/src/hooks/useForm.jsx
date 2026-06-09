@@ -55,9 +55,10 @@ const useForm = (url_suffix = "/", method = "GET", defaultValue = {}) => {
   };
 
   return {
-    prepare: submit,
+    submitForm: submit,
     changeListener: handleChange,
     content: datas,
+    setContent: setDatas,
     simulateUserConnection: simulateRegister,
   };
 };
