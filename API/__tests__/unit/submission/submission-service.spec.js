@@ -9,8 +9,6 @@ jest.mock("../../../repositories/formulaire-repository.js");
 jest.mock("../../../repositories/entreprise-repository.js");
 jest.mock("../../../repositories/user-repository.js");
 jest.mock("../../../utils/sendRecap.js", () => jest.fn());
-// Évite d'instancier le vrai PrismaClient (importé par le service).
-jest.mock("../../../utils/client.js", () => ({}));
 
 const submissionService = require("../../../services/submission-service.js");
 
