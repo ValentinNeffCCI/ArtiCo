@@ -4,8 +4,9 @@ const submissionCollectionResource = require("../resources/collections/soumissio
 const formulaireRepository = require("../repositories/formulaire-repository.js");
 const HttpError = require("../customclasses/HttpError.js");
 const soumissionCollectionResource = require("../resources/collections/soumission-collection-resource.js");
-const client = require("../utils/client.js");
 const sendMail = require("../utils/sendRecap.js");
+const entrepriseRepository = require("../repositories/entreprise-repository.js");
+const userRepository = require("../repositories/user-repository.js");
 
 module.exports = {
     findById: async (id) => {

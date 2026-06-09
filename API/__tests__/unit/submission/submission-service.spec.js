@@ -1,10 +1,13 @@
 const submissionRepository = require("../../../repositories/submission-repository.js");
 const formulaireRepository = require("../../../repositories/formulaire-repository.js");
+const entrepriseRepository = require("../../../repositories/entreprise-repository.js");
+const userRepository = require("../../../repositories/user-repository.js");
 const sendMail = require("../../../utils/sendRecap.js");
 
 jest.mock("../../../repositories/submission-repository.js");
 jest.mock("../../../repositories/formulaire-repository.js");
-// sendRecap exporte une fonction (envoi de mail récapitulatif) -> on la stub.
+jest.mock("../../../repositories/entreprise-repository.js");
+jest.mock("../../../repositories/user-repository.js");
 jest.mock("../../../utils/sendRecap.js", () => jest.fn());
 // Évite d'instancier le vrai PrismaClient (importé par le service).
 jest.mock("../../../utils/client.js", () => ({}));
@@ -72,6 +75,10 @@ describe("submission-service", () => {
   describe("create", () => {
     it("crée la soumission et envoie le mail récap quand le formulaire existe", async () => {
       formulaireRepository.findById.mockResolvedValue({ id: 10 });
+      entrepriseRepository.findById.mockResolvedValue({ id: 10, email: "test@test.com"});
+      userRepository.findById.mockResolvedValue({ id: 10 });
+      sendMail.mockResolvedValue(true);
+
       const submission = makeSubmission({ id: 5 });
       submissionRepository.create.mockResolvedValue(submission);
 
@@ -82,8 +89,8 @@ describe("submission-service", () => {
 
       expect(formulaireRepository.findById).toHaveBeenCalledWith(10);
       expect(submissionRepository.create).toHaveBeenCalled();
-      // Le mail récapitulatif est déclenché avec la soumission créée.
-      expect(sendMail).toHaveBeenCalledWith(submission);
+      // Le mail récapitulatif est envoyé avec la soumission créée.
+      expect(sendMail).toHaveBeenCalledWith(submission, "test@test.com");
       expect(result).toMatchObject({ id: 5 });
     });
 
