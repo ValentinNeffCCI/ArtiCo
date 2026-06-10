@@ -9,6 +9,7 @@ import CustomForm from "../../../components/forms/CustomForm/Displayer/CustomFor
 import useForm from "../../../hooks/useForm";
 import { toast } from "react-toastify";
 import { useAuth } from "../../../contexts/UserContext";
+import happyWorker from "../../../assets/mascotte/happy_worker.png";
 
 const AnswerForm = () => {
   const { id } = useParams();
@@ -74,21 +75,27 @@ const AnswerForm = () => {
         Revenir en arrière
       </CustomButton>
       <h1>{form.name}</h1>
-      <div className={classes["card"]}>
-        <CustomForm
-          form={!user.email ? [...form.inputs,
-          {
-            "type": "email",
-            "name": "Votre adresse mail afin de pouvoir être recontacté par le professionnel",
-            "required": true,
-            "options": false,
-            "formulaireId": id
-          }
-          ] : form.inputs}
-          onChange={onChange}
-          onSubmit={handleSubmit}
-          submitButton={"Envoyer"}
-        ></CustomForm>
+      <div className={classes["layout"]}>
+        <div className={classes["card"]}>
+          <CustomForm
+            form={!user.email ? [...form.inputs,
+            {
+              "type": "email",
+              "name": "Votre adresse mail afin de pouvoir être recontacté par le professionnel",
+              "required": true,
+              "options": false,
+              "formulaireId": id
+            }
+            ] : form.inputs}
+            onChange={onChange}
+            onSubmit={handleSubmit}
+            submitButton={"Envoyer"}
+          ></CustomForm>
+        </div>
+        <aside className={classes["mascot"]}>
+          <img src={happyWorker} alt="Mascotte ArtiCo" />
+          <p>Encore quelques infos et le professionnel vous recontacte&nbsp;!</p>
+        </aside>
       </div>
     </main>
   );

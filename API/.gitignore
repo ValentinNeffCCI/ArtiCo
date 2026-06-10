@@ -13,3 +13,4 @@ uploads/*
 
 brouillo*
 logs/
+coverage/
