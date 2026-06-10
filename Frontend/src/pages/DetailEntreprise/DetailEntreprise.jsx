@@ -17,11 +17,8 @@ const DetailEntreprise = () => {
   const fetchEntreprise = async () => {
     const response = await callAPI("/entreprise/" + id);
     setEntreprise(response);
-    setGalerie(
-      response.photos
-        ? [response.image, ...response.photos.map((p) => p.path)]
-        : response.image,
-    );
+    const photos = response.photos?.map((p) => p.path) ?? [];
+    setGalerie([response.image, ...photos].filter(Boolean));
   };
 
   useEffect(() => {
@@ -46,6 +43,8 @@ const DetailEntreprise = () => {
   };
 
   if (!entreprise) return <Loader />;
+
+  const hasDescription = !!entreprise.description?.trim();
 
   return (
     <main className={classes["main"]}>
@@ -103,17 +102,17 @@ const DetailEntreprise = () => {
           </div>
         </aside>
         <div className={classes["content"]}>
-          <h2>
-            <span>Description de l'entreprise</span>
-          </h2>
-          {entreprise.description?.length != 0 && (
-            <div className={classes["description"]}>
-              <ReactMarkdown>
-                {entreprise.description
-                  ? sanitizeDescription(entreprise.description)
-                  : ""}
-              </ReactMarkdown>
-            </div>
+          {hasDescription && (
+            <>
+              <h2>
+                <span>Description de l'entreprise</span>
+              </h2>
+              <div className={classes["description"]}>
+                <ReactMarkdown>
+                  {sanitizeDescription(entreprise.description)}
+                </ReactMarkdown>
+              </div>
+            </>
           )}
           <FormList forms={entreprise.formulaires} />
         </div>
