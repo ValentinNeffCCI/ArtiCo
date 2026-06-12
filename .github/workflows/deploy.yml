@@ -52,6 +52,7 @@ jobs:
         with:
           context: .
           file: docker/frontend/Dockerfile.prod
+          envs: CERTS_PATH={{ secrets.CERTS_PATH }}
           build-args: |
             VITE_API_URL=/api
           push: true
