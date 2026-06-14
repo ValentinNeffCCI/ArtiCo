@@ -1,17 +1,19 @@
 import classes from "../AdminUsers/AdminUsers.module.css";
 import table from "../../../components/admin/AdminTable.module.css";
-import { Search, Eye, Trash2 } from "lucide-react";
+import { Search, Eye } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useAPI from "../../../hooks/useAPI";
 import {toast} from 'react-toastify';
 import DeleteConfirmation from "../../../components/modales/DeleteConfirmation/DeleteConfirmation.jsx";
+import EntrepriseDetailsModale from "../../../components/modales/EntrepriseDetails/EntrepriseDetailsModale.jsx";
 import { CustomButton } from "../../../components/buttons/Custom/CustomButton.jsx";
 import useForm from '../../../hooks/useForm.jsx';
 
 const AdminEntreprises = () => {
   const [entreprises, setEntreprises] = useState(false);
   const [selectedEntreprise, setSelectedEntreprise] = useState(false);
+  const [detailEntreprise, setDetailEntreprise] = useState(false);
 
   const { query: callAPI } = useAPI();
   const {content, changeListener: onChange} = useForm();
@@ -74,6 +76,14 @@ const AdminEntreprises = () => {
           ?
         </DeleteConfirmation>
       )}
+      {detailEntreprise && (
+        <EntrepriseDetailsModale
+          entreprise={detailEntreprise}
+          onView={(en) => navigation("/artisan/" + en.id)}
+          onDelete={confirmDeletion}
+          onClose={() => setDetailEntreprise(false)}
+        />
+      )}
       <form
         className={classes["search-entreprise"]}
         onSubmit={onSubmit}
@@ -123,18 +133,11 @@ const AdminEntreprises = () => {
                     <td>
                       <div className={table["actions"]}>
                         <CustomButton
-                          clickAction={() => navigation("/artisan/" + e.id)}
+                          clickAction={() => setDetailEntreprise(e)}
                           style={{ "--bg-color": "var(--secondary)", "--color": "var(--dark)" }}
                         >
                           <Eye />
-                          <span>Voir</span>
-                        </CustomButton>
-                        <CustomButton
-                          clickAction={() => confirmDeletion(e)}
-                          style={{ "--bg-color": "red", "--color": "white" }}
-                        >
-                          <Trash2 />
-                          <span>Supprimer</span>
+                          <span>Détails</span>
                         </CustomButton>
                       </div>
                     </td>
