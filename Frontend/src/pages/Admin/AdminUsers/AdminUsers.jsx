@@ -4,12 +4,14 @@ import { useState, useEffect } from "react";
 import useAPI from "../../../hooks/useAPI";
 import DeleteConfirmation from "../../../components/modales/DeleteConfirmation/DeleteConfirmation.jsx";
 import UserList from "../../../components/listes/users/EntiteList.jsx";
+import UserDetailsModale from "../../../components/modales/UserDetails/UserDetailsModale.jsx";
 import { useAuth } from "../../../contexts/UserContext.jsx";
 
 const AdminUsers = () => {
   const [users, setUsers] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedUser, setSelectedUser] = useState(false);
+  const [detailUser, setDetailUser] = useState(false);
 
   const { query: callAPI } = useAPI();
   const { user: currentUser } = useAuth();
@@ -102,6 +104,15 @@ const AdminUsers = () => {
           Voulez-vous vraiment supprimer {selectedUser.name} ?
         </DeleteConfirmation>
       )}
+      {detailUser && (
+        <UserDetailsModale
+          user={detailUser}
+          onRoleChange={toggleRole}
+          onBan={toggleBan}
+          onDelete={confirmDeletion}
+          onClose={() => setDetailUser(false)}
+        />
+      )}
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -119,12 +130,7 @@ const AdminUsers = () => {
         </div>
       </form>
       {users && (
-        <UserList
-          entites={filterUsers()}
-          onBan={toggleBan}
-          onDelete={confirmDeletion}
-          onRoleChange={toggleRole}
-        />
+        <UserList entites={filterUsers()} onDetails={setDetailUser} />
       )}
     </main>
   );
