@@ -3,3 +3,5 @@
 .env.local
 postgres_*
 mongo_*
+API/coverage/
+soutenance/

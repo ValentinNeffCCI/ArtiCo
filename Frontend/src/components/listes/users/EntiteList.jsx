@@ -1,6 +1,7 @@
 import classes from "../../admin/AdminTable.module.css";
 import ToggleButton from "../../../pages/Admin/Buttons/ToggleButton.jsx";
-import { Ban, CheckCheck, Pencil, Trash, Shield, User } from "lucide-react";
+import { CustomButton } from "../../buttons/Custom/CustomButton.jsx";
+import { Ban, CheckCheck, Eye, Pencil, Trash, Shield, User } from "lucide-react";
 
 const EntiteList = ({
     entites,
@@ -8,10 +9,11 @@ const EntiteList = ({
     onChoose,
     onBan,
     onRoleChange,
+    onDetails,
 }) => {
     const hasEmail = entites.some((e) => e.email);
     const hasRole = entites.some((e) => e.role);
-    const hasStatus = !!onBan;
+    const hasStatus = entites.some((e) => typeof e.active === "boolean");
 
     const colCount = 2 + (hasEmail ? 1 : 0) + (hasRole ? 1 : 0) + (hasStatus ? 1 : 0);
 
@@ -67,6 +69,20 @@ const EntiteList = ({
                                 )}
                                 <td>
                                     <div className={classes["actions"]}>
+                                        {onDetails ? (
+                                            <CustomButton
+                                                submit={false}
+                                                clickAction={() => onDetails(entite)}
+                                                style={{
+                                                    "--color": "var(--dark)",
+                                                    "--bg-color": "var(--secondary)",
+                                                }}
+                                            >
+                                                <Eye />
+                                                <span>Détails</span>
+                                            </CustomButton>
+                                        ) : (
+                                          <>
                                         {onRoleChange && (
                                             <ToggleButton
                                                 entite={entite}
@@ -121,6 +137,8 @@ const EntiteList = ({
                                             <Trash />
                                             <span>Supprimer</span>
                                         </ToggleButton>
+                                          </>
+                                        )}
                                     </div>
                                 </td>
                             </tr>
