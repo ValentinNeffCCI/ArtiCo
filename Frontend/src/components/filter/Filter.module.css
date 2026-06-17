@@ -1,18 +1,19 @@
 .filter {
     margin: 0 auto;
     width: 85%;
+    max-width: 900px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     background-color: white;
-    border-radius: 2rem;
-    padding: 2rem 1.5rem;
+    border-radius: 1.5rem;
+    padding: 2rem;
+    box-shadow: 0 1rem 2.5rem rgba(40, 5, 70, .18);
 }
 
 .filter input[name="name"] {
-    width: 75%;
-    margin: 0 auto;
-    margin-bottom: 1.5rem;
+    width: 100%;
+    margin-bottom: 1.75rem;
     font-size: 1.2rem;
 }
 
@@ -21,80 +22,74 @@
     border: none;
     background-color: white;
     border-bottom: 1px solid var(--primary);
-    padding: .5rem;
+    border-radius: 0;
+    padding: .5rem 0;
     outline: 0;
-    padding-top: 1rem;
-    transition: all .2s ease-in;
+    transition: border-color .2s ease-in;
 }
 
-.filter input:focus {
+.filter input:focus,
+.filter select:focus {
     border-color: var(--secondary);
 }
 
 .filter label {
-    font-size: .8em;
-    font-weight: 500;
-    margin-bottom: .5rem;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: .35rem;
 }
 
 .filter select {
-    border-radius: 0;
-    border: none;
-    outline: none;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    padding-left: 0;
     cursor: pointer;
-    border-bottom: 1px solid var(--dark);
+    padding-right: 1.5rem;
+    /* flèche personnalisée */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23280546' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right center;
 }
 
-.filter>div {
+/* ligne : champs de filtre + bouton */
+.filter > div {
     display: flex;
-    margin: 2rem;
-    justify-content: space-between;
-    width: 75%;
-    min-width: 600px;
     align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+}
+
+/* groupe des deux champs (domaine + code postal) */
+.filter > div > div {
+    display: flex;
+    align-items: end;
+    gap: 1.5rem;
+    flex: 1;
 }
 
 .input_container {
     display: flex;
     flex-direction: column;
-}
-
-.filter>div>div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 40%;
-    min-width: 400px;
+    flex: 1;
 }
 
 @media screen and (max-width: 768px) {
     .filter {
         width: 92%;
-        padding: 1.5rem 1rem;
+        padding: 1.5rem 1.25rem;
     }
 
-    .filter input[name="name"] {
-        width: 100%;
-    }
-
-    .filter>div {
+    .filter > div {
         flex-direction: column;
         align-items: stretch;
-        width: 100%;
-        min-width: 0;
-        margin: 1.5rem 0 0;
         gap: 1.5rem;
     }
 
-    .filter>div>div {
+    .filter > div > div {
         flex-direction: column;
         align-items: stretch;
-        width: 100%;
-        min-width: 0;
         gap: 1.5rem;
     }
 }
