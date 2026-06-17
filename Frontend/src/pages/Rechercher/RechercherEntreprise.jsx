@@ -30,7 +30,13 @@ const RechercherEntreprise = () => {
 
   return (
     <main className={style.rechercher}>
-      <h1 className="dangrek">Rechercher une entreprise</h1>
+      <div className={style.header}>
+        <h1>Rechercher une entreprise</h1>
+        <p>
+          Trouvez les artisans près de chez vous et affinez votre recherche par
+          domaine d'activité ou code postal.
+        </p>
+      </div>
       <EntrepriseList categorie={categorie} allCategories={categories} />
     </main>
   );
