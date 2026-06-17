@@ -9,6 +9,7 @@ import { LinkButton } from "../../components/buttons/Link/LinkButton";
 import { ArrowLeft } from "lucide-react";
 import { CustomButton } from "../../components/buttons/Custom/CustomButton";
 import { ToastContainer, Slide } from "react-toastify";
+import MentionInformation from "../../components/modales/Mentions/MentionInformation";
 
 const Login = () => {
   const { user } = useAuth();
@@ -96,6 +97,7 @@ const Login = () => {
         {isConnecting ? (
           <LoginForm>
             <CustomButton
+              className={classes["switch-btn"]}
               style={{
                 textAlign: "left",
               }}
@@ -107,13 +109,16 @@ const Login = () => {
         ) : (
           <RegisterForm>
             <CustomButton
+              className={classes["switch-btn"]}
               style={{
                 textAlign: "left",
               }}
               clickAction={switchScreen}
             >
               {isConnecting ? "Je n'ai pas de compte" : "J'ai déjà un compte "}
-            </CustomButton>
+              </CustomButton>
+              
+              <MentionInformation />
           </RegisterForm>
         )}
       </div>

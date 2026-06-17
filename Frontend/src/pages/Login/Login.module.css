@@ -12,6 +12,10 @@
     font-weight: 500;
 }
 
+.switch-btn:hover {
+    color: white;
+}
+
 
 .form>div {
     display: flex;
