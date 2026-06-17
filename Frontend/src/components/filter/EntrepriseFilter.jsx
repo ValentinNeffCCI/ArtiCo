@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { CustomButton } from "../buttons/Custom/CustomButton";
-import style from "./Filter.module.css";
-import { usePosition } from "../../hooks/usePosition";
+import classes from "./Filter.module.css";
 
 const EntrepriseFilter = ({
   filters,
@@ -9,19 +7,18 @@ const EntrepriseFilter = ({
   categorieList = [],
   onSubmit,
 }) => {
-  const position = usePosition();
   return (
-    <form onSubmit={onSubmit} className={style["filter"]}>
+    <form onSubmit={onSubmit} className={classes["filter"]}>
       <input
         type="search"
         name="name"
         onChange={onChange}
         placeholder="Rechercher"
-        defaultValue={position ? position.ville : ""}
+        value={filters.name ?? ""}
       />
       <div>
         <div>
-          <div className={style["input_container"]}>
+          <div className={classes["input_container"]}>
             <label htmlFor="categorie">Domaine d'activité</label>
             <select
               name="categorieId"
@@ -37,7 +34,7 @@ const EntrepriseFilter = ({
               ))}
             </select>
           </div>
-          <div className={style["input_container"]}>
+          <div className={classes["input_container"]}>
             <label htmlFor="cp">Code postal</label>
             <input
               type="text"
@@ -48,7 +45,7 @@ const EntrepriseFilter = ({
               inputMode="numeric"
               placeholder="Ex : 67000"
               onChange={onChange}
-              defaultValue={position ? position.codesPostal : ""}
+              value={filters.cp ?? ""}
             />
           </div>
         </div>

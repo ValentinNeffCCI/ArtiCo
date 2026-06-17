@@ -5,6 +5,7 @@ import { CustomButton } from "../../buttons/Custom/CustomButton";
 import { Plus } from "lucide-react";
 import Loader from "../../UX/loaders/Loader";
 import { toast } from "react-toastify";
+import styles from "./ManageGalerie.module.css";
 
 const ManageGalerie = ({ entrepriseId = false }) => {
   const [galerie, setGalerie] = useState(false);
@@ -60,26 +61,10 @@ const ManageGalerie = ({ entrepriseId = false }) => {
     getPhotos();
   }, []);
   return (
-    <div
-      style={{
-        width: "20%",
-        margin: "0 5%",
-        padding: "1rem",
-        borderLeft: "2px solid var(--primary)",
-      }}
-    >
+    <div className={styles["galerie"]}>
       {isLoading && <Loader />}
-      <h2 className="dangrek text-center">Galerie de photos</h2>
       {galerie && galerie.length != 0 ? (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            gap: 25,
-            padding: 15,
-          }}
-        >
+        <div className={styles["grid"]}>
           {galerie.map((photo) => (
             <GaleriePhoto
               key={photo.id}
@@ -89,23 +74,21 @@ const ManageGalerie = ({ entrepriseId = false }) => {
           ))}
         </div>
       ) : (
-        <div className="text-center p-3">
+        <div className={styles["empty"]}>
           Les photos de votre galerie s'afficheront ici
         </div>
       )}
       <CustomButton
         style={{
-          display: "flex",
-          gap: ".2rem",
-          alignItems: "center",
           "--bg-color": "var(--primary)",
           "--color": "var(--light)",
-          fontSize: ".8rem",
+          fontSize: ".85rem",
         }}
+        className={styles["add-btn"]}
         clickAction={similiLabel}
       >
-        <span>Ajouter</span>
-        <Plus />
+        <span>Ajouter une photo</span>
+        <Plus size={18} />
       </CustomButton>
       <input
         type="file"

@@ -1,6 +1,6 @@
 import { Navigate, useSearchParams } from "react-router-dom";
 import ApprovingWorker from "../../assets/mascotte/happy_worker.png";
-import style from "./passwordRecovery.module.css";
+import classes from "./passwordRecovery.module.css";
 import { Fragment, useState } from "react";
 import useForm from "../../hooks/useForm";
 import ChangePassword from "../../components/forms/ChangePassword/ChangePassword";
@@ -15,9 +15,9 @@ const PasswordRecovery = () => {
   }
 
   return (
-    <main className={`${style.recovery}`}>
+    <main className={`${classes.recovery}`}>
         <Fragment>
-          <figure className={`hidden-mobile ${style.figure}`}>
+          <figure className={`hidden-mobile ${classes.figure}`}>
             <img src={ApprovingWorker} alt="Ouvrier heureux" />
           </figure>
           <ChangePassword token={token} />

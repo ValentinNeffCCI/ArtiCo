@@ -1,8 +1,8 @@
-import style from './Skeleton.module.css'
+import classes from './Skeleton.module.css'
 
 const CardSkeleton = () => {
   return (
-    <div className={style['skeleton']}>
+    <div className={classes['skeleton']}>
       <div></div>
       <div></div>
       <div></div>

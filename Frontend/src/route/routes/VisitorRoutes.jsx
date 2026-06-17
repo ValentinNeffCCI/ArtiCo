@@ -5,6 +5,9 @@ import ForgotPassword from "../../pages/ForgotPassword/ForgotPassword";
 import AnswerForm from "../../pages/Forms/AnswerForm/AnswerForm";
 import PasswordRecovery from "../../pages/PasswordRecovery/PasswordRecovery";
 import RechercherEntreprise from "../../pages/Rechercher/RechercherEntreprise";
+import MentionsLegales from "../../pages/Legal/MentionsLegales";
+import PolitiqueConfidentialite from "../../pages/Legal/PolitiqueConfidentialite";
+import PolitiqueProtectionDonnees from "../../pages/Legal/PolitiqueProtectionDonnees";
 import userRoutes from "./UserRoutes";
 
 export const VisitorRoutes = [
@@ -31,6 +34,18 @@ export const VisitorRoutes = [
   {
     path: "/questionnaire/:id",
     element: <AnswerForm />,
+  },
+  {
+    path: "/mentions-legales",
+    element: <MentionsLegales />,
+  },
+  {
+    path: "/politique-de-confidentialite",
+    element: <PolitiqueConfidentialite />,
+  },
+  {
+    path: "/politique-de-protection-des-donnees",
+    element: <PolitiqueProtectionDonnees />,
   },
   {
     element: <ProtectedRoute allowedRoles={["USER", "ADMIN"]} />,

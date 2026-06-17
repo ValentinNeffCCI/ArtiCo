@@ -28,9 +28,10 @@ const useAPI = () => {
           payload.body = body;
         } else if (hasFileData(body)) {
           const formData = new FormData();
-          Object.entries(body).forEach(([key, value]) =>
-            formData.append(key, value)
-          );
+          Object.entries(body).forEach(([key, value]) => {
+            if (value === null || value === undefined) return;
+            formData.append(key, value);
+          });
           payload.body = formData;
         } else {
           payload.headers = {

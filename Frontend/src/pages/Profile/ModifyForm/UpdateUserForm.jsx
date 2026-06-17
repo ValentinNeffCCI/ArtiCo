@@ -1,7 +1,7 @@
 import useForm from "../../../hooks/useForm";
 import { useAuth } from "../../../contexts/UserContext";
 import { CustomButton } from "../../../components/buttons/Custom/CustomButton";
-import style from "./update.module.css";
+import classes from "./update.module.css";
 import { toast, ToastContainer } from "react-toastify";
 
 const UpdateUserForm = ({user}) => {
@@ -26,7 +26,7 @@ const UpdateUserForm = ({user}) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={style["form"]}>
+    <form onSubmit={handleSubmit} className={classes["form"]}>
       <ToastContainer/>
       <div>
         <label htmlFor="">Mon pseudo :</label>
