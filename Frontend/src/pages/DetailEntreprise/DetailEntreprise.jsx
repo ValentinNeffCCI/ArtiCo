@@ -38,7 +38,7 @@ const DetailEntreprise = () => {
     ].join("+");
 
   const sanitizeDescription = (text) => {
-    text = text.replaceAll(`<`, "<div");
+    // text = text.replaceAll(`<`, "<div");
     return text;
   };
 
@@ -102,7 +102,7 @@ const DetailEntreprise = () => {
           </div>
         </aside>
         <div className={classes["content"]}>
-          {hasDescription && (
+          {hasDescription ? (
             <>
               <h2>
                 <span>Description de l'entreprise</span>
@@ -113,6 +113,12 @@ const DetailEntreprise = () => {
                 </ReactMarkdown>
               </div>
             </>
+          ) : (
+              <div>
+                <h2>
+                    Cette entreprise n'a pas (encore) de bio
+                </h2>
+              </div>
           )}
           <FormList forms={entreprise.formulaires} />
         </div>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import style from "./ResponseCard.module.css";
+import classes from "./ResponseCard.module.css";
 import { CustomButton } from "../../buttons/Custom/CustomButton";
 import { DownloadIcon } from "lucide-react";
 
@@ -69,13 +69,13 @@ const ResponseCard = ({ reponse }) => {
   };
 
   return (
-    <div className={style["card"]}>
-      <p className={style["card-header"]}>
-        <span className={style["card-header-date"]}>
+    <div className={classes["card"]}>
+      <p className={classes["card-header"]}>
+        <span className={classes["card-header-date"]}>
           Le {formatDate(reponse.submittedAt)}
         </span>
         &nbsp;:&nbsp;
-        <span className={style["card-header-user"]}>
+        <span className={classes["card-header-user"]}>
           {getUserEmail()} à répondu
         </span>
       </p>
@@ -95,9 +95,9 @@ const ResponseCard = ({ reponse }) => {
           ))}
         </tbody>
       </table>
-      <div className={style["card-footer"]}>
+      <div className={classes["card-footer"]}>
         <select
-          className={style["card-format"]}
+          className={classes["card-format"]}
           value={format}
           onChange={(e) => setFormat(e.target.value)}
           aria-label="Format d'export"
@@ -105,7 +105,7 @@ const ResponseCard = ({ reponse }) => {
           <option value="json">JSON</option>
           <option value="csv">CSV</option>
         </select>
-        <CustomButton clickAction={exportFile} className={style["card-button"]}>
+        <CustomButton clickAction={exportFile} className={classes["card-button"]}>
           <span>Exporter le contenu</span>
           <DownloadIcon />
         </CustomButton>

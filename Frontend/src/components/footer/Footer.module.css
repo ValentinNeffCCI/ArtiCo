@@ -19,7 +19,8 @@
     margin-top: .25rem;
 }
 
-.legal-links button {
+.legal-links button,
+.legal-links a {
     background: none;
     border: none;
     padding: 0;
@@ -33,7 +34,8 @@
     text-underline-offset: 3px;
 }
 
-.legal-links button:hover {
+.legal-links button:hover,
+.legal-links a:hover {
     opacity: 1;
     text-decoration-color: currentColor;
 }

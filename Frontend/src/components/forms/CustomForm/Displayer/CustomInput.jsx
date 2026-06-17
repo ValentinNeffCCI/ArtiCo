@@ -1,11 +1,11 @@
 import React from "react";
-import style from "./customInput.module.css";
+import classes from "./customInput.module.css";
 
 const CustomInput = ({ input, children }) => {
   return (
-    <div className={style["input"]}>
+    <div className={classes["input"]}>
       {input.type == "radio" || input.type == "checkbox" ? (
-        <div className={style["input_label"]}>
+        <div className={classes["input_label"]}>
           {input.name}{" "}
           {input.required && "*"}
         </div>
@@ -15,7 +15,7 @@ const CustomInput = ({ input, children }) => {
           {input.required && "*"}
         </label>
       )}
-      <div className={style[input.type]}>{children}</div>
+      <div className={classes[input.type]}>{children}</div>
     </div>
   );
 };

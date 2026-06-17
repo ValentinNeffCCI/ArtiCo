@@ -4,7 +4,7 @@ import { useAuth } from "../../../contexts/UserContext";
 import useAPI from "../../../hooks/useAPI";
 import { Navigate, useNavigate } from "react-router-dom";
 import CustomForm from "../CustomForm/Displayer/CustomForm";
-import style from "./style.module.css";
+import classes from "./style.module.css";
 import { Upload } from "lucide-react";
 import placeholder from "../../../assets/photos/placeholder.jpeg";
 import { toast, ToastContainer } from "react-toastify";
@@ -15,14 +15,25 @@ const CreateEntreprise = ({
   url = "/entreprise",
 }) => {
   const { user } = useAuth();
+
+  const buildInitialContent = () => {
+    if (!defaultValues) {
+      return { email: user.email };
+    }
+    // L'API renvoie la relation `categorie` (objet) et des champs annexes
+    // (owner, photos, formulaires) qui ne doivent pas être renvoyés tels quels.
+    const { categorie, owner, photos, formulaires, ...rest } = defaultValues;
+    return {
+      ...rest,
+      categorieId: categorie?.id ?? "",
+      description: rest.description && rest.description !== "null" ? rest.description : "",
+    };
+  };
+
   const { content, changeListener, submitForm } = useForm(
     url,
     method,
-    defaultValues
-      ? defaultValues
-      : {
-          email: user.email,
-        }
+    buildInitialContent()
   );
   const API = useAPI();
   const [categories, setCategories] = useState([]);
@@ -147,7 +158,7 @@ const CreateEntreprise = ({
       id: 5,
       required: false,
       label: "Bio de l'entreprise",
-      value: content.description ? content.description : "",
+      value: content.description && content.description !== "null" ? content.description : "",
       is_fix: false
     },
   ];
@@ -171,13 +182,13 @@ const CreateEntreprise = ({
       }
     >
       {categories.length !== 0 && (
-        <div className={[style["input"], style["select"]].join(" ")}>
+        <div className={[classes["input"], classes["select"]].join(" ")}>
           <label htmlFor="categorieId">Catégorie de votre entreprise :</label>
           <select
             name="categorieId"
             id="categorieId"
             onChange={changeListener}
-            className={style["select"]}
+            className={classes["select"]}
             value={content.categorieId ?? ""}
             required
           >
@@ -190,7 +201,7 @@ const CreateEntreprise = ({
           </select>
         </div>
       )}
-      <div className={[style["input"], style["file"]].join(" ")}>
+      <div className={[classes["input"], classes["file"]].join(" ")}>
         <h4>Photo de votre entreprise :</h4>
         <label htmlFor="image">
           <Upload />
