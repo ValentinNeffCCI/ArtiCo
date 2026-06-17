@@ -1,9 +1,9 @@
-import { useState } from "react";
 import { CustomButton } from "../../../components/buttons/Custom/CustomButton";
 import useForm from "../../../hooks/useForm";
 import classes from "./LoginSection.module.css";
 import { useAuth } from "../../../contexts/UserContext";
 import { toast } from "react-toastify";
+import MentionInformation from "../../../components/modales/Mentions/MentionInformation";
 
 export const RegisterForm = ({ children }) => {
 
@@ -31,7 +31,7 @@ export const RegisterForm = ({ children }) => {
           onChange={changeListener}
           required
           type="text"
-          placeholder="Pseudo"
+          placeholder="Nom d'utilisateur"
         />
         <input
           name="email"
