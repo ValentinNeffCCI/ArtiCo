@@ -2,15 +2,28 @@
     background-color: var(--secondary);
     display: flex;
     flex-direction: column;
-    /* empêche la marge basse de la grille de "s'échapper" du main
-       (margin collapse) et de laisser une bande blanche avant le footer */
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
 }
 
-.rechercher h1 {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 2.5rem;
-    color: white;
+.header {
     text-align: center;
-    padding: 2rem;
+    padding: 3rem 1.5rem 1.5rem;
+}
+
+.header h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    line-height: 1.15;
+    text-align: center;
+}
+
+.header p {
+    margin: .75rem auto 0;
+    max-width: 38rem;
+    color: rgba(255, 255, 255, .85);
+    font-size: 1.05rem;
+    line-height: 1.5;
 }
