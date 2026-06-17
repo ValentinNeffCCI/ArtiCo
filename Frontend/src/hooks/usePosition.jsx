@@ -1,9 +1,10 @@
-import { useEffect, useState, createContext, useContext } from "react";
+import { useState, createContext, useContext } from "react";
 
 const PositionContext = createContext();
 
 export const PositionProvider = ({ children }) => {
   const [position, setPosition] = useState(null);
+  const [isLocating, setIsLocating] = useState(false);
 
   const baseUrl =
     "https://geo.api.gouv.fr/communes?lat={latitude}&lon={longitude}&fields=code,nom,codesPostaux";
@@ -28,16 +29,21 @@ export const PositionProvider = ({ children }) => {
           setPosition(null);
         }
       })
-      .catch((error) => {
+      .catch(() => {
         setPosition(null);
+      })
+      .finally(() => {
+        setIsLocating(false);
       });
   };
 
-  const onLocalisationFailure = (error) => {
+  const onLocalisationFailure = () => {
     setPosition(null);
+    setIsLocating(false);
   };
 
-  const determineCity = () => {
+  const requestPosition = () => {
+    setIsLocating(true);
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         onLocalisationSuccess,
@@ -48,15 +54,12 @@ export const PositionProvider = ({ children }) => {
         ville: "Paris",
         codesPostal: "75000",
       });
+      setIsLocating(false);
     }
   };
 
-  useEffect(() => {
-    determineCity();
-  }, []);
-
   return (
-    <PositionContext.Provider value={position}>
+    <PositionContext.Provider value={{ position, requestPosition, isLocating }}>
       {children}
     </PositionContext.Provider>
   );

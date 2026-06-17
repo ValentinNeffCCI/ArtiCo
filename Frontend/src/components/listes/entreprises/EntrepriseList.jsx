@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import style from "./Entreprise.module.css";
+import classes from "./Entreprise.module.css";
 import EntrepriseCard from "../../cards/EntrepriseCard/EntrepriseCard.jsx";
 import EntrepriseFilter from "../../filter/EntrepriseFilter.jsx";
 import useForm from "../../../hooks/useForm.jsx";
@@ -9,13 +9,13 @@ import { usePosition } from "../../../hooks/usePosition.jsx";
 
 const EntrepriseList = ({ categorie = false, allCategories }) => {
 
-  const position = usePosition();
+  const { position } = usePosition();
   const [isLoading, setIsLoading] = useState(false);
 
-  const { content: filters, changeListener } = useForm("/entreprise", "GET", {
+  const { content: filters, changeListener, setContent } = useForm("/entreprise", "GET", {
     categorieId : categorie ?? "",
-    name: position ? position.ville : "",
-    cp: position ? position.codesPostal : ""
+    name: "",
+    cp: ""
   });
   const { query: callAPI } = useAPI();
 
@@ -45,6 +45,19 @@ const EntrepriseList = ({ categorie = false, allCategories }) => {
     getEntreprises(filters);
   }, [])
 
+  // Quand l'utilisateur déclenche la géolocalisation, on pré-remplit
+  // la ville / le code postal et on relance la recherche.
+  useEffect(() => {
+    if (!position) return;
+    const located = {
+      ...filters,
+      name: position.ville,
+      cp: position.codesPostal,
+    };
+    setContent(located);
+    getEntreprises(located);
+  }, [position])
+
   return (
     <Fragment>
       {isLoading && <Loader/>}
@@ -54,13 +67,13 @@ const EntrepriseList = ({ categorie = false, allCategories }) => {
         categorieList={allCategories}
         onSubmit={handleSubmit}
       />
-      <div className={style["grid"]}>
+      <div className={classes["grid"]}>
         {entreprises.length != 0 ? (
           entreprises.map((entreprise) => (
             <EntrepriseCard key={entreprise.id} entreprise={entreprise} />
           ))
         ) : (
-          <div className={style["no-content"]}>
+          <div className={classes["no-content"]}>
             <p>Il semblerait que votre recherche n'ai pas abouti</p>
           </div>
         )}

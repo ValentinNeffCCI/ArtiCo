@@ -5,7 +5,7 @@ import Loader from '../../components/UX/loaders/Loader'
 import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, TextAlignCenter } from 'lucide-react'
 import { CustomButton } from '../../components/buttons/Custom/CustomButton'
-import style from './Responses.module.css'
+import classes from './Responses.module.css'
 import ResponseCard from '../../components/cards/ResponseCard/ResponseCard'
 
 const Responses = () => {
@@ -31,21 +31,21 @@ const Responses = () => {
     }, []);
     
   return (
-    <main className={style["page"]}>
+    <main className={classes["page"]}>
         {isLoading && <Loader />}
-        <CustomButton clickAction={returnBack} className={style["goBack"]}>
+        <CustomButton clickAction={returnBack} className={classes["goBack"]}>
             <ArrowLeft size={20}/>
             Revenir en arrière
         </CustomButton>
         <h1>Réponses au questionnaire</h1>
-        <div className={style["list"]}>
+        <div className={classes["list"]}>
            {
             responses.length != 0 ?
             responses.map((response) => (
                 <ResponseCard key={response.id} reponse={response} />
             ))
             :
-            <div className={style["empty"]}>
+            <div className={classes["empty"]}>
                 Il semblerait que personne n'ai encore répondu à ce questionnaire 🤔
             </div>
            }

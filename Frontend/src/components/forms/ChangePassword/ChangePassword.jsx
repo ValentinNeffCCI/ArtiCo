@@ -1,4 +1,4 @@
-import style from "./ChangePassword.module.css";
+import classes from "./ChangePassword.module.css";
 import useForm from "../../../hooks/useForm";
 import { CustomButton } from "../../buttons/Custom/CustomButton";
 import PasswordInput from "../inputs/PasswordInput";
@@ -43,11 +43,11 @@ const ChangePassword = ({ token }) => {
   };
 
   return (
-    <form className={style["form"]} onSubmit={handleSubmit}>
-      <h1 className={style["title"]}>Nouveau mot de passe</h1>
+    <form className={classes["form"]} onSubmit={handleSubmit}>
+      <h1 className={classes["title"]}>Nouveau mot de passe</h1>
       <PasswordInput
         onChange={changeListener}
-        style={style}
+        style={classes}
         name="password"
         placeholder="Nouveau mot de passe"
       >
@@ -55,7 +55,7 @@ const ChangePassword = ({ token }) => {
       </PasswordInput>
       <PasswordInput
         onChange={changeListener}
-        style={style}
+        style={classes}
         name="confirmPassword"
         placeholder="Confirmer le mot de passe"
       >

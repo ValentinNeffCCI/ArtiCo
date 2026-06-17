@@ -1,5 +1,5 @@
 import React from "react";
-import style from "../Formulaires.module.css";
+import classes from "../Formulaires.module.css";
 import { Eye, FileText, Pencil, Trash2 } from "lucide-react";
 import { LinkButton } from "../../../components/buttons/Link/LinkButton";
 import { CustomButton } from "../../../components/buttons/Custom/CustomButton";
@@ -9,14 +9,14 @@ const FormCard = ({ onDelete, form }) => {
     onDelete(form);
   };
   return (
-    <div className={style["form"]}>
-      <div className={style["form-head"]}>
-        <span className={style["form-icon"]}>
+    <div className={classes["form"]}>
+      <div className={classes["form-head"]}>
+        <span className={classes["form-icon"]}>
           <FileText size={20} />
         </span>
         <h2>{form.name}</h2>
       </div>
-      <div className={style["form-buttons"]}>
+      <div className={classes["form-buttons"]}>
         <LinkButton path={"/formulaire/" + form.id + "/reponses"}>
           <Eye size={15} />
           <span>Réponses</span>

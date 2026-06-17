@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../contexts/UserContext";
-import style from "./profil.module.css";
+import classes from "./profil.module.css";
 import UpdateUserForm from "./ModifyForm/UpdateUserForm";
 import useAPI from "../../hooks/useAPI";
 import { CustomButton } from "../../components/buttons/Custom/CustomButton";
@@ -58,13 +58,13 @@ const Profile = () => {
   };
 
   return (
-    <main className={style["profil"]}>
-      <section className={style["panel"]}>
-        <div className={style["modify-header"]}>
-          <h1 className={["dangrek", style["title"]].join(" ")}>
+    <main className={classes["profil"]}>
+      <section className={classes["panel"]}>
+        <div className={classes["modify-header"]}>
+          <h1 className={["dangrek", classes["title"]].join(" ")}>
             Mon profil
           </h1>
-          <CustomButton className={style["deleteBtn"]} clickAction={toggleModale}>
+          <CustomButton className={classes["deleteBtn"]} clickAction={toggleModale}>
             Supprimer le compte
           </CustomButton>
         </div>
@@ -72,18 +72,18 @@ const Profile = () => {
       </section>
 
       {!isAdmin && (
-        <section className={[style["panel"], style["entrepriseList"]].join(" ")}>
-          <div className={style["section-header"]}>
+        <section className={[classes["panel"], classes["entrepriseList"]].join(" ")}>
+          <div className={classes["section-header"]}>
             <h2 className="itim">Mes entreprises</h2>
-            <NavLink to="/entreprise/nouveau" className={style["addBtn"]}>
+            <NavLink to="/entreprise/nouveau" className={classes["addBtn"]}>
               <Plus size={18} />
               <span>Ajouter une entreprise</span>
             </NavLink>
           </div>
           {entreprises && entreprises.length !== 0 ? (
-            <div className={style["grid"]}>
+            <div className={classes["grid"]}>
               {entreprises.map((entreprise) => (
-                <div className={style["card"]} key={entreprise.id}>
+                <div className={classes["card"]} key={entreprise.id}>
                   <figure>
                     <img
                       src={
@@ -94,9 +94,9 @@ const Profile = () => {
                       alt={entreprise.name}
                     />
                   </figure>
-                  <div className={style["card-content"]}>
+                  <div className={classes["card-content"]}>
                     <h3 className="montserrat">{entreprise.name}</h3>
-                    <div className={style["card-buttons"]}>
+                    <div className={classes["card-buttons"]}>
                       <NavLink
                         to={"/entreprise/" + entreprise.id}
                         title={"Mettre à jour les informations"}
@@ -117,7 +117,7 @@ const Profile = () => {
               ))}
             </div>
           ) : (
-            <NavLink to="/entreprise/nouveau" className={style["empty"]}>
+            <NavLink to="/entreprise/nouveau" className={classes["empty"]}>
               <Plus size={28} />
               <span>Ajoutez votre première entreprise</span>
             </NavLink>
@@ -127,14 +127,14 @@ const Profile = () => {
 
       {showModal && (
         <Modale>
-          <div className={style["deleteAccount"]}>
+          <div className={classes["deleteAccount"]}>
             <h2>Nous sommes désolés de vous voir partir ...</h2>
             <div>
               <h3>Voulez-vous vraiment supprimer votre compte ?</h3>
               <p style={{ textAlign: "center", fontStyle: "italic" }}>
                 (Cette action est définitive)
               </p>
-              <div className={style["delete-btns"]}>
+              <div className={classes["delete-btns"]}>
                 <CustomButton
                   clickAction={deleteAccount}
                   style={{

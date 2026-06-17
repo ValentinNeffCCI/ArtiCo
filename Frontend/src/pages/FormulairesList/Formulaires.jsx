@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
 import Loader from "../../components/UX/loaders/Loader";
-import style from "./Formulaires.module.css";
+import classes from "./Formulaires.module.css";
 import { CustomButton } from "../../components/buttons/Custom/CustomButton";
 import { ArrowLeft, Plus } from "lucide-react";
 import FormCard from "./FormCard/FormCard";
@@ -55,9 +55,9 @@ const Formulaires = () => {
   }, []);
 
   return (
-    <main className={style["formulaires"]}>
+    <main className={classes["formulaires"]}>
       {isLoading && <Loader />}
-      <CustomButton clickAction={returnBack} className={style["goBack"]}>
+      <CustomButton clickAction={returnBack} className={classes["goBack"]}>
         <ArrowLeft />
         Revenir en arrière
       </CustomButton>
@@ -70,12 +70,12 @@ const Formulaires = () => {
           <h3>Voulez-vous vraiment supprimer "{showModale.name}"</h3>
         </DeleteConfirmation>
       )}
-      <header className={style["pageHead"]}>
-        <h1 className={["dangrek", style["title"]].join(" ")}>
+      <header className={classes["pageHead"]}>
+        <h1 className={["dangrek", classes["title"]].join(" ")}>
           Les questionnaires de mon entreprise
         </h1>
         {!isLoading && (
-          <p className={style["subtitle"]}>
+          <p className={classes["subtitle"]}>
             {forms.length === 0
               ? "Aucun questionnaire pour le moment"
               : `${forms.length} questionnaire${forms.length > 1 ? "s" : ""}`}
@@ -84,27 +84,27 @@ const Formulaires = () => {
       </header>
 
       {!isLoading && forms.length === 0 ? (
-        <section className={style["empty"]}>
+        <section className={classes["empty"]}>
           <figure>
             <img src={worker} alt="Artisan heureux" />
           </figure>
           <p>Créez votre premier questionnaire pour commencer à collecter des réponses.</p>
           <NavLink
             to={`/entreprise/${entrepriseID}/formulaire/nouveau`}
-            className={style["emptyCta"]}
+            className={classes["emptyCta"]}
           >
             <Plus size={18} />
             <span>Nouveau questionnaire</span>
           </NavLink>
         </section>
       ) : (
-        <div className={style["formList"]}>
+        <div className={classes["formList"]}>
           {forms.map((form) => (
             <FormCard key={form.id} form={form} onDelete={showPopup} />
           ))}
           <NavLink
             to={`/entreprise/${entrepriseID}/formulaire/nouveau`}
-            className={style["newForm"]}
+            className={classes["newForm"]}
           >
             <Plus />
             <span>Nouveau questionnaire</span>

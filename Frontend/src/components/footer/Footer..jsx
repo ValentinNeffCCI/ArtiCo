@@ -1,13 +1,7 @@
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import classes from './Footer.module.css'
-import MentionsLegales from '../modales/Mentions/MentionsLegales';
-import PolitiqueConfidentialite from '../modales/Mentions/PolitiqueConfidentialite';
 
 export const Footer = () => {
-    const [openModal, setOpenModal] = useState(null);
-
-    const close = () => setOpenModal(null);
-
     return (
         <footer className={classes["footer"]}>
             <span>
@@ -17,24 +11,18 @@ export const Footer = () => {
                 Valentin NEFF
             </span>
             <nav className={classes["legal-links"]}>
-                <button type="button" onClick={() => setOpenModal("legal")}>
+                <Link to="/mentions-legales">
                     Mentions légales
-                </button>
+                </Link>
                 <span className={classes["separator"]}>·</span>
-                <button type="button" onClick={() => setOpenModal("privacy")}>
+                <Link to="/politique-de-confidentialite">
                     Politique de confidentialité
-                </button>
+                </Link>
+                <span className={classes["separator"]}>·</span>
+                <Link to="/politique-de-protection-des-donnees">
+                    Politique de protection des données
+                </Link>
             </nav>
-
-            {openModal === "legal" && (
-                <MentionsLegales
-                    onClose={close}
-                    onOpenPrivacy={() => setOpenModal("privacy")}
-                />
-            )}
-            {openModal === "privacy" && (
-                <PolitiqueConfidentialite onClose={close} />
-            )}
         </footer>
     )
 }

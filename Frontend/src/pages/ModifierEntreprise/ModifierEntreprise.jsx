@@ -1,4 +1,4 @@
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Images, Trash2 } from "lucide-react";
 import Loader from "../../components/UX/loaders/Loader";
 import React, { Suspense, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,8 +7,8 @@ import { toast, ToastContainer, Slide } from "react-toastify";
 import defaultImage from "../../assets/photos/Sora_Shimazaki/handshake.jpg";
 import CreateEntreprise from "../../components/forms/CreateEntreprise/CreateEntreprise";
 import { LinkButton } from "../../components/buttons/Link/LinkButton";
-import style from "./Modifier.module.css";
-import ManageGalerie from "../../components/images/galerie/ManageGalerie";
+import classes from "./Modifier.module.css";
+import GalerieModale from "../../components/modales/Galerie/GalerieModale";
 import { CustomButton } from "../../components/buttons/Custom/CustomButton";
 import DeleteConfirmation from "../../components/modales/DeleteConfirmation/DeleteConfirmation";
 
@@ -19,6 +19,7 @@ const ModifierEntreprise = () => {
 
   const [entreprise, setEntreprise] = useState(false);
   const [showModale, setShowModale] = useState(false);
+  const [showGalerie, setShowGalerie] = useState(false);
 
   const closeModale = () => {
     setShowModale(false);
@@ -49,8 +50,11 @@ const ModifierEntreprise = () => {
   useEffect(() => {
     getEntrepriseById(id);
   }, [id]);
+
+  if (!entreprise) null;
+  
   return (
-    <main className={style["page"]}>
+    <main className={classes["page"]}>
       {showModale && (
         <DeleteConfirmation onClose={closeModale} onDelete={deleteUser}>
           Voulez-vous vraiment supprimer l'entreprise ?
@@ -72,7 +76,7 @@ const ModifierEntreprise = () => {
         <span>Retourner au profil</span>
       </LinkButton>
       <h1
-        className="itim p-2 w-60 mx-auto"
+        className={classes["title"]}
         style={{
           paddingTop: 0,
         }}
@@ -80,26 +84,46 @@ const ModifierEntreprise = () => {
         Modifier mon entreprise
       </h1>
       {entreprise ? (
-        <div className={style["update"]}>
+        <div className={classes["update"]}>
           <CreateEntreprise
             defaultValues={entreprise}
             method="PUT"
             url={"/entreprise/" + id}
           />
-          <ManageGalerie entrepriseId={id} />
+          <div className={classes["actions"]}>
+            <CustomButton
+              style={{
+                "--bg-color": "var(--primary)",
+                "--color": "var(--light)",
+              }}
+              className={classes["action-btn"]}
+              clickAction={() => setShowGalerie(true)}
+            >
+              <Images size={18} />
+              <span>Gérer la galerie de photos</span>
+            </CustomButton>
+            <CustomButton
+              style={{
+                "--bg-color": "red",
+                "--color": "var(--light)",
+              }}
+              className={classes["action-btn"]}
+              clickAction={displayModale}
+            >
+              <Trash2 size={18} />
+              <span>Supprimer l'entreprise</span>
+            </CustomButton>
+          </div>
         </div>
       ) : (
         <Loader />
       )}
-      <CustomButton
-        style={{
-          "--color": "red",
-          margin: "1rem auto 0",
-        }}
-        clickAction={displayModale}
-      >
-        Supprimer l'entreprise
-      </CustomButton>
+      {showGalerie && (
+        <GalerieModale
+          entrepriseId={id}
+          onClose={() => setShowGalerie(false)}
+        />
+      )}
       <ToastContainer
         position="top-right"
         autoClose={3000}
