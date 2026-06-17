@@ -25,22 +25,28 @@ function MentionsLegales({ onClose, onOpenPrivacy }) {
         <div className={classes["legal-body"]}>
           <h4>Éditeur du site</h4>
           <p>
-            Le site <strong>Artico</strong> est édité par{" "}
-            <strong>Valentin NEFF</strong>, personne physique, dans le cadre
-            d'un projet personnel à but non commercial.
+            Le site <strong>Artico</strong> est édité par la société{" "}
+            <strong>Artico SAS</strong>, société par actions simplifiée au
+            capital de XX XXX €.
             <br />
-            Contact : neffvalentinpro@gmail.com
-          </p>
-          <p>
-            Conformément à l'article 6 III 2 de la loi n° 2004-575 du 21 juin
-            2004 pour la confiance dans l'économie numérique (LCEN), l'éditeur
-            étant une personne physique non professionnelle, son adresse postale
-            n'est pas rendue publique. Elle est tenue à la disposition de
-            l'hébergeur du site.
+            Siège social : 12 rue des Placeholder, 67000 Strasbourg, France
+            <br />
+            SIRET : 912 345 678 00019
+            <br />
+            RCS Strasbourg : 912 345 678
+            <br />
+            N° TVA intracommunautaire : FR45 912345678
+            <br />
+            Téléphone : +33 3 88 00 00 00
+            <br />
+            Contact : contact@artico.fr
           </p>
 
           <h4>Directeur de la publication</h4>
-          <p>Valentin NEFF.</p>
+          <p>
+            Le directeur de la publication est <strong>Valentin NEFF</strong>,
+            en sa qualité de représentant légal de la société Artico SAS.
+          </p>
 
           <h4>Hébergeur</h4>
           <p>

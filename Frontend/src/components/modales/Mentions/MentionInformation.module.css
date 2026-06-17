@@ -36,6 +36,7 @@
     padding: 2.5rem;
     box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
     animation: popIn .35s cubic-bezier(.2, .8, .3, 1.2);
+    text-align: left;
 }
 
 .close-btn {
