@@ -16,6 +16,19 @@ const useAPI = () => {
 
   const getUrl = baseURL.replace("/api", "");
 
+  // Endpoints d'authentification : un 401 y signifie "identifiants invalides"
+  // et non "token d'accès expiré". On ne doit donc pas déclencher le refresh
+  // silencieux pour eux, sous peine d'avaler le corps d'erreur attendu par
+  // l'appelant (ex. LoginForm qui lit `response.error`).
+  const AUTH_ENDPOINTS = [
+    "/auth/login",
+    "/auth/register",
+    "/auth/refresh",
+    "/auth/change-password",
+  ];
+  const isAuthEndpoint = (suffix) =>
+    AUTH_ENDPOINTS.some((endpoint) => suffix.startsWith(endpoint));
+
   const callAPI = async (suffix, method = "GET", body = false) => {
     try {
       let payload = {
@@ -44,7 +57,7 @@ const useAPI = () => {
 
       let response = await fetch(baseURL + suffix, payload);
 
-      if (response.status === 401) {
+      if (response.status === 401 && !isAuthEndpoint(suffix)) {
         const refresh = await fetch(baseURL + "/auth/refresh", {
           method: "GET",
           headers: {

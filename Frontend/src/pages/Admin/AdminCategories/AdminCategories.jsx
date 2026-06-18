@@ -4,7 +4,7 @@ import useAPI from '../../../hooks/useAPI';
 import useForm from '../../../hooks/useForm';
 import { CustomButton } from '../../../components/buttons/Custom/CustomButton';
 import { Save } from 'lucide-react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import DeleteConfirmation from "../../../components/modales/DeleteConfirmation/DeleteConfirmation.jsx";
 import EntiteList from "../../../components/listes/users/EntiteList.jsx";
 import { UpdateCategorie } from '../../../components/modales/UpdateCategorie/UpdateCategorie.jsx';
@@ -75,7 +75,6 @@ const AdminCategories = () => {
 
     return (
         <main className={classes["categorie_page"]}>
-            <ToastContainer/>
             {
                 showUpdateModale &&
                 <UpdateCategorie categorie={showUpdateModale} onClose={closeCategorieToModify} onModify={modifyCategorie}/>

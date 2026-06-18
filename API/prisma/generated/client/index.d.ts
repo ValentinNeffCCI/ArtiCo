@@ -65,11 +65,32 @@ export namespace $Enums {
 
 export type EnumRole = (typeof EnumRole)[keyof typeof EnumRole]
 
+
+export const InputType: {
+  text: 'text',
+  textarea: 'textarea',
+  number: 'number',
+  email: 'email',
+  tel: 'tel',
+  date: 'date',
+  datetime_local: 'datetime_local',
+  color: 'color',
+  checkbox: 'checkbox',
+  radio: 'radio',
+  select: 'select'
+};
+
+export type InputType = (typeof InputType)[keyof typeof InputType]
+
 }
 
 export type EnumRole = $Enums.EnumRole
 
 export const EnumRole: typeof $Enums.EnumRole
+
+export type InputType = $Enums.InputType
+
+export const InputType: typeof $Enums.InputType
 
 /**
  * ##  Prisma Client ʲˢ
@@ -7554,7 +7575,7 @@ export namespace Prisma {
   export type InputMinAggregateOutputType = {
     id: number | null
     name: string | null
-    type: string | null
+    type: $Enums.InputType | null
     required: boolean | null
     formulaireId: number | null
   }
@@ -7562,7 +7583,7 @@ export namespace Prisma {
   export type InputMaxAggregateOutputType = {
     id: number | null
     name: string | null
-    type: string | null
+    type: $Enums.InputType | null
     required: boolean | null
     formulaireId: number | null
   }
@@ -7701,7 +7722,7 @@ export namespace Prisma {
   export type InputGroupByOutputType = {
     id: number
     name: string
-    type: string
+    type: $Enums.InputType
     required: boolean
     formulaireId: number
     _count: InputCountAggregateOutputType | null
@@ -7784,7 +7805,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
-      type: string
+      type: $Enums.InputType
       required: boolean
       formulaireId: number
     }, ExtArgs["result"]["input"]>
@@ -8214,7 +8235,7 @@ export namespace Prisma {
   interface InputFieldRefs {
     readonly id: FieldRef<"Input", 'Int'>
     readonly name: FieldRef<"Input", 'String'>
-    readonly type: FieldRef<"Input", 'String'>
+    readonly type: FieldRef<"Input", 'InputType'>
     readonly required: FieldRef<"Input", 'Boolean'>
     readonly formulaireId: FieldRef<"Input", 'Int'>
   }
@@ -11068,6 +11089,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'InputType'
+   */
+  export type EnumInputTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InputType'>
+    
+
+
+  /**
+   * Reference to a field of type 'InputType[]'
+   */
+  export type ListEnumInputTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InputType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Json'
    */
   export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
@@ -11469,7 +11504,7 @@ export namespace Prisma {
     NOT?: InputWhereInput | InputWhereInput[]
     id?: IntFilter<"Input"> | number
     name?: StringFilter<"Input"> | string
-    type?: StringFilter<"Input"> | string
+    type?: EnumInputTypeFilter<"Input"> | $Enums.InputType
     required?: BoolFilter<"Input"> | boolean
     formulaireId?: IntFilter<"Input"> | number
     formulaire?: XOR<FormulaireScalarRelationFilter, FormulaireWhereInput>
@@ -11492,7 +11527,7 @@ export namespace Prisma {
     OR?: InputWhereInput[]
     NOT?: InputWhereInput | InputWhereInput[]
     name?: StringFilter<"Input"> | string
-    type?: StringFilter<"Input"> | string
+    type?: EnumInputTypeFilter<"Input"> | $Enums.InputType
     required?: BoolFilter<"Input"> | boolean
     formulaireId?: IntFilter<"Input"> | number
     formulaire?: XOR<FormulaireScalarRelationFilter, FormulaireWhereInput>
@@ -11518,7 +11553,7 @@ export namespace Prisma {
     NOT?: InputScalarWhereWithAggregatesInput | InputScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Input"> | number
     name?: StringWithAggregatesFilter<"Input"> | string
-    type?: StringWithAggregatesFilter<"Input"> | string
+    type?: EnumInputTypeWithAggregatesFilter<"Input"> | $Enums.InputType
     required?: BoolWithAggregatesFilter<"Input"> | boolean
     formulaireId?: IntWithAggregatesFilter<"Input"> | number
   }
@@ -12010,7 +12045,7 @@ export namespace Prisma {
 
   export type InputCreateInput = {
     name?: string
-    type?: string
+    type?: $Enums.InputType
     required?: boolean
     formulaire: FormulaireCreateNestedOneWithoutInputsInput
     options?: OptionCreateNestedManyWithoutInputInput
@@ -12019,7 +12054,7 @@ export namespace Prisma {
   export type InputUncheckedCreateInput = {
     id?: number
     name?: string
-    type?: string
+    type?: $Enums.InputType
     required?: boolean
     formulaireId: number
     options?: OptionUncheckedCreateNestedManyWithoutInputInput
@@ -12027,7 +12062,7 @@ export namespace Prisma {
 
   export type InputUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
     required?: BoolFieldUpdateOperationsInput | boolean
     formulaire?: FormulaireUpdateOneRequiredWithoutInputsNestedInput
     options?: OptionUpdateManyWithoutInputNestedInput
@@ -12036,7 +12071,7 @@ export namespace Prisma {
   export type InputUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
     required?: BoolFieldUpdateOperationsInput | boolean
     formulaireId?: IntFieldUpdateOperationsInput | number
     options?: OptionUncheckedUpdateManyWithoutInputNestedInput
@@ -12045,21 +12080,21 @@ export namespace Prisma {
   export type InputCreateManyInput = {
     id?: number
     name?: string
-    type?: string
+    type?: $Enums.InputType
     required?: boolean
     formulaireId: number
   }
 
   export type InputUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
     required?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type InputUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
     required?: BoolFieldUpdateOperationsInput | boolean
     formulaireId?: IntFieldUpdateOperationsInput | number
   }
@@ -12613,6 +12648,13 @@ export namespace Prisma {
     entrepriseId?: SortOrder
   }
 
+  export type EnumInputTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.InputType | EnumInputTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInputTypeFilter<$PrismaModel> | $Enums.InputType
+  }
+
   export type FormulaireScalarRelationFilter = {
     is?: FormulaireWhereInput
     isNot?: FormulaireWhereInput
@@ -12660,6 +12702,16 @@ export namespace Prisma {
   export type InputSumOrderByAggregateInput = {
     id?: SortOrder
     formulaireId?: SortOrder
+  }
+
+  export type EnumInputTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InputType | EnumInputTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInputTypeWithAggregatesFilter<$PrismaModel> | $Enums.InputType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInputTypeFilter<$PrismaModel>
+    _max?: NestedEnumInputTypeFilter<$PrismaModel>
   }
 
   export type InputScalarRelationFilter = {
@@ -13145,6 +13197,10 @@ export namespace Prisma {
     connect?: OptionWhereUniqueInput | OptionWhereUniqueInput[]
   }
 
+  export type EnumInputTypeFieldUpdateOperationsInput = {
+    set?: $Enums.InputType
+  }
+
   export type FormulaireUpdateOneRequiredWithoutInputsNestedInput = {
     create?: XOR<FormulaireCreateWithoutInputsInput, FormulaireUncheckedCreateWithoutInputsInput>
     connectOrCreate?: FormulaireCreateOrConnectWithoutInputsInput
@@ -13400,6 +13456,23 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumInputTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.InputType | EnumInputTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInputTypeFilter<$PrismaModel> | $Enums.InputType
+  }
+
+  export type NestedEnumInputTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InputType | EnumInputTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.InputType[] | ListEnumInputTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumInputTypeWithAggregatesFilter<$PrismaModel> | $Enums.InputType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInputTypeFilter<$PrismaModel>
+    _max?: NestedEnumInputTypeFilter<$PrismaModel>
   }
   export type NestedJsonFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -13821,7 +13894,7 @@ export namespace Prisma {
 
   export type InputCreateWithoutFormulaireInput = {
     name?: string
-    type?: string
+    type?: $Enums.InputType
     required?: boolean
     options?: OptionCreateNestedManyWithoutInputInput
   }
@@ -13829,7 +13902,7 @@ export namespace Prisma {
   export type InputUncheckedCreateWithoutFormulaireInput = {
     id?: number
     name?: string
-    type?: string
+    type?: $Enums.InputType
     required?: boolean
     options?: OptionUncheckedCreateNestedManyWithoutInputInput
   }
@@ -13937,7 +14010,7 @@ export namespace Prisma {
     NOT?: InputScalarWhereInput | InputScalarWhereInput[]
     id?: IntFilter<"Input"> | number
     name?: StringFilter<"Input"> | string
-    type?: StringFilter<"Input"> | string
+    type?: EnumInputTypeFilter<"Input"> | $Enums.InputType
     required?: BoolFilter<"Input"> | boolean
     formulaireId?: IntFilter<"Input"> | number
   }
@@ -14152,7 +14225,7 @@ export namespace Prisma {
 
   export type InputCreateWithoutOptionsInput = {
     name?: string
-    type?: string
+    type?: $Enums.InputType
     required?: boolean
     formulaire: FormulaireCreateNestedOneWithoutInputsInput
   }
@@ -14160,7 +14233,7 @@ export namespace Prisma {
   export type InputUncheckedCreateWithoutOptionsInput = {
     id?: number
     name?: string
-    type?: string
+    type?: $Enums.InputType
     required?: boolean
     formulaireId: number
   }
@@ -14183,7 +14256,7 @@ export namespace Prisma {
 
   export type InputUpdateWithoutOptionsInput = {
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
     required?: BoolFieldUpdateOperationsInput | boolean
     formulaire?: FormulaireUpdateOneRequiredWithoutInputsNestedInput
   }
@@ -14191,7 +14264,7 @@ export namespace Prisma {
   export type InputUncheckedUpdateWithoutOptionsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
     required?: BoolFieldUpdateOperationsInput | boolean
     formulaireId?: IntFieldUpdateOperationsInput | number
   }
@@ -14441,7 +14514,7 @@ export namespace Prisma {
   export type InputCreateManyFormulaireInput = {
     id?: number
     name?: string
-    type?: string
+    type?: $Enums.InputType
     required?: boolean
   }
 
@@ -14455,7 +14528,7 @@ export namespace Prisma {
 
   export type InputUpdateWithoutFormulaireInput = {
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
     required?: BoolFieldUpdateOperationsInput | boolean
     options?: OptionUpdateManyWithoutInputNestedInput
   }
@@ -14463,7 +14536,7 @@ export namespace Prisma {
   export type InputUncheckedUpdateWithoutFormulaireInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
     required?: BoolFieldUpdateOperationsInput | boolean
     options?: OptionUncheckedUpdateManyWithoutInputNestedInput
   }
@@ -14471,7 +14544,7 @@ export namespace Prisma {
   export type InputUncheckedUpdateManyWithoutFormulaireInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    type?: StringFieldUpdateOperationsInput | string
+    type?: EnumInputTypeFieldUpdateOperationsInput | $Enums.InputType
     required?: BoolFieldUpdateOperationsInput | boolean
   }
 
