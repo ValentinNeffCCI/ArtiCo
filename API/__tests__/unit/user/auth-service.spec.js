@@ -64,31 +64,31 @@ describe("auth-service", () => {
       });
     });
 
-    it("lève une 403 quand l'utilisateur n'existe pas", async () => {
+    it("lève une 401 quand l'utilisateur n'existe pas", async () => {
       UserRepository.findByEmail.mockResolvedValue(null);
 
       await expect(
         authService.login("inconnu@artico.fr", "x")
-      ).rejects.toMatchObject({ status: 403 });
+      ).rejects.toMatchObject({ status: 401 });
       expect(bcrypt.compare).not.toHaveBeenCalled();
     });
 
-    it("lève une 403 quand le mot de passe est incorrect", async () => {
+    it("lève une 401 quand le mot de passe est incorrect", async () => {
       UserRepository.findByEmail.mockResolvedValue(makeUser());
       bcrypt.compare.mockResolvedValue(false);
 
       await expect(
         authService.login("test@artico.fr", "mauvais")
-      ).rejects.toMatchObject({ status: 403, message: authService.wrongCredentials.message });
+      ).rejects.toMatchObject({ status: 401, message: authService.wrongCredentials.message });
     });
 
-    it("lève une 403 quand le compte est inactif", async () => {
+    it("lève une 401 quand le compte est inactif", async () => {
       UserRepository.findByEmail.mockResolvedValue(makeUser({ active: false }));
       bcrypt.compare.mockResolvedValue(true);
 
       await expect(
         authService.login("test@artico.fr", "password")
-      ).rejects.toMatchObject({ status: 403 });
+      ).rejects.toMatchObject({ status: 401 });
     });
   });
 
@@ -236,7 +236,7 @@ describe("auth-service", () => {
       expect(result).toMatchObject({ id: 1, token: "access-token" });
     });
 
-    it("lève une 403 quand le reset_token stocké ne correspond pas", async () => {
+    it("lève une 401 quand le reset_token stocké ne correspond pas", async () => {
       jwt.verify.mockImplementation((token, key, cb) => cb(null, { id: 1 }));
       UserRepository.findById.mockResolvedValue(
         makeUser({ reset_token: "autre-token" })
@@ -244,7 +244,7 @@ describe("auth-service", () => {
 
       await expect(
         authService.reset("valid-token", "new-password")
-      ).rejects.toMatchObject({ status: 403 });
+      ).rejects.toMatchObject({ status: 401 });
       expect(UserRepository.update).not.toHaveBeenCalled();
     });
   });
