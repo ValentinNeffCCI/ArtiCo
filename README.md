@@ -10,6 +10,21 @@ Application web permettant à des artisans de référencer leur(s) entreprise(s)
 
 ---
 
+## Documentation
+
+| Document | Contenu |
+|--|--|
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Schémas (déploiement, couches API, modèle de données, flux d'auth) |
+| [docs/Documentation-API.md](docs/Documentation-API.md) | Référence des endpoints REST |
+| [docs/BACKEND.md](docs/BACKEND.md) | Guide développeur backend (architecture en couches, ajout d'endpoint) |
+| [docs/DATABASE.md](docs/DATABASE.md) | Bases de données : Prisma/PostgreSQL, migrations, seed, logs Mongo |
+| [Frontend/README.md](Frontend/README.md) | Documentation technique du frontend React |
+| [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) | Workflow Git, conventions, tests, CI |
+
+Le présent README couvre l'**infrastructure, la CI/CD et le déploiement**.
+
+---
+
 ## Sommaire
 
 - [Architecture](#architecture)

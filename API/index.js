@@ -23,20 +23,23 @@ const AdminRouter = require("./routers/admin-router.js");
 const errorMiddleware = require("./middlewares/error-middleware.js");
 const logger = require("./middlewares/logger.js");
 
-
 // .env
 dotenv.config();
 
 // connexion base de logs (MongoDB)
 const { connectMongo } = require("./utils/mongo.js");
+const HttpError = require("./customclasses/HttpError.js");
 connectMongo();
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: 50,
+  limit: 1000,
   standardHeaders: "draft-8",
   legacyHeaders: false,
-  skipSuccessfulRequests: true
+  skip: (req) => {
+    const ext = path.extname(req.path).toLowerCase();
+    return [".jpg", ".jpeg", ".png", ".gif", ".webp"].includes(ext);
+  },
 });
 
 // temps pour le cache des images
@@ -80,7 +83,7 @@ const PORT = process.env.PORT || 3000;
 app.use(logger);
 
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the ArtiCo API' });
+  res.json({ message: 'Welcome to the ArtiCo API :)' });
 });
 
 const apiRouter = express.Router();
@@ -122,12 +125,12 @@ app.use(
   })
 );
 
+app.use((req, _, next) => {
+  next(new HttpError("Aucune route trouvée", 404));
+});
+
 // Gérer les erreurs
 app.use(errorMiddleware);
-
-app.use((req, res) => {
-  res.status(404).send();
-});
 
 app.listen(PORT, process.env.HOSTNAME , () => {
   console.log(`Server running at http://localhost:${PORT} : ${new Date().toLocaleDateString()}`);
