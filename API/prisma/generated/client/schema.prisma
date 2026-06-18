@@ -72,6 +72,20 @@ model Categorie {
   @@map("categories")
 }
 
+enum InputType {
+  text
+  textarea
+  number
+  email
+  tel
+  date
+  datetime_local @map("datetime-local")
+  color
+  checkbox
+  radio
+  select
+}
+
 model Formulaire {
   id           Int      @id @default(autoincrement())
   name         String
@@ -101,10 +115,10 @@ model Galerie {
 }
 
 model Input {
-  id           Int     @id @default(autoincrement())
-  name         String  @default("Nouveau champ")
-  type         String  @default("text")
-  required     Boolean @default(true)
+  id           Int       @id @default(autoincrement())
+  name         String    @default("Nouveau champ")
+  type         InputType @default(text)
+  required     Boolean   @default(true)
   formulaireId Int
 
   formulaire Formulaire @relation(fields: [formulaireId], references: [id], onDelete: Cascade)

@@ -3,7 +3,7 @@ import Loader from "../../components/UX/loaders/Loader";
 import React, { Suspense, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useAPI from "../../hooks/useAPI";
-import { toast, ToastContainer, Slide } from "react-toastify";
+import { toast } from "react-toastify";
 import defaultImage from "../../assets/photos/Sora_Shimazaki/handshake.jpg";
 import CreateEntreprise from "../../components/forms/CreateEntreprise/CreateEntreprise";
 import { LinkButton } from "../../components/buttons/Link/LinkButton";
@@ -124,19 +124,6 @@ const ModifierEntreprise = () => {
           onClose={() => setShowGalerie(false)}
         />
       )}
-      <ToastContainer
-        position="top-right"
-        autoClose={3000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick={false}
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="colored"
-        transition={Slide}
-      />
     </main>
   );
 };

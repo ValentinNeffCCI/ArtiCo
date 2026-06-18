@@ -225,6 +225,20 @@ exports.EnumRole = exports.$Enums.EnumRole = {
   USER: 'USER'
 };
 
+exports.InputType = exports.$Enums.InputType = {
+  text: 'text',
+  textarea: 'textarea',
+  number: 'number',
+  email: 'email',
+  tel: 'tel',
+  date: 'date',
+  datetime_local: 'datetime_local',
+  color: 'color',
+  checkbox: 'checkbox',
+  radio: 'radio',
+  select: 'select'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Entreprise: 'Entreprise',
