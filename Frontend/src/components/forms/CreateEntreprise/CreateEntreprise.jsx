@@ -7,7 +7,7 @@ import CustomForm from "../CustomForm/Displayer/CustomForm";
 import classes from "./style.module.css";
 import { Upload } from "lucide-react";
 import placeholder from "../../../assets/photos/placeholder.jpeg";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 const CreateEntreprise = ({
   defaultValues = false,

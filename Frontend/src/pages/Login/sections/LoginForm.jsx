@@ -4,7 +4,7 @@ import { useAuth } from "../../../contexts/UserContext";
 import useForm from "../../../hooks/useForm";
 import classes from "./LoginSection.module.css";
 import { LinkButton } from "../../../components/buttons/Link/LinkButton";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 export const LoginForm = ({ children }) => {
   const { changeListener, submitForm, content } = useForm(
