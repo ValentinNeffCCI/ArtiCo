@@ -31,7 +31,7 @@ const OptionDialog = ({addOption, inputId, onClose}) => {
           <label htmlFor="value">Intitulé du choix</label>
           <input type="text" name="value" required id="value" onChange={handleChange}/>
         
-          <CustomButton>
+          <CustomButton submit={true}>
             <span>Enregistrer</span>
           </CustomButton>
         </form>

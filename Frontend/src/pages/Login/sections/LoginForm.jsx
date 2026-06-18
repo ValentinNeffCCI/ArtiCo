@@ -63,6 +63,7 @@ export const LoginForm = ({ children }) => {
           Mot de passe oublié ?
         </LinkButton>
         <CustomButton
+          submit={true}
           style={{
             "--bg-color": "var(--primary)",
             "--color": "var(--light)",

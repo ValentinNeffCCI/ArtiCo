@@ -5,10 +5,10 @@ export const CustomButton = ({
   clickAction = false, 
   children,
   className,
-  submit = true
+  submit = false
 }) => {
   return (
-    <button type={submit && "submit"} className={[classes["btn"], className].join(' ')} style={style} onClick={clickAction ? clickAction : undefined}>
+    <button type={submit ? "submit" : "button"} className={[classes["btn"], className].join(' ')} style={style} onClick={clickAction ? clickAction : undefined}>
         {children}
     </button>
   );
