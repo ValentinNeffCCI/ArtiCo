@@ -17,7 +17,7 @@ const SECRET = process.env.SECRET_KEY;
 const REFRESH_KEY = process.env.REFRESH_KEY;
 const RESET_KEY = process.env.RESET_KEY;
 
-const wrongCredentials = new HttpError("Identifiants incorrects", 403);
+const wrongCredentials = new HttpError("Identifiants incorrects", 401);
 
 module.exports = {
   wrongCredentials,
