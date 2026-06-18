@@ -48,6 +48,7 @@ export const RegisterForm = ({ children }) => {
           placeholder="Mot de passe"
         />
         <CustomButton
+          submit={true}
           style={{
             "--bg-color": "var(--primary)",
             "--color": "var(--light)",

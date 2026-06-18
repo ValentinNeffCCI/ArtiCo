@@ -10,7 +10,8 @@ const optionCreateSchema = require('../schemas/Option/optionCreateSchema.js');
 
 router.get('/:id', idParser, OptionController.getOptionById);
 router.get('/input/:id', idParser, OptionController.getOptionByInputId);
-router.post('/', authenticated(), validate(optionCreateSchema), canCreateOption, OptionController.createOption);
+// Création/modification gérées directement via l'objet formulaire (formulaire-router) :
+// router.post('/', authenticated(), validate(optionCreateSchema), canCreateOption, OptionController.createOption);
 // router.put('/:id', idParser, authenticated(),OptionController.updateOption);
 router.delete('/:id', idParser, authenticated(), verifyAccessOptions, OptionController.deleteOption);
 

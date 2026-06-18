@@ -52,7 +52,7 @@ const LocalOptionDialog = ({ inputId, onClose, addOption }) => {
             value={value}
             onChange={(e) => setValue(e.target.value)}
           />
-          <CustomButton>
+          <CustomButton submit={true}>
             <span>Enregistrer</span>
           </CustomButton>
         </form>
@@ -194,7 +194,7 @@ const FormBuilder = ({ entrepriseId = false, form = null, onSuccess }) => {
           <Plus size={16} />
         </CustomButton>
 
-        <CustomButton className={classes["save"]}>
+        <CustomButton submit={true} className={classes["save"]}>
           <span>Enregistrer</span>
           <Save size={15} />
         </CustomButton>

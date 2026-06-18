@@ -66,6 +66,7 @@ const UpdateUserForm = ({user}) => {
           />
       </div>
       <CustomButton
+        submit={true}
         style={{
           "--bg-color": "var(--primary)",
           "--color": "var(--light)",

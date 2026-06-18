@@ -11,7 +11,8 @@ const inputCreateSchema = require('../schemas/Input/inputCreateSchema.js');
 router.get('/', InputController.getAllInputs);
 router.get('/:id', idParser, InputController.getInputById);
 router.get('/formulaire/:id', idParser, InputController.getInputByFormulaireId);
-router.post('/', authenticated(), validate(inputCreateSchema), canCreateInput, InputController.createInput);
+// Création/modification gérées directement via l'objet formulaire (formulaire-router) :
+// router.post('/', authenticated(), validate(inputCreateSchema), canCreateInput, InputController.createInput);
 // router.put('/:id', idParser, authenticated(),InputController.updateInput);
 router.delete('/:id', idParser, authenticated(), verifyAccessInput, InputController.deleteInput);
 

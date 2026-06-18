@@ -89,7 +89,7 @@ const AdminCategories = () => {
             }
             <form onSubmit={onSubmit}>
                 <input type="text" name="name" placeholder='Nouvelle catégorie' onChange={changeListener} ref={inputRef} />
-                <CustomButton className={classes['form-btn']}>
+                <CustomButton submit={true} className={classes['form-btn']}>
                     <span>Enregistrer</span>
                     <Save />
                 </CustomButton>

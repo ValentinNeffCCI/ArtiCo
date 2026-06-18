@@ -62,7 +62,7 @@ const ContactModale = ({ toggleModale }) => {
                         >
                             Annuler
                         </CustomButton>
-                        <CustomButton type="submit" style={{
+                        <CustomButton submit={true} style={{
                             "--bg-color": "var(--primary)",
                             "--color": "var(--light)"
                         }}>

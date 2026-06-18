@@ -62,6 +62,7 @@ const ChangePassword = ({ token }) => {
         Confirmer le nouveau mot de passe
       </PasswordInput>
       <CustomButton
+        submit={true}
         style={{
           width: "fit-content",
           "--bg-color": "var(--primary)",

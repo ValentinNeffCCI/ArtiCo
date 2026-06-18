@@ -99,6 +99,7 @@ const AdminEntreprises = () => {
           />
         </div>
         <CustomButton
+        submit={true}
         className={classes['admin-search-button']}
         style={{
           "--bg-color": 'var(--primary)',

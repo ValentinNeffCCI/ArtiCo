@@ -27,7 +27,7 @@ export const UpdateCategorie = ({
                 <h2>Modifier {categorie.name}</h2>
                 <form onSubmit={handleSubmit}>
                     <input name="name" type="text" defaultValue={categorie.name} onChange={changeListener} placeholder={"Modifier la catégorie"}/>
-                    <CustomButton style={{
+                    <CustomButton submit={true} style={{
                         "--bg-color": "var(--primary)",
                         "--color": "var(--light)",
                         display: "flex",
