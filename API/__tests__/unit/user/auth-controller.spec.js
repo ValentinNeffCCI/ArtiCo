@@ -58,7 +58,7 @@ describe("auth-controller", () => {
 
     it("encapsule l'erreur du service dans un HttpError et la passe à next()", async () => {
       AuthService.login.mockRejectedValue(
-        new HttpError("Identifiants incorrects", 403),
+        new HttpError("Identifiants incorrects", 401),
       );
 
       await authController.login(
@@ -70,7 +70,7 @@ describe("auth-controller", () => {
       const passed = next.mock.calls[0][0];
       expect(passed).toBeInstanceOf(HttpError);
       expect(passed).toMatchObject({
-        status: 403,
+        status: 401,
         message: "Identifiants incorrects",
       });
       expect(res.cookie).not.toHaveBeenCalled();

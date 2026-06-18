@@ -17,7 +17,7 @@ const SECRET = process.env.SECRET_KEY;
 const REFRESH_KEY = process.env.REFRESH_KEY;
 const RESET_KEY = process.env.RESET_KEY;
 
-const wrongCredentials = new HttpError("Identifiants incorrects", 403);
+const wrongCredentials = new HttpError("Identifiants incorrects", 401);
 
 module.exports = {
   wrongCredentials,
@@ -74,7 +74,7 @@ module.exports = {
     if (!user) throw new HttpError("Aucun utilisateur trouvé", 404);
     if (!user.reset_token || user.reset_token !== hashToken(token)) throw new HttpError(
         "Aucune demande réinitialisation de mot de passe",
-        403
+        401
     );
 
     const refresh = jwt.sign({ id }, REFRESH_KEY, {
