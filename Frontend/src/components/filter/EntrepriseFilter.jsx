@@ -50,6 +50,7 @@ const EntrepriseFilter = ({
           </div>
         </div>
         <CustomButton
+          submit={true}
           style={{
             "--bg-color": "var(--primary)",
             "--color": "var(--light)",

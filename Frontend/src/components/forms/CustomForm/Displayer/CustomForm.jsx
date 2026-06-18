@@ -158,6 +158,7 @@ const CustomForm = ({
       })}
       {children}
       <CustomButton
+        submit={true}
         className={classes["submit"]}
         style={{
           pointerEvents: active ? "auto" : "none",
