@@ -33,7 +33,7 @@ connectMongo();
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: 1000,
+  limit: 200,
   standardHeaders: "draft-8",
   legacyHeaders: false,
   skip: (req) => {
