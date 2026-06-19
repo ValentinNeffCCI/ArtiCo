@@ -14,3 +14,4 @@ uploads/*
 brouillo*
 logs/
 coverage/
+prisma/generated/
