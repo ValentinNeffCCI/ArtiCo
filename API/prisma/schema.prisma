@@ -51,7 +51,7 @@ model Entreprise {
   categorieId Int?
 
   owner      User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  categorie  Categorie? @relation(fields: [categorieId], references: [id])
+  categorie  Categorie? @relation(fields: [categorieId], references: [id], onDelete: SetNull)
   photos     Galerie[]
   formulaires Formulaire[]
 
