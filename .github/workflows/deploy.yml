@@ -20,6 +20,9 @@ jobs:
           cache: npm
           cache-dependency-path: API/package-lock.json
       - run: npm ci
+      - run: npx prisma generate
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - run: npm test
 
   build-push:
