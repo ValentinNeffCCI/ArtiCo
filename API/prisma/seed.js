@@ -1,5 +1,6 @@
 const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
+const categories = require("./categories.js");
 const prisma = require("../utils/client.js");
 dotenv.config();
 
@@ -20,15 +21,10 @@ const main = async () => {
     },
   });
 
-  const verifyCategorie = await prisma.categorie.findUnique({
-    where: { name: "Autre" },
+  await prisma.categorie.createMany({
+    data: categories.map((name) => ({ name })),
+    skipDuplicates: true,
   });
-
-  if (!verifyCategorie) {
-    await prisma.categorie.create({
-      data: { name: "Autre" },
-    });
-  }
 
 };
 
