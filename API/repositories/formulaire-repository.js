@@ -1,9 +1,5 @@
 const prisma = require("../utils/client.js");
 
-// Construit le payload `inputs.create` imbriqué pour Prisma.
-// On retire les ids (uuid côté front ou Int existants) et les clés
-// relationnelles scalaires (formulaireId/inputId) : Prisma les gère via les
-// relations, et les envoyer provoquerait une erreur de type / un conflit.
 const buildInputsCreate = (inputs = []) =>
   inputs.map(({ id, formulaireId, options = [], ...input }) => ({
     ...input,
