@@ -39,7 +39,9 @@ module.exports = {
         } else {
             destinataire = entreprise.email;
         }
-        sendMail(submission, destinataire);
+        Promise.resolve(sendMail(submission, destinataire)).catch((err) => {
+            console.error("Échec de l'envoi du mail de récapitulatif :", err);
+        });
         return submissionResource(submission);
     },
     delete: async (id) => {
