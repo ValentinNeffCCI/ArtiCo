@@ -13,10 +13,13 @@ const sendRecap = async (submission, destinataire = destination) => {
   const { ...content } = submission.content;
   const { formulaire } = submission;
   const recap = Object.keys(content).map((key) => {
-    return `<tr><th style="padding: 15px">${key}</th><td style="padding: 15px">${content[key].replaceAll("<", "{").replaceAll(">", "};")}</td></tr>`;
+    const value = Array.isArray(content[key])
+      ? content[key].join(", ")
+      : String(content[key] ?? "");
+    return `<tr><th style="padding: 15px">${key}</th><td style="padding: 15px">${value.replaceAll("<", "{").replaceAll(">", "};")}</td></tr>`;
   });
   const mailContent = template.replace("{{content}}", recap.join(""));
-  mailer.sendMail({
+  await mailer.sendMail({
     to: destinataire,
     html: mailContent,
     subject: `Artico - Nouvelle réponse au questionnaire : ${formulaire.name}`,
