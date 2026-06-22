@@ -39,7 +39,6 @@ module.exports = {
         } else {
             destinataire = entreprise.email;
         }
-        console.log("envoi de mail à ", destinataire);
         sendMail(submission, destinataire);
         return submissionResource(submission);
     },
