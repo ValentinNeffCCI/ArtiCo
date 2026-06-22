@@ -13,7 +13,7 @@ const sendRecap = async (submission, destinataire = destination) => {
   const { ...content } = submission.content;
   const { formulaire } = submission;
   const recap = Object.keys(content).map((key) => {
-    return `<tr><th style="padding: 15px">${key}</th><td style="padding: 15px">${content[key]}</td></tr>`;
+    return `<tr><th style="padding: 15px">${key}</th><td style="padding: 15px">${content[key].replaceAll("<", "{").replaceAll(">", "};")}</td></tr>`;
   });
   const mailContent = template.replace("{{content}}", recap.join(""));
   mailer.sendMail({
