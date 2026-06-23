@@ -6,10 +6,11 @@ const idParser = require('../middlewares/id-parser.js');
 const submissionService = require('../services/submission-service.js');
 const validate = require('../middlewares/validate.js');
 const submissionCreateSchema = require('../schemas/Submission/submissionCreateSchema.js');
+const verifySubmissionContent = require('../middlewares/submission-content-verification.js');
 
 router.get('/', authenticated(), SubmissionController.getAllSubmissions);
 router.get('/:id', idParser, authenticated(), SubmissionController.getSubmissionById);
-router.post('/', validate(submissionCreateSchema), SubmissionController.createSubmission);
+router.post('/', validate(submissionCreateSchema), verifySubmissionContent, SubmissionController.createSubmission);
 router.get('/formulaire/:id', idParser, authenticated(), SubmissionController.getSubmissionByFormulaireId);
 router.delete('/:id', idParser, authenticated(),SubmissionController.deleteSubmission);
 

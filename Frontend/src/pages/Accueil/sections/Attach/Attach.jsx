@@ -1,8 +1,10 @@
 import { LinkButton } from "../../../../components/buttons/Link/LinkButton";
 import classes from "./Attach.module.css";
 import worker from "../../../../assets/mascotte/greeting_worker.png"
+import { useAuth } from "../../../../contexts/UserContext";
 
-export const Attach = ({ user }) => {
+export const Attach = () => {
+  const { user } = useAuth();
   return (
     <div className={classes["attach"]}>
       <section>
