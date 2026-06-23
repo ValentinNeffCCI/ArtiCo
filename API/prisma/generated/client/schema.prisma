@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output = "./generated/client"
+  output   = "./generated/client"
 }
 
 datasource db {
@@ -14,16 +14,16 @@ datasource db {
 }
 
 model User {
-  id        Int         @id @default(autoincrement())
-  name      String      @unique
-  email     String      @unique
-  password  String
-  role      EnumRole    @default(USER)
-  active    Boolean     @default(true)
+  id            Int      @id @default(autoincrement())
+  name          String   @unique
+  email         String   @unique
+  password      String
+  role          EnumRole @default(USER)
+  active        Boolean  @default(true)
   refresh_token String?
-  reset_token String?
-  createdAt DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
+  reset_token   String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
   entreprises Entreprise[]
 
@@ -50,13 +50,13 @@ model Entreprise {
   ownerId     Int
   categorieId Int?
 
-  owner      User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
-  categorie  Categorie? @relation(fields: [categorieId], references: [id], onDelete: SetNull)
-  photos     Galerie[]
+  owner       User         @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  categorie   Categorie?   @relation(fields: [categorieId], references: [id])
+  photos      Galerie[]
   formulaires Formulaire[]
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
 
   @@map("entreprises")
 }
@@ -72,25 +72,11 @@ model Categorie {
   @@map("categories")
 }
 
-enum InputType {
-  text
-  textarea
-  number
-  email
-  tel
-  date
-  datetime_local @map("datetime-local")
-  color
-  checkbox
-  radio
-  select
-}
-
 model Formulaire {
-  id        Int      @id @default(autoincrement())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  name         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
   entrepriseId Int
 
   entreprise Entreprise @relation(fields: [entrepriseId], references: [id], onDelete: Cascade)
@@ -115,10 +101,10 @@ model Galerie {
 }
 
 model Input {
-  id           Int      @id @default(autoincrement())
-  name         String   @default("Nouveau champ")
-  type         InputType   @default(text)
-  required     Boolean  @default(true)
+  id           Int     @id @default(autoincrement())
+  name         String  @default("Nouveau champ")
+  type         String  @default("text")
+  required     Boolean @default(true)
   formulaireId Int
 
   formulaire Formulaire @relation(fields: [formulaireId], references: [id], onDelete: Cascade)

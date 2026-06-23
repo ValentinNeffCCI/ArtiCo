@@ -2,8 +2,8 @@ import classes from "./Card.module.css";
 import { NavLink } from "react-router-dom";
 import useAPI from "../../../hooks/useAPI";
 
-const EntrepriseCard = ({ entreprise, style={} }) => {
-  const {url} = useAPI();
+const EntrepriseCard = ({ entreprise, style = {} }) => {
+  const { url } = useAPI();
   return (
     <NavLink
       to={`/artisan/${entreprise.id}`}
@@ -11,7 +11,15 @@ const EntrepriseCard = ({ entreprise, style={} }) => {
       title={`Accéder à la page de ${entreprise.name}`}
     >
       <figure>
-        <img src={entreprise.image && (entreprise.image.startsWith('http') ? entreprise.image : url + '/' + entreprise.image)} alt={entreprise.name} />
+        <img
+          src={
+            entreprise.image &&
+            (entreprise.image.startsWith("http")
+              ? entreprise.image
+              : url + "/" + entreprise.image)
+          }
+          alt={entreprise.name}
+        />
       </figure>
       <div className={classes["description"]}>
         <h3 className="itim">{entreprise.name}</h3>
