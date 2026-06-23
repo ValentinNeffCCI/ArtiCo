@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="280" viewBox="0 0 1040 280" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#64748b"/>
+    </marker>
+    <style>
+      .title { font-size: 22px; font-weight: 700; fill: #fff; }
+      .subtitle { font-size: 13px; fill: #94a3b8; }
+      .step-label { font-size: 13px; font-weight: 700; }
+      .step-sub { font-size: 11px; }
+      .route { font-size: 12px; font-family: 'Consolas','Monaco',monospace; }
+      .edge { stroke: #475569; stroke-width: 1.8; fill: none; }
+    </style>
+  </defs>
+
+  <rect width="1040" height="280" rx="14" fill="#0f172a"/>
+
+  <text x="40" y="50" class="title">Cycle de rendu d'une URL protégée</text>
+  <text x="40" y="74" class="subtitle">react-router-dom · Layout &amp; ProtectedRoute via &lt;Outlet/&gt;</text>
+
+  <g transform="translate(40,120)">
+    <!-- URL -->
+    <rect x="0" y="0" width="170" height="50" rx="10" fill="#1e293b"/>
+    <text x="85" y="22" text-anchor="middle" class="step-sub" fill="#cbd5e1">URL demandée</text>
+    <text x="85" y="40" text-anchor="middle" class="route" fill="#93c5fd">/entreprise/:id</text>
+
+    <path class="edge" d="M170,25 L212,25" marker-end="url(#arrow)"/>
+
+    <!-- Layout -->
+    <rect x="214" y="0" width="180" height="50" rx="10" fill="#1e3a8a"/>
+    <text x="304" y="22" text-anchor="middle" class="step-label" fill="#fff">MainLayout</text>
+    <text x="304" y="40" text-anchor="middle" class="step-sub" fill="#bfdbfe">Header / Footer + &lt;Outlet/&gt;</text>
+
+    <path class="edge" d="M394,25 L436,25" marker-end="url(#arrow)"/>
+
+    <!-- ProtectedRoute -->
+    <rect x="438" y="0" width="190" height="50" rx="10" fill="#14532d"/>
+    <text x="533" y="22" text-anchor="middle" class="step-label" fill="#fff">ProtectedRoute</text>
+    <text x="533" y="40" text-anchor="middle" class="step-sub" fill="#bbf7d0">vérifie user + rôle</text>
+
+    <path class="edge" d="M628,25 L670,25" marker-end="url(#arrow)"/>
+
+    <!-- Page rendue -->
+    <rect x="672" y="0" width="170" height="50" rx="10" fill="#166534"/>
+    <text x="757" y="22" text-anchor="middle" class="step-label" fill="#fff">Page rendue</text>
+    <text x="757" y="40" text-anchor="middle" class="step-sub" fill="#bbf7d0">via &lt;Outlet/&gt;</text>
+
+    <!-- Non autorisé branch -->
+    <path class="edge" stroke="#dc2626" stroke-dasharray="5 3" d="M533,50 L533,90 L870,90 L870,50" marker-end="url(#arrow)"/>
+    <rect x="780" y="100" width="200" height="50" rx="10" fill="#7f1d1d"/>
+    <text x="880" y="122" text-anchor="middle" class="step-label" fill="#fff">Non autorisé</text>
+    <text x="880" y="140" text-anchor="middle" class="step-sub" fill="#fecaca">&lt;Navigate to="/" /&gt;</text>
+    <text x="630" y="84" class="step-sub" fill="#f87171">!user ou rôle ∉ allowedRoles</text>
+  </g>
+</svg>

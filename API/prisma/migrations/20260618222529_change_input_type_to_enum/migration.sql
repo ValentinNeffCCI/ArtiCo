@@ -9,4 +9,4 @@ CREATE TYPE "InputType" AS ENUM ('text', 'textarea', 'number', 'email', 'tel', '
 
 -- AlterTable
 ALTER TABLE "inputs" DROP COLUMN "type",
-ADD COLUMN     "type" "InputType" NOT NULL DEFAULT 'text';
+ADD COLUMN "type" "InputType" NOT NULL DEFAULT 'text';

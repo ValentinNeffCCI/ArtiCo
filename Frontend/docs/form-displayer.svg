@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="820" viewBox="0 0 1080 820" font-family="'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#475569"/>
+    </marker>
+    <marker id="arrowState" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#7c3aed"/>
+    </marker>
+    <style>
+      .title { font-size: 26px; font-weight: 700; fill: #0f172a; }
+      .subtitle { font-size: 14px; fill: #64748b; }
+      .box-title { font-size: 16px; font-weight: 700; }
+      .box-sub { font-size: 11.5px; font-family: 'Courier New', monospace; }
+      .lbl { font-size: 12px; fill: #334155; }
+      .lbl-state { font-size: 12px; fill: #7c3aed; font-weight: 600; }
+      .small { font-size: 11px; fill: #475569; }
+      .mono { font-size: 11px; font-family: 'Courier New', monospace; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect width="1080" height="820" fill="#f8fafc"/>
+  <text x="40" y="48" class="title">Form Builder — Le Displayer (rendu &amp; réponse)</text>
+  <text x="40" y="72" class="subtitle">Frontend React · components/forms/CustomForm/Displayer · affichage du formulaire &amp; collecte des réponses</text>
+
+  <!-- Source data -->
+  <rect x="40" y="100" width="300" height="120" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="60" y="128" class="box-title" fill="#15803d">API Backend</text>
+  <text x="60" y="150" class="box-sub" fill="#15803d">GET /formulaire/{id}</text>
+  <text x="60" y="172" class="small">retourne { name, inputs[] }</text>
+  <text x="60" y="192" class="small">chaque input : id, name, type,</text>
+  <text x="60" y="209" class="small">required, options[]</text>
+
+  <!-- Page AnswerForm -->
+  <rect x="390" y="100" width="650" height="120" rx="12" fill="#dbeafe" stroke="#2563eb" stroke-width="2"/>
+  <text x="410" y="128" class="box-title" fill="#1d4ed8">AnswerForm.jsx (page consommatrice)</text>
+  <text x="410" y="150" class="small">useAPI → getForm() charge le formulaire dans l'état local `form`</text>
+  <text x="410" y="170" class="small">useForm("/submission", POST) → `content` accumule les réponses</text>
+  <text x="410" y="190" class="small">injecte un champ email si user non identifié · onChange = changeListener</text>
+  <text x="410" y="210" class="small">handleSubmit → POST /submission { formulaireId, content, email }</text>
+
+  <!-- CustomForm displayer -->
+  <rect x="40" y="260" width="630" height="380" rx="12" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+  <text x="60" y="288" class="box-title" fill="#b45309">CustomForm.jsx — &lt;form&gt;</text>
+  <text x="60" y="308" class="small">props: form (inputs), onChange, onSubmit, submitButton, active</text>
+
+  <rect x="60" y="320" width="590" height="240" rx="8" fill="#ffffff" stroke="#fbbf24"/>
+  <text x="74" y="342" class="lbl" font-weight="700">form.map(input) → switch (input.type)</text>
+
+  <!-- switch branches -->
+  <rect x="74" y="354" width="270" height="30" rx="5" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="86" y="373" class="mono">radio | checkbox → groupe d'options</text>
+  <rect x="360" y="354" width="276" height="30" rx="5" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="372" y="373" class="mono">color → &lt;ColorInput/&gt; (Builder/Color)</text>
+
+  <rect x="74" y="390" width="270" height="30" rx="5" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="86" y="409" class="mono">number → &lt;input type="number"&gt;</text>
+  <rect x="360" y="390" width="276" height="30" rx="5" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="372" y="409" class="mono">textarea → &lt;textarea&gt;</text>
+
+  <rect x="74" y="426" width="270" height="30" rx="5" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="86" y="445" class="mono">select → &lt;select&gt; + options</text>
+  <rect x="360" y="426" width="276" height="30" rx="5" fill="#fff7ed" stroke="#fdba74"/>
+  <text x="372" y="445" class="mono">default → &lt;input type={type}&gt;</text>
+
+  <text x="74" y="480" class="small">Chaque branche (sauf color) est enveloppée par &lt;CustomInput/&gt;.</text>
+  <text x="74" y="500" class="small">Nom du champ : `name` ou `name-id` selon input.is_fix (champ fixe vs libre).</text>
+  <text x="74" y="520" class="small">required dérivé de input.required ; onChange câblé sur chaque contrôle.</text>
+
+  <rect x="74" y="532" width="562" height="20" rx="5" fill="#bbf7d0" stroke="#22c55e"/>
+  <text x="86" y="547" class="small">{children} puis &lt;CustomButton&gt; submit (affiché si active) → onSubmit</text>
+
+  <text x="60" y="592" class="small">Le formulaire est purement contrôlé par les props : aucun état interne propre.</text>
+  <text x="60" y="612" class="small">Réversible avec le Builder — même structure d'`input`, même CustomInput.</text>
+
+  <!-- CustomInput -->
+  <rect x="700" y="260" width="340" height="200" rx="12" fill="#fae8ff" stroke="#a21caf" stroke-width="2"/>
+  <text x="720" y="288" class="box-title" fill="#86198f">CustomInput.jsx — wrapper</text>
+  <text x="720" y="310" class="small">Présentation commune d'un champ :</text>
+  <text x="720" y="332" class="small">• radio/checkbox → libellé en &lt;div&gt;</text>
+  <text x="720" y="352" class="small">• autres → &lt;label htmlFor&gt;</text>
+  <text x="720" y="372" class="small">• affiche `*` si required</text>
+  <text x="720" y="392" class="small">• {children} = le contrôle réel</text>
+  <text x="720" y="418" class="mono" fill="#86198f">label = input.label ?? input.name</text>
+  <text x="720" y="440" class="small">Partagé entre Displayer et l'Aperçu du Builder.</text>
+
+  <!-- useForm collect -->
+  <rect x="700" y="490" width="340" height="150" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="5 4"/>
+  <text x="720" y="518" class="box-title" fill="#7c3aed">État réponses — useForm()</text>
+  <text x="720" y="540" class="mono" fill="#5b21b6">content[name] = value</text>
+  <text x="720" y="562" class="small">handleChange gère file / checkbox</text>
+  <text x="720" y="580" class="small">(tableau cumulé) / valeur simple</text>
+  <text x="720" y="600" class="small">chaque saisie remonte ici via onChange</text>
+  <text x="720" y="620" class="small">puis envoyée au submit</text>
+
+  <!-- Submit backend -->
+  <rect x="300" y="700" width="480" height="80" rx="12" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="320" y="728" class="box-title" fill="#15803d">API Backend</text>
+  <text x="320" y="750" class="box-sub" fill="#15803d">POST /submission { formulaireId, content, email }</text>
+  <text x="320" y="770" class="small">toast succès → retour arrière · erreurs → toast.error par message</text>
+
+  <!-- ARROWS -->
+  <path d="M340 160 L390 160" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="365" y="150" class="small" text-anchor="middle">inputs</text>
+
+  <path d="M420 220 C 360 240, 250 245, 200 260" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="300" y="244" class="small" text-anchor="middle">form, onChange, onSubmit</text>
+
+  <!-- switch to custominput -->
+  <path d="M650 420 C 680 400, 690 380, 700 360" stroke="#475569" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+  <text x="700" y="408" class="small">wrap</text>
+
+  <!-- onChange to useForm state -->
+  <path d="M650 542 C 690 550, 690 555, 700 558" stroke="#7c3aed" stroke-width="2" fill="none" marker-end="url(#arrowState)"/>
+  <text x="668" y="535" class="lbl-state">onChange ↑</text>
+
+  <!-- useForm back to answerform (content) -->
+  <path d="M1000 490 C 1030 360, 1030 270, 1010 220" stroke="#7c3aed" stroke-width="2" fill="none" marker-end="url(#arrowState)"/>
+  <text x="1042" y="360" class="lbl-state" transform="rotate(-90 1042 360)" text-anchor="middle">content</text>
+
+  <!-- submit to backend -->
+  <path d="M360 552 C 380 650, 440 680, 480 700" stroke="#16a34a" stroke-width="2.5" fill="none" marker-end="url(#arrow)"/>
+  <text x="360" y="660" class="small" fill="#15803d" font-weight="600">onSubmit → handleSubmit</text>
+
+  <!-- legend -->
+  <rect x="40" y="794" width="14" height="14" fill="#f5f3ff" stroke="#7c3aed" stroke-dasharray="3 2"/>
+  <text x="60" y="806" class="small">— flux des réponses (useForm)</text>
+  <rect x="280" y="794" width="14" height="14" fill="#fff" stroke="#475569"/>
+  <text x="300" y="806" class="small">— props / rendu de composant</text>
+  <rect x="540" y="794" width="14" height="14" fill="#dcfce7" stroke="#16a34a"/>
+  <text x="560" y="806" class="small">— échanges API</text>
+</svg>
